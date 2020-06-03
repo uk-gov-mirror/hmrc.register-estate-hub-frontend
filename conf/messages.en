@@ -43,3 +43,8 @@ site.sign_out = Sign out
 
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
+
+estateRegisteredOnline.title = Has the estate already been registered online?
+estateRegisteredOnline.heading = Has the estate already been registered online?
+estateRegisteredOnline.checkYourAnswersLabel = Has the estate already been registered online?
+estateRegisteredOnline.error.required = Select yes if the estate has already been registered online

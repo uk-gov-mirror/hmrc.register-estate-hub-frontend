@@ -16,6 +16,7 @@
 
 package controllers
 
+import config.annotations.EstateRegistration
 import controllers.actions.{DataRequiredAction, DataRetrievalAction, IdentifierAction}
 import forms.YesNoFormProvider
 import javax.inject.Inject
@@ -34,7 +35,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class EstateRegisteredOnlineController @Inject()(
                                                   override val messagesApi: MessagesApi,
                                                   sessionRepository: SessionRepository,
-                                                  navigator: Navigator,
+                                                  @EstateRegistration navigator: Navigator,
                                                   identify: IdentifierAction,
                                                   getData: DataRetrievalAction,
                                                   requireData: DataRequiredAction,
@@ -47,7 +48,7 @@ class EstateRegisteredOnlineController @Inject()(
 
   val form: Form[Boolean] = formProvider.withPrefix("estateRegisteredOnline")
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = actions() {
+  def onPageLoad(): Action[AnyContent] = actions() {
     implicit request =>
 
       val preparedForm = request.userAnswers.get(EstateRegisteredOnlinePage) match {
@@ -58,7 +59,7 @@ class EstateRegisteredOnlineController @Inject()(
       Ok(view(preparedForm))
   }
 
-  def onSubmit(mode: Mode) = actions().async {
+  def onSubmit() = actions().async {
     implicit request =>
 
       form.bindFromRequest().fold(
@@ -69,7 +70,7 @@ class EstateRegisteredOnlineController @Inject()(
           for {
             updatedAnswers <- Future.fromTry(request.userAnswers.set(EstateRegisteredOnlinePage, value))
             _              <- sessionRepository.set(updatedAnswers)
-          } yield Redirect(navigator.nextPage(EstateRegisteredOnlinePage, mode, updatedAnswers))
+          } yield Redirect(navigator.nextPage(EstateRegisteredOnlinePage, updatedAnswers))
         }
       )
   }
