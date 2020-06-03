@@ -2,6 +2,12 @@
 
 GET        /                                            controllers.IndexController.onPageLoad
 
+GET        /estate-registered-online                    controllers.EstateRegisteredOnlineController.onPageLoad(mode: Mode = NormalMode)
+POST       /estate-registered-online                    controllers.EstateRegisteredOnlineController.onSubmit(mode: Mode = NormalMode)
+GET        /change-estate-registered-online             controllers.EstateRegisteredOnlineController.onPageLoad(mode: Mode = NormalMode)
+POST       /change-estate-registered-online             controllers.EstateRegisteredOnlineController.onSubmit(mode: Mode = NormalMode)
+
+
 GET        /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
 
 GET        /language/:lang                              controllers.LanguageSwitchController.switchToLanguage(lang: String)
