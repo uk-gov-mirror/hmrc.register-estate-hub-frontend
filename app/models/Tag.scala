@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package models.pages
-
-import models.{Enumerable, WithName}
+package models
 
 sealed trait Tag
 

@@ -17,9 +17,8 @@
 package controllers.task_list
 
 import config.FrontendAppConfig
-import models.CompletedTasks
-import models.pages.Tag
-import models.pages.Tag.InProgress
+import models.Tag.InProgress
+import models.{CompletedTasks, Tag}
 import viewmodels.tasks.{DeceasedPersons, EstateDetails, PersonalRep}
 import viewmodels.{Link, Task}
 
