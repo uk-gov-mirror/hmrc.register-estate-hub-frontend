@@ -29,7 +29,7 @@ trait TaskListSections {
   }
 
   private lazy val notYetAvailable : String =
-    ??? //TODO: Make this feature unavailable
+    controllers.routes.FeatureNotAvailableController.onPageLoad().url
 
   val config: FrontendAppConfig
 

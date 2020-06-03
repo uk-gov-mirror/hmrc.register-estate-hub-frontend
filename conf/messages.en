@@ -44,6 +44,12 @@ site.sign_out = Sign out
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
 
+featureNotAvailable.title = This part of the online service is not available yet
+featureNotAvailable.heading = This part of the online service is not available yet
+featureNotAvailable.p1 = If you need to make any changes to the trust you can
+featureNotAvailable.link = contact the trusts helpline (opens in a new window or tab)
+featureNotAvailable.p2 = You will be able to update these details online in the future.
+
 estateRegisteredOnline.title = Has the estate already been registered online?
 estateRegisteredOnline.heading = Has the estate already been registered online?
 estateRegisteredOnline.checkYourAnswersLabel = Has the estate already been registered online?
