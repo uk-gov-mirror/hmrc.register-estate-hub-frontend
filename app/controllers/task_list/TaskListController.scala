@@ -40,8 +40,14 @@ class TaskListController @Inject()(
     // TODO: get this time from user answers
     val savedUntil: String = dateFormatter.savedUntil(LocalDateTime.now)
 
+    // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
     val taskList = generateTaskList(CompletedTasks())
-    Ok(view(None, savedUntil, taskList.mandatory, isTaskListComplete = taskList.isAbleToDeclare))
+    Ok(view(
+      estateName = None,
+      savedUntil = savedUntil,
+      sections = taskList.mandatory,
+      isTaskListComplete = taskList.isAbleToDeclare
+    ))
   }
 
 }
