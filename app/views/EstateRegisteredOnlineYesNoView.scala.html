@@ -15,7 +15,6 @@
  *@
 
 @import controllers.routes._
-@import models.Mode
 
 @this(
     main_template: MainTemplate,
@@ -28,7 +27,7 @@
     title = s"${errorPrefix(form)} ${messages("estateRegisteredOnline.title")}"
     ) {
 
-    @formHelper(action = EstateRegisteredOnlineController.onSubmit(), 'autoComplete -> "off") {
+    @formHelper(action = EstateRegisteredOnlineYesNoController.onSubmit(), 'autoComplete -> "off") {
 
         @components.back_link()
 

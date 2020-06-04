@@ -27,9 +27,36 @@ class RegistrationNavigatorSpec extends SpecBase {
 
   "Registration navigator" when {
 
-    "EstateRegisteredOnline page -> EstateRegisteredOnline page" in {
-      navigator.nextPage(EstateRegisteredOnlinePage, emptyUserAnswers)
-        .mustBe(controllers.routes.EstateRegisteredOnlineController.onPageLoad())
+    "EstateRegisteredOnlineYesNo page -> Yes -> FeatureNotAvailable page" in {
+      val answers = emptyUserAnswers
+        .set(EstateRegisteredOnlineYesNoPage, true).success.value
+
+      navigator.nextPage(EstateRegisteredOnlineYesNoPage, answers)
+        .mustBe(controllers.routes.FeatureNotAvailableController.onPageLoad())
+    }
+
+    "EstateRegisteredOnlineYesNo page -> No -> HaveUTRYesNo page" in {
+      val answers = emptyUserAnswers
+        .set(EstateRegisteredOnlineYesNoPage, false).success.value
+
+      navigator.nextPage(EstateRegisteredOnlineYesNoPage, answers)
+        .mustBe(controllers.routes.HaveUTRYesNoController.onPageLoad())
+    }
+
+    "HaveUTRYesNo page -> Yes -> FeatureNotAvailable page" in {
+      val answers = emptyUserAnswers
+        .set(HaveUTRYesNoPage, true).success.value
+
+      navigator.nextPage(HaveUTRYesNoPage, answers)
+        .mustBe(controllers.routes.FeatureNotAvailableController.onPageLoad())
+    }
+
+    "HaveUTRYesNo page -> No -> TaskList page" in {
+      val answers = emptyUserAnswers
+        .set(HaveUTRYesNoPage, false).success.value
+
+      navigator.nextPage(HaveUTRYesNoPage, answers)
+        .mustBe(controllers.task_list.routes.TaskListController.onPageLoad())
     }
   }
 }

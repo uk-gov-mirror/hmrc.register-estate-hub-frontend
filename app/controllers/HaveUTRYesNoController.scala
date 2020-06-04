@@ -20,19 +20,18 @@ import config.annotations.EstateRegistration
 import controllers.actions.{DataRequiredAction, DataRetrievalAction, IdentifierAction}
 import forms.YesNoFormProvider
 import javax.inject.Inject
-import models.Mode
 import navigation.Navigator
-import pages.EstateRegisteredOnlinePage
+import pages.HaveUTRYesNoPage
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import repositories.SessionRepository
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
-import views.html.EstateRegisteredOnlineView
+import views.html.HaveUTRYesNoView
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class EstateRegisteredOnlineController @Inject()(
+class HaveUTRYesNoController @Inject()(
                                                   override val messagesApi: MessagesApi,
                                                   sessionRepository: SessionRepository,
                                                   @EstateRegistration navigator: Navigator,
@@ -41,17 +40,17 @@ class EstateRegisteredOnlineController @Inject()(
                                                   requireData: DataRequiredAction,
                                                   formProvider: YesNoFormProvider,
                                                   val controllerComponents: MessagesControllerComponents,
-                                                  view: EstateRegisteredOnlineView
+                                                  view: HaveUTRYesNoView
                                  )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
   private def actions() = identify andThen getData andThen requireData
 
-  val form: Form[Boolean] = formProvider.withPrefix("estateRegisteredOnline")
+  val form: Form[Boolean] = formProvider.withPrefix("haveUtr")
 
   def onPageLoad(): Action[AnyContent] = actions() {
     implicit request =>
 
-      val preparedForm = request.userAnswers.get(EstateRegisteredOnlinePage) match {
+      val preparedForm = request.userAnswers.get(HaveUTRYesNoPage) match {
         case None => form
         case Some(value) => form.fill(value)
       }
@@ -68,9 +67,9 @@ class EstateRegisteredOnlineController @Inject()(
 
         value => {
           for {
-            updatedAnswers <- Future.fromTry(request.userAnswers.set(EstateRegisteredOnlinePage, value))
+            updatedAnswers <- Future.fromTry(request.userAnswers.set(HaveUTRYesNoPage, value))
             _              <- sessionRepository.set(updatedAnswers)
-          } yield Redirect(navigator.nextPage(EstateRegisteredOnlinePage, updatedAnswers))
+          } yield Redirect(navigator.nextPage(HaveUTRYesNoPage, updatedAnswers))
         }
       )
   }

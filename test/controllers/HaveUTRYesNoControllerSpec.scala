@@ -20,20 +20,20 @@ import base.SpecBase
 import config.annotations.EstateRegistration
 import forms.YesNoFormProvider
 import navigation.Navigator
-import pages.EstateRegisteredOnlinePage
+import pages.HaveUTRYesNoPage
 import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import views.html.EstateRegisteredOnlineView
+import views.html.HaveUTRYesNoView
 
-class EstateRegisteredOnlineControllerSpec extends SpecBase {
+class HaveUTRYesNoControllerSpec extends SpecBase {
 
   val formProvider = new YesNoFormProvider()
-  val form = formProvider.withPrefix("estateRegisteredOnline")
+  val form = formProvider.withPrefix("haveUtr")
 
-  lazy val estateRegisteredOnlineRoute = routes.EstateRegisteredOnlineController.onPageLoad().url
+  lazy val haveUTRRoute = routes.HaveUTRYesNoController.onPageLoad().url
 
-  "EstateRegisteredOnline Controller" must {
+  "HaveUTR Controller" must {
 
     "return OK and the correct view for a GET" in {
 
@@ -41,11 +41,11 @@ class EstateRegisteredOnlineControllerSpec extends SpecBase {
         .overrides(bind[Navigator].qualifiedWith(classOf[EstateRegistration]).toInstance(fakeNavigator))
         .build()
 
-      val request = FakeRequest(GET, estateRegisteredOnlineRoute)
+      val request = FakeRequest(GET, haveUTRRoute)
 
       val result = route(application, request).value
 
-      val view = application.injector.instanceOf[EstateRegisteredOnlineView]
+      val view = application.injector.instanceOf[HaveUTRYesNoView]
 
       status(result) mustEqual OK
 
@@ -57,13 +57,13 @@ class EstateRegisteredOnlineControllerSpec extends SpecBase {
 
     "populate the view correctly on a GET when the question has previously been answered" in {
 
-      val userAnswers = emptyUserAnswers.set(EstateRegisteredOnlinePage, true).success.value
+      val userAnswers = emptyUserAnswers.set(HaveUTRYesNoPage, true).success.value
 
       val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
 
-      val request = FakeRequest(GET, estateRegisteredOnlineRoute)
+      val request = FakeRequest(GET, haveUTRRoute)
 
-      val view = application.injector.instanceOf[EstateRegisteredOnlineView]
+      val view = application.injector.instanceOf[HaveUTRYesNoView]
 
       val result = route(application, request).value
 
@@ -83,7 +83,7 @@ class EstateRegisteredOnlineControllerSpec extends SpecBase {
           .build()
 
       val request =
-        FakeRequest(POST, estateRegisteredOnlineRoute)
+        FakeRequest(POST, haveUTRRoute)
           .withFormUrlEncodedBody(("value", "true"))
 
       val result = route(application, request).value
@@ -100,12 +100,12 @@ class EstateRegisteredOnlineControllerSpec extends SpecBase {
       val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
 
       val request =
-        FakeRequest(POST, estateRegisteredOnlineRoute)
+        FakeRequest(POST, haveUTRRoute)
           .withFormUrlEncodedBody(("value", ""))
 
       val boundForm = form.bind(Map("value" -> ""))
 
-      val view = application.injector.instanceOf[EstateRegisteredOnlineView]
+      val view = application.injector.instanceOf[HaveUTRYesNoView]
 
       val result = route(application, request).value
 
@@ -121,7 +121,7 @@ class EstateRegisteredOnlineControllerSpec extends SpecBase {
 
       val application = applicationBuilder(userAnswers = None).build()
 
-      val request = FakeRequest(GET, estateRegisteredOnlineRoute)
+      val request = FakeRequest(GET, haveUTRRoute)
 
       val result = route(application, request).value
 
@@ -137,7 +137,7 @@ class EstateRegisteredOnlineControllerSpec extends SpecBase {
       val application = applicationBuilder(userAnswers = None).build()
 
       val request =
-        FakeRequest(POST, estateRegisteredOnlineRoute)
+        FakeRequest(POST, haveUTRRoute)
           .withFormUrlEncodedBody(("value", "true"))
 
       val result = route(application, request).value
