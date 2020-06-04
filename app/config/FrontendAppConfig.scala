@@ -63,4 +63,6 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
 
   lazy val deceasedPersonsFrontendUrl : String =
     configuration.get[String]("urls.deceasedPersons")
+
+  lazy val ttlInSeconds: Int = configuration.get[Int]("mongodb.timeToLiveInSeconds")
 }

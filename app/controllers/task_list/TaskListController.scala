@@ -16,25 +16,32 @@
 
 package controllers.task_list
 
+import java.time.LocalDateTime
+
 import com.google.inject.{Inject, Singleton}
 import config.FrontendAppConfig
 import models.CompletedTasks
 import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
+import utils.DateFormatter
 import views.html.TaskListView
 
 @Singleton
 class TaskListController @Inject()(
                                     val controllerComponents: MessagesControllerComponents,
                                     val config: FrontendAppConfig,
-                                    view: TaskListView
+                                    view: TaskListView,
+                                    dateFormatter: DateFormatter
                                   ) extends FrontendBaseController with I18nSupport with TaskListSections {
 
   def onPageLoad(): Action[AnyContent] = Action { implicit request =>
 
+    // TODO: get this time from user answers
+    val savedUntil: String = dateFormatter.savedUntil(LocalDateTime.now)
+
     val taskList = generateTaskList(CompletedTasks())
-    Ok(view(None, "", taskList.mandatory, isTaskListComplete = taskList.isAbleToDeclare))
+    Ok(view(None, savedUntil, taskList.mandatory, isTaskListComplete = taskList.isAbleToDeclare))
   }
 
 }
