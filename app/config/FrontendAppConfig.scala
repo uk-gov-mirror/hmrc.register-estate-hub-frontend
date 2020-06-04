@@ -50,4 +50,19 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
 
   def routeToSwitchLanguage: String => Call =
     (lang: String) => routes.LanguageSwitchController.switchToLanguage(lang)
+
+  lazy val estateDetailsEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.estate-details.enabled")
+  lazy val personalRepEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.personal-rep.enabled")
+  lazy val deceasedPersonsEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.deceased-persons.enabled")
+
+  lazy val estateDetailsFrontendUrl : String =
+    configuration.get[String]("urls.estateDetails")
+
+  lazy val personalRepFrontendUrl : String =
+    configuration.get[String]("urls.personalRep")
+
+  lazy val deceasedPersonsFrontendUrl : String =
+    configuration.get[String]("urls.deceasedPersons")
+
+  lazy val ttlInSeconds: Int = configuration.get[Int]("mongodb.timeToLiveInSeconds")
 }
