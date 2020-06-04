@@ -18,7 +18,7 @@ package connectors
 
 import config.FrontendAppConfig
 import javax.inject.Inject
-import models.Declaration
+import models.{Declaration, EstateRegistration}
 import models.http.DeclarationResponse
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
@@ -27,11 +27,10 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class TrustConnector @Inject()(http: HttpClient, config : FrontendAppConfig) {
 
-  private val declareUrl = s"${config.estatesUrl}/estates/register"
+  private val registerUrl = s"${config.estatesUrl}/estates/register"
 
-  // TODO: Amend payload to be of type EstateRegistration
-  def declare(payload: Declaration)(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[DeclarationResponse] = {
-    http.POST[Declaration, DeclarationResponse](declareUrl, payload)
+  def register(payload: EstateRegistration)(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[DeclarationResponse] = {
+    http.POST[EstateRegistration, DeclarationResponse](registerUrl, payload)
   }
 }
 

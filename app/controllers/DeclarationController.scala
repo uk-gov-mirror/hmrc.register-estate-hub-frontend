@@ -22,8 +22,8 @@ import com.google.inject.Inject
 import connectors.TrustConnector
 import controllers.actions.Actions
 import forms.DeclarationFormProvider
-import models.Declaration
 import models.http.TRNResponse
+import models.{Declaration, EstateRegistration}
 import pages._
 import play.api.data.Form
 import play.api.i18n.I18nSupport
@@ -65,7 +65,14 @@ class DeclarationController @Inject()(
           Future.successful(BadRequest(view(formWithErrors))),
 
         declaration => {
-          connector.declare(declaration) flatMap {
+          val registration = EstateRegistration(
+            matchData = None,
+            correspondence = ???,
+            yearsReturns = None,
+            declaration = declaration,
+            estate = ???
+          )
+          connector.register(registration) flatMap {
             case TRNResponse(trn) =>
               for {
                 updatedAnswers <- Future.fromTry(
