@@ -24,7 +24,7 @@
 @(form: Form[_])(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = s"${errorPrefix(form)} ${messages("estateRegisteredOnline.title")}"
+    title = s"${errorPrefix(form)} ${messages("declaration.title")}"
     ) {
 
     @formHelper(action = DeclarationController.onSubmit(), 'autoComplete -> "off") {
@@ -32,6 +32,8 @@
         @components.back_link()
 
         @components.error_summary(form.errors)
+
+        @components.heading("declaration.heading")
 
         @components.input_text(
             field = form("firstName"),
