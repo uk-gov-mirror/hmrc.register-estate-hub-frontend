@@ -16,9 +16,6 @@
 
 package views
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
 import models.{CompletedTasks, Tag}
 import play.twirl.api.HtmlFormat
 import viewmodels.tasks.{DeceasedPersons, EstateDetails, PersonalRep}
@@ -28,7 +25,10 @@ import views.html.TaskListView
 
 class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
+<<<<<<< HEAD
   private val dateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy")
+=======
+>>>>>>> a16ae26e2611cba53f85ad524a4c0c0a4a1888d7
   private val estateName: Option[String] = Some("The estate of John Smith")
   private val url: String = "url"
 
