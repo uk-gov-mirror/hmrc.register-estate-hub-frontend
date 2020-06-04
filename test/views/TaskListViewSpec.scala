@@ -20,6 +20,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import models.{CompletedTasks, Tag}
+import play.twirl.api.HtmlFormat
 import viewmodels.tasks.{DeceasedPersons, EstateDetails, PersonalRep}
 import viewmodels.{Link, Task}
 import views.behaviours.{TaskListViewBehaviours, ViewBehaviours}
@@ -30,6 +31,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
   private val dateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy")
   private val savedUntil: String = LocalDateTime.now.format(dateFormatter)
   private val estateName: Option[String] = Some("The estate of John Smith")
+  private val url: String = "url"
 
   private def tasks(estateDetailsEnabled: Boolean,
             personalRepEnabled: Boolean,
@@ -45,15 +47,15 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
   private def sections(tasks: CompletedTasks): List[Task] = {
     List(
       Task(
-        Link(EstateDetails, "url"),
+        Link(EstateDetails, url),
         Some(Tag.tagFor(tasks.estateDetails, featureEnabled = true))
       ),
       Task(
-        Link(PersonalRep, "url"),
+        Link(PersonalRep, url),
         Some(Tag.tagFor(tasks.personalRep, featureEnabled = true))
       ),
       Task(
-        Link(DeceasedPersons, "url"),
+        Link(DeceasedPersons, url),
         Some(Tag.tagFor(tasks.deceasedPersons, featureEnabled = true))
       )
     )
@@ -78,48 +80,78 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
       behave like taskList(applyView, tasksList)
     }
 
-    "render summary" when {
+    "summary" must {
 
-      "all sections are completed" in {
+      val view = viewFor[TaskListView](Some(emptyUserAnswers))
 
-        val view = viewFor[TaskListView](Some(emptyUserAnswers))
+      "be rendered" when {
 
-        val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true)
+        "all sections are completed" in {
 
-        val tasksList = sections(completedTasks)
+          val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true)
 
-        val applyView = view.apply(estateName, savedUntil, tasksList, isTaskListComplete = true)(fakeRequest, messages)
-        val doc = asDocument(applyView)
+          val tasksList = sections(completedTasks)
 
-        assertRenderedById(doc, "summary-heading")
-        assertRenderedById(doc, "summary-paragraph")
-        assertRenderedById(doc, "print-and-save")
+          val applyView = view.apply(estateName, savedUntil, tasksList, isTaskListComplete = true)(fakeRequest, messages)
+          val doc = asDocument(applyView)
 
+          assertRenderedById(doc, "summary-heading")
+          assertRenderedById(doc, "summary-paragraph")
+          assertRenderedById(doc, "print-and-save")
+
+        }
       }
 
+      "not be rendered" when {
+
+        "not all sections are completed" in {
+
+          val completedTasks = tasks(estateDetailsEnabled = false, personalRepEnabled = false, deceasedPersonsEnabled = false)
+
+          val tasksList = sections(completedTasks)
+
+          val applyView = view.apply(estateName, savedUntil, tasksList, isTaskListComplete = false)(fakeRequest, messages)
+          val doc = asDocument(applyView)
+
+          assertNotRenderedById(doc, "summary-heading")
+          assertNotRenderedById(doc, "summary-paragraph")
+          assertNotRenderedById(doc, "print-and-save")
+
+        }
+      }
     }
 
-    "not render summary" when {
+    "estate name" must {
 
-      "not all sections are completed" in {
+      val view = viewFor[TaskListView](Some(emptyUserAnswers))
 
-        val view = viewFor[TaskListView](Some(emptyUserAnswers))
+      val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true)
 
-        val completedTasks = tasks(estateDetailsEnabled = false, personalRepEnabled = false, deceasedPersonsEnabled = false)
+      val tasksList = sections(completedTasks)
 
-        val tasksList = sections(completedTasks)
+      def applyView(estateName: Option[String]): HtmlFormat.Appendable =
+        view.apply(estateName, savedUntil, tasksList, isTaskListComplete = true)(fakeRequest, messages)
 
-        val applyView = view.apply(estateName, savedUntil, tasksList, isTaskListComplete = false)(fakeRequest, messages)
-        val doc = asDocument(applyView)
+      "be rendered" when {
 
-        assertNotRenderedById(doc, "summary-heading")
-        assertNotRenderedById(doc, "summary-paragraph")
-        assertNotRenderedById(doc, "print-and-save")
+        "user has entered name in estate details" in {
 
+          val doc = asDocument(applyView(estateName))
+          assertRenderedById(doc, "estate-name")
+
+        }
       }
 
-    }
+      "not be rendered" when {
 
+        "user has not entered name in estate details" in {
+
+          val doc = asDocument(applyView(None))
+          assertNotRenderedById(doc, "estate-name")
+
+        }
+      }
+    }
+    
   }
-
 }
