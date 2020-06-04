@@ -29,6 +29,7 @@ class TrustConnector @Inject()(http: HttpClient, config : FrontendAppConfig) {
 
   private val declareUrl = s"${config.estatesUrl}/estates/register"
 
+  // TODO: Amend payload to be of type EstateRegistration
   def declare(payload: Declaration)(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[DeclarationResponse] = {
     http.POST[Declaration, DeclarationResponse](declareUrl, payload)
   }

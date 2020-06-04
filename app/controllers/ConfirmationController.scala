@@ -31,13 +31,14 @@ class ConfirmationController @Inject()(
                                         val controllerComponents: MessagesControllerComponents,
                                         view: ConfirmationView,
                                         actions: Actions
-                                     )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
+                                      )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
   def onPageLoad: Action[AnyContent] = actions.authWithData {
     implicit request =>
 
       request.userAnswers.get(TRNPage).fold {
-        Logger.error(s"[ConfirmationController] no TVN in user answers, cannot render confirmation")
+        Logger.error(s"[ConfirmationController] no TRN in user answers, cannot render confirmation")
+        // TODO: Redirect to problem page
         Redirect(???)
       }{
         trn =>

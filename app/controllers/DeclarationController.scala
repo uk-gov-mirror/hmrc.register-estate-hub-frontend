@@ -77,6 +77,7 @@ class DeclarationController @Inject()(
                 _ <- repository.set(updatedAnswers)
               } yield Redirect(controllers.routes.ConfirmationController.onPageLoad())
             case _ =>
+              // TODO: Redirect to problem declaring page
               ???
           }
         }
