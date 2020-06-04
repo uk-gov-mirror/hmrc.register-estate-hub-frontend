@@ -17,18 +17,24 @@
 package controllers.task_list
 
 import com.google.inject.{Inject, Singleton}
+import config.FrontendAppConfig
+import models.CompletedTasks
 import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
-import views.html.{FeatureNotAvailableView, TaskListView}
+import views.html.TaskListView
 
 @Singleton
 class TaskListController @Inject()(
                                     val controllerComponents: MessagesControllerComponents,
+                                    val config: FrontendAppConfig,
                                     view: TaskListView
-                                  ) extends FrontendBaseController with I18nSupport {
+                                  ) extends FrontendBaseController with I18nSupport with TaskListSections {
 
   def onPageLoad(): Action[AnyContent] = Action { implicit request =>
-    Ok(view(None, "", Nil, isTaskListComplete = false))
+
+    val taskList = generateTaskList(CompletedTasks())
+    Ok(view(None, "", taskList.mandatory, isTaskListComplete = taskList.isAbleToDeclare))
   }
+
 }
