@@ -47,9 +47,9 @@
     @components.task_list(sections)
 
     @if(isTaskListComplete) {
-        <h2>@messages("taskList.summary.heading")</h2>
+        <h2 id="summary-heading">@messages("taskList.summary.heading")</h2>
 
-        <p>@messages("taskList.summary.paragraph")</p>
+        <p id="summary-paragraph">@messages("taskList.summary.paragraph")</p>
 
         <p>
             @components.link("#", "print-and-save", "taskList.summary.link", openInNewWindow = true)

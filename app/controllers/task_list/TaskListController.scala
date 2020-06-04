@@ -18,7 +18,7 @@ package controllers.task_list
 
 import java.time.LocalDateTime
 
-import com.google.inject.{Inject, Singleton}
+import com.google.inject.Inject
 import config.FrontendAppConfig
 import models.CompletedTasks
 import play.api.i18n.I18nSupport
@@ -27,7 +27,6 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import utils.DateFormatter
 import views.html.TaskListView
 
-@Singleton
 class TaskListController @Inject()(
                                     val controllerComponents: MessagesControllerComponents,
                                     val config: FrontendAppConfig,
@@ -40,8 +39,9 @@ class TaskListController @Inject()(
     // TODO: get this time from user answers
     val savedUntil: String = dateFormatter.savedUntil(LocalDateTime.now)
 
-    // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
     val taskList = generateTaskList(CompletedTasks())
+
+    // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
     Ok(view(
       estateName = None,
       savedUntil = savedUntil,
