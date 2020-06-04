@@ -24,9 +24,9 @@ case class CompletedTasks(estateDetails: Boolean,
 
 object CompletedTasks {
 
-  implicit val formats : Format[CompletedTasks] = Json.format[CompletedTasks]
+  implicit val formats: Format[CompletedTasks] = Json.format[CompletedTasks]
 
-  def apply() : CompletedTasks = CompletedTasks(
+  def apply(): CompletedTasks = CompletedTasks(
     estateDetails = false,
     personalRep = false,
     deceasedPersons = false
