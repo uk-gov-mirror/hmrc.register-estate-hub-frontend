@@ -18,21 +18,20 @@ package views
 
 import controllers.routes
 import forms.YesNoFormProvider
-import models.NormalMode
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
 import views.behaviours.YesNoViewBehaviours
-import views.html.EstateRegisteredOnlineView
+import views.html.EstateRegisteredOnlineYesNoView
 
-class EstateRegisteredOnlineViewSpec extends YesNoViewBehaviours {
+class EstateRegisteredOnlineYesNoViewSpec extends YesNoViewBehaviours {
 
   val messageKeyPrefix = "estateRegisteredOnline"
 
   val form = new YesNoFormProvider().withPrefix("estateRegisteredOnline")
 
-  "EstateRegisteredOnline view" must {
+  "EstateRegisteredOnlineYesNo view" must {
 
-    val view = viewFor[EstateRegisteredOnlineView](Some(emptyUserAnswers))
+    val view = viewFor[EstateRegisteredOnlineYesNoView](Some(emptyUserAnswers))
 
     def applyView(form: Form[_]): HtmlFormat.Appendable =
       view.apply(form)(fakeRequest, messages)
@@ -41,7 +40,7 @@ class EstateRegisteredOnlineViewSpec extends YesNoViewBehaviours {
 
     behave like pageWithBackLink(applyView(form))
 
-    behave like yesNoPage(form, applyView, messageKeyPrefix, None, routes.EstateRegisteredOnlineController.onSubmit().url)
+    behave like yesNoPage(form, applyView, messageKeyPrefix, None, routes.EstateRegisteredOnlineYesNoController.onSubmit().url)
 
     behave like pageWithASubmitButton(applyView(form))
   }

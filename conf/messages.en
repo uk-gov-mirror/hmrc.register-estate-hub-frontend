@@ -55,6 +55,11 @@ estateRegisteredOnline.heading = Has the estate already been registered online?
 estateRegisteredOnline.checkYourAnswersLabel = Has the estate already been registered online?
 estateRegisteredOnline.error.required = Select yes if the estate has already been registered online
 
+haveUtr.title = Do you have a Unique Taxpayer Reference for the estate?
+haveUtr.heading = Do you have a Unique Taxpayer Reference for the estate?
+haveUtr.checkYourAnswersLabel = Do you have a Unique Taxpayer Reference for the estate?
+haveUtr.error.required = Select yes if you have a Unique Taxpayer Reference for the estate
+
 taskList.title = Registration progress
 taskList.heading = Registration progress
 taskList.paragraph1 = You can save your registration and come back later. You have 28 days from the first time you save to complete this registration or your information will be deleted.

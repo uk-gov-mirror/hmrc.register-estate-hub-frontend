@@ -28,14 +28,16 @@ class RegistrationNavigator @Inject()() extends Navigator {
   override def nextPage(page: Page, userAnswers: UserAnswers): Call =
     routes()(page)(userAnswers)
 
-  private def simpleNavigation(): PartialFunction[Page, Call] = {
-    case EstateRegisteredOnlinePage => rts.EstateRegisteredOnlineController.onPageLoad()
-
-  }
+//  private def simpleNavigation(): PartialFunction[Page, Call] = {
+//    case EstateRegisteredOnlineYesNoPage => rts.EstateRegisteredOnlineYesNoController.onPageLoad()
+//
+//  }
 
   private def yesNoNavigation(): PartialFunction[Page, UserAnswers => Call] = {
-    case EstateRegisteredOnlinePage => ua =>
-      yesNoNav(ua, EstateRegisteredOnlinePage, rts.EstateRegisteredOnlineController.onPageLoad(), rts.EstateRegisteredOnlineController.onPageLoad())
+    case EstateRegisteredOnlineYesNoPage => ua =>
+      yesNoNav(ua, EstateRegisteredOnlineYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), rts.HaveUTRYesNoController.onPageLoad())
+    case HaveUTRYesNoPage => ua =>
+      yesNoNav(ua, HaveUTRYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), controllers.task_list.routes.TaskListController.onPageLoad())
   }
 
   def yesNoNav(ua: UserAnswers, fromPage: QuestionPage[Boolean], yesCall: => Call, noCall: => Call): Call = {
@@ -46,6 +48,6 @@ class RegistrationNavigator @Inject()() extends Navigator {
 
 
   def routes(): PartialFunction[Page, UserAnswers => Call] =
-    simpleNavigation() andThen (c => (_: UserAnswers) => c) orElse
+//    simpleNavigation() andThen (c => (_: UserAnswers) => c) orElse
       yesNoNavigation()
 }

@@ -24,14 +24,14 @@ import models.CompletedTasks
 import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
-import utils.DateFormatter
+import utils.TrustsDateFormatter
 import views.html.TaskListView
 
 class TaskListController @Inject()(
                                     val controllerComponents: MessagesControllerComponents,
                                     val config: FrontendAppConfig,
                                     view: TaskListView,
-                                    dateFormatter: DateFormatter
+                                    dateFormatter: TrustsDateFormatter
                                   ) extends FrontendBaseController with I18nSupport with TaskListSections {
 
   def onPageLoad(): Action[AnyContent] = Action { implicit request =>
