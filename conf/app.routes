@@ -10,6 +10,8 @@ POST       /have-utr                                    controllers.HaveUTRYesNo
 
 GET        /task-list                                   controllers.task_list.TaskListController.onPageLoad()
 
+GET        /problem-declaring                           controllers.ProblemDeclaringController.onPageLoad()
+
 GET        /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
 
 GET        /language/:lang                              controllers.LanguageSwitchController.switchToLanguage(lang: String)

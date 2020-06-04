@@ -92,6 +92,12 @@ declaration.error.lastName.invalid = Your last name must only include letters a 
 declaration.error.email.length = Your email must be 35 characters or less
 declaration.error.email.invalid = Enter a valid email address with no spaces, like name@example.com
 
+problemDeclaring.heading = Sorry, there is a problem with the service
+problemDeclaring.title = Sorry, there is a problem with the service
+problemDeclaring.p1 = Try again later.
+problemDeclaring.p2 = If you need need help with the service
+problemDeclaring.contact.link = contact the trusts helpline (opens in a new window or tab)
+
 confirmation.title = Registration received
 confirmation.heading = Registration received
 confirmation.heading2 = Your reference is:
