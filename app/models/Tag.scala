@@ -20,12 +20,12 @@ sealed trait Tag
 
 object Tag extends Enumerable.Implicits {
 
-  case object UpToDate extends WithName("up-to-date") with Tag
+  case object Completed extends WithName("completed") with Tag
 
   case object InProgress extends WithName("in-progress") with Tag
 
   val values: Set[Tag] = Set(
-    UpToDate, InProgress
+    Completed, InProgress
   )
 
   implicit val enumerable: Enumerable[Tag] =
@@ -33,7 +33,7 @@ object Tag extends Enumerable.Implicits {
 
   def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
     if (upToDate || !featureEnabled) {
-      UpToDate
+      Completed
     } else {
       InProgress
     }

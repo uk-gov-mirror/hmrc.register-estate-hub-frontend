@@ -37,7 +37,7 @@ site.hidden-edit = Change {0}
 site.no = No
 site.yes = Yes
 site.continue = Continue
-site.service_name = register-estate-hub-frontend
+site.service_name = Register and Maintain an Estate
 site.textarea.char_limit = (Limit is {0} characters)
 site.sign_out = Sign out
 
@@ -62,15 +62,20 @@ haveUtr.error.required = Select yes if you have a Unique Taxpayer Reference for 
 
 taskList.title = Registration progress
 taskList.heading = Registration progress
-taskList.paragraph1 = You can save your registration and come back later. You have 28 days from the first time you save to complete this registration or your information will be deleted.
-taskList.paragraph2 = You can print a draft copy of your saved answers, as well as a declared copy after you have made a declaration.
-taskList.paragraph3 = You can add information about the estate and make a declaration once you have confirmed each section is complete.
-taskList.paragraph4 = Any information you add without declaring will not be saved.
+taskList.paragraph1 = You can add information about the estate and make a declaration once you have confirmed each section is complete.
+taskList.paragraph2 = Any information you add without declaring will not be saved.
 taskList.sections.heading = Sections to be completed
 taskList.summary.heading = Summary
 taskList.summary.paragraph = After you have made a declaration, the only section you will be able to update for this estate’s registration is the personal representative.
 taskList.summary.link = Print or save a copy of your answers (opens in a new window or tab)
 taskList.continue = Continue to declaration
+
+taskList.estateDetails.label = Estate name
+taskList.personalRep.label = Personal representative
+taskList.deceasedPersons.label = Person who died
+
+taskList.in-progress = In progress
+taskList.completed = Completed
 
 declaration.title = Declaration
 declaration.heading = Declaration
