@@ -18,20 +18,21 @@ package connectors
 
 import config.FrontendAppConfig
 import javax.inject.Inject
-import models.{Declaration, EstateRegistration}
-import models.http.DeclarationResponse
+import models.CompletedTasks
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class TrustConnector @Inject()(http: HttpClient, config : FrontendAppConfig) {
+class EstatesStoreConnector @Inject()(http: HttpClient, config : FrontendAppConfig) {
 
-  private val registerUrl = s"${config.estatesUrl}/estates/register"
+  private val maintainTasksUrl = s"${config.estatesStoreUrl}/register/tasks"
 
-  def register(payload: EstateRegistration)(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[DeclarationResponse] = {
-    http.POST[EstateRegistration, DeclarationResponse](registerUrl, payload)
+  def getStatusOfTasks(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[CompletedTasks] = {
+    http.GET[CompletedTasks](maintainTasksUrl)
+      .recover {
+        case _ => CompletedTasks()
+      }
   }
+
 }
-
-

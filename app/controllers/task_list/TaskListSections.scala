@@ -24,8 +24,8 @@ import viewmodels.{Link, Task}
 
 trait TaskListSections {
 
-  case class TaskList(mandatory: List[Task]) {
-    val isAbleToDeclare: Boolean = !mandatory.exists(_.tag.contains(InProgress))
+  case class TaskList(tasks: List[Task]) {
+    val isAbleToDeclare: Boolean = !tasks.exists(_.tag.contains(InProgress))
   }
 
   private lazy val notYetAvailable: String =

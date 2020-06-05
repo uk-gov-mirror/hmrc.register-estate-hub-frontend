@@ -15,6 +15,7 @@
  *@
 
 @import viewmodels.Task
+@import controllers.routes._
 
 @this(
     main_template: MainTemplate
@@ -51,6 +52,6 @@
             @components.link("#", "print-and-save", "taskList.summary.link", openInNewWindow = true)
         </p>
 
-        @components.button_link(messages("taskList.continue"), "#")
+        @components.button_link(messages("taskList.continue"), DeclarationController.onPageLoad().url)
     }
 }

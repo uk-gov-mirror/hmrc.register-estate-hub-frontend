@@ -18,28 +18,39 @@ package controllers.task_list
 
 import com.google.inject.Inject
 import config.FrontendAppConfig
+import connectors.EstatesStoreConnector
+import controllers.actions.Actions
 import models.CompletedTasks
 import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.TaskListView
 
+import scala.concurrent.ExecutionContext
+
 class TaskListController @Inject()(
+                                    actions: Actions,
                                     val controllerComponents: MessagesControllerComponents,
                                     val config: FrontendAppConfig,
-                                    view: TaskListView
-                                  ) extends FrontendBaseController with I18nSupport with TaskListSections {
+                                    view: TaskListView,
+                                    storeConnector: EstatesStoreConnector
+                                  )(implicit ec: ExecutionContext)
+  extends FrontendBaseController with I18nSupport with TaskListSections {
 
-  def onPageLoad(): Action[AnyContent] = Action { implicit request =>
+  def onPageLoad(): Action[AnyContent] = actions.authWithData.async {
+    implicit request =>
 
-    val taskList = generateTaskList(CompletedTasks())
+      storeConnector.getStatusOfTasks map {
+        tasks =>
+          val taskList = generateTaskList(tasks)
 
-    // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
-    Ok(view(
-      estateName = None,
-      sections = taskList.mandatory,
-      isTaskListComplete = taskList.isAbleToDeclare
-    ))
+          // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
+          Ok(view(
+            estateName = None,
+            sections = taskList.tasks,
+            isTaskListComplete = taskList.isAbleToDeclare
+          ))
+      }
   }
 
 }

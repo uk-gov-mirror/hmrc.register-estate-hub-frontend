@@ -19,7 +19,7 @@ package controllers
 import java.time.LocalDateTime
 
 import com.google.inject.Inject
-import connectors.TrustConnector
+import connectors.EstatesConnector
 import controllers.actions.Actions
 import forms.DeclarationFormProvider
 import models.http.TRNResponse
@@ -40,7 +40,7 @@ class DeclarationController @Inject()(
                                        formProvider: DeclarationFormProvider,
                                        actions: Actions,
                                        repository: SessionRepository,
-                                       connector: TrustConnector
+                                       connector: EstatesConnector
                                      )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
   val form: Form[Declaration] = formProvider()
