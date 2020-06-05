@@ -27,7 +27,7 @@ final case class TRNResponse(trn : String) extends DeclarationResponse
 
 object TRNResponse {
 
-  implicit val formats : OFormat[TRNResponse] = Json.format[TRNResponse]
+  implicit val formats : Format[TRNResponse] = Json.format[TRNResponse]
 
 }
 
@@ -39,6 +39,7 @@ object DeclarationResponse {
 
   }
 
+  case object AlreadyRegistered extends DeclarationResponse
   case object InternalServerError extends DeclarationResponse
 
   implicit lazy val httpReads: HttpReads[DeclarationResponse] =
@@ -49,6 +50,8 @@ object DeclarationResponse {
         response.status match {
           case OK =>
             response.json.as[TRNResponse]
+          case CONFLICT =>
+            AlreadyRegistered
           case _ =>
             InternalServerError
         }

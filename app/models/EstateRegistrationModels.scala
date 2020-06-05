@@ -85,7 +85,7 @@ object PersonalRepresentativeType {
   implicit val personalRepresentativeTypeFormat: Format[PersonalRepresentativeType] = Json.format[PersonalRepresentativeType]
 }
 
-case class EstatePerRepIndType(name: NameType,
+case class EstatePerRepIndType(name: Name,
                                dateOfBirth: LocalDate,
                                identification: IdentificationType,
                                phoneNumber: String,
@@ -105,7 +105,7 @@ object EstatePerRepOrgType {
 }
 
 
-case class EstateWillType(name: NameType,
+case class EstateWillType(name: Name,
                           dateOfBirth: Option[LocalDate],
                           dateOfDeath: LocalDate,
                           identification: Option[IdentificationType])
@@ -121,14 +121,6 @@ case class AgentDetails(arn: String,
                         clientReference: String)
 object AgentDetails {
   implicit val agentDetailsFormat: Format[AgentDetails] = Json.format[AgentDetails]
-}
-
-case class NameType(firstName: String,
-                    middleName: Option[String],
-                    lastName: String)
-
-object NameType {
-  implicit val nameTypeFormat: Format[NameType] = Json.format[NameType]
 }
 
 case class AddressType(line1: String,

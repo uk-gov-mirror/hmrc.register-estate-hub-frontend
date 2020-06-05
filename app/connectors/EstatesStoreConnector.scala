@@ -26,10 +26,10 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class EstatesStoreConnector @Inject()(http: HttpClient, config : FrontendAppConfig) {
 
-  private val maintainTasksUrl = s"${config.estatesStoreUrl}/register/tasks"
+  private val registerTasksUrl = s"${config.estatesStoreUrl}/register/tasks"
 
-  def getStatusOfTasks(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[CompletedTasks] = {
-    http.GET[CompletedTasks](maintainTasksUrl)
+  def getStatusOfTasks(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[CompletedTasks] = {
+    http.GET[CompletedTasks](registerTasksUrl)
       .recover {
         case _ => CompletedTasks()
       }

@@ -61,15 +61,15 @@ trait TaskListSections {
     val mandatorySections = List(
       Task(
         Link(EstateDetails, estateDetailsRouteEnabled),
-        Some(Tag.tagFor(tasks.estateDetails, config.estateDetailsEnabled))
+        Some(Tag.tagFor(tasks.details, config.estateDetailsEnabled))
       ),
       Task(
         Link(PersonalRep, personalRepRouteEnabled),
-        Some(Tag.tagFor(tasks.personalRep, config.personalRepEnabled))
+        Some(Tag.tagFor(tasks.personalRepresentative, config.personalRepEnabled))
       ),
       Task(
         Link(DeceasedPersons, deceasedPersonsRouteEnabled),
-        Some(Tag.tagFor(tasks.deceasedPersons, config.deceasedPersonsEnabled))
+        Some(Tag.tagFor(tasks.deceased, config.deceasedPersonsEnabled))
       )
     )
 
