@@ -49,7 +49,7 @@
         <p id="summary-paragraph">@messages("taskList.summary.paragraph")</p>
 
         <p>
-            @components.link("#", "print-and-save", "taskList.summary.link", openInNewWindow = true)
+            @components.link(FeatureNotAvailableController.onPageLoad().url, "print-and-save", "taskList.summary.link", openInNewWindow = true)
         </p>
 
         @components.button_link(messages("taskList.continue"), DeclarationController.onPageLoad().url)

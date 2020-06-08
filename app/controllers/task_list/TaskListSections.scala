@@ -29,11 +29,11 @@ trait TaskListSections {
   }
 
   private lazy val notYetAvailable: String =
-    controllers.routes.FeatureNotAvailableController.onPageLoad().url
+    config.featureUnavailableUrl
 
   val config: FrontendAppConfig
 
-  private val estateDetailsRouteEnabled: String = {
+  private val estateDetailsRoute: String = {
     if (config.estateDetailsEnabled) {
       config.estateDetailsFrontendUrl
     } else {
@@ -41,7 +41,7 @@ trait TaskListSections {
     }
   }
 
-  private val personalRepRouteEnabled: String = {
+  private val personalRepRoute: String = {
     if (config.personalRepEnabled) {
       config.personalRepFrontendUrl
     } else {
@@ -49,7 +49,7 @@ trait TaskListSections {
     }
   }
 
-  private val deceasedPersonsRouteEnabled: String = {
+  private val deceasedPersonsRoute: String = {
     if (config.deceasedPersonsEnabled) {
       config.deceasedPersonsFrontendUrl
     } else {
@@ -60,15 +60,15 @@ trait TaskListSections {
   def generateTaskList(tasks: CompletedTasks): TaskList = {
     val mandatorySections = List(
       Task(
-        Link(EstateDetails, estateDetailsRouteEnabled),
+        Link(EstateDetails, estateDetailsRoute),
         Some(Tag.tagFor(tasks.details, config.estateDetailsEnabled))
       ),
       Task(
-        Link(PersonalRep, personalRepRouteEnabled),
+        Link(PersonalRep, personalRepRoute),
         Some(Tag.tagFor(tasks.personalRepresentative, config.personalRepEnabled))
       ),
       Task(
-        Link(DeceasedPersons, deceasedPersonsRouteEnabled),
+        Link(DeceasedPersons, deceasedPersonsRoute),
         Some(Tag.tagFor(tasks.deceased, config.deceasedPersonsEnabled))
       )
     )
