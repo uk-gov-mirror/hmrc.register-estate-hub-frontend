@@ -44,6 +44,7 @@ class TaskListController @Inject()(
           val taskList = generateTaskList(tasks)
 
           // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
+
           Ok(view(
             estateName = None,
             sections = taskList.tasks,

@@ -58,7 +58,7 @@ trait TaskListSections {
   }
 
   def generateTaskList(tasks: CompletedTasks): TaskList = {
-    val mandatorySections = List(
+    val sections = List(
       Task(
         Link(EstateDetails, estateDetailsRoute),
         Some(Tag.tagFor(tasks.details, config.estateDetailsEnabled))
@@ -73,7 +73,7 @@ trait TaskListSections {
       )
     )
 
-    TaskList(mandatorySections)
+    TaskList(sections)
   }
 
 }
