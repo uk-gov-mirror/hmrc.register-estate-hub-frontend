@@ -14,8 +14,24 @@
  * limitations under the License.
  */
 
-package viewmodels
+package utils.print
 
-import play.twirl.api.Html
+import javax.inject.Inject
+import models.UserAnswers
+import play.api.i18n.Messages
+import utils.CheckYourAnswersHelper
+import viewmodels.AnswerSection
 
-case class AnswerRow(label: String, answer: Html, changeUrl: Option[String], labelArg: String = "")
+class PrintUserAnswersHelper @Inject()(){
+
+  def summary(userAnswers : UserAnswers)(implicit messages: Messages) : Seq[AnswerSection] = {
+
+    val helper = new CheckYourAnswersHelper(userAnswers)
+
+    List(
+      helper.estateDetails,
+      helper.personalRepresentative
+    ).flatten.flatten
+
+  }
+}

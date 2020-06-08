@@ -18,13 +18,11 @@ package utils
 
 import java.time.format.DateTimeFormatter
 
-import controllers.routes
-import models.{CheckMode, UserAnswers}
+import models.UserAnswers
 import pages._
 import play.api.i18n.Messages
 import play.twirl.api.{Html, HtmlFormat}
-import viewmodels.AnswerRow
-import CheckYourAnswersHelper._
+import viewmodels.{AnswerRow, AnswerSection}
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages) {
 
@@ -34,6 +32,39 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
     } else {
       HtmlFormat.escape(messages("site.no"))
     }
+
+  def estateDetails: Option[Seq[AnswerSection]] = {
+    val questions = Seq(
+      estateName
+    ).flatten
+
+    if (questions.nonEmpty) Some(Seq(AnswerSection(None, questions, Some(messages("answerPage.section.estateDetails.heading"))))) else None
+  }
+
+  def personalRepresentative: Option[Seq[AnswerSection]] = {
+    val questions = Seq(
+      personalRepIndividualOrBusiness
+    ).flatten
+
+    if (questions.nonEmpty) Some(Seq(AnswerSection(None, questions, Some(messages("answerPage.section.personalRepresentative.heading"))))) else None
+  }
+
+
+
+  def estateName: Option[AnswerRow] = userAnswers.get(EstateNamePage) map {
+    x => AnswerRow("estateName.checkYourAnswersLabel", HtmlFormat.escape(x), Some(controllers.routes.FeatureNotAvailableController.onPageLoad().url))
+  }
+
+  def personalRepIndividualOrBusiness: Option[AnswerRow] = userAnswers.get(PersonalRepIndividualOrBusinessPage) map {
+    x =>
+      AnswerRow(
+        "personalRepIndividualOrBusiness.checkYourAnswersLabel",
+        HtmlFormat.escape(messages(s"personalRepIndividualOrBusiness.$x")),
+        Some(controllers.routes.FeatureNotAvailableController.onPageLoad().url)
+      )
+  }
+
+
 }
 
 object CheckYourAnswersHelper {

@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 
-package viewmodels
+package pages
 
-import play.twirl.api.Html
+import models.IndividualOrBusiness
+import play.api.libs.json.JsPath
 
-case class AnswerRow(label: String, answer: Html, changeUrl: Option[String], labelArg: String = "")
+import scala.util.Try
+
+case object PersonalRepIndividualOrBusinessPage extends QuestionPage[IndividualOrBusiness] {
+
+  override def path: JsPath = JsPath \ toString
+
+  override def toString: String = "individualOrBusiness"
+
+}

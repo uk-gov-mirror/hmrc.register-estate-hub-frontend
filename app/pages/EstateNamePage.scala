@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-package viewmodels
+package pages
 
-import play.twirl.api.Html
+import play.api.libs.json.JsPath
 
-case class AnswerRow(label: String, answer: Html, changeUrl: Option[String], labelArg: String = "")
+case object EstateNamePage extends QuestionPage[String] {
+
+  override def path: JsPath = JsPath \ toString
+
+  override def toString: String = "estateName"
+}
