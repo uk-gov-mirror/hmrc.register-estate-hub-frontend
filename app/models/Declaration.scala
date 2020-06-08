@@ -18,7 +18,7 @@ package models
 
 import play.api.libs.json.{Format, Json}
 
-case class Declaration(name: Name, email: Option[String])
+case class Declaration(name: Name)
 
 object Declaration {
   implicit lazy val formats: Format[Declaration] = Json.format[Declaration]

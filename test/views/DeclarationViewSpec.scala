@@ -46,7 +46,7 @@ class DeclarationViewSpec extends QuestionViewBehaviours[Declaration] {
       messageKeyPrefix,
       None,
       controllers.routes.ConfirmationController.onPageLoad().url,
-      "firstName", "middleName", "lastName", "email"
+      "firstName", "middleName", "lastName"
     )
 
     "render declaration warning" in {

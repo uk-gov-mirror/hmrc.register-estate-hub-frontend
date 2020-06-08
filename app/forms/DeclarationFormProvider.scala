@@ -51,12 +51,7 @@ class DeclarationFormProvider @Inject() extends Mappings {
   def apply(): Form[Declaration] =
     Form(
       mapping(
-        "" -> fullName,
-        "email" -> optional(text().verifying(
-          firstError(
-            maxLength(35, s"declaration.error.email.length"),
-            regexp(Validation.emailRegex, s"declaration.error.email.invalid"))
-        ))
+        "" -> fullName
       )(Declaration.apply)(Declaration.unapply)
     )
 }

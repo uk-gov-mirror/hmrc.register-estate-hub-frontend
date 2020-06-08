@@ -54,7 +54,7 @@ class DeclarationControllerSpec extends SpecBase {
 
     "populate the view correctly on a GET when the question has previously been answered" in {
 
-      val declaration: Declaration = Declaration(Name("First", None, "Last"), Some("email@email.com"))
+      val declaration: Declaration = Declaration(Name("First", None, "Last"))
 
       val userAnswers = emptyUserAnswers
         .set(DeclarationPage, declaration).success.value
