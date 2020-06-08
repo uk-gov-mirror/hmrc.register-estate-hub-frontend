@@ -18,6 +18,7 @@ package controllers
 
 import com.google.inject.Inject
 import controllers.actions.Actions
+import handlers.ErrorHandler
 import pages._
 import play.api.Logger
 import play.api.i18n.I18nSupport
@@ -25,24 +26,24 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.ConfirmationView
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 class ConfirmationController @Inject()(
                                         val controllerComponents: MessagesControllerComponents,
                                         view: ConfirmationView,
-                                        actions: Actions
+                                        actions: Actions,
+                                        errorHandler: ErrorHandler
                                       )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  def onPageLoad: Action[AnyContent] = actions.authWithData {
+  def onPageLoad: Action[AnyContent] = actions.authWithData.async {
     implicit request =>
 
       request.userAnswers.get(TRNPage).fold {
         Logger.error(s"[ConfirmationController] no TRN in user answers, cannot render confirmation")
-        // TODO: Redirect to problem page
-        Redirect(???)
+        errorHandler.onServerError(request, new Exception("TRN is not available for completed estate."))
       }{
         trn =>
-          Ok(view(trn))
+          Future.successful(Ok(view(trn)))
       }
   }
 }
