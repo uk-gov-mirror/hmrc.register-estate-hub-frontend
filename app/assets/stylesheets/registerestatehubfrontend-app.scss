@@ -1,3 +1,6 @@
+@import 'mixins/spacing';
+@import 'mixins/clearfix';
+
 @import 'partials/_variables';
 @import 'partials/_base';
 
@@ -14,3 +17,7 @@
 // WCGA 2.1
 @import 'partials/_palette';
 @import 'partials/_focus';
+
+@import 'conditionals';
+@import 'colours/_palette';
+@import 'partials/_task-list';
