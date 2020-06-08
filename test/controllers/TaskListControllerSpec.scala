@@ -20,6 +20,7 @@ import base.SpecBase
 import config.FrontendAppConfig
 import connectors.EstatesStoreConnector
 import models.CompletedTasks
+import models.CompletedTasksResponse.InternalServerError
 import models.Tag._
 import org.mockito.Matchers.any
 import org.mockito.Mockito._
@@ -160,6 +161,26 @@ class TaskListControllerSpec extends SpecBase {
 
         application.stop()
       }
+    }
+
+    "return InternalServerError when error retrieving tasks statuses" in {
+
+      when(mockConnector.getStatusOfTasks(any(), any()))
+        .thenReturn(Future.successful(InternalServerError))
+
+      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
+        .overrides(Seq(
+          bind(classOf[EstatesStoreConnector]).toInstance(mockConnector)
+        ))
+        .build()
+
+      val request = FakeRequest(GET, controllers.task_list.routes.TaskListController.onPageLoad().url)
+
+      val result = route(application, request).value
+
+      status(result) mustEqual INTERNAL_SERVER_ERROR
+
+      application.stop()
     }
   }
 }

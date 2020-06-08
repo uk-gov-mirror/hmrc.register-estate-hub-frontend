@@ -18,7 +18,7 @@ package connectors
 
 import config.FrontendAppConfig
 import javax.inject.Inject
-import models.CompletedTasks
+import models.CompletedTasksResponse
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
@@ -28,11 +28,8 @@ class EstatesStoreConnector @Inject()(http: HttpClient, config : FrontendAppConf
 
   private val registerTasksUrl = s"${config.estatesStoreUrl}/register/tasks"
 
-  def getStatusOfTasks(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[CompletedTasks] = {
-    http.GET[CompletedTasks](registerTasksUrl)
-      .recover {
-        case _ => CompletedTasks()
-      }
+  def getStatusOfTasks(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[CompletedTasksResponse] = {
+    http.GET[CompletedTasksResponse](registerTasksUrl)
   }
 
 }

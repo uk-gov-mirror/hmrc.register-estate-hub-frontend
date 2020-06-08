@@ -21,8 +21,10 @@ import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.{get, okJson, urlEqualTo, _}
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
 import models.CompletedTasks
+import models.CompletedTasksResponse.InternalServerError
 import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach}
+import play.api.http.Status
 import play.api.libs.json.Json
 import uk.gov.hmrc.http.HeaderCarrier
 
@@ -85,7 +87,7 @@ class EstatesStoreConnectorSpec extends SpecBase with BeforeAndAfterAll with Bef
       application.stop()
     }
 
-    "return default tasks when a failure occurs" in {
+    "return internal server error when a failure occurs" in {
       val application = applicationBuilder()
         .configure(
           Seq(
@@ -96,15 +98,26 @@ class EstatesStoreConnectorSpec extends SpecBase with BeforeAndAfterAll with Bef
 
       val connector = application.injector.instanceOf[EstatesStoreConnector]
 
+      val json = Json.parse(
+        """
+          |{
+          | "code": "INTERNAL_SERVER_ERROR",
+          | "message": "Internal server error."
+          |}
+          |""".stripMargin)
+
       server.stubFor(
         get(urlEqualTo("/estates-store/register/tasks"))
-          .willReturn(serverError())
+          .willReturn(aResponse()
+            .withStatus(Status.INTERNAL_SERVER_ERROR)
+            .withBody(json.toString())
+          )
       )
 
       val result = connector.getStatusOfTasks
 
       result.futureValue mustBe
-        CompletedTasks()
+        InternalServerError
 
       application.stop()
     }

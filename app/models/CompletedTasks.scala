@@ -16,11 +16,18 @@
 
 package models
 
+import play.api.Logger
+import play.api.http.Status._
 import play.api.libs.json.{Format, Json}
+import uk.gov.hmrc.http.{HttpReads, HttpResponse}
 
-case class CompletedTasks(details: Boolean,
-                          personalRepresentative: Boolean,
-                          deceased: Boolean)
+sealed trait CompletedTasksResponse
+
+case class CompletedTasks(
+                           details: Boolean,
+                           personalRepresentative: Boolean,
+                           deceased: Boolean
+                         ) extends CompletedTasksResponse
 
 object CompletedTasks {
 
@@ -31,4 +38,22 @@ object CompletedTasks {
     personalRepresentative = false,
     deceased = false
   )
+}
+
+object CompletedTasksResponse {
+
+  case object InternalServerError extends CompletedTasksResponse
+
+  implicit lazy val httpReads: HttpReads[CompletedTasksResponse] = new HttpReads[CompletedTasksResponse] {
+    override def read(method: String, url: String, response: HttpResponse): CompletedTasksResponse = {
+      Logger.info(s"[CompletedTasksResponse] response status received from estates store api: ${response.status}")
+
+      response.status match {
+        case OK =>
+          response.json.as[CompletedTasks]
+        case _ =>
+          InternalServerError
+      }
+    }
+  }
 }
