@@ -28,7 +28,7 @@ class ConfirmationControllerSpec extends SpecBase {
 
     "return OK and the correct view for a GET when TRN is available" in {
 
-      val trn: String = "XTRN1234567"
+      val trn: String = "XC TRN 000 000 4911"
 
       val userAnswers = emptyUserAnswers.set(TRNPage, trn).success.value
 

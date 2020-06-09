@@ -69,7 +69,7 @@ class DeclarationController @Inject()(
             updatedAnswers <- Future.fromTry(request.userAnswers
               .set(DeclarationPage, declaration)
               .flatMap(_.set(SubmissionDatePage, LocalDateTime.now))
-              .flatMap(_.set(TRNPage, "XTRN1234567"))
+              .flatMap(_.set(TRNPage, "XC TRN 000 000 4911"))
             )
             _ <- repository.set(updatedAnswers)
           } yield {
