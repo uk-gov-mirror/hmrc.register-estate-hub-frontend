@@ -76,7 +76,7 @@ class TaskListControllerSpec extends SpecBase {
           ))
           .build()
 
-        val request = FakeRequest(GET, controllers.task_list.routes.TaskListController.onPageLoad().url)
+        val request = FakeRequest(GET, controllers.registration_progress.routes.TaskListController.onPageLoad().url)
 
         val result = route(application, request).value
 
@@ -112,7 +112,7 @@ class TaskListControllerSpec extends SpecBase {
           ))
           .build()
 
-        val request = FakeRequest(GET, controllers.task_list.routes.TaskListController.onPageLoad().url)
+        val request = FakeRequest(GET, controllers.registration_progress.routes.TaskListController.onPageLoad().url)
 
         val result = route(application, request).value
 
@@ -148,7 +148,7 @@ class TaskListControllerSpec extends SpecBase {
           ))
           .build()
 
-        val request = FakeRequest(GET, controllers.task_list.routes.TaskListController.onPageLoad().url)
+        val request = FakeRequest(GET, controllers.registration_progress.routes.TaskListController.onPageLoad().url)
 
         val result = route(application, request).value
 
@@ -174,7 +174,7 @@ class TaskListControllerSpec extends SpecBase {
         ))
         .build()
 
-      val request = FakeRequest(GET, controllers.task_list.routes.TaskListController.onPageLoad().url)
+      val request = FakeRequest(GET, controllers.registration_progress.routes.TaskListController.onPageLoad().url)
 
       val result = route(application, request).value
 

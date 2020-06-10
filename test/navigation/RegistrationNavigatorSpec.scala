@@ -56,7 +56,7 @@ class RegistrationNavigatorSpec extends SpecBase {
         .set(HaveUTRYesNoPage, false).success.value
 
       navigator.nextPage(HaveUTRYesNoPage, answers)
-        .mustBe(controllers.task_list.routes.TaskListController.onPageLoad())
+        .mustBe(controllers.registration_progress.routes.TaskListController.onPageLoad())
     }
   }
 }

@@ -37,7 +37,7 @@ class RegistrationNavigator @Inject()() extends Navigator {
     case EstateRegisteredOnlineYesNoPage => ua =>
       yesNoNav(ua, EstateRegisteredOnlineYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), rts.HaveUTRYesNoController.onPageLoad())
     case HaveUTRYesNoPage => ua =>
-      yesNoNav(ua, HaveUTRYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), controllers.task_list.routes.TaskListController.onPageLoad())
+      yesNoNav(ua, HaveUTRYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), controllers.registration_progress.routes.TaskListController.onPageLoad())
   }
 
   def yesNoNav(ua: UserAnswers, fromPage: QuestionPage[Boolean], yesCall: => Call, noCall: => Call): Call = {
