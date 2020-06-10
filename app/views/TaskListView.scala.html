@@ -15,12 +15,13 @@
  *@
 
 @import viewmodels.Task
+@import controllers.routes._
 
 @this(
     main_template: MainTemplate
 )
 
-@(estateName: Option[String], savedUntil: String, sections: List[Task], isTaskListComplete: Boolean)(implicit request: Request[_], messages: Messages)
+@(estateName: Option[String], sections: List[Task], isTaskListComplete: Boolean)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("taskList.title")
@@ -40,10 +41,6 @@
 
     <p>@messages("taskList.paragraph2")</p>
 
-    <h2>@messages("taskList.savedUntil.heading")</h2>
-
-    <p id="saved-until">@savedUntil</p>
-
     @components.task_list(sections)
 
     @if(isTaskListComplete) {
@@ -52,9 +49,9 @@
         <p id="summary-paragraph">@messages("taskList.summary.paragraph")</p>
 
         <p>
-            @components.link("#", "print-and-save", "taskList.summary.link", openInNewWindow = true)
+            @components.link(FeatureNotAvailableController.onPageLoad().url, "print-and-save", "taskList.summary.link", openInNewWindow = true)
         </p>
 
-        @components.button_link(messages("taskList.continue"), "#")
+        @components.button_link(messages("taskList.continue"), DeclarationController.onPageLoad().url)
     }
 }

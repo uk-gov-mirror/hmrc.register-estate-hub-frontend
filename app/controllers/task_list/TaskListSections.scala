@@ -24,16 +24,16 @@ import viewmodels.{Link, Task}
 
 trait TaskListSections {
 
-  case class TaskList(mandatory: List[Task]) {
-    val isAbleToDeclare: Boolean = !mandatory.exists(_.tag.contains(InProgress))
+  case class TaskList(tasks: List[Task]) {
+    val isAbleToDeclare: Boolean = !tasks.exists(_.tag.contains(InProgress))
   }
 
   private lazy val notYetAvailable: String =
-    controllers.routes.FeatureNotAvailableController.onPageLoad().url
+    config.featureUnavailableUrl
 
   val config: FrontendAppConfig
 
-  private val estateDetailsRouteEnabled: String = {
+  private val estateDetailsRoute: String = {
     if (config.estateDetailsEnabled) {
       config.estateDetailsFrontendUrl
     } else {
@@ -41,7 +41,7 @@ trait TaskListSections {
     }
   }
 
-  private val personalRepRouteEnabled: String = {
+  private val personalRepRoute: String = {
     if (config.personalRepEnabled) {
       config.personalRepFrontendUrl
     } else {
@@ -49,7 +49,7 @@ trait TaskListSections {
     }
   }
 
-  private val deceasedPersonsRouteEnabled: String = {
+  private val deceasedPersonsRoute: String = {
     if (config.deceasedPersonsEnabled) {
       config.deceasedPersonsFrontendUrl
     } else {
@@ -58,22 +58,22 @@ trait TaskListSections {
   }
 
   def generateTaskList(tasks: CompletedTasks): TaskList = {
-    val mandatorySections = List(
+    val sections = List(
       Task(
-        Link(EstateDetails, estateDetailsRouteEnabled),
-        Some(Tag.tagFor(tasks.estateDetails, config.estateDetailsEnabled))
+        Link(EstateDetails, estateDetailsRoute),
+        Some(Tag.tagFor(tasks.details, config.estateDetailsEnabled))
       ),
       Task(
-        Link(PersonalRep, personalRepRouteEnabled),
-        Some(Tag.tagFor(tasks.personalRep, config.personalRepEnabled))
+        Link(PersonalRep, personalRepRoute),
+        Some(Tag.tagFor(tasks.personalRepresentative, config.personalRepEnabled))
       ),
       Task(
-        Link(DeceasedPersons, deceasedPersonsRouteEnabled),
-        Some(Tag.tagFor(tasks.deceasedPersons, config.deceasedPersonsEnabled))
+        Link(DeceasedPersons, deceasedPersonsRoute),
+        Some(Tag.tagFor(tasks.deceased, config.deceasedPersonsEnabled))
       )
     )
 
-    TaskList(mandatorySections)
+    TaskList(sections)
   }
 
 }

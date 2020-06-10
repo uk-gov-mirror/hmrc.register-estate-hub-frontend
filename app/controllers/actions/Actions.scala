@@ -14,28 +14,21 @@
  * limitations under the License.
  */
 
-package models
+package controllers.actions
 
-sealed trait Tag
+import com.google.inject.Inject
+import models.requests.{DataRequest, OptionalDataRequest}
+import play.api.mvc.{ActionBuilder, AnyContent}
 
-object Tag extends Enumerable.Implicits {
+class Actions @Inject()(
+                         identify: IdentifierAction,
+                         getData: DataRetrievalAction,
+                         requireData: DataRequiredAction
+                       ) {
 
-  case object Completed extends WithName("completed") with Tag
+  def authWithSession: ActionBuilder[OptionalDataRequest, AnyContent] =
+    identify andThen getData
 
-  case object InProgress extends WithName("in-progress") with Tag
-
-  val values: Set[Tag] = Set(
-    Completed, InProgress
-  )
-
-  implicit val enumerable: Enumerable[Tag] =
-    Enumerable(values.toSeq.map(v => v.toString -> v): _*)
-
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
-    if (upToDate || !featureEnabled) {
-      Completed
-    } else {
-      InProgress
-    }
-  }
+  def authWithData: ActionBuilder[DataRequest, AnyContent] =
+    authWithSession andThen requireData
 }

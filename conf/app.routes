@@ -10,6 +10,8 @@ POST       /have-utr                                    controllers.HaveUTRYesNo
 
 GET        /task-list                                   controllers.task_list.TaskListController.onPageLoad()
 
+GET        /problem-declaring                           controllers.ProblemDeclaringController.onPageLoad()
+
 GET        /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
 
 GET        /language/:lang                              controllers.LanguageSwitchController.switchToLanguage(lang: String)
@@ -23,3 +25,8 @@ GET        /unauthorised                                controllers.Unauthorised
 GET        /logout                                      controllers.LogoutController.logout()
 
 GET        /feature-not-available                       controllers.FeatureNotAvailableController.onPageLoad()
+
+GET        /declaration                                 controllers.DeclarationController.onPageLoad()
+POST       /declaration                                 controllers.DeclarationController.onSubmit()
+
+GET        /confirmation                                controllers.ConfirmationController.onPageLoad()

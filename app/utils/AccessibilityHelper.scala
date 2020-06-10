@@ -14,28 +14,12 @@
  * limitations under the License.
  */
 
-package models
+package utils
 
-sealed trait Tag
+object AccessibilityHelper {
 
-object Tag extends Enumerable.Implicits {
-
-  case object Completed extends WithName("completed") with Tag
-
-  case object InProgress extends WithName("in-progress") with Tag
-
-  val values: Set[Tag] = Set(
-    Completed, InProgress
-  )
-
-  implicit val enumerable: Enumerable[Tag] =
-    Enumerable(values.toSeq.map(v => v.toString -> v): _*)
-
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
-    if (upToDate || !featureEnabled) {
-      Completed
-    } else {
-      InProgress
-    }
+  def formatReferenceNumber(referenceNumber: String): String = {
+    referenceNumber.replace(" ", "").replace("", " ").trim()
   }
+
 }

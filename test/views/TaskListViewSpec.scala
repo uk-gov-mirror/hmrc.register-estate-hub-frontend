@@ -16,9 +16,6 @@
 
 package views
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
 import models.{CompletedTasks, Tag}
 import play.twirl.api.HtmlFormat
 import viewmodels.tasks.{DeceasedPersons, EstateDetails, PersonalRep}
@@ -28,8 +25,6 @@ import views.html.TaskListView
 
 class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
-  private val dateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy")
-  private val savedUntil: String = LocalDateTime.now.format(dateFormatter)
   private val estateName: Option[String] = Some("The estate of John Smith")
   private val url: String = "url"
 
@@ -39,24 +34,24 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
            ): CompletedTasks =
 
     CompletedTasks(
-      estateDetails = estateDetailsEnabled,
-      personalRep = personalRepEnabled,
-      deceasedPersons = deceasedPersonsEnabled
+      details = estateDetailsEnabled,
+      personalRepresentative = personalRepEnabled,
+      deceased = deceasedPersonsEnabled
     )
 
   private def sections(tasks: CompletedTasks): List[Task] = {
     List(
       Task(
         Link(EstateDetails, url),
-        Some(Tag.tagFor(tasks.estateDetails, featureEnabled = true))
+        Some(Tag.tagFor(tasks.details, featureEnabled = true))
       ),
       Task(
         Link(PersonalRep, url),
-        Some(Tag.tagFor(tasks.personalRep, featureEnabled = true))
+        Some(Tag.tagFor(tasks.personalRepresentative, featureEnabled = true))
       ),
       Task(
         Link(DeceasedPersons, url),
-        Some(Tag.tagFor(tasks.deceasedPersons, featureEnabled = true))
+        Some(Tag.tagFor(tasks.deceased, featureEnabled = true))
       )
     )
   }
@@ -71,7 +66,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
       val tasksList = sections(completedTasks)
 
-      val applyView = view.apply(estateName, savedUntil, tasksList, isTaskListComplete = true)(fakeRequest, messages)
+      val applyView = view.apply(estateName, tasksList, isTaskListComplete = true)(fakeRequest, messages)
 
       behave like normalPage(applyView, "taskList")
 
@@ -92,7 +87,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
           val tasksList = sections(completedTasks)
 
-          val applyView = view.apply(estateName, savedUntil, tasksList, isTaskListComplete = true)(fakeRequest, messages)
+          val applyView = view.apply(estateName, tasksList, isTaskListComplete = true)(fakeRequest, messages)
           val doc = asDocument(applyView)
 
           assertRenderedById(doc, "summary-heading")
@@ -110,7 +105,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
           val tasksList = sections(completedTasks)
 
-          val applyView = view.apply(estateName, savedUntil, tasksList, isTaskListComplete = false)(fakeRequest, messages)
+          val applyView = view.apply(estateName, tasksList, isTaskListComplete = false)(fakeRequest, messages)
           val doc = asDocument(applyView)
 
           assertNotRenderedById(doc, "summary-heading")
@@ -130,7 +125,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
       val tasksList = sections(completedTasks)
 
       def applyView(estateName: Option[String]): HtmlFormat.Appendable =
-        view.apply(estateName, savedUntil, tasksList, isTaskListComplete = true)(fakeRequest, messages)
+        view.apply(estateName, tasksList, isTaskListComplete = true)(fakeRequest, messages)
 
       "be rendered" when {
 

@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,30 +12,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package models
+@this(
+    main_template: MainTemplate
+)
 
-sealed trait Tag
+@()(implicit request: Request[_], messages: Messages)
 
-object Tag extends Enumerable.Implicits {
+@main_template(
+    title = messages("problemDeclaring.title")
+    ) {
+    @components.heading("problemDeclaring.heading", headingSize = "heading-large heading-with-top-margin")
 
-  case object Completed extends WithName("completed") with Tag
+    <p>@messages("problemDeclaring.p1")</p>
 
-  case object InProgress extends WithName("in-progress") with Tag
+    <p>@messages("problemDeclaring.p2") <a id="help-link" target="_blank" href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/trusts">@messages("problemDeclaring.contact.link")</a>.</p>
 
-  val values: Set[Tag] = Set(
-    Completed, InProgress
-  )
-
-  implicit val enumerable: Enumerable[Tag] =
-    Enumerable(values.toSeq.map(v => v.toString -> v): _*)
-
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
-    if (upToDate || !featureEnabled) {
-      Completed
-    } else {
-      InProgress
-    }
-  }
 }

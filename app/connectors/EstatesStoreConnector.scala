@@ -14,28 +14,22 @@
  * limitations under the License.
  */
 
-package models
+package connectors
 
-sealed trait Tag
+import config.FrontendAppConfig
+import javax.inject.Inject
+import models.CompletedTasksResponse
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
-object Tag extends Enumerable.Implicits {
+import scala.concurrent.{ExecutionContext, Future}
 
-  case object Completed extends WithName("completed") with Tag
+class EstatesStoreConnector @Inject()(http: HttpClient, config : FrontendAppConfig) {
 
-  case object InProgress extends WithName("in-progress") with Tag
+  private val registerTasksUrl = s"${config.estatesStoreUrl}/register/tasks"
 
-  val values: Set[Tag] = Set(
-    Completed, InProgress
-  )
-
-  implicit val enumerable: Enumerable[Tag] =
-    Enumerable(values.toSeq.map(v => v.toString -> v): _*)
-
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
-    if (upToDate || !featureEnabled) {
-      Completed
-    } else {
-      InProgress
-    }
+  def getStatusOfTasks(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[CompletedTasksResponse] = {
+    http.GET[CompletedTasksResponse](registerTasksUrl)
   }
+
 }

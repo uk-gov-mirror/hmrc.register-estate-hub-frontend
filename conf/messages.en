@@ -37,6 +37,8 @@ site.hidden-edit = Change {0}
 site.no = No
 site.yes = Yes
 site.continue = Continue
+site.save.continue = Save and continue
+site.warning = Warning
 site.service_name = Register and Maintain an Estate
 site.textarea.char_limit = (Limit is {0} characters)
 site.sign_out = Sign out
@@ -55,18 +57,60 @@ estateRegisteredOnline.heading = Has the estate already been registered online?
 estateRegisteredOnline.checkYourAnswersLabel = Has the estate already been registered online?
 estateRegisteredOnline.error.required = Select yes if the estate has already been registered online
 
-haveUtr.title = Do you have a Unique Taxpayer Reference for the estate?
-haveUtr.heading = Do you have a Unique Taxpayer Reference for the estate?
-haveUtr.checkYourAnswersLabel = Do you have a Unique Taxpayer Reference for the estate?
-haveUtr.error.required = Select yes if you have a Unique Taxpayer Reference for the estate
+haveUtr.title = Does the estate have a Unique Taxpayer Reference (UTR)?
+haveUtr.heading = Does the estate have a Unique Taxpayer Reference (UTR)?
+haveUtr.checkYourAnswersLabel = Does the estate have a Unique Taxpayer Reference (UTR)?
+haveUtr.error.required = Select yes if the estate has a Unique Taxpayer Reference
 
 taskList.title = Registration progress
 taskList.heading = Registration progress
-taskList.paragraph1 = You can save your registration and come back later. You have 28 days from the first time you save to complete this registration or your information will be deleted.
-taskList.paragraph2 = You can print a draft copy of your saved answers, as well as a declared copy after you have made a declaration.
-taskList.savedUntil.heading = Saved until
+taskList.paragraph1 = You can add information about the estate and make a declaration once you have confirmed each section is complete.
+taskList.paragraph2 = Any information you add without declaring will not be saved.
 taskList.sections.heading = Sections to be completed
 taskList.summary.heading = Summary
 taskList.summary.paragraph = After you have made a declaration, the only section you will be able to update for this estate’s registration is the personal representative.
 taskList.summary.link = Print or save a copy of your answers (opens in a new window or tab)
 taskList.continue = Continue to declaration
+
+taskList.estateDetails.label = Estate name
+taskList.personalRep.label = Personal representative
+taskList.deceasedPersons.label = Person who died
+
+taskList.in-progress = In progress
+taskList.completed = Completed
+
+declaration.title = Declaration
+declaration.heading = Declaration
+declaration.firstName = Your first name
+declaration.middleName = Your middle name (optional)
+declaration.lastName = Your last name
+declaration.paragraph1 = Please give us your email address to get a confirmation of your registration.
+declaration.paragraph2 = If you do not enter your email address, you will not receive a confirmation email with the declaration reference number.
+declaration.warning = I confirm that I have taken all reasonable steps to obtain up to date and accurate information for this registration. I understand that if I knowingly provide false information and cannot demonstrate that I have taken all reasonable steps, I could be subject to penalties.
+
+declaration.error.firstName.required = Enter your first name
+declaration.error.firstName.length = Your first name must be 35 characters or less
+declaration.error.firstName.invalid = Your first name must only include letters a to z, numbers 0 to 9, ampersands (&), apostrophes, commas, forward slashes, full stops, hyphens, round brackets and spaces
+declaration.error.middleName.length = Your middle names must be 35 characters or less
+declaration.error.middleName.invalid = Your middle names must only include letters a to z, numbers 0 to 9, ampersands (&), apostrophes, commas, forward slashes, full stops, hyphens, round brackets and spaces
+declaration.error.lastName.required = Enter your last name
+declaration.error.lastName.length = Your last name must be 35 characters or less
+declaration.error.lastName.invalid = Your last name must only include letters a to z, numbers 0 to 9, ampersands (&), apostrophes, commas, forward slashes, full stops, hyphens, round brackets and spaces
+
+problemDeclaring.heading = Sorry, there is a problem with the service
+problemDeclaring.title = Sorry, there is a problem with the service
+problemDeclaring.p1 = Try again later.
+problemDeclaring.p2 = If you need need help with the service
+problemDeclaring.contact.link = contact the trusts helpline (opens in a new window or tab)
+
+confirmation.title = Registration received
+confirmation.heading = Registration received
+confirmation.heading2 = Your reference is:
+confirmation.printsave = Print or save a copy of the estate’s declaration (opens in a new window or tab)
+confirmation.subheading1 = What happens next
+confirmation.paragraph1 = We will post the estate’s Unique Taxpayer Reference (UTR). If they are based in the UK, this can take 15 working days. For an international personal representative, this can take up to 21 working days.
+confirmation.subheading2 = What you need to do next
+confirmation.paragraph2 = Make a note of your reference number in case you need to contact HMRC. If the UTR does not arrive within 15 to 21 working days, the personal representative will need to
+confirmation.paragraph2.link = contact HMRC to find out why (opens in a new window or tab)
+confirmation.paragraph3 = You cannot make online changes to the estate. To change the personal representative or their contact details,
+confirmation.paragraph3.link = post the changes to HMRC (opens in a new window or tab)

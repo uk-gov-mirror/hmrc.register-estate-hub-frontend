@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,30 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package models
+@(messageKeyPrefix: String)(implicit messages: Messages)
 
-sealed trait Tag
-
-object Tag extends Enumerable.Implicits {
-
-  case object Completed extends WithName("completed") with Tag
-
-  case object InProgress extends WithName("in-progress") with Tag
-
-  val values: Set[Tag] = Set(
-    Completed, InProgress
-  )
-
-  implicit val enumerable: Enumerable[Tag] =
-    Enumerable(values.toSeq.map(v => v.toString -> v): _*)
-
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
-    if (upToDate || !featureEnabled) {
-      Completed
-    } else {
-      InProgress
-    }
-  }
-}
+<div class="govuk-warning-text">
+    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">@messages("site.warning")</span>
+        @messages(s"$messageKeyPrefix.warning")
+    </strong>
+</div>

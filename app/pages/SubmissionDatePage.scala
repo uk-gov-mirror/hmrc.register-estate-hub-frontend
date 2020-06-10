@@ -14,28 +14,15 @@
  * limitations under the License.
  */
 
-package models
+package pages
 
-sealed trait Tag
+import java.time.LocalDateTime
 
-object Tag extends Enumerable.Implicits {
+import play.api.libs.json.JsPath
 
-  case object Completed extends WithName("completed") with Tag
+case object SubmissionDatePage extends QuestionPage[LocalDateTime] {
 
-  case object InProgress extends WithName("in-progress") with Tag
+  override def path: JsPath = JsPath \  toString
 
-  val values: Set[Tag] = Set(
-    Completed, InProgress
-  )
-
-  implicit val enumerable: Enumerable[Tag] =
-    Enumerable(values.toSeq.map(v => v.toString -> v): _*)
-
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
-    if (upToDate || !featureEnabled) {
-      Completed
-    } else {
-      InProgress
-    }
-  }
+  override def toString: String = "submissionDate"
 }

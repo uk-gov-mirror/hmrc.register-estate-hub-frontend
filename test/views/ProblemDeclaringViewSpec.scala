@@ -14,28 +14,24 @@
  * limitations under the License.
  */
 
-package models
+package views
 
-sealed trait Tag
+import views.behaviours.ViewBehaviours
+import views.html.ProblemDeclaringView
 
-object Tag extends Enumerable.Implicits {
+class ProblemDeclaringViewSpec extends ViewBehaviours {
 
-  case object Completed extends WithName("completed") with Tag
+  "ProblemDeclaring view" must {
 
-  case object InProgress extends WithName("in-progress") with Tag
+    val view = viewFor[ProblemDeclaringView](Some(emptyUserAnswers))
 
-  val values: Set[Tag] = Set(
-    Completed, InProgress
-  )
+    val applyView = view.apply()(fakeRequest, messages)
 
-  implicit val enumerable: Enumerable[Tag] =
-    Enumerable(values.toSeq.map(v => v.toString -> v): _*)
-
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
-    if (upToDate || !featureEnabled) {
-      Completed
-    } else {
-      InProgress
-    }
+    behave like normalPage(applyView,
+      "problemDeclaring",
+      "p1",
+      "p2",
+      "contact.link"
+    )
   }
 }

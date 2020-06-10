@@ -16,38 +16,52 @@
 
 package controllers.task_list
 
-import java.time.LocalDateTime
-
 import com.google.inject.Inject
 import config.FrontendAppConfig
+import connectors.EstatesStoreConnector
+import controllers.actions.Actions
+import handlers.ErrorHandler
 import models.CompletedTasks
+import play.api.Logger
 import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
-import utils.TrustsDateFormatter
 import views.html.TaskListView
 
+import scala.concurrent.{ExecutionContext, Future}
+
 class TaskListController @Inject()(
+                                    actions: Actions,
                                     val controllerComponents: MessagesControllerComponents,
                                     val config: FrontendAppConfig,
                                     view: TaskListView,
-                                    dateFormatter: TrustsDateFormatter
-                                  ) extends FrontendBaseController with I18nSupport with TaskListSections {
+                                    storeConnector: EstatesStoreConnector,
+                                    errorHandler: ErrorHandler
+                                  )(implicit ec: ExecutionContext)
+  extends FrontendBaseController with I18nSupport with TaskListSections {
 
-  def onPageLoad(): Action[AnyContent] = Action { implicit request =>
+  def onPageLoad(): Action[AnyContent] = actions.authWithData.async {
+    implicit request =>
 
-    // TODO: get this time from user answers
-    val savedUntil: String = dateFormatter.savedUntil(LocalDateTime.now)
+      storeConnector.getStatusOfTasks flatMap {
 
-    val taskList = generateTaskList(CompletedTasks())
+        case _ @(tasks: CompletedTasks) =>
+          val taskList = generateTaskList(tasks)
 
-    // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
-    Ok(view(
-      estateName = None,
-      savedUntil = savedUntil,
-      sections = taskList.mandatory,
-      isTaskListComplete = taskList.isAbleToDeclare
-    ))
+          // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
+
+          Future.successful(
+            Ok(view(
+            estateName = None,
+            sections = taskList.tasks,
+            isTaskListComplete = taskList.isAbleToDeclare
+            ))
+          )
+
+        case e =>
+          Logger.error(s"[TaskListController] unable to get tasks statuses due to error $e")
+          errorHandler.onServerError(request, new Exception("Error while retrieving tasks statuses."))
+      }
   }
 
 }

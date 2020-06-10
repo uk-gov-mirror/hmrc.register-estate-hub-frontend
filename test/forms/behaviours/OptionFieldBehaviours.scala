@@ -16,35 +16,39 @@
 
 package forms.behaviours
 
-import play.api.data.{Form, FormError}
+import forms.FormSpec
+import generators.Generators
+import org.scalacheck.Gen
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
+import play.api.data.Form
 
-class OptionFieldBehaviours extends FieldBehaviours {
-
-  def optionsField[T](form: Form[_],
-                      fieldName: String,
-                      validValues: Seq[T],
-                      invalidError: FormError): Unit = {
+trait OptionFieldBehaviours extends FormSpec with ScalaCheckPropertyChecks with Generators {
 
 
-    "bind all valid values" in {
+  def optionalField(form: Form[_],
+                    fieldName: String,
+                    validDataGenerator: Gen[String]): Unit = {
 
-      for(value <- validValues) {
-
-        val result = form.bind(Map(fieldName -> value.toString)).apply(fieldName)
-        result.value.value shouldEqual value.toString
+    "bind valid data" in {
+      forAll(validDataGenerator) {
+        dataItem =>
+          val result = form.bind(Map(fieldName -> dataItem)).apply(fieldName)
+          result.value.value shouldBe dataItem
       }
     }
 
-    "not bind invalid values" in {
 
-      val generator = stringsExceptSpecificValues(validValues.map(_.toString))
+    "bind when key is not present at all" in {
 
-      forAll(generator -> "invalidValue") {
-        value =>
-
-          val result = form.bind(Map(fieldName -> value)).apply(fieldName)
-          result.errors shouldEqual Seq(invalidError)
-      }
+      val result = form.bind(emptyForm).apply(fieldName)
+      result.errors shouldBe empty
     }
+
+    "bind blank values" in {
+
+      val result = form.bind(Map(fieldName -> "")).apply(fieldName)
+      result.errors shouldBe empty
+    }
+
   }
 }

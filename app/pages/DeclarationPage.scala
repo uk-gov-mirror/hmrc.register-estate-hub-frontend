@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 
-package models
+package pages
 
-sealed trait Tag
+import models.Declaration
+import play.api.libs.json.JsPath
 
-object Tag extends Enumerable.Implicits {
+case object DeclarationPage extends QuestionPage[Declaration] {
 
-  case object Completed extends WithName("completed") with Tag
+  override def path: JsPath = JsPath \ toString
 
-  case object InProgress extends WithName("in-progress") with Tag
-
-  val values: Set[Tag] = Set(
-    Completed, InProgress
-  )
-
-  implicit val enumerable: Enumerable[Tag] =
-    Enumerable(values.toSeq.map(v => v.toString -> v): _*)
-
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
-    if (upToDate || !featureEnabled) {
-      Completed
-    } else {
-      InProgress
-    }
-  }
+  override def toString: String = "declaration"
 }

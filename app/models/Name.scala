@@ -16,26 +16,14 @@
 
 package models
 
-sealed trait Tag
+import play.api.libs.json.{Format, Json}
 
-object Tag extends Enumerable.Implicits {
+case class Name(firstName: String, middleName: Option[String], lastName: String) {
+  lazy val displayName : String = firstName + " " + lastName
+  private val middleNameFormatted = middleName.fold(" ")(m => s" $m ")
+  lazy val displayFullName : String = firstName + middleNameFormatted + lastName
+}
 
-  case object Completed extends WithName("completed") with Tag
-
-  case object InProgress extends WithName("in-progress") with Tag
-
-  val values: Set[Tag] = Set(
-    Completed, InProgress
-  )
-
-  implicit val enumerable: Enumerable[Tag] =
-    Enumerable(values.toSeq.map(v => v.toString -> v): _*)
-
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
-    if (upToDate || !featureEnabled) {
-      Completed
-    } else {
-      InProgress
-    }
-  }
+object Name {
+  implicit lazy val formats: Format[Name] = Json.format[Name]
 }

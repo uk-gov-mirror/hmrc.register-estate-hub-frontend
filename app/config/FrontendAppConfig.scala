@@ -40,6 +40,9 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   lazy val loginContinueUrl: String = configuration.get[String]("urls.loginContinue")
   lazy val logoutUrl: String = configuration.get[String]("urls.logout")
 
+  lazy val estatesUrl: String = configuration.get[Service]("microservice.services.estates").baseUrl
+  lazy val estatesStoreUrl: String = configuration.get[Service]("microservice.services.estates-store").baseUrl + "/estates-store"
+
   lazy val locationCanonicalList: String = configuration.get[String]("location.canonical.list.all")
   lazy val locationCanonicalListNonUK: String = configuration.get[String]("location.canonical.list.nonUK")
 
@@ -58,14 +61,17 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   lazy val personalRepEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.personal-rep.enabled")
   lazy val deceasedPersonsEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.deceased-persons.enabled")
 
-  lazy val estateDetailsFrontendUrl : String =
+  lazy val estateDetailsFrontendUrl: String =
     configuration.get[String]("urls.estateDetails")
 
-  lazy val personalRepFrontendUrl : String =
+  lazy val personalRepFrontendUrl: String =
     configuration.get[String]("urls.personalRep")
 
-  lazy val deceasedPersonsFrontendUrl : String =
+  lazy val deceasedPersonsFrontendUrl: String =
     configuration.get[String]("urls.deceasedPersons")
+
+  lazy val featureUnavailableUrl: String =
+    configuration.get[String]("urls.featureUnavailable")
 
   lazy val ttlInSeconds: Int = configuration.get[Int]("mongodb.timeToLiveInSeconds")
 }

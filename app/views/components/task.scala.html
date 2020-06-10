@@ -16,6 +16,7 @@
 
 @import viewmodels.Task
 @import views.html._
+@import models.Tag._
 
 @(task: Task)(implicit messages: Messages)
 
@@ -30,10 +31,12 @@
     </a>
 
     @task.tag.map { t =>
-      <strong class="govuk-tag @{t.toString} app-task-list__task-@{t.toString}"
-         id="task-list__task--@{task.link.text}__tag">
+        @if(t == Completed){
+            <strong class="govuk-tag @{t.toString} app-task-list__task-@{t.toString}"
+                    id="task-list__task--@{task.link.text}__tag">
 
-          @messages(s"taskList.${t.toString}")
-      </strong>
+                @messages(s"taskList.${t.toString}")
+            </strong>
+        }
     }
 </li>
