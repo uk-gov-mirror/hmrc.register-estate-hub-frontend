@@ -16,6 +16,7 @@
 
 package navigation
 
+import config.FrontendAppConfig
 import controllers.{routes => rts}
 import javax.inject.{Inject, Singleton}
 import models._
@@ -23,21 +24,16 @@ import pages._
 import play.api.mvc.Call
 
 @Singleton
-class RegistrationNavigator @Inject()() extends Navigator {
+class RegistrationNavigator @Inject()(config: FrontendAppConfig) extends Navigator {
 
   override def nextPage(page: Page, userAnswers: UserAnswers): Call =
     routes()(page)(userAnswers)
-
-//  private def simpleNavigation(): PartialFunction[Page, Call] = {
-//    case EstateRegisteredOnlineYesNoPage => rts.EstateRegisteredOnlineYesNoController.onPageLoad()
-//
-//  }
 
   private def yesNoNavigation(): PartialFunction[Page, UserAnswers => Call] = {
     case EstateRegisteredOnlineYesNoPage => ua =>
       yesNoNav(ua, EstateRegisteredOnlineYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), rts.HaveUTRYesNoController.onPageLoad())
     case HaveUTRYesNoPage => ua =>
-      yesNoNav(ua, HaveUTRYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), controllers.registration_progress.routes.TaskListController.onPageLoad())
+      yesNoNav(ua, HaveUTRYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), Call("GET", config.suitabilityUrl))
   }
 
   def yesNoNav(ua: UserAnswers, fromPage: QuestionPage[Boolean], yesCall: => Call, noCall: => Call): Call = {
