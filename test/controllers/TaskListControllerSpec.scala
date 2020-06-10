@@ -27,6 +27,7 @@ import org.mockito.Mockito._
 import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import repositories.SessionRepository
 import viewmodels.tasks.{DeceasedPersons, EstateDetails, PersonalRep}
 import viewmodels.{Link, Task}
 import views.html.TaskListView
@@ -41,6 +42,8 @@ class TaskListControllerSpec extends SpecBase {
   private val featureUnavailableRoute: String = "http://localhost:8822/register-an-estate/feature-not-available"
 
   private val mockAppConfig: FrontendAppConfig = mock[FrontendAppConfig]
+
+  private val mockRepository : SessionRepository = mock[SessionRepository]
 
   when(mockAppConfig.estateDetailsFrontendUrl) thenReturn estateDetailsRoute
   when(mockAppConfig.personalRepFrontendUrl) thenReturn personalRepRoute
@@ -62,6 +65,8 @@ class TaskListControllerSpec extends SpecBase {
           Task(Link(DeceasedPersons, deceasedPersonsRoute), Some(Completed))
         )
 
+        when(mockRepository.set(any())).thenReturn(Future.successful(true))
+
         when(mockConnector.getStatusOfTasks(any(), any()))
           .thenReturn(Future.successful(CompletedTasks(details = true, personalRepresentative = true, deceased = true)))
 
@@ -72,7 +77,8 @@ class TaskListControllerSpec extends SpecBase {
         val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(Seq(
             bind(classOf[EstatesStoreConnector]).toInstance(mockConnector),
-            bind[FrontendAppConfig].toInstance(mockAppConfig)
+            bind[FrontendAppConfig].toInstance(mockAppConfig),
+            bind[SessionRepository].toInstance(mockRepository)
           ))
           .build()
 
@@ -98,6 +104,8 @@ class TaskListControllerSpec extends SpecBase {
           Task(Link(DeceasedPersons, featureUnavailableRoute), Some(Completed))
         )
 
+        when(mockRepository.set(any())).thenReturn(Future.successful(true))
+
         when(mockConnector.getStatusOfTasks(any(), any()))
           .thenReturn(Future.successful(CompletedTasks(details = true, personalRepresentative = true, deceased = true)))
 
@@ -108,7 +116,8 @@ class TaskListControllerSpec extends SpecBase {
         val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(Seq(
             bind(classOf[EstatesStoreConnector]).toInstance(mockConnector),
-            bind[FrontendAppConfig].toInstance(mockAppConfig)
+            bind[FrontendAppConfig].toInstance(mockAppConfig),
+            bind[SessionRepository].toInstance(mockRepository)
           ))
           .build()
 
@@ -134,6 +143,8 @@ class TaskListControllerSpec extends SpecBase {
           Task(Link(DeceasedPersons, deceasedPersonsRoute), Some(InProgress))
         )
 
+        when(mockRepository.set(any())).thenReturn(Future.successful(true))
+
         when(mockConnector.getStatusOfTasks(any(), any()))
           .thenReturn(Future.successful(CompletedTasks(details = false, personalRepresentative = false, deceased = false)))
 
@@ -144,7 +155,8 @@ class TaskListControllerSpec extends SpecBase {
         val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(Seq(
             bind(classOf[EstatesStoreConnector]).toInstance(mockConnector),
-            bind[FrontendAppConfig].toInstance(mockAppConfig)
+            bind[FrontendAppConfig].toInstance(mockAppConfig),
+            bind[SessionRepository].toInstance(mockRepository)
           ))
           .build()
 
@@ -168,8 +180,11 @@ class TaskListControllerSpec extends SpecBase {
       when(mockConnector.getStatusOfTasks(any(), any()))
         .thenReturn(Future.successful(InternalServerError))
 
+      when(mockRepository.set(any())).thenReturn(Future.successful(true))
+
       val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
         .overrides(Seq(
+          bind[SessionRepository].toInstance(mockRepository),
           bind(classOf[EstatesStoreConnector]).toInstance(mockConnector)
         ))
         .build()
