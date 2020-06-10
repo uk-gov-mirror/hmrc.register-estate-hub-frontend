@@ -21,10 +21,11 @@ import config.FrontendAppConfig
 import connectors.EstatesStoreConnector
 import controllers.actions.Actions
 import handlers.ErrorHandler
-import models.CompletedTasks
+import models.{CompletedTasks, CompletedTasksResponse, UserAnswers}
 import play.api.Logger
 import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import repositories.SessionRepository
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.TaskListView
 
@@ -36,31 +37,37 @@ class TaskListController @Inject()(
                                     val config: FrontendAppConfig,
                                     view: TaskListView,
                                     storeConnector: EstatesStoreConnector,
-                                    errorHandler: ErrorHandler
+                                    errorHandler: ErrorHandler,
+                                    repository: SessionRepository
                                   )(implicit ec: ExecutionContext)
   extends FrontendBaseController with I18nSupport with TaskListSections {
 
-  def onPageLoad(): Action[AnyContent] = actions.authWithData.async {
+  def onPageLoad(): Action[AnyContent] = actions.authWithSession.async {
     implicit request =>
 
-      storeConnector.getStatusOfTasks flatMap {
+      def continueOrCreateNewSession =
+        request.userAnswers.getOrElse(UserAnswers(request.internalId))
 
-        case _ @(tasks: CompletedTasks) =>
-          val taskList = generateTaskList(tasks)
+      for {
+       _ <- repository.set(continueOrCreateNewSession)
+        tasks <- storeConnector.getStatusOfTasks
+      } yield {
+        tasks match {
+          case l @ CompletedTasks(_, _, _) =>
+            val taskList = generateTaskList(l)
 
-          // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
+            // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
 
-          Future.successful(
-            Ok(view(
-            estateName = None,
-            sections = taskList.tasks,
-            isTaskListComplete = taskList.isAbleToDeclare
-            ))
-          )
-
-        case e =>
-          Logger.error(s"[TaskListController] unable to get tasks statuses due to error $e")
-          errorHandler.onServerError(request, new Exception("Error while retrieving tasks statuses."))
+              Ok(view(
+                estateName = None,
+                sections = taskList.tasks,
+                isTaskListComplete = taskList.isAbleToDeclare
+              )
+            )
+          case CompletedTasksResponse.InternalServerError =>
+            Logger.error(s"[TaskListController] unable to get tasks statuses")
+            InternalServerError(errorHandler.internalServerErrorTemplate)
+        }
       }
   }
 

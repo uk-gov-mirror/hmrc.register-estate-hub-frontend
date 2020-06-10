@@ -17,13 +17,14 @@
 package navigation
 
 import base.SpecBase
-import controllers.routes
+import config.FrontendAppConfig
 import pages._
-import models._
 
 class RegistrationNavigatorSpec extends SpecBase {
 
-  val navigator = new RegistrationNavigator
+  val appConfig = injector.instanceOf[FrontendAppConfig]
+
+  val navigator = new RegistrationNavigator(appConfig)
 
   "Registration navigator" when {
 
@@ -51,12 +52,11 @@ class RegistrationNavigatorSpec extends SpecBase {
         .mustBe(controllers.routes.FeatureNotAvailableController.onPageLoad())
     }
 
-    "HaveUTRYesNo page -> No -> TaskList page" in {
+    "HaveUTRYesNo page -> No -> Suitability questions" in {
       val answers = emptyUserAnswers
         .set(HaveUTRYesNoPage, false).success.value
 
-      navigator.nextPage(HaveUTRYesNoPage, answers)
-        .mustBe(controllers.registration_progress.routes.TaskListController.onPageLoad())
+      navigator.nextPage(HaveUTRYesNoPage, answers).url mustBe "http://localhost:8821/register-an-estate/suitability"
     }
   }
 }
