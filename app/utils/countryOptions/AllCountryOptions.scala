@@ -14,6 +14,17 @@
  * limitations under the License.
  */
 
-package utils
+package utils.countryOptions
 
-case class InputOption(value: String, label: String, dataTarget: Option[String] = None)
+import config.FrontendAppConfig
+import javax.inject.{Inject, Singleton}
+import play.api.Environment
+import utils.InputOption
+
+@Singleton
+class AllCountryOptions @Inject()(environment: Environment, config: FrontendAppConfig)
+  extends CountryOptions {
+
+  override def options: Seq[InputOption] = getCountries(environment, config.locationCanonicalList)
+
+}
