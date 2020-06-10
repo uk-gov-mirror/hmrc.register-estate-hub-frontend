@@ -8,7 +8,7 @@ POST       /estate-registered-online                    controllers.EstateRegist
 GET        /have-utr                                    controllers.HaveUTRYesNoController.onPageLoad()
 POST       /have-utr                                    controllers.HaveUTRYesNoController.onSubmit()
 
-GET        /task-list                                   controllers.task_list.TaskListController.onPageLoad()
+GET        /registration-progress                       controllers.registration_progress.TaskListController.onPageLoad()
 
 GET        /problem-declaring                           controllers.ProblemDeclaringController.onPageLoad()
 

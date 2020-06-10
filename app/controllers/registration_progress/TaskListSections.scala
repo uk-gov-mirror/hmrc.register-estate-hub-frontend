@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package controllers.task_list
+package controllers.registration_progress
 
 import config.FrontendAppConfig
 import models.Tag.InProgress

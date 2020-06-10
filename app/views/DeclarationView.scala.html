@@ -52,6 +52,8 @@
 
         @components.warning("declaration")
 
-        @components.submit_button()
+        @components.submit_button(Some("site.confirm.send"))
+
+        <p><a href="@controllers.registration_progress.routes.TaskListController.onPageLoad()">@messages("site.returnToRegistrationProgress")</a></p>
     }
 }
