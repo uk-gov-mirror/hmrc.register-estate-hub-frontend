@@ -19,7 +19,7 @@ package connectors
 import config.FrontendAppConfig
 import javax.inject.Inject
 import models.http.DeclarationResponse
-import models.{EstateRegistration, PersonalRepName}
+import models.{EstateName, EstateRegistration, PersonalRepName}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
@@ -48,6 +48,11 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
       }
     }
   }
+
+  private val getEstateNameUrl = s"${config.estatesUrl}/estates/correspondence/name"
+
+  def getEstateName()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[Option[String]] = {
+    http.GET[EstateName](getEstateNameUrl).map(_.name)
+  }
+
 }
-
-

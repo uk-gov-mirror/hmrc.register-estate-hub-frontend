@@ -18,7 +18,7 @@ package controllers.registration_progress
 
 import com.google.inject.Inject
 import config.FrontendAppConfig
-import connectors.EstatesStoreConnector
+import connectors.{EstatesConnector, EstatesStoreConnector}
 import controllers.actions.Actions
 import handlers.ErrorHandler
 import models.{CompletedTasks, CompletedTasksResponse, UserAnswers}
@@ -29,13 +29,14 @@ import repositories.SessionRepository
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.TaskListView
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class TaskListController @Inject()(
                                     actions: Actions,
                                     val controllerComponents: MessagesControllerComponents,
                                     val config: FrontendAppConfig,
                                     view: TaskListView,
+                                    connector: EstatesConnector,
                                     storeConnector: EstatesStoreConnector,
                                     errorHandler: ErrorHandler,
                                     repository: SessionRepository
@@ -48,22 +49,23 @@ class TaskListController @Inject()(
       def continueOrCreateNewSession =
         request.userAnswers.getOrElse(UserAnswers(request.internalId))
 
+      def getEstateName =  connector.getEstateName()
+
       for {
        _ <- repository.set(continueOrCreateNewSession)
+       estateName <- getEstateName
         tasks <- storeConnector.getStatusOfTasks
       } yield {
         tasks match {
           case l @ CompletedTasks(_, _, _) =>
             val taskList = generateTaskList(l)
 
-            // TODO: get estate name from register-estate-details-frontend user answers as Option[String]
-
               Ok(view(
-                estateName = None,
+                estateName = estateName,
                 sections = taskList.tasks,
                 isTaskListComplete = taskList.isAbleToDeclare
               )
-            )
+              )
           case CompletedTasksResponse.InternalServerError =>
             Logger.error(s"[TaskListController] unable to get tasks statuses")
             InternalServerError(errorHandler.internalServerErrorTemplate)
