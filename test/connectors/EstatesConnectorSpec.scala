@@ -24,7 +24,7 @@ import com.github.tomakehurst.wiremock.client.WireMock.{okJson, urlEqualTo, _}
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
 import models.http.DeclarationResponse.{AlreadyRegistered, InternalServerError}
 import models.http.TRNResponse
-import models.{AddressType, Correspondence, Declaration, EntitiesType, Estate, EstateRegistration, EstateWillType, Name, PersonalRepresentativeType}
+import models.{AddressType, Correspondence, Declaration, EntitiesType, Estate, EstateRegistration, EstateWillType, Name, PersonalRepName, PersonalRepresentativeType}
 import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach}
 import play.api.http.Status
@@ -177,6 +177,136 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
 
       result.futureValue mustBe
         InternalServerError
+
+      application.stop()
+    }
+
+    "return a personal representative name when the personal representative is an individual" in {
+      val application = applicationBuilder()
+        .configure(
+          Seq(
+            "microservice.services.estates.port" -> server.port(),
+            "auditing.enabled" -> false
+          ): _*
+        ).build()
+
+      val connector = application.injector.instanceOf[EstatesConnector]
+
+      val personalRepIndResponse = Json.parse(
+        """
+          |{
+          |  "name": {
+          |     "firstName": "Adam",
+          |     "lastName": "Conder"
+          |  },
+          |  "dateOfBirth": "2010-10-10",
+          |   "identification": {
+          |     "nino": "JP121212A"
+          |   },
+          |   "phoneNumber": "+44 1911111"
+          |}
+          |""".stripMargin)
+
+      val personalRepOrgResponse = Json.parse(
+        """
+          |{}
+          |""".stripMargin)
+
+      server.stubFor(
+        get(urlEqualTo("/estates/personal-rep/individual"))
+          .willReturn(okJson(personalRepIndResponse.toString))
+      )
+
+      server.stubFor(
+        get(urlEqualTo("/estates/personal-rep/organisation"))
+          .willReturn(okJson(personalRepOrgResponse.toString))
+      )
+
+      val result = connector.getPersonalRepName()
+
+      result.futureValue mustBe PersonalRepName("Adam Conder")
+
+      application.stop()
+    }
+
+    "return a personal representative name when the personal representative is an organisation" in {
+      val application = applicationBuilder()
+        .configure(
+          Seq(
+            "microservice.services.estates.port" -> server.port(),
+            "auditing.enabled" -> false
+          ): _*
+        ).build()
+
+      val connector = application.injector.instanceOf[EstatesConnector]
+
+      val personalRepIndResponse = Json.parse(
+        """
+          |{}
+          |""".stripMargin)
+
+      val personalRepOrgResponse = Json.parse(
+        """
+          |{
+          | "orgName": "Conder Ltd",
+          | "phoneNumber": "+44 1911111",
+          | "identification": {
+          |   "utr": "1234567890"
+          | }
+          |}
+          |""".stripMargin)
+
+      server.stubFor(
+        get(urlEqualTo("/estates/personal-rep/individual"))
+          .willReturn(okJson(personalRepIndResponse.toString))
+      )
+
+      server.stubFor(
+        get(urlEqualTo("/estates/personal-rep/organisation"))
+          .willReturn(okJson(personalRepOrgResponse.toString))
+      )
+
+      val result = connector.getPersonalRepName()
+
+      result.futureValue mustBe PersonalRepName("Conder Ltd")
+
+      application.stop()
+    }
+
+    "return an error when personal rep name cannot be retrieved" in {
+      val application = applicationBuilder()
+        .configure(
+          Seq(
+            "microservice.services.estates.port" -> server.port(),
+            "auditing.enabled" -> false
+          ): _*
+        ).build()
+
+      val connector = application.injector.instanceOf[EstatesConnector]
+
+      val personalRepIndResponse = Json.parse(
+        """
+          |{}
+          |""".stripMargin)
+
+      val personalRepOrgResponse = Json.parse(
+        """
+          |{}
+          |""".stripMargin)
+
+      server.stubFor(
+        get(urlEqualTo("/estates/personal-rep/individual"))
+          .willReturn(okJson(personalRepIndResponse.toString))
+      )
+
+      server.stubFor(
+        get(urlEqualTo("/estates/personal-rep/organisation"))
+          .willReturn(okJson(personalRepOrgResponse.toString))
+      )
+
+      val result = connector.getPersonalRepName()
+
+      result.failed.futureValue mustBe a[RuntimeException]
 
       application.stop()
     }

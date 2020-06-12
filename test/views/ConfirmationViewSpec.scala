@@ -56,7 +56,8 @@ class ConfirmationViewSpec extends ViewBehaviours {
     val view = viewFor[ConfirmationView](Some(emptyUserAnswers))
 
     val applyView = view.apply(
-      trn = refNumber
+      trn = refNumber,
+      personalRepName = ""
     )(fakeRequest, messages)
 
     behave like confirmationPage(applyView, messageKeyPrefix, refNumber, accessibleRefNumber)

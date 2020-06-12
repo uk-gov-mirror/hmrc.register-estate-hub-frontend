@@ -20,7 +20,6 @@ import com.google.inject.Inject
 import connectors.EstatesConnector
 import controllers.actions.Actions
 import handlers.ErrorHandler
-import models.{EstatePerRepIndType, EstatePerRepOrgType}
 import pages._
 import play.api.Logger
 import play.api.i18n.I18nSupport
@@ -46,12 +45,9 @@ class ConfirmationController @Inject()(
         errorHandler.onServerError(request, new Exception("TRN is not available for completed estate."))
       }{
         trn =>
-          connector.getPersonalRep().map {
-            personalRep =>
-              personalRep.estatePerRepInd.getOrElse(personalRep.estatePerRepOrg.get) match {
-                case ind:EstatePerRepIndType => Ok(view(trn, ind.name.displayName))
-                case org:EstatePerRepOrgType => Ok(view(trn, org.orgName))
-              }
+          connector.getPersonalRepName().map {
+            name =>
+              Ok(view(trn, name.name))
           }
       }
   }

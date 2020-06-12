@@ -18,8 +18,8 @@ package connectors
 
 import config.FrontendAppConfig
 import javax.inject.Inject
-import models.{Declaration, EstatePerRepIndType, EstatePerRepOrgType, EstateRegistration, PersonalRepresentativeType}
 import models.http.DeclarationResponse
+import models.{EstateRegistration, PersonalRepName}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
@@ -36,14 +36,15 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
   private val getPersonalRepIndUrl = s"${config.estatesUrl}/estates/personal-rep/individual"
   private val getPersonalRepOrgUrl = s"${config.estatesUrl}/estates/personal-rep/organisation"
 
-  def getPersonalRep()(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[PersonalRepresentativeType] = {
+  def getPersonalRepName()(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[PersonalRepName] = {
     for {
-      individual <- http.GET[Option[EstatePerRepIndType]](getPersonalRepIndUrl)
-      organisation <- http.GET[Option[EstatePerRepOrgType]](getPersonalRepOrgUrl)
+      individual <- http.GET[Option[PersonalRepName]](getPersonalRepIndUrl)(PersonalRepName.personalRepIndividualNameReads, hc, ec)
+      organisation <- http.GET[Option[PersonalRepName]](getPersonalRepOrgUrl)(PersonalRepName.personalRepOrganisationNameReads, hc, ec)
     } yield {
       (individual, organisation) match {
-        case (ind: Option[EstatePerRepIndType], _) => PersonalRepresentativeType(ind, None)
-        case (_, org: Option[EstatePerRepOrgType]) => PersonalRepresentativeType(None, org)
+        case (Some(name), None) => name
+        case (None, Some(name)) => name
+        case _ => throw new RuntimeException("Unable to get personal representatives name")
       }
     }
   }
