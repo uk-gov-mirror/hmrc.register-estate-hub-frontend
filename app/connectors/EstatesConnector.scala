@@ -18,19 +18,34 @@ package connectors
 
 import config.FrontendAppConfig
 import javax.inject.Inject
-import models.{Declaration, EstateRegistration}
+import models.{Declaration, EstatePerRepIndType, EstatePerRepOrgType, EstateRegistration, PersonalRepresentativeType}
 import models.http.DeclarationResponse
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class EstatesConnector @Inject()(http: HttpClient, config : FrontendAppConfig) {
+class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
 
   private val registerUrl = s"${config.estatesUrl}/estates/register"
 
-  def register(payload: EstateRegistration)(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[DeclarationResponse] = {
+  def register(payload: EstateRegistration)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[DeclarationResponse] = {
     http.POST[EstateRegistration, DeclarationResponse](registerUrl, payload)
+  }
+
+  private val getPersonalRepIndUrl = s"${config.estatesUrl}/estates/personal-rep/individual"
+  private val getPersonalRepOrgUrl = s"${config.estatesUrl}/estates/personal-rep/organisation"
+
+  def getPersonalRep()(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[PersonalRepresentativeType] = {
+    for {
+      individual <- http.GET[Option[EstatePerRepIndType]](getPersonalRepIndUrl)
+      organisation <- http.GET[Option[EstatePerRepOrgType]](getPersonalRepOrgUrl)
+    } yield {
+      (individual, organisation) match {
+        case (ind: Option[EstatePerRepIndType], _) => PersonalRepresentativeType(ind, None)
+        case (_, org: Option[EstatePerRepOrgType]) => PersonalRepresentativeType(None, org)
+      }
+    }
   }
 }
 

@@ -21,7 +21,7 @@
     main_template: MainTemplate
 )
 
-@(trn: String)(implicit request: Request[_], messages: Messages)
+@(trn: String, personalRepName: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = s"${messages("confirmation.title")}"
@@ -43,7 +43,7 @@
 
     <h2>@messages("confirmation.subheading1")</h2>
 
-    <p>@messages("confirmation.paragraph1")</p>
+    <p>@messages("confirmation.paragraph1", personalRepName)</p>
 
     <h2>@messages("confirmation.subheading2")</h2>
 
