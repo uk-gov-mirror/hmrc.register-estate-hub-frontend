@@ -18,7 +18,7 @@ package controllers
 
 import base.SpecBase
 import config.FrontendAppConfig
-import connectors.EstatesStoreConnector
+import connectors.{EstatesConnector, EstatesStoreConnector}
 import models.CompletedTasks
 import models.CompletedTasksResponse.InternalServerError
 import models.Tag._
@@ -51,7 +51,8 @@ class TaskListControllerSpec extends SpecBase {
   when(mockAppConfig.featureUnavailableUrl) thenReturn featureUnavailableRoute
   when(mockAppConfig.analyticsToken) thenReturn "N/A"
 
-  private val mockConnector: EstatesStoreConnector = mock[EstatesStoreConnector]
+  private val mockEstatesStoreConnector: EstatesStoreConnector = mock[EstatesStoreConnector]
+  private val mockEstatesConnector: EstatesConnector = mock[EstatesConnector]
 
   "TaskList Controller" must {
 
@@ -67,8 +68,10 @@ class TaskListControllerSpec extends SpecBase {
 
         when(mockRepository.set(any())).thenReturn(Future.successful(true))
 
-        when(mockConnector.getStatusOfTasks(any(), any()))
+        when(mockEstatesStoreConnector.getStatusOfTasks(any(), any()))
           .thenReturn(Future.successful(CompletedTasks(details = true, personalRepresentative = true, deceased = true)))
+
+        when(mockEstatesConnector.getEstateName()(any(), any())).thenReturn(Future.successful(None))
 
         when(mockAppConfig.estateDetailsEnabled) thenReturn true
         when(mockAppConfig.personalRepEnabled) thenReturn true
@@ -76,7 +79,8 @@ class TaskListControllerSpec extends SpecBase {
 
         val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(Seq(
-            bind(classOf[EstatesStoreConnector]).toInstance(mockConnector),
+            bind(classOf[EstatesStoreConnector]).toInstance(mockEstatesStoreConnector),
+            bind(classOf[EstatesConnector]).toInstance(mockEstatesConnector),
             bind[FrontendAppConfig].toInstance(mockAppConfig),
             bind[SessionRepository].toInstance(mockRepository)
           ))
@@ -106,8 +110,10 @@ class TaskListControllerSpec extends SpecBase {
 
         when(mockRepository.set(any())).thenReturn(Future.successful(true))
 
-        when(mockConnector.getStatusOfTasks(any(), any()))
+        when(mockEstatesStoreConnector.getStatusOfTasks(any(), any()))
           .thenReturn(Future.successful(CompletedTasks(details = true, personalRepresentative = true, deceased = true)))
+
+        when(mockEstatesConnector.getEstateName()(any(), any())).thenReturn(Future.successful(None))
 
         when(mockAppConfig.estateDetailsEnabled) thenReturn false
         when(mockAppConfig.personalRepEnabled) thenReturn false
@@ -115,7 +121,8 @@ class TaskListControllerSpec extends SpecBase {
 
         val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(Seq(
-            bind(classOf[EstatesStoreConnector]).toInstance(mockConnector),
+            bind(classOf[EstatesStoreConnector]).toInstance(mockEstatesStoreConnector),
+            bind(classOf[EstatesConnector]).toInstance(mockEstatesConnector),
             bind[FrontendAppConfig].toInstance(mockAppConfig),
             bind[SessionRepository].toInstance(mockRepository)
           ))
@@ -145,8 +152,10 @@ class TaskListControllerSpec extends SpecBase {
 
         when(mockRepository.set(any())).thenReturn(Future.successful(true))
 
-        when(mockConnector.getStatusOfTasks(any(), any()))
+        when(mockEstatesStoreConnector.getStatusOfTasks(any(), any()))
           .thenReturn(Future.successful(CompletedTasks(details = false, personalRepresentative = false, deceased = false)))
+
+        when(mockEstatesConnector.getEstateName()(any(), any())).thenReturn(Future.successful(None))
 
         when(mockAppConfig.estateDetailsEnabled) thenReturn true
         when(mockAppConfig.personalRepEnabled) thenReturn true
@@ -154,7 +163,8 @@ class TaskListControllerSpec extends SpecBase {
 
         val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(Seq(
-            bind(classOf[EstatesStoreConnector]).toInstance(mockConnector),
+            bind(classOf[EstatesStoreConnector]).toInstance(mockEstatesStoreConnector),
+            bind(classOf[EstatesConnector]).toInstance(mockEstatesConnector),
             bind[FrontendAppConfig].toInstance(mockAppConfig),
             bind[SessionRepository].toInstance(mockRepository)
           ))
@@ -177,15 +187,19 @@ class TaskListControllerSpec extends SpecBase {
 
     "return InternalServerError when error retrieving tasks statuses" in {
 
-      when(mockConnector.getStatusOfTasks(any(), any()))
+
+      when(mockEstatesStoreConnector.getStatusOfTasks(any(), any()))
         .thenReturn(Future.successful(InternalServerError))
+
+      when(mockEstatesConnector.getEstateName()(any(), any())).thenReturn(Future.successful(None))
 
       when(mockRepository.set(any())).thenReturn(Future.successful(true))
 
       val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
         .overrides(Seq(
           bind[SessionRepository].toInstance(mockRepository),
-          bind(classOf[EstatesStoreConnector]).toInstance(mockConnector)
+          bind(classOf[EstatesStoreConnector]).toInstance(mockEstatesStoreConnector),
+          bind(classOf[EstatesConnector]).toInstance(mockEstatesConnector)
         ))
         .build()
 

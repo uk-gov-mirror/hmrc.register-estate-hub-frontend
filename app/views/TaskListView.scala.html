@@ -29,10 +29,8 @@
 
     @components.back_link()
 
-    @{
-        estateName.map { name =>
-            <span class="govuk-caption-xl" id="estate-name">name</span>
-        }
+    @estateName.map { name =>
+        <span class="govuk-caption-xl" id="estate-name">@name</span>
     }
 
     @components.heading("taskList.heading", headingSize = "heading-xlarge")
