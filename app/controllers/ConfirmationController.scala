@@ -17,6 +17,7 @@
 package controllers
 
 import com.google.inject.Inject
+import connectors.EstatesConnector
 import controllers.actions.Actions
 import handlers.ErrorHandler
 import pages._
@@ -26,11 +27,12 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.ConfirmationView
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class ConfirmationController @Inject()(
                                         val controllerComponents: MessagesControllerComponents,
                                         view: ConfirmationView,
+                                        connector: EstatesConnector,
                                         actions: Actions,
                                         errorHandler: ErrorHandler
                                       )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
@@ -43,7 +45,10 @@ class ConfirmationController @Inject()(
         errorHandler.onServerError(request, new Exception("TRN is not available for completed estate."))
       }{
         trn =>
-          Future.successful(Ok(view(trn)))
+          connector.getPersonalRepName().map {
+            name =>
+              Ok(view(trn, name.name))
+          }
       }
   }
 }

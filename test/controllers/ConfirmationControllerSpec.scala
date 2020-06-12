@@ -17,22 +17,37 @@
 package controllers
 
 import base.SpecBase
+import connectors.EstatesConnector
+import models.PersonalRepName
 import pages.TRNPage
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import views.html.ConfirmationView
+import org.mockito.Mockito.when
+import org.mockito.Matchers.any
+import play.api.inject.bind
+
+import scala.concurrent.Future
 
 class ConfirmationControllerSpec extends SpecBase {
+
+  val mockConnector = mock[EstatesConnector]
 
   "Confirmation Controller" must {
 
     "return OK and the correct view for a GET when TRN is available" in {
 
+      when(mockConnector.getPersonalRepName()(any(), any())).thenReturn(Future.successful(PersonalRepName("Adam")))
+
       val trn: String = "XC TRN 000 000 4911"
 
       val userAnswers = emptyUserAnswers.set(TRNPage, trn).success.value
 
-      val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
+      val application = applicationBuilder(userAnswers = Some(userAnswers))
+        .overrides(
+          bind[EstatesConnector].to(mockConnector)
+        )
+        .build()
 
       val request = FakeRequest(GET, routes.ConfirmationController.onPageLoad().url)
 
@@ -43,7 +58,7 @@ class ConfirmationControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(trn)(fakeRequest, messages).toString
+        view(trn, "Adam")(fakeRequest, messages).toString
 
       application.stop()
 
