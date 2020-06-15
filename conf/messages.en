@@ -75,7 +75,7 @@ taskList.summary.link = Print or save a copy of your answers (opens in a new win
 taskList.continue = Continue to declaration
 
 taskList.estateName.label = Estate name
-taskList.personalRepresenative.label = Personal representative
+taskList.personalRepresentative.label = Personal representative
 taskList.personWhoDied.label = Person who died
 
 taskList.in-progress = In progress
