@@ -19,7 +19,7 @@ package controllers.registration_progress
 import config.FrontendAppConfig
 import models.Tag.InProgress
 import models.{CompletedTasks, Tag}
-import viewmodels.tasks.{DeceasedPersons, EstateDetails, PersonalRep}
+import viewmodels.tasks.{PersonWhoDied, EstateName, PersonalRepresentative}
 import viewmodels.{Link, Task}
 
 trait TaskListSections {
@@ -60,15 +60,15 @@ trait TaskListSections {
   def generateTaskList(tasks: CompletedTasks): TaskList = {
     val sections = List(
       Task(
-        Link(EstateDetails, estateDetailsRoute),
+        Link(EstateName, estateDetailsRoute),
         Some(Tag.tagFor(tasks.details, config.estateDetailsEnabled))
       ),
       Task(
-        Link(PersonalRep, personalRepRoute),
+        Link(PersonalRepresentative, personalRepRoute),
         Some(Tag.tagFor(tasks.personalRepresentative, config.personalRepEnabled))
       ),
       Task(
-        Link(DeceasedPersons, deceasedPersonsRoute),
+        Link(PersonWhoDied, deceasedPersonsRoute),
         Some(Tag.tagFor(tasks.deceased, config.deceasedPersonsEnabled))
       )
     )

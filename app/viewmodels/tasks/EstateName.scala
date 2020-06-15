@@ -18,8 +18,8 @@ package viewmodels.tasks
 
 import pages.Page
 
-case object DeceasedPersons extends Page with Task {
+case object EstateName extends Page with Task {
 
-  override def toString: String = "personWhoDied"
+  override def toString: String = "estateName"
 
 }
