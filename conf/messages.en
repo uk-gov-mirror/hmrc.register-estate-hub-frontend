@@ -74,9 +74,9 @@ taskList.summary.paragraph = After you have made a declaration, the only section
 taskList.summary.link = Print or save a copy of your answers (opens in a new window or tab)
 taskList.continue = Continue to declaration
 
-taskList.estateDetails.label = Estate name
-taskList.personalRep.label = Personal representative
-taskList.deceasedPersons.label = Person who died
+taskList.estateName.label = Estate name
+taskList.personalRepresenative.label = Personal representative
+taskList.personWhoDied.label = Person who died
 
 taskList.in-progress = In progress
 taskList.completed = Completed

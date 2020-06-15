@@ -18,7 +18,7 @@ package views
 
 import models.{CompletedTasks, Tag}
 import play.twirl.api.HtmlFormat
-import viewmodels.tasks.{DeceasedPersons, EstateDetails, PersonalRep}
+import viewmodels.tasks.{PersonWhoDied, EstateName, PersonalRepresentative}
 import viewmodels.{Link, Task}
 import views.behaviours.{TaskListViewBehaviours, ViewBehaviours}
 import views.html.TaskListView
@@ -42,15 +42,15 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
   private def sections(tasks: CompletedTasks): List[Task] = {
     List(
       Task(
-        Link(EstateDetails, url),
+        Link(EstateName, url),
         Some(Tag.tagFor(tasks.details, featureEnabled = true))
       ),
       Task(
-        Link(PersonalRep, url),
+        Link(PersonalRepresentative, url),
         Some(Tag.tagFor(tasks.personalRepresentative, featureEnabled = true))
       ),
       Task(
-        Link(DeceasedPersons, url),
+        Link(PersonWhoDied, url),
         Some(Tag.tagFor(tasks.deceased, featureEnabled = true))
       )
     )

@@ -28,7 +28,7 @@ import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import repositories.SessionRepository
-import viewmodels.tasks.{DeceasedPersons, EstateDetails, PersonalRep}
+import viewmodels.tasks.{PersonWhoDied, EstateName, PersonalRepresentative}
 import viewmodels.{Link, Task}
 import views.html.TaskListView
 
@@ -61,9 +61,9 @@ class TaskListControllerSpec extends SpecBase {
       "all routes are enabled" in {
 
         val sections = List(
-          Task(Link(EstateDetails, estateDetailsRoute), Some(Completed)),
-          Task(Link(PersonalRep, personalRepRoute), Some(Completed)),
-          Task(Link(DeceasedPersons, deceasedPersonsRoute), Some(Completed))
+          Task(Link(EstateName, estateDetailsRoute), Some(Completed)),
+          Task(Link(PersonalRepresentative, personalRepRoute), Some(Completed)),
+          Task(Link(PersonWhoDied, deceasedPersonsRoute), Some(Completed))
         )
 
         when(mockRepository.set(any())).thenReturn(Future.successful(true))
@@ -103,9 +103,9 @@ class TaskListControllerSpec extends SpecBase {
       "no routes enabled" in {
 
         val sections = List(
-          Task(Link(EstateDetails, featureUnavailableRoute), Some(Completed)),
-          Task(Link(PersonalRep, featureUnavailableRoute), Some(Completed)),
-          Task(Link(DeceasedPersons, featureUnavailableRoute), Some(Completed))
+          Task(Link(EstateName, featureUnavailableRoute), Some(Completed)),
+          Task(Link(PersonalRepresentative, featureUnavailableRoute), Some(Completed)),
+          Task(Link(PersonWhoDied, featureUnavailableRoute), Some(Completed))
         )
 
         when(mockRepository.set(any())).thenReturn(Future.successful(true))
@@ -145,9 +145,9 @@ class TaskListControllerSpec extends SpecBase {
       "no tasks completed" in {
 
         val sections = List(
-          Task(Link(EstateDetails, estateDetailsRoute), Some(InProgress)),
-          Task(Link(PersonalRep, personalRepRoute), Some(InProgress)),
-          Task(Link(DeceasedPersons, deceasedPersonsRoute), Some(InProgress))
+          Task(Link(EstateName, estateDetailsRoute), Some(InProgress)),
+          Task(Link(PersonalRepresentative, personalRepRoute), Some(InProgress)),
+          Task(Link(PersonWhoDied, deceasedPersonsRoute), Some(InProgress))
         )
 
         when(mockRepository.set(any())).thenReturn(Future.successful(true))

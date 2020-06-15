@@ -18,7 +18,7 @@ package viewmodels.tasks
 
 import pages.Page
 
-case object PersonalRep extends Page with Task {
+case object PersonalRepresentative extends Page with Task {
 
   override def toString: String = "personalRepresentative"
 
