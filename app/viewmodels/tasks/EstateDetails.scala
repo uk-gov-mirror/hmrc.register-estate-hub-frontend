@@ -20,6 +20,6 @@ import pages.Page
 
 case object EstateDetails extends Page with Task {
 
-  override def toString: String = "estateDetails"
+  override def toString: String = "estateName"
 
 }

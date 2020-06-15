@@ -20,6 +20,6 @@ import pages.Page
 
 case object PersonalRep extends Page with Task {
 
-  override def toString: String = "personalRep"
+  override def toString: String = "personalRepresentative"
 
 }
