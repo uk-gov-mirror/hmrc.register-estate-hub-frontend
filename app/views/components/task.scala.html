@@ -25,9 +25,12 @@
     <a class="app-task-list__task-name"
        id="task-list__task--@{task.link.text}"
        href="@{task.link.url}"
-       @task.tag.map { t => aria-describedby="task-list__task--@{task.link.text}__tag" }>
+       @task.tag.map { t =>
+           @if(t == Completed){
+               aria-describedby="task-list__task--@{task.link.text}__tag" }>
 
-        @messages(s"taskList.${task.link.text}.label")
+                @messages(s"taskList.${task.link.text}.label")
+            }
     </a>
 
     @task.tag.map { t =>
