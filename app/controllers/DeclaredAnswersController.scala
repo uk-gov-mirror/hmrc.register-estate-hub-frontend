@@ -18,19 +18,21 @@ package controllers
 
 import java.time.LocalDateTime
 
+import connectors.EstatesConnector
 import controllers.actions.Actions
 import javax.inject.Inject
 import models.requests.DataRequest
 import pages.{SubmissionDatePage, TRNPage}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.auth.core.AffinityGroup.Agent
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.play.HeaderCarrierConverter
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import utils.DateFormatter
 import utils.print.DeclaredAnswersPrintHelper
 import views.html.DeclaredAnswersView
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class DeclaredAnswersController @Inject()(
                                            override val messagesApi: MessagesApi,
@@ -38,17 +40,23 @@ class DeclaredAnswersController @Inject()(
                                            val controllerComponents: MessagesControllerComponents,
                                            declaredAnswersView: DeclaredAnswersView,
                                            printHelper: DeclaredAnswersPrintHelper,
-                                           dateFormatter: DateFormatter
+                                           dateFormatter: DateFormatter,
+                                           connector: EstatesConnector
                                          )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
   def onPageLoad(): Action[AnyContent] = actions.authWithData.async {
     implicit request =>
 
-      val entities = printHelper.entities()
+      implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
 
-      val tvn = request.userAnswers.get(TRNPage).getOrElse("")
+      connector.getRegistration() map { registration =>
 
-      Future.successful(Ok(declaredAnswersView(entities, tvn, declarationSent)))
+        val entities = printHelper.entities(registration)
+
+        val trn = request.userAnswers.get(TRNPage).getOrElse("")
+
+        Ok(declaredAnswersView(entities, trn, declarationSent))
+      }
   }
 
   private def declarationSent(implicit request: DataRequest[AnyContent]): String = {

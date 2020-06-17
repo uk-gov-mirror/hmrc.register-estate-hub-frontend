@@ -16,8 +16,6 @@
 
 package utils.print
 
-import java.time.LocalDate
-
 import javax.inject.Inject
 import models._
 import play.api.i18n.Messages
@@ -29,52 +27,12 @@ class DeclaredAnswersPrintHelper @Inject()(countryOptions: AllCountryOptions,
                                            businessPersonalRepPrintHelper: BusinessPersonalRepPrintHelper,
                                            deceasedPersonPrintHelper: DeceasedPersonPrintHelper) {
 
-  // TODO - get the estate from the backend
+  def entities(registration: EstateRegistration)(implicit messages: Messages): Seq[AnswerSection] = {
 
-  val estate: EstateRegistration = EstateRegistration(
-    matchData = None,
-    correspondence = Correspondence(
-      abroadIndicator = false,
-      name = "name",
-      address = UkAddress("line1", "line2", None, None, "NE22NE"),
-      phoneNumber = "123"
-    ),
-    yearsReturns = None,
-    declaration = Declaration(
-      name = Name("first", None, "last")
-    ),
-    estate = Estate(
-      entities = EntitiesType(
-        PersonalRepresentativeType(
-          Some(IndividualPersonalRep(
-            Name("first", None, "last"),
-            LocalDate.parse("1996-02-03"),
-            NationalInsuranceNumber("AA000000A"),
-            UkAddress("line1", "line2", None, None, "NE11NE"),
-            "999"
-          )),
-          None
-        ),
-        DeceasedPerson(
-          Name("first", None, "last"),
-          Some(LocalDate.parse("1996-02-03")),
-          LocalDate.parse("2020-02-03"),
-          nino = Some(NationalInsuranceNumber("BB000000B")),
-          None
-        )
-      ),
-      administrationEndDate = None,
-      periodTaxDues = "periodTaxDues"
-    ),
-    agentDetails = None
-  )
-
-  def entities()(implicit messages: Messages): Seq[AnswerSection] = {
-
-    List(
-      estateDetails(estate.correspondence.name),
-      personalRep(estate.estate.entities.personalRepresentative),
-      deceasedPersonPrintHelper(estate.estate.entities.deceased)
+    Seq(
+      estateDetails(registration.correspondence.name),
+      personalRep(registration.estate.entities.personalRepresentative),
+      deceasedPersonPrintHelper(registration.estate.entities.deceased)
     )
 
   }
