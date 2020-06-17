@@ -30,3 +30,5 @@ GET        /declaration                                 controllers.DeclarationC
 POST       /declaration                                 controllers.DeclarationController.onSubmit()
 
 GET        /confirmation                                controllers.ConfirmationController.onPageLoad()
+
+GET        /declared-answers                            controllers.DeclaredAnswersController.onPageLoad()
