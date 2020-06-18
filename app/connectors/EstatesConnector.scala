@@ -16,8 +16,6 @@
 
 package connectors
 
-import java.time.LocalDate
-
 import config.FrontendAppConfig
 import javax.inject.Inject
 import models._
@@ -58,54 +56,9 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
   }
 
   private val getRegistrationUrl = s"${config.estatesUrl}/estates/registration"
-  private val getRegistrationEnabled: Boolean = false
 
   def getRegistration()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[EstateRegistration] = {
-    if (getRegistrationEnabled) {
-      http.GET[EstateRegistration](getRegistrationUrl)
-    } else {
-      Future.successful(
-        registration
-      )
-    }
+    http.GET[EstateRegistration](getRegistrationUrl)
   }
-
-  private val registration: EstateRegistration = EstateRegistration(
-    matchData = None,
-    correspondence = Correspondence(
-      abroadIndicator = false,
-      name = "name",
-      address = UkAddress("line1", "line2", None, None, "NE22NE"),
-      phoneNumber = "123"
-    ),
-    yearsReturns = None,
-    declaration = Declaration(
-      name = Name("first", None, "last")
-    ),
-    estate = Estate(
-      entities = EntitiesType(
-        PersonalRepresentativeType(
-          Some(IndividualPersonalRep(
-            Name("first", None, "last"),
-            LocalDate.parse("1996-02-03"),
-            NationalInsuranceNumber("AA000000A"),
-            UkAddress("line1", "line2", None, None, "NE11NE"),
-            "999"
-          )),
-          None
-        ),
-        DeceasedPerson(
-          Name("first", None, "last"),
-          Some(LocalDate.parse("1996-02-03")),
-          LocalDate.parse("2020-02-03"),
-          nino = Some(NationalInsuranceNumber("BB000000B")),
-          None
-        )
-      ),
-      administrationEndDate = None,
-      periodTaxDues = "periodTaxDues"
-    ),
-    agentDetails = None
-  )
 
 }

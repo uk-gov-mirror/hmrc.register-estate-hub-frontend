@@ -51,7 +51,7 @@ class DeclaredAnswersController @Inject()(
 
       connector.getRegistration() map { registration =>
 
-        val entities = printHelper.entities(registration)
+        val entities = printHelper(registration)
 
         val trn = request.userAnswers.get(TRNPage).getOrElse("")
 

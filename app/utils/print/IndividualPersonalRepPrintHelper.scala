@@ -37,13 +37,13 @@ class IndividualPersonalRepPrintHelper @Inject()(countryOptions: AllCountryOptio
         case passport: Passport =>
           Seq(
             converter.yesNoQuestion(boolean = false, "personalRep.individual.ninoYesNo"),
-            converter.stringQuestion("passportOrIdCard.passport", "personalRep.individual.passportOrIdCard"),
+            converter.stringQuestion(messages("passportOrIdCard.passport"), "personalRep.individual.passportOrIdCard"),
             converter.passportQuestion(passport, "personalRep.individual.passport")
           )
         case idCard: IdCard =>
           Seq(
             converter.yesNoQuestion(boolean = false, "personalRep.individual.ninoYesNo"),
-            converter.stringQuestion("passportOrIdCard.idCard", "personalRep.individual.passportOrIdCard"),
+            converter.stringQuestion(messages("passportOrIdCard.idCard"), "personalRep.individual.passportOrIdCard"),
             converter.idCardQuestion(idCard, "personalRep.individual.idCard")
           )
       }

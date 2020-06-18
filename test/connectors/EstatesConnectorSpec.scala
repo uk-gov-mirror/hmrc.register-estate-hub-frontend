@@ -22,9 +22,9 @@ import base.SpecBase
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.{okJson, urlEqualTo, _}
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
+import models._
 import models.http.DeclarationResponse.{AlreadyRegistered, InternalServerError}
 import models.http.TRNResponse
-import models.{AddressType, Correspondence, Declaration, EntitiesType, Estate, EstateRegistration, EstateWillType, Name, PersonalRepName, PersonalRepresentativeType}
 import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach}
 import play.api.http.Status
@@ -60,7 +60,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
     correspondence = Correspondence(
       abroadIndicator = false,
       name = "name",
-      address = AddressType("line1", "line2", None, None, None, "GB"),
+      address = UkAddress("line1", "line2", None, None, "postcode"),
       phoneNumber = "tel"
     ),
     yearsReturns = None,
@@ -68,7 +68,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
       name = Name("first", None, "last")
     ),
     estate = Estate(
-      entities = EntitiesType(PersonalRepresentativeType(), EstateWillType(Name("first", None, "last"), None, LocalDate.parse("1996-02-03"), None)),
+      entities = EntitiesType(PersonalRepresentativeType(), DeceasedPerson(Name("first", None, "last"), None, LocalDate.parse("1996-02-03"), None, None)),
       administrationEndDate = None,
       periodTaxDues = "periodTaxDues"
     ),
@@ -309,6 +309,72 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
       result.failed.futureValue mustBe a[RuntimeException]
 
       application.stop()
+    }
+
+    "get registration request" when {
+
+      val url: String = "/estates/registration"
+
+      "successful return a registration document" in {
+
+        val application = applicationBuilder()
+          .configure(
+            Seq(
+              "microservice.services.estates.port" -> server.port(),
+              "auditing.enabled" -> false
+            ): _*
+          ).build()
+
+        val connector = application.injector.instanceOf[EstatesConnector]
+
+        val json = Json.parse(
+          """
+            |{
+            | "correspondence": {
+            |   "abroadIndicator": false,
+            |   "name": "name",
+            |   "address": {
+            |     "line1": "line1",
+            |     "line2": "line2",
+            |     "postCode": "postcode"
+            |   },
+            |   "phoneNumber": "tel"
+            | },
+            | "declaration": {
+            |   "name": {
+            |     "firstName": "first",
+            |     "lastName": "last"
+            |   }
+            | },
+            | "estate": {
+            |   "entities": {
+            |     "personalRepresentative": {
+            |     },
+            |     "deceased": {
+            |       "name": {
+            |         "firstName": "first",
+            |         "lastName": "last"
+            |       },
+            |       "dateOfDeath": "1996-02-03"
+            |     }
+            |   },
+            |   "periodTaxDues": "periodTaxDues"
+            | }
+            |}
+            |""".stripMargin)
+
+        server.stubFor(
+          get(urlEqualTo(url))
+            .willReturn(okJson(json.toString))
+        )
+
+        val result = connector.getRegistration()
+
+        result.futureValue mustBe registration
+
+        application.stop()
+
+      }
     }
 
   }
