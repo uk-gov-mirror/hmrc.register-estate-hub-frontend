@@ -131,8 +131,8 @@ createAgentServicesAccount.cta = Create an agent services account
 utrSentInPost.title = The estate’s Unique Taxpayer Reference (UTR) has been sent by post
 utrSentInPost.heading = The estate’s Unique Taxpayer Reference (UTR) has been sent by post
 utrSentInPost.p1 = It can take 15 working days for you to get the estate’s UTR. For International addresses it can take 21 working days.
-utrSentInPost.link = Contact the deceased estate helpline
-utrSentInPost.link.remainder = if you have not received the estate’s UTR after this time.
+utrSentInPost.contact = You must
+utrSentInPost.contact.link = contact the deceased estate helpline to register this estate (opens in a new tab or window)
 
 doNotNeedToRegister.p3 = If you need help with the service contact
 doNotNeedToRegister.contact.link = contact the deceased estate helpline (opens in a new tab or window)
