@@ -30,8 +30,8 @@ class UTRSentInPostViewSpec extends ViewBehaviours {
     behave like normalPage(applyView,
       "utrSentInPost",
       "p1",
-      "contact",
-      "contact.link"
+      "link",
+      "link.remainder"
     )
   }
 }
