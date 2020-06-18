@@ -1,3 +1,5 @@
+estatesHelpline.url = https://www.gov.uk/government/organisations/hm-revenue-customs/contact/estates
+
 checkYourAnswers.title = Check Your Answers
 checkYourAnswers.heading = Check Your Answers
 checkYourAnswers.guidance = Guidance for check your answers
@@ -132,3 +134,12 @@ cannotMakeChanges.paragraph1 = You can
 cannotMakeChanges.paragraph2 = if you need to update the contact details for the estate.
 cannotMakeChanges.paragraph3 = You must keep a record of all other changes to the estate, but you do not need to send them by post.
 cannotMakeChanges.postLink = send a letter by post to HM Revenue and Customs
+
+utrSentInPost.title = The estate’s Unique Taxpayer Reference (UTR) has been sent by post
+utrSentInPost.heading = The estate’s Unique Taxpayer Reference (UTR) has been sent by post
+utrSentInPost.p1 = It can take 15 working days for you to get the estate’s UTR. For International addresses it can take 21 working days.
+utrSentInPost.link = Contact the deceased estate helpline (opens in new tab)
+utrSentInPost.link.remainder = if you have not received the estate’s UTR after this time.
+
+doNotNeedToRegister.p3 = If you need help with the service contact
+doNotNeedToRegister.contact.link = contact the deceased estate helpline (opens in a new tab or window)
