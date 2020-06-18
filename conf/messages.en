@@ -116,3 +116,5 @@ confirmation.paragraph2 = Make a note of your reference number in case you need 
 confirmation.paragraph2.link = contact HMRC to find out why (opens in a new window or tab)
 confirmation.paragraph3 = You cannot make online changes to the estate. To change the personal representative or their contact details,
 confirmation.paragraph3.link = post the changes to HMRC (opens in a new window or tab)
+agentOverview.title = agentOverview
+agentOverview.heading = agentOverview
