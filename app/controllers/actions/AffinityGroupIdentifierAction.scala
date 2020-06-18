@@ -97,7 +97,8 @@ class AffinityGroupIdentifierAction[A] @Inject()(action: Action[A],
               continueWithoutEnrolment
             } else {
               logger.info("[AffinityGroupIdentifier] user is already enrolled, redirecting to maintain")
-              Future.successful(Redirect(config.maintainAnEstateFrontendUrl))
+              Future.successful(Redirect(controllers.routes.CannotMakeChangesController.onPageLoad()))
+//              Future.successful(Redirect(config.maintainAnEstateFrontendUrl))
             }
         }
     }

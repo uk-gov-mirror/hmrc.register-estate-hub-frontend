@@ -108,7 +108,8 @@ class AffinityGroupIdentifierActionSpec extends SpecBase {
           val result = new AffinityGroupIdentifierAction(fakeAction, estatesAuth, appConfig).apply(fakeRequest)
 
           status(result) mustBe SEE_OTHER
-          redirectLocation(result).value mustBe s"${appConfig.maintainAnEstateFrontendUrl}"
+          redirectLocation(result).value mustBe controllers.routes.CannotMakeChangesController.onPageLoad().url
+//          redirectLocation(result).value mustBe s"${appConfig.maintainAnEstateFrontendUrl}"
           application.stop()
         }
       }
