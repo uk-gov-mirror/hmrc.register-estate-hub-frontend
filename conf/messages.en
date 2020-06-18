@@ -116,3 +116,12 @@ confirmation.paragraph2 = Make a note of your reference number in case you need 
 confirmation.paragraph2.link = contact HMRC to find out why (opens in a new window or tab)
 confirmation.paragraph3 = You cannot make online changes to the estate. To change the personal representative or their contact details,
 confirmation.paragraph3.link = post the changes to HMRC (opens in a new window or tab)
+
+createAgentServicesAccount.title = Create an agent services account
+createAgentServicesAccount.heading = Create an agent services account
+createAgentServicesAccount.paragraph1 = Before you can register an estate you will need to create an agent services account. You can do this now.
+createAgentServicesAccount.insetText = You need to be the person responsible for your firm’s tax or administrative matters. The account gives you administrative control over your firm’s access to new HMRC online services.
+createAgentServicesAccount.link = Check the guidance
+createAgentServicesAccount.paragraph2 = to find out what you will need to create an agent services account.
+createAgentServicesAccount.paragraph3 = Once you have created your agent services account, you can carry on with your estate registration.
+createAgentServicesAccount.cta = Create an agent services account

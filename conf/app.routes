@@ -2,6 +2,8 @@
 
 GET        /                                            controllers.IndexController.onPageLoad
 
+GET        /create-agent-services-account               controllers.CreateAgentServicesAccountController.onPageLoad()
+
 GET        /estate-registered-online                    controllers.EstateRegisteredOnlineYesNoController.onPageLoad()
 POST       /estate-registered-online                    controllers.EstateRegisteredOnlineYesNoController.onSubmit()
 

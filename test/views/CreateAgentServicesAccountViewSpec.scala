@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
-package models.requests
+package views
 
-import play.api.mvc.{Request, WrappedRequest}
-import uk.gov.hmrc.auth.core.{AffinityGroup, Enrolments}
+import views.behaviours.ViewBehaviours
+import views.html.CreateAgentServicesAccountView
 
-case class IdentifierRequest[A] (request: Request[A],
-                                 identifier: String,
-                                 affinityGroup: AffinityGroup,
-                                 enrolments: Enrolments,
-                                 agentARN: Option[String] = None
-                                ) extends WrappedRequest[A](request)
+class CreateAgentServicesAccountViewSpec extends ViewBehaviours {
+
+  "CreateAgentServicesAccount view" must {
+
+    val view = viewFor[CreateAgentServicesAccountView](Some(emptyUserAnswers))
+
+    val applyView = view.apply()(fakeRequest, messages)
+
+    behave like normalPage(applyView, "createAgentServicesAccount", "paragraph1", "insetText", "paragraph2", "paragraph3")
+
+ 
+  }
+}
