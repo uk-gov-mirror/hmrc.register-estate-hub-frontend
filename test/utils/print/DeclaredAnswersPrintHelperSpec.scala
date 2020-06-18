@@ -19,7 +19,7 @@ package utils.print
 import java.time.LocalDate
 
 import base.SpecBase
-import models.{Correspondence, DeceasedPerson, Declaration, EntitiesType, Estate, EstateRegistration, IdCard, IndividualPersonalRep, Name, NationalInsuranceNumber, NonUkAddress, Passport, PersonalRepresentativeType, UkAddress}
+import models._
 import play.twirl.api.Html
 import viewmodels.{AnswerRow, AnswerSection}
 
