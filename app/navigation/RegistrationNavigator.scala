@@ -29,21 +29,27 @@ class RegistrationNavigator @Inject()(config: FrontendAppConfig) extends Navigat
   override def nextPage(page: Page, userAnswers: UserAnswers): Call =
     routes()(page)(userAnswers)
 
-  private def yesNoNavigation(): PartialFunction[Page, UserAnswers => Call] = {
-    case EstateRegisteredOnlineYesNoPage => ua =>
-      yesNoNav(ua, EstateRegisteredOnlineYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), rts.HaveUTRYesNoController.onPageLoad())
-    case HaveUTRYesNoPage => ua =>
-      yesNoNav(ua, HaveUTRYesNoPage, rts.FeatureNotAvailableController.onPageLoad(), Call("GET", config.suitabilityUrl))
-  }
+  private def haveAUtrRoute(ua: UserAnswers) =
+      ua.get(EstateRegisteredOnlineYesNoPage) match {
+        case Some(true) => yesNoNav(
+          ua, HaveUTRYesNoPage,
+          rts.FeatureNotAvailableController.onPageLoad(),
+          rts.UTRSentInPostController.onPageLoad())
+        case Some(false) => yesNoNav(
+          ua, HaveUTRYesNoPage,
+          rts.FeatureNotAvailableController.onPageLoad(),
+          Call("GET", config.suitabilityUrl))
+        case None => controllers.routes.SessionExpiredController.onPageLoad()
+      }
 
-  def yesNoNav(ua: UserAnswers, fromPage: QuestionPage[Boolean], yesCall: => Call, noCall: => Call): Call = {
+  private def yesNoNav(ua: UserAnswers, fromPage: QuestionPage[Boolean], yesCall: => Call, noCall: => Call): Call = {
     ua.get(fromPage)
       .map(if (_) yesCall else noCall)
       .getOrElse(controllers.routes.SessionExpiredController.onPageLoad())
   }
 
-
-  def routes(): PartialFunction[Page, UserAnswers => Call] =
-//    simpleNavigation() andThen (c => (_: UserAnswers) => c) orElse
-      yesNoNavigation()
+  def routes(): PartialFunction[Page, UserAnswers => Call] = {
+    case EstateRegisteredOnlineYesNoPage => _ => controllers.routes.HaveUTRYesNoController.onPageLoad()
+    case HaveUTRYesNoPage => haveAUtrRoute
+  }
 }

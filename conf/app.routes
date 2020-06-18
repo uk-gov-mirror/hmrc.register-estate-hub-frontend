@@ -32,3 +32,6 @@ GET        /declaration                                 controllers.DeclarationC
 POST       /declaration                                 controllers.DeclarationController.onSubmit()
 
 GET        /confirmation                                controllers.ConfirmationController.onPageLoad()
+
+GET        /utr-sent-in-post                            controllers.UTRSentInPostController.onPageLoad()
+
