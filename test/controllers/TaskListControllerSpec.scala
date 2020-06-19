@@ -28,7 +28,8 @@ import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import repositories.SessionRepository
-import viewmodels.tasks.{PersonWhoDied, EstateName, PersonalRepresentative}
+import uk.gov.hmrc.auth.core.AffinityGroup.Organisation
+import viewmodels.tasks.{EstateName, PersonWhoDied, PersonalRepresentative}
 import viewmodels.{Link, Task}
 import views.html.TaskListView
 
@@ -95,7 +96,7 @@ class TaskListControllerSpec extends SpecBase {
         status(result) mustEqual OK
 
         contentAsString(result) mustEqual
-          view(None, sections, isTaskListComplete = true)(fakeRequest, messages).toString
+          view(None, sections, isTaskListComplete = true, Organisation)(fakeRequest, messages).toString
 
         application.stop()
       }
@@ -137,7 +138,7 @@ class TaskListControllerSpec extends SpecBase {
         status(result) mustEqual OK
 
         contentAsString(result) mustEqual
-          view(None, sections, isTaskListComplete = true)(fakeRequest, messages).toString
+          view(None, sections, isTaskListComplete = true, Organisation)(fakeRequest, messages).toString
 
         application.stop()
       }
@@ -179,7 +180,7 @@ class TaskListControllerSpec extends SpecBase {
         status(result) mustEqual OK
 
         contentAsString(result) mustEqual
-          view(None, sections, isTaskListComplete = false)(fakeRequest, messages).toString
+          view(None, sections, isTaskListComplete = false, Organisation)(fakeRequest, messages).toString
 
         application.stop()
       }

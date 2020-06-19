@@ -16,9 +16,11 @@
 
 @import controllers.routes._
 @import utils.AccessibilityHelper._
+@import config.FrontendAppConfig
 
 @this(
-    main_template: MainTemplate
+    main_template: MainTemplate,
+    appConfig: FrontendAppConfig
 )
 
 @(trn: String, personalRepName: String)(implicit request: Request[_], messages: Messages)
@@ -46,7 +48,7 @@
 
     <h2>@messages("confirmation.subheading2")</h2>
 
-    <p>@messages("confirmation.paragraph2") <a target="_blank" href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/bereavement-and-deceased-estate">@messages("confirmation.paragraph2.link")</a>.</p>
+    <p>@messages("confirmation.paragraph2") <a target="_blank" href="@appConfig.estatesHelplineUrl">@messages("confirmation.paragraph2.link")</a>.</p>
 
-    <p>@messages("confirmation.paragraph3") <a target="_blank" href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/bereavement-and-deceased-estate">@messages("confirmation.paragraph3.link")</a>.</p>
+    <p>@messages("confirmation.paragraph3") <a target="_blank" href="@appConfig.estatesHelplineUrl">@messages("confirmation.paragraph3.link")</a>.</p>
 }

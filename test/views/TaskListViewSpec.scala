@@ -18,7 +18,8 @@ package views
 
 import models.{CompletedTasks, Tag}
 import play.twirl.api.HtmlFormat
-import viewmodels.tasks.{PersonWhoDied, EstateName, PersonalRepresentative}
+import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
+import viewmodels.tasks.{EstateName, PersonWhoDied, PersonalRepresentative}
 import viewmodels.{Link, Task}
 import views.behaviours.{TaskListViewBehaviours, ViewBehaviours}
 import views.html.TaskListView
@@ -66,7 +67,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
       val tasksList = sections(completedTasks)
 
-      val applyView = view.apply(estateName, tasksList, isTaskListComplete = true)(fakeRequest, messages)
+      val applyView = view.apply(estateName, tasksList, isTaskListComplete = true, Organisation)(fakeRequest, messages)
 
       behave like normalPage(applyView, "taskList")
 
@@ -87,7 +88,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
           val tasksList = sections(completedTasks)
 
-          val applyView = view.apply(estateName, tasksList, isTaskListComplete = true)(fakeRequest, messages)
+          val applyView = view.apply(estateName, tasksList, isTaskListComplete = true, Organisation)(fakeRequest, messages)
           val doc = asDocument(applyView)
 
           assertRenderedById(doc, "summary-heading")
@@ -105,7 +106,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
           val tasksList = sections(completedTasks)
 
-          val applyView = view.apply(estateName, tasksList, isTaskListComplete = false)(fakeRequest, messages)
+          val applyView = view.apply(estateName, tasksList, isTaskListComplete = false, Organisation)(fakeRequest, messages)
           val doc = asDocument(applyView)
 
           assertNotRenderedById(doc, "summary-heading")
@@ -125,7 +126,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
       val tasksList = sections(completedTasks)
 
       def applyView(estateName: Option[String]): HtmlFormat.Appendable =
-        view.apply(estateName, tasksList, isTaskListComplete = true)(fakeRequest, messages)
+        view.apply(estateName, tasksList, isTaskListComplete = true, Organisation)(fakeRequest, messages)
 
       "be rendered" when {
 
@@ -147,6 +148,23 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
         }
       }
     }
-    
+
+    "rendered for an Agent" must {
+
+      "render Agent details link" in {
+        val view = viewFor[TaskListView](Some(emptyUserAnswers))
+
+        val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true)
+
+        val tasksList = sections(completedTasks)
+
+        val applyView = view.apply(estateName, tasksList, isTaskListComplete = true, Agent)(fakeRequest, messages)
+
+        val doc = asDocument(applyView)
+        assertRenderedById(doc, "agent-details")
+      }
+
+    }
+
   }
 }

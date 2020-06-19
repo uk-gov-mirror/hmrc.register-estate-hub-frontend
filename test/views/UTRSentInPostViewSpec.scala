@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +12,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@(prefix: String)(implicit messages: Messages)
+package views
 
-<details class="govuk-details" data-module="govuk-details">
-    <summary class="govuk-details__summary">
-    <span class="govuk-details__summary-text">
-      @messages(prefix)
-    </span>
-    </summary>
-    <div class="govuk-details__text panel-indent">
-        <p>@messages(s"${prefix}.text") <a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/trusts" target="_blank">@messages(s"${prefix}.text.link")</a>.</p>
-    </div>
-</details>
+import views.behaviours.ViewBehaviours
+import views.html.{ProblemDeclaringView, UTRSentInPostView}
+
+class UTRSentInPostViewSpec extends ViewBehaviours {
+
+  "URR Sent in Post view" must {
+
+    val view = viewFor[UTRSentInPostView](Some(emptyUserAnswers))
+
+    val applyView = view.apply()(fakeRequest, messages)
+
+    behave like normalPage(applyView,
+      "utrSentInPost",
+      "p1",
+      "link",
+      "link.remainder"
+    )
+  }
+}

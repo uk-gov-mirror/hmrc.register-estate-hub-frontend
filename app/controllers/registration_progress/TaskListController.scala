@@ -63,9 +63,9 @@ class TaskListController @Inject()(
               Ok(view(
                 estateName = estateName,
                 sections = taskList.tasks,
-                isTaskListComplete = taskList.isAbleToDeclare
-              )
-              )
+                isTaskListComplete = taskList.isAbleToDeclare,
+                affinityGroup = request.affinityGroup))
+
           case CompletedTasksResponse.InternalServerError =>
             Logger.error(s"[TaskListController] unable to get tasks statuses")
             InternalServerError(errorHandler.internalServerErrorTemplate)

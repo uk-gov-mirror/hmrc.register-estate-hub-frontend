@@ -2,6 +2,10 @@
 
 GET        /                                            controllers.IndexController.onPageLoad
 
+GET        /create-agent-services-account               controllers.CreateAgentServicesAccountController.onPageLoad()
+
+GET        /cannot-change                               controllers.CannotMakeChangesController.onPageLoad()
+
 GET        /estate-registered-online                    controllers.EstateRegisteredOnlineYesNoController.onPageLoad()
 POST       /estate-registered-online                    controllers.EstateRegisteredOnlineYesNoController.onSubmit()
 
@@ -30,6 +34,11 @@ GET        /declaration                                 controllers.DeclarationC
 POST       /declaration                                 controllers.DeclarationController.onSubmit()
 
 GET        /confirmation                                controllers.ConfirmationController.onPageLoad()
+
+GET        /utr-sent-in-post                            controllers.UTRSentInPostController.onPageLoad()
+
+GET        /agent-overview                              controllers.AgentOverviewController.onPageLoad()
+POST       /agent-overview                              controllers.AgentOverviewController.onSubmit()
 
 GET        /draft-answers                               controllers.DraftAnswersController.onPageLoad()
 GET        /declared-answers                            controllers.DeclaredAnswersController.onPageLoad()

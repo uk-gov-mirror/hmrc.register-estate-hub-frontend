@@ -36,7 +36,6 @@ import scala.concurrent.ExecutionContext
 class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAndAfterEach with ScalaFutures with IntegrationPatience {
 
   implicit lazy val hc: HeaderCarrier = HeaderCarrier()
-  implicit def executionContext: ExecutionContext = injector.instanceOf[ExecutionContext]
 
   protected val server: WireMockServer = new WireMockServer(wireMockConfig().dynamicPort())
 

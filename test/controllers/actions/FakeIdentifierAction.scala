@@ -16,20 +16,34 @@
 
 package controllers.actions
 
+import config.FrontendAppConfig
 import javax.inject.Inject
 import models.requests.IdentifierRequest
 import play.api.mvc._
+import uk.gov.hmrc.auth.core.{AffinityGroup, Enrolment, Enrolments}
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class FakeIdentifierAction @Inject()(bodyParsers: PlayBodyParsers) extends IdentifierAction {
+class FakeIdentifierAction @Inject()(affinityGroup: AffinityGroup, config: FrontendAppConfig)
+                                           (override val parser: BodyParsers.Default,
+                                            estatesAuthFunctions: EstatesAuthorisedFunctions,
+                                            enrolments: Enrolments = Enrolments(Set.empty[Enrolment]))
+                                           (override implicit val executionContext: ExecutionContext)
+  extends IdentifierAction(parser, estatesAuthFunctions, config) {
 
   override def invokeBlock[A](request: Request[A], block: IdentifierRequest[A] => Future[Result]): Future[Result] =
-    block(IdentifierRequest(request, "id"))
+    block(IdentifierRequest(request, "id", affinityGroup, enrolments))
 
-  override def parser: BodyParser[AnyContent] =
-    bodyParsers.default
+  override def composeAction[A](action: Action[A]): Action[A] = new FakeAffinityGroupIdentifierAction(action, estatesAuthFunctions, config)
 
-  override protected def executionContext: ExecutionContext =
-    scala.concurrent.ExecutionContext.Implicits.global
+}
+
+class FakeAffinityGroupIdentifierAction[A](
+                                            action: Action[A],
+                                            estatesAuthFunctions: EstatesAuthorisedFunctions,
+                                            config: FrontendAppConfig)
+  extends AffinityGroupIdentifierAction(action, estatesAuthFunctions, config)  {
+  override def apply(request: Request[A]): Future[Result] = {
+    action(request)
+  }
 }
