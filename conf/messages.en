@@ -75,6 +75,7 @@ taskList.summary.heading = Summary
 taskList.summary.paragraph = After you have made a declaration, the only section you will be able to update for this estate’s registration is the personal representative.
 taskList.summary.link = Print or save a copy of your answers (opens in a new window or tab)
 taskList.continue = Continue to declaration
+taskList.agent.agentDetails = Agent details
 
 taskList.estateName.label = Estate name
 taskList.personalRepresentative.label = Personal representative
