@@ -14,14 +14,26 @@
  * limitations under the License.
  *@
 
-@(overrideMessage : Option[String] = None, submitClass: Option[String] = None)(implicit messages: Messages)
+@import controllers.routes._
+@import models.Mode
 
-<div class="section">
- <button id="submit" class="button  @if(submitClass.nonEmpty){@{submitClass.get}}">
- @if(overrideMessage.isEmpty) {
-  @messages("site.continue")
- } else {
-  @messages(overrideMessage.get)
- }
- </button>
-</div>
+@this(
+main_template: MainTemplate
+)
+
+@()(implicit request: Request[_], messages: Messages)
+
+@main_template(
+title = messages("cannotMakeChanges.title")
+) {
+
+@components.heading("cannotMakeChanges.heading")
+
+<p>@messages("cannotMakeChanges.paragraph1") <a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/bereavement-and-deceased-estate" target="_blank" rel="external">@messages("cannotMakeChanges.postLink")</a> @messages("cannotMakeChanges.paragraph2")</p>
+
+
+<p>@messages("cannotMakeChanges.paragraph3")</p>
+
+}
+
+

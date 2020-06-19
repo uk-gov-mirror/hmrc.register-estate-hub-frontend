@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +12,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package models.requests
+@this(
+    main_template: MainTemplate
+)
 
-import play.api.mvc.{Request, WrappedRequest}
-import uk.gov.hmrc.auth.core.{AffinityGroup, Enrolments}
+@()(implicit request: Request[_], messages: Messages)
 
-case class IdentifierRequest[A] (request: Request[A],
-                                 identifier: String,
-                                 affinityGroup: AffinityGroup,
-                                 enrolments: Enrolments,
-                                 agentARN: Option[String] = None
-                                ) extends WrappedRequest[A](request)
+@main_template(
+    title = messages("utrSentInPost.title")
+    ) {
+
+    @components.back_link()
+
+    @components.heading("utrSentInPost.heading")
+
+    <p>@messages("utrSentInPost.p1")
+
+    <p><a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/bereavement-and-deceased-estate" target="_blank">@messages("utrSentInPost.link")</a> @messages("utrSentInPost.link.remainder")</p>
+}

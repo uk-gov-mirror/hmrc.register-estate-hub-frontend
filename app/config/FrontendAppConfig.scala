@@ -42,6 +42,9 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
 
   lazy val suitabilityUrl: String = configuration.get[String]("urls.suitability")
 
+  lazy val agentsSubscriptionsUrl : String = configuration.get[String]("urls.agentSubscriptions")
+  lazy val agentServiceRegistrationUrl = s"$agentsSubscriptionsUrl?continue=$loginContinueUrl"
+
   lazy val estatesUrl: String = configuration.get[Service]("microservice.services.estates").baseUrl
   lazy val estatesStoreUrl: String = configuration.get[Service]("microservice.services.estates-store").baseUrl + "/estates-store"
 
@@ -63,8 +66,8 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   lazy val personalRepEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.personal-rep.enabled")
   lazy val deceasedPersonsEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.deceased-persons.enabled")
 
-  lazy val estateMatchingFrontendUrl: String =
-    configuration.get[String]("urls.matching")
+  lazy val maintainAnEstateFrontendUrl : String =
+    configuration.get[String]("urls.maintainAnEstate")
 
   lazy val estateDetailsFrontendUrl: String =
     configuration.get[String]("urls.estateDetails")

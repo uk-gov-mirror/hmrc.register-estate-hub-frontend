@@ -30,13 +30,14 @@ class AgentOverviewController @Inject()(
                                        override val messagesApi: MessagesApi,
                                        val appConfig: FrontendAppConfig,
                                        identify: IdentifierAction,
+                                       hasAgentAffinityGroup: RequireStateActionProviderImpl,
                                        getData: DataRetrievalAction,
                                        requireData: DataRequiredAction,
                                        val controllerComponents: MessagesControllerComponents,
                                        view: AgentOverviewView
                                      )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  private def actions() = identify andThen getData andThen requireData
+  private def actions() = identify andThen hasAgentAffinityGroup()
 
   def onPageLoad(): Action[AnyContent] = actions() {
     implicit request =>
@@ -45,7 +46,7 @@ class AgentOverviewController @Inject()(
 
   def onSubmit() = actions().async {
     implicit request =>
-      Future.successful(Redirect(appConfig.estateMatchingFrontendUrl))
+      Future.successful(Redirect(routes.EstateRegisteredOnlineYesNoController.onPageLoad()))
   }
 
 }
