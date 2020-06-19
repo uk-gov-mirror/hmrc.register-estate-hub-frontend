@@ -31,6 +31,8 @@ import play.api.http.Status
 import play.api.libs.json.Json
 import uk.gov.hmrc.http.HeaderCarrier
 
+import scala.concurrent.ExecutionContext
+
 class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAndAfterEach with ScalaFutures with IntegrationPatience {
 
   implicit lazy val hc: HeaderCarrier = HeaderCarrier()
@@ -52,9 +54,8 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
     server.stop()
   }
 
-  val declaration: DeclarationWithARN = DeclarationWithARN(
-    name = Name("first", None, "last"),
-    Some("arn")
+  val declaration: Declaration = Declaration(
+    name = Name("first", None, "last")
   )
 
   val registration: EstateRegistrationNoDeclaration = EstateRegistrationNoDeclaration(
