@@ -23,5 +23,5 @@ case class IdentifierRequest[A] (request: Request[A],
                                  identifier: String,
                                  affinityGroup: AffinityGroup,
                                  enrolments: Enrolments,
-                                 agentARN: Option[String] = None
+                                 agentReferenceNumber: Option[String] = None
                                 ) extends WrappedRequest[A](request)
