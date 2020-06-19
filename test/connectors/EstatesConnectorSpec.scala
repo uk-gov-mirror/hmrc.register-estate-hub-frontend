@@ -53,9 +53,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
   }
 
   val declaration: DeclarationWithARN = DeclarationWithARN(
-    Declaration(
-      name = Name("first", None, "last")
-    ),
+    name = Name("first", None, "last"),
     Some("arn")
   )
 

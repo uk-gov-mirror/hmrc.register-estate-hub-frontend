@@ -69,7 +69,7 @@ class DeclarationController @Inject()(
 
         declaration => {
 
-          connector.register(DeclarationWithARN(declaration, request.agentReferenceNumber)) flatMap {
+          connector.register(DeclarationWithARN(declaration.name, request.agentReferenceNumber)) flatMap {
             case TRNResponse(trn) =>
               for {
                 updatedAnswers <- Future.fromTry(request.userAnswers

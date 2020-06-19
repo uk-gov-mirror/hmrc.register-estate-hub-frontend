@@ -24,7 +24,7 @@ object Declaration {
   implicit lazy val formats: Format[Declaration] = Json.format[Declaration]
 }
 
-case class DeclarationWithARN(declaration: Declaration, agentReferenceNumber: Option[String] = None)
+case class DeclarationWithARN(name: Name, agentReferenceNumber: Option[String])
 
 object DeclarationWithARN {
   implicit lazy val formats: Format[DeclarationWithARN] = Json.format[DeclarationWithARN]
