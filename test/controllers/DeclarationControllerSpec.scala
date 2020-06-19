@@ -17,13 +17,20 @@
 package controllers
 
 import base.SpecBase
+import connectors.EstatesConnector
 import forms.DeclarationFormProvider
+import models.http.TRNResponse
 import models.{Declaration, Name}
+import org.mockito.Matchers.any
+import org.mockito.Mockito.when
 import pages.DeclarationPage
 import play.api.data.Form
+import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import views.html.DeclarationView
+
+import scala.concurrent.Future
 
 class DeclarationControllerSpec extends SpecBase {
 
@@ -77,7 +84,13 @@ class DeclarationControllerSpec extends SpecBase {
 
     "redirect to the confirmation page when valid data is submitted and registration submitted successfully " in {
 
-      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
+      val mockConnector: EstatesConnector = mock[EstatesConnector]
+
+      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
+        .overrides(bind[EstatesConnector].to(mockConnector))
+        .build()
+
+      when(mockConnector.register(any())(any(), any())).thenReturn(Future.successful(TRNResponse("fakeTrn")))
 
       val request =
         FakeRequest(POST, declarationRoute)

@@ -38,18 +38,12 @@ class DeclaredAnswersPrintHelperSpec extends SpecBase {
   val idCard: IdCard = IdCard("GB", "1234567890", LocalDate.parse("2023-02-03"))
   val phoneNumber: String = "+447123456789"
 
-  val registration: EstateRegistration = EstateRegistration(
+  val registration: EstateRegistrationNoDeclaration = EstateRegistrationNoDeclaration(
     matchData = None,
-    correspondence = Correspondence(
-      abroadIndicator = false,
-      name = estateName,
-      address = ukAddress,
-      phoneNumber = phoneNumber
+    correspondence = CorrespondenceName(
+      name = estateName
     ),
     yearsReturns = None,
-    declaration = Declaration(
-      name = name
-    ),
     estate = Estate(
       entities = EntitiesType(
         personalRepresentative = PersonalRepresentativeType(

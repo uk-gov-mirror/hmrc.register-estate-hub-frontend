@@ -27,7 +27,7 @@ class DeclaredAnswersPrintHelper @Inject()(countryOptions: AllCountryOptions,
                                            businessPersonalRepPrintHelper: BusinessPersonalRepPrintHelper,
                                            deceasedPersonPrintHelper: DeceasedPersonPrintHelper) {
 
-  def apply(registration: EstateRegistration)(implicit messages: Messages): Seq[AnswerSection] = {
+  def apply(registration: EstateRegistrationNoDeclaration)(implicit messages: Messages): Seq[AnswerSection] = {
 
     Seq(
       estateDetails(registration.correspondence.name),

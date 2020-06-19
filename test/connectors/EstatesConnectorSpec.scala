@@ -55,18 +55,16 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
     server.stop()
   }
 
-  val registration: EstateRegistration = EstateRegistration(
+  val declaration: Declaration = Declaration(
+    name = Name("first", None, "last")
+  )
+
+  val registration: EstateRegistrationNoDeclaration = EstateRegistrationNoDeclaration(
     matchData = None,
-    correspondence = Correspondence(
-      abroadIndicator = false,
-      name = "name",
-      address = UkAddress("line1", "line2", None, None, "postcode"),
-      phoneNumber = "tel"
+    correspondence = CorrespondenceName(
+      name = "name"
     ),
     yearsReturns = None,
-    declaration = Declaration(
-      name = Name("first", None, "last")
-    ),
     estate = Estate(
       entities = EntitiesType(PersonalRepresentativeType(), DeceasedPerson(Name("first", None, "last"), None, LocalDate.parse("1996-02-03"), None, None)),
       administrationEndDate = None,
@@ -101,7 +99,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
           .willReturn(okJson(json.toString))
       )
 
-      val result = connector.register(registration)
+      val result = connector.register(declaration)
 
       result.futureValue mustBe
         TRNResponse("XTRN1234567")
@@ -137,7 +135,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
           )
       )
 
-      val result = connector.register(registration)
+      val result = connector.register(declaration)
 
       result.futureValue mustBe
         AlreadyRegistered
@@ -173,7 +171,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
           )
       )
 
-      val result = connector.register(registration)
+      val result = connector.register(declaration)
 
       result.futureValue mustBe
         InternalServerError
@@ -331,20 +329,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
           """
             |{
             | "correspondence": {
-            |   "abroadIndicator": false,
-            |   "name": "name",
-            |   "address": {
-            |     "line1": "line1",
-            |     "line2": "line2",
-            |     "postCode": "postcode"
-            |   },
-            |   "phoneNumber": "tel"
-            | },
-            | "declaration": {
-            |   "name": {
-            |     "firstName": "first",
-            |     "lastName": "last"
-            |   }
+            |   "name": "name"
             | },
             | "estate": {
             |   "entities": {

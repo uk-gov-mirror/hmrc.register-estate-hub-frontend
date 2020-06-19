@@ -29,8 +29,8 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
 
   private val registerUrl = s"${config.estatesUrl}/estates/register"
 
-  def register(payload: EstateRegistration)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[DeclarationResponse] = {
-    http.POST[EstateRegistration, DeclarationResponse](registerUrl, payload)
+  def register(payload: Declaration)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[DeclarationResponse] = {
+    http.POST[Declaration, DeclarationResponse](registerUrl, payload)
   }
 
   private val getPersonalRepIndUrl = s"${config.estatesUrl}/estates/personal-rep/individual"
@@ -57,8 +57,8 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
 
   private val getRegistrationUrl = s"${config.estatesUrl}/estates/registration"
 
-  def getRegistration()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[EstateRegistration] = {
-    http.GET[EstateRegistration](getRegistrationUrl)
+  def getRegistration()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[EstateRegistrationNoDeclaration] = {
+    http.GET[EstateRegistrationNoDeclaration](getRegistrationUrl)
   }
 
 }
