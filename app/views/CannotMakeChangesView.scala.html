@@ -16,9 +16,11 @@
 
 @import controllers.routes._
 @import models.Mode
+@import config.FrontendAppConfig
 
 @this(
-main_template: MainTemplate
+ main_template: MainTemplate,
+ appConfig: FrontendAppConfig
 )
 
 @()(implicit request: Request[_], messages: Messages)
@@ -29,7 +31,7 @@ title = messages("cannotMakeChanges.title")
 
 @components.heading("cannotMakeChanges.heading")
 
-<p>@messages("cannotMakeChanges.paragraph1") <a href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/bereavement-and-deceased-estate" target="_blank" rel="external">@messages("cannotMakeChanges.postLink")</a> @messages("cannotMakeChanges.paragraph2")</p>
+<p>@messages("cannotMakeChanges.paragraph1") <a href="@appConfig.estatesHelplineUrl" target="_blank" rel="external">@messages("cannotMakeChanges.postLink")</a> @messages("cannotMakeChanges.paragraph2")</p>
 
 
 <p>@messages("cannotMakeChanges.paragraph3")</p>
