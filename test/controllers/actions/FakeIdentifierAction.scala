@@ -34,16 +34,5 @@ class FakeIdentifierAction @Inject()(affinityGroup: AffinityGroup, config: Front
   override def invokeBlock[A](request: Request[A], block: IdentifierRequest[A] => Future[Result]): Future[Result] =
     block(IdentifierRequest(request, "id", affinityGroup, enrolments))
 
-  override def composeAction[A](action: Action[A]): Action[A] = new FakeAffinityGroupIdentifierAction(action, estatesAuthFunctions, config)
-
-}
-
-class FakeAffinityGroupIdentifierAction[A](
-                                            action: Action[A],
-                                            estatesAuthFunctions: EstatesAuthorisedFunctions,
-                                            config: FrontendAppConfig)
-  extends AffinityGroupIdentifierAction(action, estatesAuthFunctions, config)  {
-  override def apply(request: Request[A]): Future[Result] = {
-    action(request)
-  }
+  override def composeAction[A](action: Action[A]): Action[A] = action
 }
