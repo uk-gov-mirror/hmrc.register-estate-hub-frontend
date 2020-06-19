@@ -39,7 +39,6 @@ class IdentifierAction @Inject()(val parser: BodyParsers.Default,
 
     request match {
       case req: IdentifierRequest[A] =>
-        logger.debug("Request is already an IdentifierRequest")
         block(req)
       case _ =>
         logger.debug("Redirect to Login")
