@@ -14,14 +14,24 @@
  * limitations under the License.
  */
 
-package models.requests
+package views
 
-import play.api.mvc.{Request, WrappedRequest}
-import uk.gov.hmrc.auth.core.{AffinityGroup, Enrolments}
+import views.behaviours.ViewBehaviours
+import views.html.{ProblemDeclaringView, UTRSentInPostView}
 
-case class IdentifierRequest[A] (request: Request[A],
-                                 identifier: String,
-                                 affinityGroup: AffinityGroup,
-                                 enrolments: Enrolments,
-                                 agentARN: Option[String] = None
-                                ) extends WrappedRequest[A](request)
+class UTRSentInPostViewSpec extends ViewBehaviours {
+
+  "URR Sent in Post view" must {
+
+    val view = viewFor[UTRSentInPostView](Some(emptyUserAnswers))
+
+    val applyView = view.apply()(fakeRequest, messages)
+
+    behave like normalPage(applyView,
+      "utrSentInPost",
+      "p1",
+      "link",
+      "link.remainder"
+    )
+  }
+}

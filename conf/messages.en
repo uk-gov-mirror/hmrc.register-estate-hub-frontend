@@ -1,3 +1,5 @@
+estatesHelpline.url = https://www.gov.uk/government/organisations/hm-revenue-customs/contact/estates
+
 checkYourAnswers.title = Check Your Answers
 checkYourAnswers.heading = Check Your Answers
 checkYourAnswers.guidance = Guidance for check your answers
@@ -116,3 +118,28 @@ confirmation.paragraph2 = Make a note of your reference number in case you need 
 confirmation.paragraph2.link = contact HMRC to find out why (opens in a new window or tab)
 confirmation.paragraph3 = You cannot make online changes to the estate. To change the personal representative or their contact details,
 confirmation.paragraph3.link = post the changes to HMRC (opens in a new window or tab)
+
+createAgentServicesAccount.title = Create an agent services account
+createAgentServicesAccount.heading = Create an agent services account
+createAgentServicesAccount.paragraph1 = Before you can register an estate you will need to create an agent services account. You can do this now.
+createAgentServicesAccount.insetText = You need to be the person responsible for your firm’s tax or administrative matters. The account gives you administrative control over your firm’s access to new HMRC online services.
+createAgentServicesAccount.link = Check the guidance
+createAgentServicesAccount.paragraph2 = to find out what you will need to create an agent services account.
+createAgentServicesAccount.paragraph3 = Once you have created your agent services account, you can carry on with your estate registration.
+createAgentServicesAccount.cta = Create an agent services account
+
+cannotMakeChanges.title = You cannot make changes to the estate online
+cannotMakeChanges.heading = You cannot make changes to the estate online
+cannotMakeChanges.paragraph1 = You can
+cannotMakeChanges.paragraph2 = if you need to update the contact details for the estate.
+cannotMakeChanges.paragraph3 = You must keep a record of all other changes to the estate, but you do not need to send them by post.
+cannotMakeChanges.postLink = send a letter by post to HM Revenue and Customs
+
+utrSentInPost.title = The estate’s Unique Taxpayer Reference (UTR) has been sent by post
+utrSentInPost.heading = The estate’s Unique Taxpayer Reference (UTR) has been sent by post
+utrSentInPost.p1 = It can take 15 working days for you to get the estate’s UTR. For International addresses it can take 21 working days.
+utrSentInPost.link = Contact the deceased estate helpline (opens in new tab)
+utrSentInPost.link.remainder = if you have not received the estate’s UTR after this time.
+
+doNotNeedToRegister.p3 = If you need help with the service contact
+doNotNeedToRegister.contact.link = contact the deceased estate helpline (opens in a new tab or window)
