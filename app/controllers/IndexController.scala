@@ -19,9 +19,12 @@ package controllers
 import controllers.actions.Actions
 import javax.inject.Inject
 import models.UserAnswers
+import models.requests.OptionalDataRequest
+import play.api.Logger
 import play.api.i18n.I18nSupport
-import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
 import repositories.SessionRepository
+import uk.gov.hmrc.auth.core.AffinityGroup
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -34,15 +37,27 @@ class IndexController @Inject()(
 
   def onPageLoad: Action[AnyContent] = actions.authWithSession.async {
     implicit request =>
-
-      request.userAnswers match {
-        case Some(_) =>
-          Future.successful(Redirect(controllers.routes.EstateRegisteredOnlineYesNoController.onPageLoad()))
-        case None =>
-          val userAnswers: UserAnswers = UserAnswers(request.internalId)
-          repository.set(userAnswers).map { _ =>
-            Redirect(controllers.routes.EstateRegisteredOnlineYesNoController.onPageLoad())
-          }
+      request.affinityGroup match {
+        case AffinityGroup.Agent =>
+          Logger.info(s"[IndexController] user is an agent, redirect to overview")
+          val route: Call = controllers.routes.AgentOverviewController.onPageLoad()
+          checkUserAnswersAndRedirect(request, route)
+        case _ =>
+          val route: Call = controllers.routes.EstateRegisteredOnlineYesNoController.onPageLoad()
+          checkUserAnswersAndRedirect(request, route)
       }
   }
+
+  private def checkUserAnswersAndRedirect(request: OptionalDataRequest[AnyContent], route: Call) = {
+    request.userAnswers match {
+      case Some(_) =>
+        Future.successful(Redirect(route))
+      case None =>
+        val userAnswers: UserAnswers = UserAnswers(request.internalId)
+        repository.set(userAnswers).map { _ =>
+          Redirect(route)
+        }
+    }
+  }
+
 }

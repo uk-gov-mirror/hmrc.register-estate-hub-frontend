@@ -31,4 +31,5 @@ POST       /declaration                                 controllers.DeclarationC
 
 GET        /confirmation                                controllers.ConfirmationController.onPageLoad()
 
-GET        /agentOverview                       controllers.AgentOverviewController.onPageLoad()
+GET        /agent-overview                              controllers.AgentOverviewController.onPageLoad()
+POST       /agent-overview                              controllers.AgentOverviewController.onSubmit()

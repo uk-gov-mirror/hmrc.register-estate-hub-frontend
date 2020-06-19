@@ -28,7 +28,9 @@ import play.api.i18n.{Messages, MessagesApi}
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.inject.{Injector, bind}
 import play.api.libs.json.Json
+import play.api.mvc.BodyParsers
 import play.api.test.FakeRequest
+import uk.gov.hmrc.auth.core.AffinityGroup
 
 trait SpecBase extends PlaySpec with GuiceOneAppPerSuite with TryValues with Mocked with ScalaFutures with IntegrationPatience {
 
@@ -40,6 +42,8 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite with TryValues with Moc
 
   def injector: Injector = app.injector
 
+  def injectedParsers = injector.instanceOf[BodyParsers.Default]
+
   def frontendAppConfig: FrontendAppConfig = injector.instanceOf[FrontendAppConfig]
 
   def messagesApi: MessagesApi = injector.instanceOf[MessagesApi]
@@ -48,11 +52,13 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite with TryValues with Moc
 
   implicit def messages: Messages = messagesApi.preferred(fakeRequest)
 
-  protected def applicationBuilder(userAnswers: Option[UserAnswers] = None): GuiceApplicationBuilder =
+  protected def applicationBuilder(userAnswers: Option[UserAnswers] = None,
+                                   affinityGroup: AffinityGroup = AffinityGroup.Organisation
+                                  ): GuiceApplicationBuilder =
     new GuiceApplicationBuilder()
       .overrides(
         bind[DataRequiredAction].to[DataRequiredActionImpl],
-        bind[IdentifierAction].to[FakeIdentifierAction],
+        bind[IdentifierAction].toInstance(new FakeIdentifierAction(affinityGroup)(injectedParsers)),
         bind[DataRetrievalAction].toInstance(new FakeDataRetrievalAction(userAnswers))
       )
 }

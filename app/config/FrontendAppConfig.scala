@@ -63,6 +63,9 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   lazy val personalRepEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.personal-rep.enabled")
   lazy val deceasedPersonsEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.deceased-persons.enabled")
 
+  lazy val estateMatchingFrontendUrl: String =
+    configuration.get[String]("urls.matching")
+
   lazy val estateDetailsFrontendUrl: String =
     configuration.get[String]("urls.estateDetails")
 
