@@ -19,11 +19,26 @@ package controllers
 import base.SpecBase
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import views.html.IndexView
+import uk.gov.hmrc.auth.core.AffinityGroup
 
 class IndexControllerSpec extends SpecBase {
 
   "Index Controller" must {
+
+    "redirect to AgentOverview with Agent affinityGroup for a GET" in {
+
+      val application = applicationBuilder(userAnswers = None, AffinityGroup.Agent).build()
+
+      val request = FakeRequest(GET, routes.IndexController.onPageLoad().url)
+
+      val result = route(application, request).value
+
+      status(result) mustEqual SEE_OTHER
+
+      redirectLocation(result).value mustBe routes.AgentOverviewController.onPageLoad().url
+
+      application.stop()
+    }
 
     "redirect to EstateRegisteredOnlineYesNoController" in {
 

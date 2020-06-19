@@ -75,6 +75,7 @@ taskList.summary.heading = Summary
 taskList.summary.paragraph = After you have made a declaration, the only section you will be able to update for this estate’s registration is the personal representative.
 taskList.summary.link = Print or save a copy of your answers (opens in a new window or tab)
 taskList.continue = Continue to declaration
+taskList.agent.agentDetails = Agent details
 
 taskList.estateName.label = Estate name
 taskList.personalRepresentative.label = Personal representative
@@ -91,6 +92,7 @@ declaration.lastName = Your last name
 declaration.paragraph1 = Please give us your email address to get a confirmation of your registration.
 declaration.paragraph2 = If you do not enter your email address, you will not receive a confirmation email with the declaration reference number.
 declaration.warning = I confirm that I have taken all reasonable steps to obtain up to date and accurate information for this registration. I understand that if I knowingly provide false information and cannot demonstrate that I have taken all reasonable steps, I could be subject to penalties.
+declaration.agent.warning = I confirm that my client has taken all reasonable steps to obtain up to date and accurate information for this registration. I understand that if my client knowingly provides false information and cannot demonstrate that they have taken all reasonable steps, they could be subject to penalties.
 
 declaration.error.firstName.required = Enter your first name
 declaration.error.firstName.length = Your first name must be 35 characters or less
@@ -143,3 +145,9 @@ utrSentInPost.link.remainder = if you have not received the estate’s UTR after
 
 doNotNeedToRegister.p3 = If you need help with the service contact
 doNotNeedToRegister.contact.link = contact the deceased estate helpline (opens in a new tab or window)
+
+agentOverview.title = Register and maintain an estate for a client
+agentOverview.heading = Register and maintain an estate for a client
+agentOverview.paragraph1 = You can save your registration and come back later. You have 28 days from the first time you save to register an estate. If you do not register within 28 days, your information will be deleted.
+agentOverview.paragraph2 = If you need to maintain an estate which has already been registered online, any changes you make without declaring will not be saved.
+agentOverview.start = Start now

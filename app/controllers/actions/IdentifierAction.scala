@@ -18,9 +18,14 @@ package controllers.actions
 
 import com.google.inject.Inject
 import config.FrontendAppConfig
+import controllers.routes
 import models.requests.IdentifierRequest
 import org.slf4j.LoggerFactory
+import play.api.mvc.Results.Redirect
 import play.api.mvc.{Request, Result, _}
+import uk.gov.hmrc.auth.core.retrieve.v2.Retrievals
+import uk.gov.hmrc.auth.core.{AuthorisationException, NoActiveSession}
+import uk.gov.hmrc.auth.core.retrieve.~
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.HeaderCarrierConverter
 

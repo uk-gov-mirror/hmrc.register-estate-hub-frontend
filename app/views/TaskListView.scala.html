@@ -16,12 +16,16 @@
 
 @import viewmodels.Task
 @import controllers.routes._
+@import uk.gov.hmrc.auth.core.AffinityGroup
+@import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
+@import config.FrontendAppConfig
 
 @this(
+    appConfig: FrontendAppConfig,
     main_template: MainTemplate
 )
 
-@(estateName: Option[String], sections: List[Task], isTaskListComplete: Boolean)(implicit request: Request[_], messages: Messages)
+@(estateName: Option[String], sections: List[Task], isTaskListComplete: Boolean, affinityGroup: AffinityGroup)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("taskList.title")
@@ -38,6 +42,10 @@
     <p>@messages("taskList.paragraph1")</p>
 
     <p>@messages("taskList.paragraph2")</p>
+
+    @if(affinityGroup == AffinityGroup.Agent) {
+        <p>@components.link(appConfig.agentDetails+"/check-your-answers", "agent-details", "taskList.agent.agentDetails")</p>
+    }
 
     @components.task_list(sections)
 

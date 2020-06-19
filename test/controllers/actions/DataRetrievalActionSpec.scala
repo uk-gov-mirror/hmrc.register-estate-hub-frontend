@@ -67,6 +67,20 @@ class DataRetrievalActionSpec extends SpecBase with MockitoSugar with ScalaFutur
           result.userAnswers.isDefined mustBe true
         }
       }
+
+      "set userAnswers to 'None' because 'get' query returns 'None'" in {
+        val sessionRepository = mock[SessionRepository]
+        when(sessionRepository.get("id")) thenReturn Future(None)
+
+        val action = new Harness(sessionRepository)
+
+        val futureResult = action.callTransform(new IdentifierRequest(fakeRequest, "id", AffinityGroup.Organisation, Enrolments(Set.empty[Enrolment])))
+
+        whenReady(futureResult) { result =>
+          result.userAnswers.isEmpty mustBe true
+        }
+      }
+
     }
   }
 }

@@ -50,7 +50,7 @@ class DeclarationController @Inject()(
         case Some(value) => form.fill(value)
       }
 
-      Ok(view(preparedForm))
+      Ok(view(preparedForm, request.affinityGroup))
   }
 
   def onSubmit: Action[AnyContent] = actions.authWithData.async {
@@ -59,7 +59,7 @@ class DeclarationController @Inject()(
 
       form.bindFromRequest().fold(
         (formWithErrors: Form[_]) =>
-          Future.successful(BadRequest(view(formWithErrors))),
+          Future.successful(BadRequest(view(formWithErrors, request.affinityGroup))),
 
         declaration => {
 

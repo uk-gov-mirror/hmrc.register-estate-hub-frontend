@@ -83,5 +83,8 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   lazy val featureUnavailableUrl: String =
     configuration.get[String]("urls.featureUnavailable")
 
+  lazy val agentDetails: String =
+    configuration.get[String]("urls.agentDetails")
+
   lazy val ttlInSeconds: Int = configuration.get[Int]("mongodb.timeToLiveInSeconds")
 }
