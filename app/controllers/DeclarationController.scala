@@ -23,7 +23,7 @@ import connectors.EstatesConnector
 import controllers.actions.Actions
 import forms.DeclarationFormProvider
 import handlers.ErrorHandler
-import models.Declaration
+import models.{Declaration, DeclarationWithARN}
 import models.http.{DeclarationResponse, TRNResponse}
 import pages._
 import play.api.Logger
@@ -69,7 +69,7 @@ class DeclarationController @Inject()(
 
         declaration => {
 
-          connector.register(declaration) flatMap {
+          connector.register(DeclarationWithARN(declaration, request.agentReferenceNumber)) flatMap {
             case TRNResponse(trn) =>
               for {
                 updatedAnswers <- Future.fromTry(request.userAnswers

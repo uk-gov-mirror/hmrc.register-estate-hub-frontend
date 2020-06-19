@@ -29,8 +29,8 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
 
   private val registerUrl = s"${config.estatesUrl}/estates/register"
 
-  def register(payload: Declaration)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[DeclarationResponse] = {
-    http.POST[Declaration, DeclarationResponse](registerUrl, payload)
+  def register(payload: DeclarationWithARN)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[DeclarationResponse] = {
+    http.POST[DeclarationWithARN, DeclarationResponse](registerUrl, payload)
   }
 
   private val getPersonalRepIndUrl = s"${config.estatesUrl}/estates/personal-rep/individual"
