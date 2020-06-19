@@ -23,9 +23,9 @@ import models._
 import play.twirl.api.Html
 import viewmodels.{AnswerRow, AnswerSection}
 
-class DeclaredAnswersPrintHelperSpec extends SpecBase {
+class RegistrationAnswersPrintHelperSpec extends SpecBase {
 
-  val helper: DeclaredAnswersPrintHelper = injector.instanceOf[DeclaredAnswersPrintHelper]
+  val helper: RegistrationAnswersPrintHelper = injector.instanceOf[RegistrationAnswersPrintHelper]
 
   val estateName: String = "Estate of John Doe"
   val name: Name = Name("John", None, "Doe")

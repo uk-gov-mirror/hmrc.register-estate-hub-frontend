@@ -16,26 +16,22 @@
 
 package controllers
 
-import java.time.{LocalDate, LocalDateTime}
+import java.time.LocalDate
 
 import base.SpecBase
 import connectors.EstatesConnector
 import models._
-import pages.{SubmissionDatePage, TRNPage}
-import play.api.test.FakeRequest
-import play.api.test.Helpers._
-import utils.print.RegistrationAnswersPrintHelper
-import views.html.DeclaredAnswersView
 import org.mockito.Matchers.any
 import org.mockito.Mockito.when
 import play.api.inject.bind
+import play.api.test.FakeRequest
+import play.api.test.Helpers._
+import utils.print.RegistrationAnswersPrintHelper
+import views.html.DraftAnswersView
 
 import scala.concurrent.Future
 
-class DeclaredAnswersControllerSpec extends SpecBase {
-
-  val fakeTrn = "XC TRN 000 000 4912"
-  val fakeSubmissionDate: LocalDateTime = LocalDateTime.of(2020, 1, 27, 0, 0)
+class DraftAnswersControllerSpec extends SpecBase {
 
   val estateName: String = "Estate of John Doe"
   val name: Name = Name("John", None, "Doe")
@@ -84,34 +80,28 @@ class DeclaredAnswersControllerSpec extends SpecBase {
 
   val mockConnector: EstatesConnector = mock[EstatesConnector]
 
-  "DeclaredAnswersController" must {
+  "DraftAnswersController" must {
 
     "return OK and the correct view for a GET" in {
-
-      val userAnswers = emptyUserAnswers
-        .set(TRNPage, fakeTrn).success.value
-        .set(SubmissionDatePage, fakeSubmissionDate).success.value
 
       val entities = injector.instanceOf[RegistrationAnswersPrintHelper]
 
       when(mockConnector.getRegistration()(any(), any())).thenReturn(Future.successful(registration))
 
-      val application = applicationBuilder(userAnswers = Some(userAnswers)).overrides(bind[EstatesConnector].to(mockConnector)).build()
+      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
+        .overrides(bind[EstatesConnector].to(mockConnector))
+        .build()
 
-      val request = FakeRequest(GET, routes.DeclaredAnswersController.onPageLoad().url)
+      val request = FakeRequest(GET, routes.DraftAnswersController.onPageLoad().url)
 
       val result = route(application, request).value
 
-      val view = application.injector.instanceOf[DeclaredAnswersView]
+      val view = application.injector.instanceOf[DraftAnswersView]
 
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(
-          entities(registration),
-          fakeTrn,
-          "27 January 2020"
-        )(fakeRequest, messages).toString
+        view(entities(registration))(fakeRequest, messages).toString
 
       application.stop()
     }

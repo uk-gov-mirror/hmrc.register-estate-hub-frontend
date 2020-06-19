@@ -22,10 +22,10 @@ import play.api.i18n.Messages
 import utils.countryOptions.AllCountryOptions
 import viewmodels.AnswerSection
 
-class DeclaredAnswersPrintHelper @Inject()(countryOptions: AllCountryOptions,
-                                           individualPersonalRepPrintHelper: IndividualPersonalRepPrintHelper,
-                                           businessPersonalRepPrintHelper: BusinessPersonalRepPrintHelper,
-                                           deceasedPersonPrintHelper: DeceasedPersonPrintHelper) {
+class RegistrationAnswersPrintHelper @Inject()(countryOptions: AllCountryOptions,
+                                               individualPersonalRepPrintHelper: IndividualPersonalRepPrintHelper,
+                                               businessPersonalRepPrintHelper: BusinessPersonalRepPrintHelper,
+                                               deceasedPersonPrintHelper: DeceasedPersonPrintHelper) {
 
   def apply(registration: EstateRegistrationNoDeclaration)(implicit messages: Messages): Seq[AnswerSection] = {
 

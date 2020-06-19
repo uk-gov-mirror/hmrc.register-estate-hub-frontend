@@ -122,6 +122,9 @@ declaredAnswers.heading = Declared copy of the estate’s registration
 declaredAnswers.subheading = Declaration reference is: {0}
 declaredAnswers.p1 = The estate’s declaration was sent on {0}
 
+draftAnswers.title = Draft copy of the estate’s registration
+draftAnswers.heading = Draft copy of the estate’s registration
+
 estateDetails.name.checkYourAnswersLabel = What is the estate’s name?
 
 individualOrBusiness.individual = Individual

@@ -29,7 +29,7 @@ import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.HeaderCarrierConverter
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import utils.DateFormatter
-import utils.print.DeclaredAnswersPrintHelper
+import utils.print.RegistrationAnswersPrintHelper
 import views.html.DeclaredAnswersView
 
 import scala.concurrent.ExecutionContext
@@ -39,15 +39,13 @@ class DeclaredAnswersController @Inject()(
                                            actions: Actions,
                                            val controllerComponents: MessagesControllerComponents,
                                            declaredAnswersView: DeclaredAnswersView,
-                                           printHelper: DeclaredAnswersPrintHelper,
+                                           printHelper: RegistrationAnswersPrintHelper,
                                            dateFormatter: DateFormatter,
                                            connector: EstatesConnector
                                          )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
   def onPageLoad(): Action[AnyContent] = actions.authWithData.async {
     implicit request =>
-
-      implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
 
       connector.getRegistration() map { registration =>
 

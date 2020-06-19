@@ -17,19 +17,19 @@
 package views
 
 import views.behaviours.ViewBehaviours
-import views.html.DeclaredAnswersView
+import views.html.DraftAnswersView
 
-class DeclaredAnswersViewSpec extends ViewBehaviours {
+class DraftAnswersViewSpec extends ViewBehaviours {
 
-  val messageKeyPrefix = "declaredAnswers"
+  val messageKeyPrefix = "draftAnswers"
 
-  "DeclaredAnswers view" must {
+  "DraftAnswers view" must {
 
     val application = applicationBuilder().build()
 
-    val view = application.injector.instanceOf[DeclaredAnswersView]
+    val view = application.injector.instanceOf[DraftAnswersView]
 
-    val applyView = view.apply(Nil, "trn", "27 January 2020")(fakeRequest, messages)
+    val applyView = view.apply(Nil)(fakeRequest, messages)
 
     behave like normalPage(applyView, messageKeyPrefix)
   }
