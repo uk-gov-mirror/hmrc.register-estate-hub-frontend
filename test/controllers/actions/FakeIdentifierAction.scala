@@ -26,23 +26,23 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class FakeIdentifierAction @Inject()(affinityGroup: AffinityGroup, config: FrontendAppConfig)
                                            (override val parser: BodyParsers.Default,
-                                            estatesAuth: EstatesAuthorisedFunctions,
+                                            estatesAuthFunctions: EstatesAuthorisedFunctions,
                                             enrolments: Enrolments = Enrolments(Set.empty[Enrolment]))
                                            (override implicit val executionContext: ExecutionContext)
-  extends IdentifierAction(parser, estatesAuth, config) {
+  extends IdentifierAction(parser, estatesAuthFunctions, config) {
 
   override def invokeBlock[A](request: Request[A], block: IdentifierRequest[A] => Future[Result]): Future[Result] =
     block(IdentifierRequest(request, "id", affinityGroup, enrolments))
 
-  override def composeAction[A](action: Action[A]): Action[A] = new FakeAffinityGroupIdentifierAction(action, estatesAuth, config)
+  override def composeAction[A](action: Action[A]): Action[A] = new FakeAffinityGroupIdentifierAction(action, estatesAuthFunctions, config)
 
 }
 
 class FakeAffinityGroupIdentifierAction[A](
                                             action: Action[A],
-                                            trustsAuth: EstatesAuthorisedFunctions,
+                                            estatesAuthFunctions: EstatesAuthorisedFunctions,
                                             config: FrontendAppConfig)
-  extends AffinityGroupIdentifierAction(action, trustsAuth, config)  {
+  extends AffinityGroupIdentifierAction(action, estatesAuthFunctions, config)  {
   override def apply(request: Request[A]): Future[Result] = {
     action(request)
   }
