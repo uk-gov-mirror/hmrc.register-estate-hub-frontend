@@ -15,13 +15,15 @@
  *@
 
 @import controllers.routes._
+@import uk.gov.hmrc.auth.core.AffinityGroup
+@import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
 
 @this(
     main_template: MainTemplate,
     formHelper: FormWithCSRF
 )
 
-@(form: Form[_])(implicit request: Request[_], messages: Messages)
+@(form: Form[_], affinityGroup: AffinityGroup)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = s"${errorPrefix(form)} ${messages("declaration.title")}"
@@ -50,7 +52,11 @@
             label = messages("declaration.lastName")
         )
 
-        @components.warning("declaration")
+        @if(affinityGroup == AffinityGroup.Agent) {
+            @components.warning("declaration.agent")
+        } else {
+            @components.warning("declaration")
+        }
 
         @components.submit_button(Some("site.confirm.send"))
 

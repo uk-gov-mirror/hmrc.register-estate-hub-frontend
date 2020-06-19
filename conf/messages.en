@@ -92,6 +92,7 @@ declaration.lastName = Your last name
 declaration.paragraph1 = Please give us your email address to get a confirmation of your registration.
 declaration.paragraph2 = If you do not enter your email address, you will not receive a confirmation email with the declaration reference number.
 declaration.warning = I confirm that I have taken all reasonable steps to obtain up to date and accurate information for this registration. I understand that if I knowingly provide false information and cannot demonstrate that I have taken all reasonable steps, I could be subject to penalties.
+declaration.agent.warning = I confirm that my client has taken all reasonable steps to obtain up to date and accurate information for this registration. I understand that if my client knowingly provides false information and cannot demonstrate that they have taken all reasonable steps, they could be subject to penalties.
 
 declaration.error.firstName.required = Enter your first name
 declaration.error.firstName.length = Your first name must be 35 characters or less

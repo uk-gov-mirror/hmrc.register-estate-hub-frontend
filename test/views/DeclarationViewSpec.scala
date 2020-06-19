@@ -20,6 +20,8 @@ import forms.DeclarationFormProvider
 import models.Declaration
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.auth.core.AffinityGroup
+import uk.gov.hmrc.auth.core.AffinityGroup.Organisation
 import views.behaviours.QuestionViewBehaviours
 import views.html.DeclarationView
 
@@ -29,12 +31,12 @@ class DeclarationViewSpec extends QuestionViewBehaviours[Declaration] {
 
   val form = new DeclarationFormProvider()()
 
-  "Declaration view" must {
+  "Declaration view for Org or Agent" must {
 
     val view = viewFor[DeclarationView](Some(emptyUserAnswers))
 
     def applyView(form: Form[_]): HtmlFormat.Appendable =
-      view.apply(form)(fakeRequest, messages)
+      view.apply(form, AffinityGroup.Organisation)(fakeRequest, messages)
 
     behave like normalPage(applyView(form), messageKeyPrefix)
 
@@ -48,18 +50,32 @@ class DeclarationViewSpec extends QuestionViewBehaviours[Declaration] {
       controllers.routes.ConfirmationController.onPageLoad().url,
       "firstName", "middleName", "lastName"
     )
-
-    "render declaration warning" in {
-      val view = viewFor[DeclarationView](Some(emptyUserAnswers))
-
-      def applyView(form: Form[_]): HtmlFormat.Appendable =
-        view.apply(form)(fakeRequest, messages)
-
-      val doc = asDocument(applyView(form))
-      assertContainsText(doc, "I confirm that I have taken all reasonable steps to obtain up to " +
-        "date and accurate information for this registration. I understand " +
-        "that if I knowingly provide false information and cannot demonstrate that I have taken all " +
-        "reasonable steps, I could be subject to penalties.")
-    }
   }
+
+  "render declaration warning for an Org" in {
+    val view = viewFor[DeclarationView](Some(emptyUserAnswers))
+
+    def applyView(form: Form[_]): HtmlFormat.Appendable =
+      view.apply(form, AffinityGroup.Organisation)(fakeRequest, messages)
+
+    val doc = asDocument(applyView(form))
+    assertContainsText(doc, "I confirm that I have taken all reasonable steps to obtain up to " +
+      "date and accurate information for this registration. I understand " +
+      "that if I knowingly provide false information and cannot demonstrate that I have taken all " +
+      "reasonable steps, I could be subject to penalties.")
+  }
+
+  "render declaration warning for an Agent" in {
+    val view = viewFor[DeclarationView](Some(emptyUserAnswers))
+
+    def applyView(form: Form[_]): HtmlFormat.Appendable =
+      view.apply(form, AffinityGroup.Agent)(fakeRequest, messages)
+
+    val doc = asDocument(applyView(form))
+    assertContainsText(doc, "I confirm that my client has taken all reasonable steps to obtain up " +
+      "to date and accurate information for this registration. I understand that if my client knowingly " +"" +
+      "provides false information and cannot demonstrate that they have taken all reasonable steps, " +
+      "they could be subject to penalties.")
+  }
+
 }

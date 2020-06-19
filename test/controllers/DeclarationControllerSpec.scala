@@ -23,6 +23,7 @@ import pages.DeclarationPage
 import play.api.data.Form
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import uk.gov.hmrc.auth.core.AffinityGroup
 import views.html.DeclarationView
 
 class DeclarationControllerSpec extends SpecBase {
@@ -34,7 +35,7 @@ class DeclarationControllerSpec extends SpecBase {
 
   "Declaration Controller" must {
 
-    "return OK and the correct view for a GET" in {
+    "return OK and the correct view for a GET for an Org" in {
 
       val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
 
@@ -47,7 +48,25 @@ class DeclarationControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(form)(request, messages).toString
+        view(form, AffinityGroup.Organisation)(request, messages).toString
+
+      application.stop()
+    }
+
+    "return OK and the correct view for a GET for an Agent" in {
+
+      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers), AffinityGroup.Agent).build()
+
+      val request = FakeRequest(GET, declarationRoute)
+
+      val result = route(application, request).value
+
+      val view = application.injector.instanceOf[DeclarationView]
+
+      status(result) mustEqual OK
+
+      contentAsString(result) mustEqual
+        view(form, AffinityGroup.Agent)(request, messages).toString
 
       application.stop()
     }
@@ -70,7 +89,7 @@ class DeclarationControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(form.fill(declaration))(fakeRequest, messages).toString
+        view(form.fill(declaration), AffinityGroup.Organisation)(fakeRequest, messages).toString
 
       application.stop()
     }
@@ -109,7 +128,7 @@ class DeclarationControllerSpec extends SpecBase {
       status(result) mustEqual BAD_REQUEST
 
       contentAsString(result) mustEqual
-        view(boundForm)(fakeRequest, messages).toString
+        view(boundForm, AffinityGroup.Organisation)(fakeRequest, messages).toString
 
       application.stop()
     }
