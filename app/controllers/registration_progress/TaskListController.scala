@@ -50,19 +50,21 @@ class TaskListController @Inject()(
         request.userAnswers.getOrElse(UserAnswers(request.internalId))
 
       def getEstateName =  connector.getEstateName()
+      def getIsLiableForTax =  connector.getIsLiableForTax()
 
       for {
        _ <- repository.set(continueOrCreateNewSession)
        estateName <- getEstateName
+       isLiableForTax <- getIsLiableForTax
         tasks <- storeConnector.getStatusOfTasks
       } yield {
         tasks match {
-          case l @ CompletedTasks(_, _, _) =>
-            val taskList = generateTaskList(l)
+          case l @ CompletedTasks(_, _, _, _) =>
+            val taskList = generateTaskList(l, isLiableForTax)
 
               Ok(view(
                 estateName = estateName,
-                sections = taskList.tasks,
+                sections = taskList.mandatory ++ taskList.other,
                 isTaskListComplete = taskList.isAbleToDeclare,
                 affinityGroup = request.affinityGroup))
 

@@ -26,7 +26,8 @@ sealed trait CompletedTasksResponse
 case class CompletedTasks(
                            details: Boolean,
                            personalRepresentative: Boolean,
-                           deceased: Boolean
+                           deceased: Boolean,
+                           yearsOfTaxLiability: Boolean
                          ) extends CompletedTasksResponse
 
 object CompletedTasks {
@@ -36,7 +37,8 @@ object CompletedTasks {
   def apply() : CompletedTasks = CompletedTasks(
     details = false,
     personalRepresentative = false,
-    deceased = false
+    deceased = false,
+    yearsOfTaxLiability = false
   )
 }
 

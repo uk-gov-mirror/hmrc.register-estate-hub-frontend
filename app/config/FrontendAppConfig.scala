@@ -67,6 +67,7 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   lazy val estateDetailsEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.estate-details.enabled")
   lazy val personalRepEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.personal-rep.enabled")
   lazy val deceasedPersonsEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.deceased-persons.enabled")
+  lazy val registerTaxEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.register-tax.enabled")
 
   lazy val maintainAnEstateFrontendUrl : String =
     configuration.get[String]("urls.maintainAnEstate")
@@ -79,6 +80,9 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
 
   lazy val deceasedPersonsFrontendUrl: String =
     configuration.get[String]("urls.deceasedPersons")
+
+  lazy val registerTaxFrontendUrl: String =
+    configuration.get[String]("urls.registerTaxLiability")
 
   lazy val featureUnavailableUrl: String =
     configuration.get[String]("urls.featureUnavailable")

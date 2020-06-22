@@ -29,7 +29,7 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import repositories.SessionRepository
 import uk.gov.hmrc.auth.core.AffinityGroup.Organisation
-import viewmodels.tasks.{EstateName, PersonWhoDied, PersonalRepresentative}
+import viewmodels.tasks.{EstateName, PersonWhoDied, PersonalRepresentative, YearsOfTaxLiability}
 import viewmodels.{Link, Task}
 import views.html.TaskListView
 
@@ -40,6 +40,7 @@ class TaskListControllerSpec extends SpecBase {
   private val estateDetailsRoute: String = "http://localhost:8823/register-an-estate/details"
   private val personalRepRoute: String = "http://localhost:8825/register-an-estate/personal-representative"
   private val deceasedPersonsRoute: String = "http://localhost:8824/register-an-estate/deceased-person"
+  private val registerTaxRoute: String = "http://localhost:8827/register-tax-liability"
   private val featureUnavailableRoute: String = "http://localhost:8822/register-an-estate/feature-not-available"
 
   private val mockAppConfig: FrontendAppConfig = mock[FrontendAppConfig]
@@ -49,6 +50,7 @@ class TaskListControllerSpec extends SpecBase {
   when(mockAppConfig.estateDetailsFrontendUrl) thenReturn estateDetailsRoute
   when(mockAppConfig.personalRepFrontendUrl) thenReturn personalRepRoute
   when(mockAppConfig.deceasedPersonsFrontendUrl) thenReturn deceasedPersonsRoute
+  when(mockAppConfig.registerTaxFrontendUrl) thenReturn registerTaxRoute
   when(mockAppConfig.featureUnavailableUrl) thenReturn featureUnavailableRoute
   when(mockAppConfig.analyticsToken) thenReturn "N/A"
 
@@ -64,19 +66,23 @@ class TaskListControllerSpec extends SpecBase {
         val sections = List(
           Task(Link(EstateName, estateDetailsRoute), Some(Completed)),
           Task(Link(PersonalRepresentative, personalRepRoute), Some(Completed)),
-          Task(Link(PersonWhoDied, deceasedPersonsRoute), Some(Completed))
+          Task(Link(PersonWhoDied, deceasedPersonsRoute), Some(Completed)),
+          Task(Link(YearsOfTaxLiability, registerTaxRoute), Some(Completed))
         )
 
         when(mockRepository.set(any())).thenReturn(Future.successful(true))
 
         when(mockEstatesStoreConnector.getStatusOfTasks(any(), any()))
-          .thenReturn(Future.successful(CompletedTasks(details = true, personalRepresentative = true, deceased = true)))
+          .thenReturn(Future.successful(CompletedTasks(details = true, personalRepresentative = true, deceased = true, yearsOfTaxLiability = true)))
 
         when(mockEstatesConnector.getEstateName()(any(), any())).thenReturn(Future.successful(None))
+
+        when(mockEstatesConnector.getIsLiableForTax()(any(), any())).thenReturn(Future.successful(true))
 
         when(mockAppConfig.estateDetailsEnabled) thenReturn true
         when(mockAppConfig.personalRepEnabled) thenReturn true
         when(mockAppConfig.deceasedPersonsEnabled) thenReturn true
+        when(mockAppConfig.registerTaxEnabled) thenReturn true
 
         val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(Seq(
@@ -112,13 +118,16 @@ class TaskListControllerSpec extends SpecBase {
         when(mockRepository.set(any())).thenReturn(Future.successful(true))
 
         when(mockEstatesStoreConnector.getStatusOfTasks(any(), any()))
-          .thenReturn(Future.successful(CompletedTasks(details = true, personalRepresentative = true, deceased = true)))
+          .thenReturn(Future.successful(CompletedTasks(details = true, personalRepresentative = true, deceased = true, yearsOfTaxLiability = false)))
 
         when(mockEstatesConnector.getEstateName()(any(), any())).thenReturn(Future.successful(None))
+
+        when(mockEstatesConnector.getIsLiableForTax()(any(), any())).thenReturn(Future.successful(false))
 
         when(mockAppConfig.estateDetailsEnabled) thenReturn false
         when(mockAppConfig.personalRepEnabled) thenReturn false
         when(mockAppConfig.deceasedPersonsEnabled) thenReturn false
+        when(mockAppConfig.registerTaxEnabled) thenReturn false
 
         val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(Seq(
@@ -154,13 +163,15 @@ class TaskListControllerSpec extends SpecBase {
         when(mockRepository.set(any())).thenReturn(Future.successful(true))
 
         when(mockEstatesStoreConnector.getStatusOfTasks(any(), any()))
-          .thenReturn(Future.successful(CompletedTasks(details = false, personalRepresentative = false, deceased = false)))
+          .thenReturn(Future.successful(CompletedTasks(details = false, personalRepresentative = false, deceased = false, yearsOfTaxLiability = false)))
 
         when(mockEstatesConnector.getEstateName()(any(), any())).thenReturn(Future.successful(None))
+        when(mockEstatesConnector.getIsLiableForTax()(any(), any())).thenReturn(Future.successful(false))
 
         when(mockAppConfig.estateDetailsEnabled) thenReturn true
         when(mockAppConfig.personalRepEnabled) thenReturn true
         when(mockAppConfig.deceasedPersonsEnabled) thenReturn true
+        when(mockAppConfig.registerTaxEnabled) thenReturn true
 
         val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(Seq(

@@ -361,6 +361,38 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
       }
     }
 
+    "return a boolean to show if there is tax liability due" in {
+
+      val application = applicationBuilder()
+        .configure(
+          Seq(
+            "microservice.services.estates.port" -> server.port(),
+            "auditing.enabled" -> false
+          ): _*
+        ).build()
+
+      val connector = application.injector.instanceOf[EstatesConnector]
+
+      val json = Json.parse(
+        """
+          |true
+          |""".stripMargin)
+
+      server.stubFor(
+        get(urlEqualTo("/estates/is-tax-required"))
+          .willReturn(aResponse()
+            .withStatus(Status.OK)
+            .withBody(json.toString())
+          )
+      )
+
+      val result = connector.getIsLiableForTax()
+
+      result.futureValue mustBe
+        true
+
+      application.stop()
+    }
   }
 
 }

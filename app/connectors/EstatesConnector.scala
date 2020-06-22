@@ -61,4 +61,10 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
     http.GET[EstateRegistrationNoDeclaration](getRegistrationUrl)
   }
 
+  private val getIsLiableForTaxUrl = s"${config.estatesUrl}/estates/is-tax-required"
+
+  def getIsLiableForTax()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[Boolean] = {
+    http.GET[Boolean](getIsLiableForTaxUrl)
+  }
+
 }
