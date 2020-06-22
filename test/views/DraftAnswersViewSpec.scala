@@ -32,6 +32,8 @@ class DraftAnswersViewSpec extends ViewBehaviours {
     val applyView = view.apply(Nil)(fakeRequest, messages)
 
     behave like normalPage(applyView, messageKeyPrefix)
+
+    behave like pageWithBackLink(applyView)
   }
 
 }

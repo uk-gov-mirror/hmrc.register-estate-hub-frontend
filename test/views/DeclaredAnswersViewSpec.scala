@@ -32,6 +32,8 @@ class DeclaredAnswersViewSpec extends ViewBehaviours {
     val applyView = view.apply(Nil, "trn", "27 January 2020")(fakeRequest, messages)
 
     behave like normalPage(applyView, messageKeyPrefix)
+
+    behave like pageWithBackLink(applyView)
   }
 
 }
