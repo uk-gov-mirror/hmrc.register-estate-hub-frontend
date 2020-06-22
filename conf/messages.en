@@ -1,5 +1,3 @@
-estatesHelpline.url = https://www.gov.uk/government/organisations/hm-revenue-customs/contact/estates
-
 checkYourAnswers.title = Check Your Answers
 checkYourAnswers.heading = Check Your Answers
 checkYourAnswers.guidance = Guidance for check your answers
@@ -151,3 +149,50 @@ agentOverview.heading = Register and maintain an estate for a client
 agentOverview.paragraph1 = You can save your registration and come back later. You have 28 days from the first time you save to register an estate. If you do not register within 28 days, your information will be deleted.
 agentOverview.paragraph2 = If you need to maintain an estate which has already been registered online, any changes you make without declaring will not be saved.
 agentOverview.start = Start now
+
+
+declaredAnswers.title = Declared copy of the estate’s registration
+declaredAnswers.heading = Declared copy of the estate’s registration
+declaredAnswers.subheading = Declaration reference is: {0}
+declaredAnswers.p1 = The estate’s declaration was sent on {0}
+
+draftAnswers.title = Draft copy of the estate’s registration
+draftAnswers.heading = Draft copy of the estate’s registration
+
+estateDetails.name.checkYourAnswersLabel = What is the estate’s name?
+
+individualOrBusiness.individual = Individual
+individualOrBusiness.business = Business
+
+passportOrIdCard.passport = Passport
+passportOrIdCard.idCard = ID card
+
+personalRep.individualOrBusiness.checkYourAnswersLabel = Is the personal representative an individual or a business?
+
+personalRep.individual.name.checkYourAnswersLabel = What is the personal representative’s name?
+personalRep.individual.dateOfBirth.checkYourAnswersLabel = What is {0}’s date of birth?
+personalRep.individual.ninoYesNo.checkYourAnswersLabel = Does {0} have a National Insurance number?
+personalRep.individual.nino.checkYourAnswersLabel = What is {0}’s National Insurance number?
+personalRep.individual.passportOrIdCard.checkYourAnswersLabel = Which of {0}’s details can you provide?
+personalRep.individual.passport.checkYourAnswersLabel = What are {0}’s passport details?
+personalRep.individual.idCard.checkYourAnswersLabel = What are {0}’s ID card details?
+personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel = Does {0} live in the UK?
+personalRep.individual.address.checkYourAnswersLabel = What is {0}’s address?
+personalRep.individual.telephoneNumber.checkYourAnswersLabel = What is {0}’s telephone number?
+
+personalRep.business.ukRegisteredYesNo.checkYourAnswersLabel = Is this personal representative a UK registered company?
+personalRep.business.name.checkYourAnswersLabel = What is the company’s name?
+personalRep.business.utr.checkYourAnswersLabel = What is {0}’s Unique Taxpayer Reference (UTR)?
+personalRep.business.addressUkYesNo.checkYourAnswersLabel = Is {0}’s address in the UK?
+personalRep.business.address.checkYourAnswersLabel = What is {0}’s address?
+personalRep.business.telephoneNumber.checkYourAnswersLabel = What is {0}’s telephone number?
+
+deceasedPerson.name.checkYourAnswersLabel = What is the name of the person who died?
+deceasedPerson.dateOfDeath.checkYourAnswersLabel = What is {0}’s date of death?
+deceasedPerson.dateOfBirthYesNo.checkYourAnswersLabel = Do you know {0}’s date of birth?
+deceasedPerson.dateOfBirth.checkYourAnswersLabel = What is {0}’s date of birth?
+deceasedPerson.ninoYesNo.checkYourAnswersLabel = Do you know {0}’s National Insurance number?
+deceasedPerson.nino.checkYourAnswersLabel = What is {0}’s National Insurance number?
+deceasedPerson.addressYesNo.checkYourAnswersLabel = Do you know {0}’s last known address?
+deceasedPerson.livedInTheUkYesNo.checkYourAnswersLabel = Was {0}’s last known address in the UK?
+deceasedPerson.address.checkYourAnswersLabel = What is {0}’s last known address?

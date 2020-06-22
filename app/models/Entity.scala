@@ -14,8 +14,22 @@
  * limitations under the License.
  */
 
-package viewmodels
+package models
 
-import play.twirl.api.Html
+import play.api.libs.json.{JsPath, JsSuccess, Reads}
 
-case class AnswerRow(label: Html, answer: Html, changeUrl: Option[String] = None)
+trait Entity {
+
+  def readAtSubPath[T: Reads](subPath: JsPath): Reads[T] = Reads (
+    _.transform(subPath.json.pick)
+      .flatMap(_.validate[T])
+  )
+
+  def readNullableAtSubPath[T: Reads](subPath: JsPath): Reads[Option[T]] = Reads (
+    _.transform(subPath.json.pick)
+      .flatMap(_.validate[T])
+      .map(Some(_))
+      .recoverWith(_ => JsSuccess(None))
+  )
+
+}

@@ -39,3 +39,6 @@ GET        /utr-sent-in-post                            controllers.UTRSentInPos
 
 GET        /agent-overview                              controllers.AgentOverviewController.onPageLoad()
 POST       /agent-overview                              controllers.AgentOverviewController.onSubmit()
+
+GET        /draft-answers                               controllers.DraftAnswersController.onPageLoad()
+GET        /declared-answers                            controllers.DeclaredAnswersController.onPageLoad()

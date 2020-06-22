@@ -19,10 +19,14 @@ package controllers
 import java.time.LocalDateTime
 
 import com.google.inject.Inject
+import connectors.EstatesConnector
 import controllers.actions.Actions
 import forms.DeclarationFormProvider
+import handlers.ErrorHandler
 import models.Declaration
+import models.http.{DeclarationResponse, TRNResponse}
 import pages._
+import play.api.Logger
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
@@ -37,7 +41,9 @@ class DeclarationController @Inject()(
                                        view: DeclarationView,
                                        formProvider: DeclarationFormProvider,
                                        actions: Actions,
-                                       repository: SessionRepository
+                                       repository: SessionRepository,
+                                       connector: EstatesConnector,
+                                       errorHandler: ErrorHandler
                                      )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
   val form: Form[Declaration] = formProvider()
@@ -63,17 +69,24 @@ class DeclarationController @Inject()(
 
         declaration => {
 
-          // TODO: send registration to backend once able to build instance of EstateRegistration
-
-          for {
-            updatedAnswers <- Future.fromTry(request.userAnswers
-              .set(DeclarationPage, declaration)
-              .flatMap(_.set(SubmissionDatePage, LocalDateTime.now))
-              .flatMap(_.set(TRNPage, "XC TRN 000 000 4911"))
-            )
-            _ <- repository.set(updatedAnswers)
-          } yield {
-            Redirect(controllers.routes.ConfirmationController.onPageLoad())
+          connector.register(declaration) flatMap {
+            case TRNResponse(trn) =>
+              for {
+                updatedAnswers <- Future.fromTry(request.userAnswers
+                  .set(DeclarationPage, declaration)
+                  .flatMap(_.set(SubmissionDatePage, LocalDateTime.now))
+                  .flatMap(_.set(TRNPage, trn))
+                )
+                _ <- repository.set(updatedAnswers)
+              } yield {
+                Redirect(controllers.routes.ConfirmationController.onPageLoad())
+              }
+            case DeclarationResponse.AlreadyRegistered =>
+              Logger.error(s"[DeclarationController] estate already registered")
+              Future.successful(Conflict(errorHandler.badRequestTemplate))
+            case _ =>
+              Logger.error(s"[DeclarationController] something went wrong")
+              Future.successful(InternalServerError(errorHandler.internalServerErrorTemplate))
           }
         }
       )

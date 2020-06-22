@@ -22,9 +22,9 @@ import base.SpecBase
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.{okJson, urlEqualTo, _}
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
+import models._
 import models.http.DeclarationResponse.{AlreadyRegistered, InternalServerError}
 import models.http.TRNResponse
-import models.{AddressType, Correspondence, Declaration, EntitiesType, Estate, EstateRegistration, EstateWillType, Name, PersonalRepName, PersonalRepresentativeType}
 import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach}
 import play.api.http.Status
@@ -54,20 +54,18 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
     server.stop()
   }
 
-  val registration: EstateRegistration = EstateRegistration(
+  val declaration: Declaration = Declaration(
+    name = Name("first", None, "last")
+  )
+
+  val registration: EstateRegistrationNoDeclaration = EstateRegistrationNoDeclaration(
     matchData = None,
-    correspondence = Correspondence(
-      abroadIndicator = false,
-      name = "name",
-      address = AddressType("line1", "line2", None, None, None, "GB"),
-      phoneNumber = "tel"
+    correspondence = CorrespondenceName(
+      name = "name"
     ),
     yearsReturns = None,
-    declaration = Declaration(
-      name = Name("first", None, "last")
-    ),
     estate = Estate(
-      entities = EntitiesType(PersonalRepresentativeType(), EstateWillType(Name("first", None, "last"), None, LocalDate.parse("1996-02-03"), None)),
+      entities = EntitiesType(PersonalRepresentativeType(), DeceasedPerson(Name("first", None, "last"), None, LocalDate.parse("1996-02-03"), None, None)),
       administrationEndDate = None,
       periodTaxDues = "periodTaxDues"
     ),
@@ -100,7 +98,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
           .willReturn(okJson(json.toString))
       )
 
-      val result = connector.register(registration)
+      val result = connector.register(declaration)
 
       result.futureValue mustBe
         TRNResponse("XTRN1234567")
@@ -136,7 +134,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
           )
       )
 
-      val result = connector.register(registration)
+      val result = connector.register(declaration)
 
       result.futureValue mustBe
         AlreadyRegistered
@@ -172,7 +170,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
           )
       )
 
-      val result = connector.register(registration)
+      val result = connector.register(declaration)
 
       result.futureValue mustBe
         InternalServerError
@@ -308,6 +306,59 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
       result.failed.futureValue mustBe a[RuntimeException]
 
       application.stop()
+    }
+
+    "get registration request" when {
+
+      val url: String = "/estates/registration"
+
+      "successful return a registration document" in {
+
+        val application = applicationBuilder()
+          .configure(
+            Seq(
+              "microservice.services.estates.port" -> server.port(),
+              "auditing.enabled" -> false
+            ): _*
+          ).build()
+
+        val connector = application.injector.instanceOf[EstatesConnector]
+
+        val json = Json.parse(
+          """
+            |{
+            | "correspondence": {
+            |   "name": "name"
+            | },
+            | "estate": {
+            |   "entities": {
+            |     "personalRepresentative": {
+            |     },
+            |     "deceased": {
+            |       "name": {
+            |         "firstName": "first",
+            |         "lastName": "last"
+            |       },
+            |       "dateOfDeath": "1996-02-03"
+            |     }
+            |   },
+            |   "periodTaxDues": "periodTaxDues"
+            | }
+            |}
+            |""".stripMargin)
+
+        server.stubFor(
+          get(urlEqualTo(url))
+            .willReturn(okJson(json.toString))
+        )
+
+        val result = connector.getRegistration()
+
+        result.futureValue mustBe registration
+
+        application.stop()
+
+      }
     }
 
   }

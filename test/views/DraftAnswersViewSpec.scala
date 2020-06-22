@@ -14,8 +14,24 @@
  * limitations under the License.
  */
 
-package viewmodels
+package views
 
-import play.twirl.api.Html
+import views.behaviours.ViewBehaviours
+import views.html.DraftAnswersView
 
-case class AnswerRow(label: Html, answer: Html, changeUrl: Option[String] = None)
+class DraftAnswersViewSpec extends ViewBehaviours {
+
+  val messageKeyPrefix = "draftAnswers"
+
+  "DraftAnswers view" must {
+
+    val application = applicationBuilder().build()
+
+    val view = application.injector.instanceOf[DraftAnswersView]
+
+    val applyView = view.apply(Nil)(fakeRequest, messages)
+
+    behave like normalPage(applyView, messageKeyPrefix)
+  }
+
+}

@@ -41,7 +41,7 @@ object MatchData {
 
 case class Correspondence(abroadIndicator: Boolean,
                           name: String,
-                          address: AddressType,
+                          address: Address,
                           phoneNumber: String)
 
 object Correspondence {
@@ -71,79 +71,31 @@ object Estate {
 }
 
 case class EntitiesType(personalRepresentative: PersonalRepresentativeType,
-                        deceased: EstateWillType)
+                        deceased: DeceasedPerson)
 
 object EntitiesType {
   implicit val entitiesTypeFormat: Format[EntitiesType] = Json.format[EntitiesType]
 }
 
 
-case class PersonalRepresentativeType (estatePerRepInd : Option[EstatePerRepIndType] = None,
-                                       estatePerRepOrg : Option[EstatePerRepOrgType] = None)
+case class PersonalRepresentativeType (estatePerRepInd : Option[IndividualPersonalRep] = None,
+                                       estatePerRepOrg : Option[BusinessPersonalRep] = None)
 
 object PersonalRepresentativeType {
   implicit val personalRepresentativeTypeFormat: Format[PersonalRepresentativeType] = Json.format[PersonalRepresentativeType]
 }
 
-case class EstatePerRepIndType(name: Name,
-                               dateOfBirth: LocalDate,
-                               identification: IdentificationType,
-                               phoneNumber: String,
-                               email: Option[String])
-
-object EstatePerRepIndType {
-  implicit val estatePerRepIndTypeFormat: Format[EstatePerRepIndType] = Json.format[EstatePerRepIndType]
-}
-
-case class EstatePerRepOrgType(orgName: String,
-                               phoneNumber: String,
-                               email: Option[String] = None,
-                               identification: IdentificationOrgType)
-
-object EstatePerRepOrgType {
-  implicit val estatePerRepOrgTypeFormat: Format[EstatePerRepOrgType] = Json.format[EstatePerRepOrgType]
-}
-
-
-case class EstateWillType(name: Name,
-                          dateOfBirth: Option[LocalDate],
-                          dateOfDeath: LocalDate,
-                          identification: Option[IdentificationType])
-
-object EstateWillType {
-  implicit val estateWillTypeFormat: Format[EstateWillType] = Json.format[EstateWillType]
-}
-
 case class AgentDetails(arn: String,
                         agentName: String,
-                        agentAddress: AddressType,
+                        agentAddress: Address,
                         agentTelephoneNumber: String,
                         clientReference: String)
 object AgentDetails {
   implicit val agentDetailsFormat: Format[AgentDetails] = Json.format[AgentDetails]
 }
 
-case class AddressType(line1: String,
-                       line2: String,
-                       line3: Option[String],
-                       line4: Option[String],
-                       postCode: Option[String],
-                       country: String)
-
-object AddressType {
-  implicit val addressTypeFormat: Format[AddressType] = Json.format[AddressType]
-}
-
-case class IdentificationType(nino: Option[String],
-                              passport: Option[PassportType],
-                              address: Option[AddressType])
-
-object IdentificationType {
-  implicit val identificationTypeFormat: Format[IdentificationType] = Json.format[IdentificationType]
-}
-
 case class IdentificationOrgType(utr: Option[String],
-                                 address: Option[AddressType])
+                                 address: Option[Address])
 
 object IdentificationOrgType {
   implicit val trustBeneficiaryIdentificationFormat: Format[IdentificationOrgType] = Json.format[IdentificationOrgType]

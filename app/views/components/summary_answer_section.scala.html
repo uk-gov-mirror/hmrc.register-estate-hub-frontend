@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,10 +12,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package viewmodels
+@import viewmodels.AnswerSection
+@import views.html._
 
-import play.twirl.api.Html
+@(answerSection: AnswerSection)(implicit messages: Messages)
 
-case class AnswerRow(label: Html, answer: Html, changeUrl: Option[String] = None)
+@if(answerSection.headingKey.isDefined){
+    <h2 class="heading-large">@messages(answerSection.headingKey.get)</h2>
+}
+
+@if(answerSection.rows) {
+    <ul role="list" class="govuk-check-your-answers cya-questions-long section">
+        @for(row <- answerSection.rows){
+            @components.summary_answer_row(row)
+        }
+    </ul>
+}

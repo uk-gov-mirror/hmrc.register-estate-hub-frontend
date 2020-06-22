@@ -18,8 +18,8 @@ package connectors
 
 import config.FrontendAppConfig
 import javax.inject.Inject
+import models._
 import models.http.DeclarationResponse
-import models.{EstateName, EstateRegistration, PersonalRepName}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
@@ -29,8 +29,8 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
 
   private val registerUrl = s"${config.estatesUrl}/estates/register"
 
-  def register(payload: EstateRegistration)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[DeclarationResponse] = {
-    http.POST[EstateRegistration, DeclarationResponse](registerUrl, payload)
+  def register(payload: Declaration)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[DeclarationResponse] = {
+    http.POST[Declaration, DeclarationResponse](registerUrl, payload)
   }
 
   private val getPersonalRepIndUrl = s"${config.estatesUrl}/estates/personal-rep/individual"
@@ -53,6 +53,12 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
 
   def getEstateName()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[Option[String]] = {
     http.GET[EstateName](getEstateNameUrl).map(_.name)
+  }
+
+  private val getRegistrationUrl = s"${config.estatesUrl}/estates/registration"
+
+  def getRegistration()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[EstateRegistrationNoDeclaration] = {
+    http.GET[EstateRegistrationNoDeclaration](getRegistrationUrl)
   }
 
 }

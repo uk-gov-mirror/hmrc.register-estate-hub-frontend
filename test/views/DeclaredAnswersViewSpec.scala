@@ -14,8 +14,24 @@
  * limitations under the License.
  */
 
-package viewmodels
+package views
 
-import play.twirl.api.Html
+import views.behaviours.ViewBehaviours
+import views.html.DeclaredAnswersView
 
-case class AnswerRow(label: Html, answer: Html, changeUrl: Option[String] = None)
+class DeclaredAnswersViewSpec extends ViewBehaviours {
+
+  val messageKeyPrefix = "declaredAnswers"
+
+  "DeclaredAnswers view" must {
+
+    val application = applicationBuilder().build()
+
+    val view = application.injector.instanceOf[DeclaredAnswersView]
+
+    val applyView = view.apply(Nil, "trn", "27 January 2020")(fakeRequest, messages)
+
+    behave like normalPage(applyView, messageKeyPrefix)
+  }
+
+}
