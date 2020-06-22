@@ -24,10 +24,6 @@
 
 @(entities: Seq[Section], trn: String, declarationSent: String)(implicit request: Request[_], messages: Messages)
 
-@printScript = {
-    <script type="text/javascript" src='@routes.Assets.versioned("javascripts/print.js")'></script>
-}
-
 @main_template(
     title = messages("declaredAnswers.title"),
     scriptElem = Some(printScript)
