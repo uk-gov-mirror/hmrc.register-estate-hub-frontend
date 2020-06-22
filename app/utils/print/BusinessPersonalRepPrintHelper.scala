@@ -28,19 +28,11 @@ class BusinessPersonalRepPrintHelper @Inject()(countryOptions: AllCountryOptions
     val converter = AnswerRowConverter(countryOptions, business.name)
 
     def name(utr: Option[String]): Seq[AnswerRow] = {
-      utr match {
-        case Some(x) =>
-          Seq(
-            converter.yesNoQuestion(boolean = true, "personalRep.business.ukRegisteredYesNo"),
-            converter.stringQuestion(business.name, "personalRep.business.name"),
-            converter.stringQuestion(x, "personalRep.business.utr")
-          )
-        case None =>
-          Seq(
-            converter.yesNoQuestion(boolean = false, "personalRep.business.ukRegisteredYesNo"),
-            converter.stringQuestion(business.name, "personalRep.business.name")
-          )
-      }
+      Seq(
+        Some(converter.yesNoQuestion(boolean = utr.isDefined, "personalRep.business.ukRegisteredYesNo")),
+        Some(converter.stringQuestion(business.name, "personalRep.business.name")),
+        converter.optionStringQuestion(utr, "personalRep.business.utr")
+      ).flatten
     }
 
     def address(address: Address): Seq[AnswerRow] = {

@@ -45,6 +45,14 @@ case class AnswerRowConverter @Inject()(countryOptions: CountryOptions, name: St
     )
   }
 
+  def optionStringQuestion(optionString: Option[String],
+                           labelKey: String): Option[AnswerRow] = {
+    optionString match {
+      case Some(string) => Some(stringQuestion(string, labelKey))
+      case _ => None
+    }
+  }
+
   def yesNoQuestion(boolean: Boolean,
                     labelKey: String): AnswerRow = {
     AnswerRow(
