@@ -34,6 +34,8 @@ class DeclaredAnswersViewSpec extends ViewBehaviours {
     behave like normalPage(applyView, messageKeyPrefix)
 
     behave like pageWithBackLink(applyView)
+
+    behave like pageWithAPrintButton(applyView)
   }
 
 }
