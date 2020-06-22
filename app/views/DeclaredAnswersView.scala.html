@@ -25,9 +25,10 @@
 @(entities: Seq[Section], trn: String, declarationSent: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("declaredAnswers.title"),
-    scriptElem = Some(printScript)
+    title = messages("declaredAnswers.title")
 ) {
+
+    @components.back_link()
 
     @components.heading("declaredAnswers.heading", headingSize = "heading-xlarge")
 
