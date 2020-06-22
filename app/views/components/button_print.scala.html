@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,30 +12,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package views
+@()(implicit messages: Messages)
 
-import views.behaviours.ViewBehaviours
-import views.html.DraftAnswersView
-
-class DraftAnswersViewSpec extends ViewBehaviours {
-
-  val messageKeyPrefix = "draftAnswers"
-
-  "DraftAnswers view" must {
-
-    val application = applicationBuilder().build()
-
-    val view = application.injector.instanceOf[DraftAnswersView]
-
-    val applyView = view.apply(Nil)(fakeRequest, messages)
-
-    behave like normalPage(applyView, messageKeyPrefix)
-
-    behave like pageWithBackLink(applyView)
-
-    behave like pageWithAPrintButton(applyView)
-  }
-
-}
+<div class="section">
+    <button id="print" class="button--secondary" onClick="window.print()">
+         @messages("site.print-or-save")
+    </button>
+</div>

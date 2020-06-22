@@ -55,7 +55,7 @@
         <p id="summary-paragraph">@messages("taskList.summary.paragraph")</p>
 
         <p>
-            @components.link(DraftAnswersController.onPageLoad().url, "print-and-save", "taskList.summary.link", openInNewWindow = true)
+            @components.link(DraftAnswersController.onPageLoad().url, "print-and-save", "taskList.summary.link")
         </p>
 
         @components.button_link(messages("taskList.continue"), DeclarationController.onPageLoad().url)

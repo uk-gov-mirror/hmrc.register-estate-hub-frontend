@@ -86,6 +86,16 @@ trait ViewBehaviours extends ViewSpecBase {
     }
   }
 
+  def pageWithAPrintButton(view: HtmlFormat.Appendable) = {
+
+    "behave like a page with a print button" must {
+      "have a print button" in {
+        val doc = asDocument(view)
+        assertRenderedById(doc, "print")
+      }
+    }
+  }
+
   def dynamicTitlePage(view: HtmlFormat.Appendable,
                        messageKeyPrefix: String,
                        messageKeyParam: String,

@@ -24,16 +24,15 @@
 
 @(entities: Seq[Section], trn: String, declarationSent: String)(implicit request: Request[_], messages: Messages)
 
-@printScript = {
-    <script type="text/javascript" src='@routes.Assets.versioned("javascripts/print.js")'></script>
-}
-
 @main_template(
-    title = messages("declaredAnswers.title"),
-    scriptElem = Some(printScript)
+    title = messages("declaredAnswers.title")
 ) {
 
+    @components.back_link()
+
     @components.heading("declaredAnswers.heading", headingSize = "heading-xlarge")
+
+    @components.button_print()
 
     <h2>
         <span aria-hidden=true>@messages("declaredAnswers.subheading", trn)</span>

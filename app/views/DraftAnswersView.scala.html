@@ -24,16 +24,15 @@
 
 @(entities: Seq[Section])(implicit request: Request[_], messages: Messages)
 
-@printScript = {
-    <script type="text/javascript" src='@routes.Assets.versioned("javascripts/print.js")'></script>
-}
-
 @main_template(
-    title = messages("draftAnswers.title"),
-    scriptElem = Some(printScript)
+    title = messages("draftAnswers.title")
 ) {
 
+    @components.back_link()
+
     @components.heading("draftAnswers.heading", headingSize = "heading-xlarge")
+
+    @components.button_print()
 
     @for(section <- entities){
         @{
