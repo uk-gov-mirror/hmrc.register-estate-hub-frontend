@@ -78,6 +78,7 @@ taskList.agent.agentDetails = Agent details
 taskList.estateName.label = Estate name
 taskList.personalRepresentative.label = Personal representative
 taskList.personWhoDied.label = Person who died
+taskList.yearsOfTaxLiability.label = Years of tax liability
 
 taskList.in-progress = In progress
 taskList.completed = Completed
