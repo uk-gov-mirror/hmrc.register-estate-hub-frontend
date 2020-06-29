@@ -21,10 +21,6 @@ error.number = Please enter a valid number
 error.required = Please enter a value
 error.summary.title = There is a problem
 
-index.title = register-estate-hub-frontend
-index.heading = register-estate-hub-frontend
-index.guidance = Welcome to your new frontend. Please see the README file for a guide to getting started.
-
 session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
 session_expired.guidance = The details you have given have been deleted because you did not continue the service for 15 minutes.
@@ -72,7 +68,7 @@ taskList.paragraph2 = Any information you add without declaring will not be save
 taskList.sections.heading = Sections to be completed
 taskList.summary.heading = Summary
 taskList.summary.paragraph = After you have made a declaration, the only section you will be able to update for this estate’s registration is the personal representative.
-taskList.summary.link = Print or save a copy of your answers (opens in a new window or tab)
+taskList.summary.link = Print or save a copy of your answers
 taskList.continue = Continue to declaration
 taskList.agent.agentDetails = Agent details
 
@@ -111,7 +107,7 @@ problemDeclaring.contact.link = contact the trusts helpline (opens in a new wind
 confirmation.title = Registration received
 confirmation.heading = Registration received
 confirmation.heading2 = Your reference is:
-confirmation.printsave = Print or save a copy of the estate’s declaration (opens in a new window or tab)
+confirmation.printsave = Print or save a copy of the estate’s declaration
 confirmation.subheading1 = What happens next
 confirmation.paragraph1 = We will post {0} the estate’s Unique Taxpayer Reference (UTR). If they are based in the UK, this can take 15 working days. For an international personal representative, this can take up to 21 working days.
 confirmation.subheading2 = What you need to do next
