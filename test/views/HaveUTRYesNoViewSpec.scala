@@ -27,21 +27,41 @@ class HaveUTRYesNoViewSpec extends YesNoViewBehaviours {
 
   val messageKeyPrefix = "haveUtr"
 
-  val form = new YesNoFormProvider().withPrefix("haveUtr")
+  val form: Form[Boolean] = new YesNoFormProvider().withPrefix("haveUtr")
 
-  "HaveUTRYesNo view" must {
+  val view: HaveUTRYesNoView = viewFor[HaveUTRYesNoView](Some(emptyUserAnswers))
 
-    val view = viewFor[HaveUTRYesNoView](Some(emptyUserAnswers))
+  "HaveUTRYesNo view" when {
 
-    def applyView(form: Form[_]): HtmlFormat.Appendable =
-      view.apply(form)(fakeRequest, messages)
+    "org cred user" must {
 
-    behave like normalPage(applyView(form), messageKeyPrefix)
+      def applyView(form: Form[_]): HtmlFormat.Appendable =
+        view.apply(form, isOrgCredUser = true)(fakeRequest, messages)
 
-    behave like pageWithBackLink(applyView(form))
+      behave like normalPage(applyView(form), messageKeyPrefix)
 
-    behave like yesNoPage(form, applyView, messageKeyPrefix, None, routes.HaveUTRYesNoController.onSubmit().url)
+      behave like pageWithBackLink(applyView(form))
 
-    behave like pageWithASubmitButton(applyView(form))
+      behave like yesNoPage(form, applyView, messageKeyPrefix, None, routes.HaveUTRYesNoController.onSubmit().url)
+
+      behave like pageWithHint(form, applyView, s"$messageKeyPrefix.hint")
+
+      behave like pageWithASubmitButton(applyView(form))
+    }
+
+    "non-org cred user" must {
+
+      def applyView(form: Form[_]): HtmlFormat.Appendable =
+        view.apply(form, isOrgCredUser = false)(fakeRequest, messages)
+
+      behave like normalPage(applyView(form), messageKeyPrefix)
+
+      behave like pageWithBackLink(applyView(form))
+
+      behave like yesNoPage(form, applyView, messageKeyPrefix, None, routes.HaveUTRYesNoController.onSubmit().url)
+
+      behave like pageWithASubmitButton(applyView(form))
+    }
+
   }
 }

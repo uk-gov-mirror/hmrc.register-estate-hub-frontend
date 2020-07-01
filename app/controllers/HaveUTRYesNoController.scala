@@ -20,12 +20,14 @@ import config.annotations.EstateRegistration
 import controllers.actions.{DataRequiredAction, DataRetrievalAction, IdentifierAction}
 import forms.YesNoFormProvider
 import javax.inject.Inject
+import models.requests.DataRequest
 import navigation.Navigator
 import pages.HaveUTRYesNoPage
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import play.api.mvc.{Action, ActionBuilder, AnyContent, MessagesControllerComponents}
 import repositories.SessionRepository
+import uk.gov.hmrc.auth.core.AffinityGroup._
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.HaveUTRYesNoView
 
@@ -43,7 +45,7 @@ class HaveUTRYesNoController @Inject()(
                                                   view: HaveUTRYesNoView
                                  )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  private def actions() = identify andThen getData andThen requireData
+  private def actions(): ActionBuilder[DataRequest, AnyContent] = identify andThen getData andThen requireData
 
   val form: Form[Boolean] = formProvider.withPrefix("haveUtr")
 
@@ -55,15 +57,15 @@ class HaveUTRYesNoController @Inject()(
         case Some(value) => form.fill(value)
       }
 
-      Ok(view(preparedForm))
+      Ok(view(preparedForm, isOrgCredUser))
   }
 
-  def onSubmit() = actions().async {
+  def onSubmit(): Action[AnyContent] = actions().async {
     implicit request =>
 
       form.bindFromRequest().fold(
         (formWithErrors: Form[_]) =>
-          Future.successful(BadRequest(view(formWithErrors))),
+          Future.successful(BadRequest(view(formWithErrors, isOrgCredUser))),
 
         value => {
           for {
@@ -72,5 +74,9 @@ class HaveUTRYesNoController @Inject()(
           } yield Redirect(navigator.nextPage(HaveUTRYesNoPage, updatedAnswers))
         }
       )
+  }
+
+  private def isOrgCredUser(implicit request: DataRequest[AnyContent]): Boolean = {
+    request.affinityGroup == Organisation
   }
 }

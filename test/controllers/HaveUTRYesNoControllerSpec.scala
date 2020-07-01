@@ -21,38 +21,64 @@ import config.annotations.EstateRegistration
 import forms.YesNoFormProvider
 import navigation.Navigator
 import pages.HaveUTRYesNoPage
+import play.api.data.Form
 import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import uk.gov.hmrc.auth.core.AffinityGroup
 import views.html.HaveUTRYesNoView
 
 class HaveUTRYesNoControllerSpec extends SpecBase {
 
   val formProvider = new YesNoFormProvider()
-  val form = formProvider.withPrefix("haveUtr")
+  val form: Form[Boolean] = formProvider.withPrefix("haveUtr")
 
-  lazy val haveUTRRoute = routes.HaveUTRYesNoController.onPageLoad().url
+  lazy val haveUTRRoute: String = routes.HaveUTRYesNoController.onPageLoad().url
 
-  "HaveUTR Controller" must {
+  "HaveUTR Controller" when {
 
-    "return OK and the correct view for a GET" in {
+    "org cred user" must {
+      "return OK and the correct view for a GET" in {
 
-      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
-        .overrides(bind[Navigator].qualifiedWith(classOf[EstateRegistration]).toInstance(fakeNavigator))
-        .build()
+        val application = applicationBuilder(userAnswers = Some(emptyUserAnswers), AffinityGroup.Organisation)
+          .overrides(bind[Navigator].qualifiedWith(classOf[EstateRegistration]).toInstance(fakeNavigator))
+          .build()
 
-      val request = FakeRequest(GET, haveUTRRoute)
+        val request = FakeRequest(GET, haveUTRRoute)
 
-      val result = route(application, request).value
+        val result = route(application, request).value
 
-      val view = application.injector.instanceOf[HaveUTRYesNoView]
+        val view = application.injector.instanceOf[HaveUTRYesNoView]
 
-      status(result) mustEqual OK
+        status(result) mustEqual OK
 
-      contentAsString(result) mustEqual
-        view(form)(fakeRequest, messages).toString
+        contentAsString(result) mustEqual
+          view(form, isOrgCredUser = true)(fakeRequest, messages).toString
 
-      application.stop()
+        application.stop()
+      }
+    }
+
+    "non-org cred user" must {
+      "return OK and the correct view for a GET" in {
+
+        val application = applicationBuilder(userAnswers = Some(emptyUserAnswers), AffinityGroup.Agent)
+          .overrides(bind[Navigator].qualifiedWith(classOf[EstateRegistration]).toInstance(fakeNavigator))
+          .build()
+
+        val request = FakeRequest(GET, haveUTRRoute)
+
+        val result = route(application, request).value
+
+        val view = application.injector.instanceOf[HaveUTRYesNoView]
+
+        status(result) mustEqual OK
+
+        contentAsString(result) mustEqual
+          view(form, isOrgCredUser = false)(fakeRequest, messages).toString
+
+        application.stop()
+      }
     }
 
     "populate the view correctly on a GET when the question has previously been answered" in {
@@ -70,7 +96,7 @@ class HaveUTRYesNoControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(form.fill(true))(fakeRequest, messages).toString
+        view(form.fill(true), isOrgCredUser = true)(fakeRequest, messages).toString
 
       application.stop()
     }
@@ -112,7 +138,7 @@ class HaveUTRYesNoControllerSpec extends SpecBase {
       status(result) mustEqual BAD_REQUEST
 
       contentAsString(result) mustEqual
-        view(boundForm)(fakeRequest, messages).toString
+        view(boundForm, isOrgCredUser = true)(fakeRequest, messages).toString
 
       application.stop()
     }
