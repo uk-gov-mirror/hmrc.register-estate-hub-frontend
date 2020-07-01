@@ -69,7 +69,8 @@ class EstatesStoreConnectorSpec extends SpecBase with BeforeAndAfterAll with Bef
           |{
           |  "details": true,
           |  "personalRepresentative": true,
-          |  "deceased": true
+          |  "deceased": true,
+          |  "yearsOfTaxLiability": true
           |}
           |""".stripMargin)
 
@@ -81,7 +82,7 @@ class EstatesStoreConnectorSpec extends SpecBase with BeforeAndAfterAll with Bef
       val result = connector.getStatusOfTasks
 
       result.futureValue mustBe
-        CompletedTasks(details = true, personalRepresentative = true, deceased = true)
+        CompletedTasks(details = true, personalRepresentative = true, deceased = true, yearsOfTaxLiability = true)
 
       application.stop()
     }

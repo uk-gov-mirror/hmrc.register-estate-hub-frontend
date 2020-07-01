@@ -37,7 +37,8 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
     CompletedTasks(
       details = estateDetailsEnabled,
       personalRepresentative = personalRepEnabled,
-      deceased = deceasedPersonsEnabled
+      deceased = deceasedPersonsEnabled,
+      yearsOfTaxLiability = true
     )
 
   private def sections(tasks: CompletedTasks): List[Task] = {

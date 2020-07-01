@@ -19,13 +19,13 @@ package controllers.registration_progress
 import config.FrontendAppConfig
 import models.Tag.InProgress
 import models.{CompletedTasks, Tag}
-import viewmodels.tasks.{PersonWhoDied, EstateName, PersonalRepresentative}
+import viewmodels.tasks.{EstateName, PersonWhoDied, PersonalRepresentative, YearsOfTaxLiability}
 import viewmodels.{Link, Task}
 
 trait TaskListSections {
 
-  case class TaskList(tasks: List[Task]) {
-    val isAbleToDeclare: Boolean = !tasks.exists(_.tag.contains(InProgress))
+  case class TaskList(mandatory: List[Task], other: List[Task]) {
+    val isAbleToDeclare : Boolean = !(mandatory ::: other).exists(_.tag.contains(InProgress))
   }
 
   private lazy val notYetAvailable: String =
@@ -57,8 +57,16 @@ trait TaskListSections {
     }
   }
 
-  def generateTaskList(tasks: CompletedTasks): TaskList = {
-    val sections = List(
+  private val registerTaxRoute: String = {
+    if (config.registerTaxEnabled) {
+      config.registerTaxFrontendUrl
+    } else {
+      notYetAvailable
+    }
+  }
+
+  def generateTaskList(tasks: CompletedTasks, enableTaxLiability: Boolean): TaskList = {
+    val mandatorySections = List(
       Task(
         Link(EstateName, estateDetailsRoute),
         Some(Tag.tagFor(tasks.details, config.estateDetailsEnabled))
@@ -73,7 +81,18 @@ trait TaskListSections {
       )
     )
 
-    TaskList(sections)
+    val optionalSections = if (enableTaxLiability) {
+      List(
+        Task(
+          Link(YearsOfTaxLiability, registerTaxRoute),
+          Some(Tag.tagFor(tasks.yearsOfTaxLiability, config.registerTaxEnabled))
+        )
+      )
+    } else {
+      Nil
+    }
+
+    TaskList(mandatorySections, optionalSections)
   }
 
 }
