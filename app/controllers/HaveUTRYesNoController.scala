@@ -17,7 +17,7 @@
 package controllers
 
 import config.annotations.EstateRegistration
-import controllers.actions.{DataRequiredAction, DataRetrievalAction, IdentifierAction}
+import controllers.actions.Actions
 import forms.YesNoFormProvider
 import javax.inject.Inject
 import models.requests.DataRequest
@@ -34,18 +34,16 @@ import views.html.HaveUTRYesNoView
 import scala.concurrent.{ExecutionContext, Future}
 
 class HaveUTRYesNoController @Inject()(
-                                                  override val messagesApi: MessagesApi,
-                                                  sessionRepository: SessionRepository,
-                                                  @EstateRegistration navigator: Navigator,
-                                                  identify: IdentifierAction,
-                                                  getData: DataRetrievalAction,
-                                                  requireData: DataRequiredAction,
-                                                  formProvider: YesNoFormProvider,
-                                                  val controllerComponents: MessagesControllerComponents,
-                                                  view: HaveUTRYesNoView
-                                 )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
+                                        override val messagesApi: MessagesApi,
+                                        sessionRepository: SessionRepository,
+                                        @EstateRegistration navigator: Navigator,
+                                        actions: Actions,
+                                        formProvider: YesNoFormProvider,
+                                        val controllerComponents: MessagesControllerComponents,
+                                        view: HaveUTRYesNoView
+                                      )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  private def actions(): ActionBuilder[DataRequest, AnyContent] = identify andThen getData andThen requireData
+  private def actions(): ActionBuilder[DataRequest, AnyContent] = actions.authWithData
 
   val form: Form[Boolean] = formProvider.withPrefix("haveUtr")
 
