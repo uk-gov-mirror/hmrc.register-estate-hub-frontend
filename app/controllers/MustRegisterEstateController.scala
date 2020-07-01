@@ -17,22 +17,20 @@
 package controllers
 
 import com.google.inject.Inject
-import controllers.actions.{DataRequiredAction, DataRetrievalAction, IdentifierAction}
+import controllers.actions.Actions
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.MustRegisterEstateView
 
 class MustRegisterEstateController @Inject()(
-                                            override val messagesApi: MessagesApi,
-                                            identify: IdentifierAction,
-                                            getData: DataRetrievalAction,
-                                            requireData: DataRequiredAction,
-                                            val controllerComponents: MessagesControllerComponents,
-                                            view: MustRegisterEstateView
-                                          ) extends FrontendBaseController with I18nSupport {
+                                              override val messagesApi: MessagesApi,
+                                              actions: Actions,
+                                              val controllerComponents: MessagesControllerComponents,
+                                              view: MustRegisterEstateView
+                                            ) extends FrontendBaseController with I18nSupport {
 
-  def onPageLoad(): Action[AnyContent] = (identify andThen getData andThen requireData) {
+  def onPageLoad(): Action[AnyContent] = actions.authWithData {
     implicit request =>
 
       Ok(view())
