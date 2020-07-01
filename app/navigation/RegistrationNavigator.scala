@@ -37,7 +37,7 @@ class RegistrationNavigator @Inject()(config: FrontendAppConfig) extends Navigat
           rts.UTRSentInPostController.onPageLoad())
         case Some(false) => yesNoNav(
           ua, HaveUTRYesNoPage,
-          rts.FeatureNotAvailableController.onPageLoad(),
+          rts.MustRegisterEstateController.onPageLoad(),
           Call("GET", config.suitabilityUrl))
         case None => controllers.routes.SessionExpiredController.onPageLoad()
       }
