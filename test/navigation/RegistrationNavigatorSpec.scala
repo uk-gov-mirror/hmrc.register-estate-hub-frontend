@@ -33,13 +33,13 @@ class RegistrationNavigatorSpec extends SpecBase {
         .mustBe(controllers.routes.HaveUTRYesNoController.onPageLoad())
     }
 
-    "HaveUTRYesNo page -> Yes with Registered online No -> FeatureNotAvailable page" in {
+    "HaveUTRYesNo page -> Yes with Registered online No -> Must register online page" in {
       val answers = emptyUserAnswers
         .set(EstateRegisteredOnlineYesNoPage, false).success.value
         .set(HaveUTRYesNoPage, true).success.value
 
       navigator.nextPage(HaveUTRYesNoPage, answers)
-        .mustBe(controllers.routes.FeatureNotAvailableController.onPageLoad())
+        .mustBe(controllers.routes.MustRegisterEstateController.onPageLoad())
     }
 
     "HaveUTRYesNo page -> Yes with Registered online Yes -> FeatureNotAvailable page" in {

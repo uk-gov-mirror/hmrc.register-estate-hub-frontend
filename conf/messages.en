@@ -59,7 +59,13 @@ estateRegisteredOnline.error.required = Select yes if the estate has already bee
 haveUtr.title = Does the estate have a Unique Taxpayer Reference (UTR)?
 haveUtr.heading = Does the estate have a Unique Taxpayer Reference (UTR)?
 haveUtr.checkYourAnswersLabel = Does the estate have a Unique Taxpayer Reference (UTR)?
+haveUtr.hint = If your estate has been set up for Self Assessment, someone should have received a letter (SA250) with the estate’s UTR.
 haveUtr.error.required = Select yes if the estate has a Unique Taxpayer Reference
+
+mustRegisterEstate.title = You must register your estate
+mustRegisterEstate.heading = You must register your estate
+mustRegisterEstate.p1 = You must
+mustRegisterEstate.p1.link = contact the bereavement and deceased estate helpline to register this estate (opens in a new tab)
 
 taskList.title = Registration progress
 taskList.heading = Registration progress

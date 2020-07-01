@@ -15,31 +15,22 @@
  *@
 
 @import controllers.routes._
+@import config.FrontendAppConfig
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    config: FrontendAppConfig
 )
 
-@(form: Form[_], isOrgCredUser: Boolean)(implicit request: Request[_], messages: Messages)
+@()(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = s"${errorPrefix(form)} ${messages("haveUtr.title")}"
-    ) {
+    title = messages("mustRegisterEstate.title")
+) {
 
-    @formHelper(action = HaveUTRYesNoController.onSubmit(), 'autoComplete -> "off") {
+    @components.back_link()
 
-        @components.back_link()
+    @components.heading("mustRegisterEstate.heading")
 
-        @components.error_summary(form.errors)
-
-        @components.input_yes_no(
-            field = form("value"),
-            legend = messages("haveUtr.heading"),
-            legendClass = Some("heading-large"),
-            hint = if(isOrgCredUser) Some(messages("haveUtr.hint")) else None
-        )
-
-        @components.submit_button()
-    }
+    <p>@messages("mustRegisterEstate.p1") <a href=@config.estatesHelplineUrl target="_blank">@messages("mustRegisterEstate.p1.link")</a>.</p>
 }
