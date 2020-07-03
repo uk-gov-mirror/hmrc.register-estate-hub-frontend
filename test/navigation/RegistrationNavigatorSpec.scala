@@ -33,38 +33,45 @@ class RegistrationNavigatorSpec extends SpecBase {
         .mustBe(controllers.routes.HaveUTRYesNoController.onPageLoad())
     }
 
-    "HaveUTRYesNo page -> Yes with Registered online No -> Must register online page" in {
-      val answers = emptyUserAnswers
-        .set(EstateRegisteredOnlineYesNoPage, false).success.value
-        .set(HaveUTRYesNoPage, true).success.value
+    "registered online" must {
 
-      navigator.nextPage(HaveUTRYesNoPage, answers)
-        .mustBe(controllers.routes.MustRegisterEstateController.onPageLoad())
+      "HaveUTRYesNo page -> Yes with Registered online Yes -> Maintain an estate service" in {
+        val answers = emptyUserAnswers
+          .set(EstateRegisteredOnlineYesNoPage, true).success.value
+          .set(HaveUTRYesNoPage, true).success.value
+
+        navigator.nextPage(HaveUTRYesNoPage, answers).url mustBe appConfig.maintainAnEstateFrontendUrl
+
+      }
+
+      "HaveUTRYesNo page -> No with Registered online Yes -> UTR sent in post" in {
+        val answers = emptyUserAnswers
+          .set(EstateRegisteredOnlineYesNoPage, true).success.value
+          .set(HaveUTRYesNoPage, false).success.value
+
+        navigator.nextPage(HaveUTRYesNoPage, answers) mustBe controllers.routes.UTRSentInPostController.onPageLoad()
+      }
+
     }
 
-    "HaveUTRYesNo page -> Yes with Registered online Yes -> FeatureNotAvailable page" in {
-      val answers = emptyUserAnswers
-        .set(EstateRegisteredOnlineYesNoPage, true).success.value
-        .set(HaveUTRYesNoPage, true).success.value
+    "not registered online" must {
 
-      navigator.nextPage(HaveUTRYesNoPage, answers)
-        .mustBe(controllers.routes.FeatureNotAvailableController.onPageLoad())
-    }
+      "HaveUTRYesNo page -> Yes with Registered online No -> Must register online page" in {
+        val answers = emptyUserAnswers
+          .set(EstateRegisteredOnlineYesNoPage, false).success.value
+          .set(HaveUTRYesNoPage, true).success.value
 
-    "HaveUTRYesNo page -> No with Registered online No -> Suitability questions" in {
-      val answers = emptyUserAnswers
-        .set(EstateRegisteredOnlineYesNoPage, false).success.value
-        .set(HaveUTRYesNoPage, false).success.value
+        navigator.nextPage(HaveUTRYesNoPage, answers)
+          .mustBe(controllers.routes.MustRegisterEstateController.onPageLoad())
+      }
 
-      navigator.nextPage(HaveUTRYesNoPage, answers).url mustBe "http://localhost:8821/register-an-estate/suitability"
-    }
+      "HaveUTRYesNo page -> No with Registered online No -> Suitability questions" in {
+        val answers = emptyUserAnswers
+          .set(EstateRegisteredOnlineYesNoPage, false).success.value
+          .set(HaveUTRYesNoPage, false).success.value
 
-    "HaveUTRYesNo page -> No with Registered online Yes -> UTR sent in post" in {
-      val answers = emptyUserAnswers
-        .set(EstateRegisteredOnlineYesNoPage, true).success.value
-        .set(HaveUTRYesNoPage, false).success.value
-
-      navigator.nextPage(HaveUTRYesNoPage, answers) mustBe controllers.routes.UTRSentInPostController.onPageLoad()
+        navigator.nextPage(HaveUTRYesNoPage, answers).url mustBe appConfig.suitabilityUrl
+      }
     }
 
   }
