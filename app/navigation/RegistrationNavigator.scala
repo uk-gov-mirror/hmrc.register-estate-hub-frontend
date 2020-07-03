@@ -33,7 +33,7 @@ class RegistrationNavigator @Inject()(config: FrontendAppConfig) extends Navigat
       ua.get(EstateRegisteredOnlineYesNoPage) match {
         case Some(true) => yesNoNav(
           ua, HaveUTRYesNoPage,
-          rts.FeatureNotAvailableController.onPageLoad(),
+          Call("GET", config.maintainAnEstateFrontendUrl),
           rts.UTRSentInPostController.onPageLoad())
         case Some(false) => yesNoNav(
           ua, HaveUTRYesNoPage,
