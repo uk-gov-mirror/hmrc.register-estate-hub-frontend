@@ -20,9 +20,10 @@ import controllers.actions.Actions
 import javax.inject.Inject
 import models.UserAnswers
 import models.requests.OptionalDataRequest
+import pages.{EstateRegisteredOnlineYesNoPage, HaveUTRYesNoPage}
 import play.api.Logger
 import play.api.i18n.I18nSupport
-import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
+import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents, Result}
 import repositories.SessionRepository
 import uk.gov.hmrc.auth.core.AffinityGroup
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
@@ -48,10 +49,17 @@ class IndexController @Inject()(
       }
   }
 
-  private def checkUserAnswersAndRedirect(request: OptionalDataRequest[AnyContent], route: Call) = {
+  private def checkUserAnswersAndRedirect(request: OptionalDataRequest[AnyContent], route: Call): Future[Result] = {
     request.userAnswers match {
-      case Some(_) =>
-        Future.successful(Redirect(route))
+      case Some(userAnswers) =>
+        for {
+          updatedAnswers <- Future.fromTry(
+            userAnswers
+              .remove(EstateRegisteredOnlineYesNoPage)
+              .flatMap(_.remove(HaveUTRYesNoPage))
+          )
+          _ <- repository.set(updatedAnswers)
+        } yield Redirect(route)
       case None =>
         val userAnswers: UserAnswers = UserAnswers(request.internalId)
         repository.set(userAnswers).map { _ =>
