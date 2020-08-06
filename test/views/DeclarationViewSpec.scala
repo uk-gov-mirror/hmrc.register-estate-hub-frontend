@@ -59,10 +59,7 @@ class DeclarationViewSpec extends QuestionViewBehaviours[Declaration] {
       view.apply(form, AffinityGroup.Organisation)(fakeRequest, messages)
 
     val doc = asDocument(applyView(form))
-    assertContainsText(doc, "I confirm that I have taken all reasonable steps to obtain up to " +
-      "date and accurate information for this registration. I understand " +
-      "that if I knowingly provide false information and cannot demonstrate that I have taken all " +
-      "reasonable steps, I could be subject to penalties.")
+    assertContainsText(doc, "I confirm that the information I have given is true and complete to the best of my knowledge. I will make sure it is kept up to date, including any change of address. If I find out that I have made an error or something has changed, I will update the information.")
   }
 
   "render declaration warning for an Agent" in {
@@ -72,10 +69,7 @@ class DeclarationViewSpec extends QuestionViewBehaviours[Declaration] {
       view.apply(form, AffinityGroup.Agent)(fakeRequest, messages)
 
     val doc = asDocument(applyView(form))
-    assertContainsText(doc, "I confirm that my client has taken all reasonable steps to obtain up " +
-      "to date and accurate information for this registration. I understand that if my client knowingly " +"" +
-      "provides false information and cannot demonstrate that they have taken all reasonable steps, " +
-      "they could be subject to penalties.")
+    assertContainsText(doc, "I confirm that the information my client has given is true and complete to the best of their knowledge. I will make sure it is kept up to date, including any change of address. If I find out that an error has been made or something has changed, I will update the information.")
   }
 
 }

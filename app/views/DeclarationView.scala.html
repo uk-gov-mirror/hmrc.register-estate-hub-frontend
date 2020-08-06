@@ -53,9 +53,9 @@
         )
 
         @if(affinityGroup == AffinityGroup.Agent) {
-            @components.warning("declaration.agent")
+            <p class="panel-indent">@messages("declaration.agent.warning")</p>
         } else {
-            @components.warning("declaration")
+            <p class="panel-indent">@messages("declaration.warning")</p>
         }
 
         @components.submit_button(Some("site.confirm.send"))
