@@ -30,13 +30,10 @@
     ) {
 
     <div class="govuk-main-wrapper--l">
-        <h1 class="form-title heading-large heading-confirmation ">
+        <h1 class="form-title heading-large heading-confirmation">
             @messages("confirmation.heading")
             <span class="reference-text">@messages("confirmation.heading2")</span>
-            <span id="estates-registration-number" class="reference-number">
-                <span aria-hidden=true>@trn</span>
-                <span class="visually-hidden">@formatReferenceNumber(trn)</span>
-            </span>
+            <span id="estates-registration-number" class="reference-number">@trn</span>
         </h1>
     </div>
 

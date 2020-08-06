@@ -30,14 +30,11 @@
 
     @components.back_link()
 
-    @components.heading("declaredAnswers.heading", headingSize = "heading-xlarge")
+    @components.heading("declaredAnswers.heading", headingSize = "heading-large")
 
     @components.button_print()
 
-    <h2>
-        <span aria-hidden=true>@messages("declaredAnswers.subheading", trn)</span>
-        <span class="visually-hidden">@messages("declaredAnswers.subheading", formatReferenceNumber(trn))</span>
-    </h2>
+    <p class="bold">@messages("declaredAnswers.trn", trn)</p>
 
     <p>@messages("declaredAnswers.p1", declarationSent)</p>
 
