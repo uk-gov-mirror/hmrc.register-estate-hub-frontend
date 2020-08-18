@@ -20,8 +20,10 @@ import config.FrontendAppConfig
 import javax.inject.Inject
 import models._
 import models.http.DeclarationResponse
+import play.api.libs.json.Writes
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
+import uk.gov.hmrc.http.HttpReads.Implicits._
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -30,7 +32,9 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
   private val registerUrl = s"${config.estatesUrl}/estates/register"
 
   def register(payload: Declaration)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[DeclarationResponse] = {
-    http.POST[Declaration, DeclarationResponse](registerUrl, payload)
+    http.POST[Declaration, DeclarationResponse](registerUrl, payload)(
+      implicitly[Writes[Declaration]], DeclarationResponse.httpReads, hc, ec
+    )
   }
 
   private val getPersonalRepIndUrl = s"${config.estatesUrl}/estates/personal-rep/individual"
