@@ -28,6 +28,10 @@ GET        /check-your-answers                          controllers.CheckYourAns
 
 GET        /unauthorised                                controllers.UnauthorisedController.onPageLoad
 
+GET        /keep-alive                                  controllers.SessionTimeoutController.keepAlive
+
+GET        /timeout                                     controllers.SessionTimeoutController.timeout
+
 GET        /logout                                      controllers.LogoutController.logout()
 
 GET        /signed-out                                  controllers.LogoutController.logout()
