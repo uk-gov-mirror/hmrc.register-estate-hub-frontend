@@ -85,3 +85,18 @@ p.font-xsmall{
 .heading-with-top-margin {
   margin-top: .625em;
 }
+
+.estate-list--bullet {
+  list-style-type: disc;
+
+  > li {
+    margin-bottom: 5px;
+  }
+}
+
+.estate-list--bullet .inside {
+  list-style-position: inside;
+  // ensures all lines have same indent
+  padding-left: 1.28571429em;
+  text-indent: -1.28571429em;
+}

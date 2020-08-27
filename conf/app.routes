@@ -2,6 +2,8 @@
 
 GET        /                                            controllers.IndexController.onPageLoad
 
+GET        /accessibility                               controllers.AccessibilityStatementController.onPageLoad
+
 GET        /create-agent-services-account               controllers.CreateAgentServicesAccountController.onPageLoad()
 
 GET        /cannot-change                               controllers.CannotMakeChangesController.onPageLoad()
