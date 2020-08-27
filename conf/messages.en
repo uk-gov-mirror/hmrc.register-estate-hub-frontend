@@ -50,6 +50,97 @@ timeout.keep-alive-button=Continue application
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account
 
+accessibilityStatement.title = Accessibility statement for Register and Maintain an Estate
+accessibilityStatement.heading = Accessibility statement for Register and Maintain an Estate
+
+accessibilityStatement.p1 = This accessibility statement explains how accessible this service is, what to do if you have difficulty using it, and how to report accessibility problems with the service.
+
+accessibilityStatement.p2.pre.link = This service is part of the wider GOV.UK website. There is a separate
+accessibilityStatement.p2.link.text = accessibility statement
+accessibilityStatement.p2.post.link = for the main GOV.UK website.
+
+accessibilityStatement.p3 = This page only contains information about the Register and Maintain an Estate service, available at tax.service.gov.uk.
+
+accessibilityStatement.using.this.service = Using this service
+
+accessibilityStatement.this.service.allows = This service allows you to register and maintain an estate which has to pay tax.
+
+accessibilityStatement.this.service.is.run = This service is run by HM Revenue and Customs (HMRC). We want as many people as possible to be able to use this service. This means you should be able to:
+
+accessibilityStatement.this.service.is.run.b1 = change colours, contrast levels and fonts
+accessibilityStatement.this.service.is.run.b2 = zoom in up to 300% without the text spilling off the screen
+accessibilityStatement.this.service.is.run.b3 = get from the start of the service to the end using just a keyboard
+accessibilityStatement.this.service.is.run.b4 = get from the start of the service to the end using speech recognition software
+accessibilityStatement.this.service.is.run.b5 = listen to the service using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
+
+accessibilityStatement.we.have.also = We have also made the text in the service as simple as possible to understand.
+
+accessibilityStatement.ability.net.has.advice = has advice on making your device easier to use if you have a disability.
+
+accessibilityStatement.how.accessible = How accessible this service is
+
+accessibilityStatement.this.service.is.partial = This service is partially compliant with the
+
+accessibilityStatement.some.people.may.find = Some people may find parts of this service difficult to use:
+
+accessibilityStatement.some.people.may.find.b1 = Users will not be informed when their session is about to end, which may result in the loss of data
+accessibilityStatement.some.people.may.find.b2 = Users may not be made aware of an error when having entered data in an incorrect format
+accessibilityStatement.some.people.may.find.b3 = Users are unable to enter telephone numbers with brackets; users should remove brackets when entering telephone numbers
+
+accessibilityStatement.reporting.problems = Reporting accessibility problems with this service
+
+accessibilityStatement.reporting.pre.link = We are always looking to improve the accessibility of this service. If you find any problems that are not listed on this page or think we are not meeting accessibility requirements, report the
+accessibilityStatement.reporting.link = accessibility problem (opens in a new window or tab)
+accessibilityStatement.reporting.post.link = or contact accessibility.team@hmrc.gov.uk.
+
+accessibilityStatement.what.to.do = What to do if you are not happy with how we respond to your complaint
+accessibilityStatement.what.to.do.pre.eass.link = The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ''accessibility regulations''). If you are not happy with how we respond to your complaint,
+
+accessibilityStatement.what.to.do.eass.link = contact the Equality Advisory and Support Service (EASS)
+accessibilityStatement.what.to.do.or.the = or the
+accessibilityStatement.what.to.do.ecni.link = Equality Commission for Northern Ireland (ECNI)
+accessibilityStatement.what.to.do.if.you.live = if you live in Northern Ireland.
+
+accessibilityStatement.contacting.us = Contacting us by phone or getting a visit from us in person
+accessibilityStatement.we.provide.a.text = We provide a text relay service if you are deaf, hearing impaired or have a speech impediment.
+accessibilityStatement.we.can.provide = We can provide a British Sign Language (BSL) interpreter, or you can arrange a visit from an HMRC advisor to help you complete the service.
+accessibilityStatement.find.out.how = Find out how to
+accessibilityStatement.find.out.contact.us = contact us
+
+accessibilityStatement.technical.information = Technical information about this service’s accessibility
+accessibilityStatement.hmrc.is.committed = HMRC is committed to making this service accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
+
+accessibilityStatement.this.service.is.partial.due.to = due to the non-compliances listed below.
+
+accessibilityStatement.non.accessible = Non-accessible content
+accessibilityStatement.the.content.listed = The content listed below is non-accessible for the following reasons.
+accessibilityStatement.non.compliance.with = Non-compliance with the accessibility regulations
+
+accessibilityStatement.non.compliance.timeout.pre.link = Users are not able to turn off, adjust or extend the time in which inactivity will result in a loss of data. The service does not meet WCAG 2.2.1 A success criterion
+accessibilityStatement.non.compliance.timeout.link = 2.2.1 Understanding Timing Adjustable
+accessibilityStatement.non.compliance.timeout.post.link = (Level A). We plan to allow users to extend their session in the service by October 2020.
+
+accessibilityStatement.non.compliance.telephone.pre.link = Users may be able to enter an incorrect telephone number which cannot be used by HMRC for contact. The service does not meet WCAG 3.3.1 A success criterion
+accessibilityStatement.non.compliance.telephone.link1 = 3.3.1 Error Identification
+accessibilityStatement.non.compliance.telephone.post.link1 = (Level A) and success criterion WCAG 3.3.3 AA
+accessibilityStatement.non.compliance.telephone.link2 = 3.3.3 Error Suggestion
+accessibilityStatement.non.compliance.telephone.post.link2 = (Level AA). We plan to implement stricter validation on telephone numbers by October 2020.
+
+accessibilityStatement.how.we.tested = How we tested this service
+accessibilityStatement.service.last.tested.on = The service was last tested on 19 August 2020 and was checked for compliance with WCAG 2.1 AA.
+
+accessibilityStatement.this.service.was.built.pre.link = The service was built using parts that were tested by the
+accessibilityStatement.this.service.was.built.link = Digital Accessibility Centre
+accessibilityStatement.this.service.was.built.post.link = The full service was tested by HMRC and included disabled users.
+
+accessibilityStatement.page.prepared.on = This page was prepared on 27 August 2020. It was last updated on 27 August 2020.
+
+accessibilityStatement.wcag.standard = Web Content Accessibility Guidelines version 2.1 AA standard
+
+footer.links.accessibility.text = Accessibility
+
+
+
 featureNotAvailable.title = This part of the online service is not available yet
 featureNotAvailable.heading = This part of the online service is not available yet
 featureNotAvailable.p1 = If you need to make any changes to the trust you can

@@ -95,4 +95,6 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
     configuration.get[String]("urls.suitability")
 
   lazy val ttlInSeconds: Int = configuration.get[Int]("mongodb.timeToLiveInSeconds")
+
+  lazy val accessibilityLinkUrl: String = configuration.get[String]("urls.accessibility")
 }
