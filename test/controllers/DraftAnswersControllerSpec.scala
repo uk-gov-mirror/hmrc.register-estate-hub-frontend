@@ -101,7 +101,7 @@ class DraftAnswersControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(entities(registration))(fakeRequest, messages).toString
+        view(entities(registration))(request, messages).toString
 
       application.stop()
     }

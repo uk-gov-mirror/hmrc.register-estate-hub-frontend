@@ -58,7 +58,7 @@ class ConfirmationControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(trn, "Adam")(fakeRequest, messages).toString
+        view(trn, "Adam")(request, messages).toString
 
       application.stop()
 

@@ -38,7 +38,7 @@ class MustRegisterEstateControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view()(fakeRequest, messages).toString
+        view()(request, messages).toString
 
       application.stop()
     }

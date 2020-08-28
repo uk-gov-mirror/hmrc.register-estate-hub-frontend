@@ -111,7 +111,7 @@ class DeclaredAnswersControllerSpec extends SpecBase {
           entities(registration),
           fakeTrn,
           "27 January 2020"
-        )(fakeRequest, messages).toString
+        )(request, messages).toString
 
       application.stop()
     }
