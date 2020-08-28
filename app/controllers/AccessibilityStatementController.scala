@@ -30,8 +30,7 @@ class AccessibilityStatementController @Inject()(
                                              view: AccessibilityStatementView)
                                                 (implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  def onPageLoad: Action[AnyContent] = Action {
-    implicit request =>
-      Ok(view())
+  def onPageLoad(userAction: String): Action[AnyContent] = Action {
+    implicit request => Ok(view(userAction))
   }
 }

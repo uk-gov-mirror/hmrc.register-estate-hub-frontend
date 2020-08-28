@@ -96,7 +96,7 @@ class DeclarationControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(form.fill(declaration), AffinityGroup.Organisation)(fakeRequest, messages).toString
+        view(form.fill(declaration), AffinityGroup.Organisation)(request, messages).toString
 
       application.stop()
     }
@@ -141,7 +141,7 @@ class DeclarationControllerSpec extends SpecBase {
       status(result) mustEqual BAD_REQUEST
 
       contentAsString(result) mustEqual
-        view(boundForm, AffinityGroup.Organisation)(fakeRequest, messages).toString
+        view(boundForm, AffinityGroup.Organisation)(request, messages).toString
 
       application.stop()
     }

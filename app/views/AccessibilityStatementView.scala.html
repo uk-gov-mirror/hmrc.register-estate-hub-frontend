@@ -22,12 +22,7 @@
 main_template: MainTemplate
 )
 
-@()(implicit request: Request[_], messages: Messages)
-
-@userAction = @{
-    val uri = request.headers.get("referer").getOrElse(controllers.routes.AccessibilityStatementController.onPageLoad().url)
-    new URI(uri).getPath()
-}
+@(userAction: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
 title = messages("accessibilityStatement.title")

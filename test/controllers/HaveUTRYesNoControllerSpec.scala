@@ -53,7 +53,7 @@ class HaveUTRYesNoControllerSpec extends SpecBase {
         status(result) mustEqual OK
 
         contentAsString(result) mustEqual
-          view(form, isOrgCredUser = true)(fakeRequest, messages).toString
+          view(form, isOrgCredUser = true)(request, messages).toString
 
         application.stop()
       }
@@ -75,7 +75,7 @@ class HaveUTRYesNoControllerSpec extends SpecBase {
         status(result) mustEqual OK
 
         contentAsString(result) mustEqual
-          view(form, isOrgCredUser = false)(fakeRequest, messages).toString
+          view(form, isOrgCredUser = false)(request, messages).toString
 
         application.stop()
       }
@@ -96,7 +96,7 @@ class HaveUTRYesNoControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(form.fill(true), isOrgCredUser = true)(fakeRequest, messages).toString
+        view(form.fill(true), isOrgCredUser = true)(request, messages).toString
 
       application.stop()
     }
@@ -138,7 +138,7 @@ class HaveUTRYesNoControllerSpec extends SpecBase {
       status(result) mustEqual BAD_REQUEST
 
       contentAsString(result) mustEqual
-        view(boundForm, isOrgCredUser = true)(fakeRequest, messages).toString
+        view(boundForm, isOrgCredUser = true)(request, messages).toString
 
       application.stop()
     }
