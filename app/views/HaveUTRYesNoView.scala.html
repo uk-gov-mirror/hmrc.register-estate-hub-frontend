@@ -24,7 +24,7 @@
 @(form: Form[_], isOrgCredUser: Boolean)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = s"${errorPrefix(form)} ${messages("haveUtr.title")}"
+    title = s"${errorPrefix(form)}${messages("haveUtr.title")}"
     ) {
 
     @formHelper(action = HaveUTRYesNoController.onSubmit(), 'autoComplete -> "off") {
