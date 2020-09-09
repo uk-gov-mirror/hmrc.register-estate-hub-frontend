@@ -82,3 +82,9 @@
 .app-task-link {
   display: block;
 }
+
+@media(min-width: 621px) {
+  .app-task-list__items {
+    padding-left: 0;
+  }
+}
