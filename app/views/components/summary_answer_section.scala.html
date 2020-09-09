@@ -23,6 +23,10 @@
     <h2 class="heading-large">@messages(answerSection.headingKey.get)</h2>
 }
 
+@if(answerSection.subHeading.isDefined){
+    <h3 class="heading-medium">@{answerSection.subHeading.get}</h3>
+}
+
 @if(answerSection.rows) {
     <ul role="list" class="govuk-check-your-answers cya-questions-long section">
         @for(row <- answerSection.rows){

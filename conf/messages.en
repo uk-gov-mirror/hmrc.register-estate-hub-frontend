@@ -177,6 +177,7 @@ taskList.estateName.label = Estate name
 taskList.personalRepresentative.label = Personal representative
 taskList.personWhoDied.label = Person who died
 taskList.yearsOfTaxLiability.label = Years of tax liability
+taskList.yearOfTaxLiability.label = Tax liability {0} to {1}
 
 taskList.in-progress = In progress
 taskList.completed = Completed
@@ -297,3 +298,6 @@ deceasedPerson.nino.checkYourAnswersLabel = What is {0}’s National Insurance n
 deceasedPerson.addressYesNo.checkYourAnswersLabel = Do you know {0}’s last known address?
 deceasedPerson.livedInTheUkYesNo.checkYourAnswersLabel = Was {0}’s last known address in the UK?
 deceasedPerson.address.checkYourAnswersLabel = What is {0}’s last known address?
+
+taxLiability.neededToPayTax.checkYourAnswersLabel = Did the estate need to pay any tax from {0} to {1}?
+taxLiability.wasTaxDeclared.checkYourAnswersLabel = Was the tax from {0} to {1} declared?
