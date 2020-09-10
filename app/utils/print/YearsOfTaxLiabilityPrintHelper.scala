@@ -21,11 +21,11 @@ import models._
 import play.api.i18n.Messages
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.time.TaxYear
-import utils.DateFormatter
+import utils.{DateFormatter, YearFormatter}
 import utils.print.CheckAnswersFormatters.yesOrNo
 import viewmodels.{AnswerRow, AnswerSection}
 
-class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter) {
+class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yearFormatter: YearFormatter) {
 
   def apply(yearReturns: List[YearReturnType])(implicit messages: Messages): Seq[AnswerSection] = {
 
@@ -50,11 +50,9 @@ class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter) {
 
   private def taxYearStartAndEndDate(taxReturnYear: String): (String, String) = {
 
-    def taxReturnYearToInt(taxReturnYear: String): Int = {
-      val taxReturnYearFull = s"20$taxReturnYear" // TODO - not particularly robust. Could we figure out from the current year if this is 20, 21 etc.?
-      taxReturnYearFull.toInt
-    }
-    val endYear: Int = taxReturnYearToInt(taxReturnYear)
+    import yearFormatter._
+
+    val endYear: Int = taxReturnYear.fullYear
     val taxYear = TaxYear(startYear = endYear - 1)
     (dateFormatter.formatDate(taxYear.starts), dateFormatter.formatDate(taxYear.finishes))
 
