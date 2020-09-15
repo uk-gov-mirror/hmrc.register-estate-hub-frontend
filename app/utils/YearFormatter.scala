@@ -23,15 +23,15 @@ class YearFormatter @Inject()(localDateService: LocalDateService) {
 
   implicit class TwoDigitYearFormatter(twoDigitYear: String) {
     def fullYear: Int = {
-
       val century: Int = {
         val currentYear = localDateService.now.getYear
         val twoDigitCurrentYear = currentYear.twoDigitYear
         val twoDigitTaxReturnYear = twoDigitYear.toInt
 
-        twoDigitTaxReturnYear - twoDigitCurrentYear match {
-          case x if x > 1 => currentYear.century - 1
-          case _ => currentYear.century
+        if (twoDigitTaxReturnYear > twoDigitCurrentYear) {
+          currentYear.century - 1
+        } else {
+          currentYear.century
         }
       }
 

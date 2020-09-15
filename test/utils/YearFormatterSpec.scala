@@ -34,6 +34,16 @@ class YearFormatterSpec extends SpecBase {
       val formatter = new YearFormatter(mockLocalDateService)
       import formatter._
 
+      "format 16 as 2016" in {
+        val input = "16"
+        input.fullYear mustBe 2016
+      }
+
+      "format 17 as 2017" in {
+        val input = "17"
+        input.fullYear mustBe 2017
+      }
+
       "format 18 as 2018" in {
         val input = "18"
         input.fullYear mustBe 2018
@@ -42,11 +52,6 @@ class YearFormatterSpec extends SpecBase {
       "format 19 as 2019" in {
         val input = "19"
         input.fullYear mustBe 2019
-      }
-
-      "format 20 as 2020" in {
-        val input = "20"
-        input.fullYear mustBe 2020
       }
     }
 
@@ -58,6 +63,16 @@ class YearFormatterSpec extends SpecBase {
       val formatter = new YearFormatter(mockLocalDateService)
       import formatter._
 
+      "format 16 as 2116" in {
+        val input = "16"
+        input.fullYear mustBe 2116
+      }
+
+      "format 17 as 2117" in {
+        val input = "17"
+        input.fullYear mustBe 2117
+      }
+
       "format 18 as 2118" in {
         val input = "18"
         input.fullYear mustBe 2118
@@ -66,11 +81,6 @@ class YearFormatterSpec extends SpecBase {
       "format 19 as 2119" in {
         val input = "19"
         input.fullYear mustBe 2119
-      }
-
-      "format 20 as 2120" in {
-        val input = "20"
-        input.fullYear mustBe 2120
       }
     }
 
@@ -100,11 +110,6 @@ class YearFormatterSpec extends SpecBase {
       "format 01 as 2101" in {
         val input = "01"
         input.fullYear mustBe 2101
-      }
-
-      "format 02 as 2102" in {
-        val input = "02"
-        input.fullYear mustBe 2102
       }
     }
   }
