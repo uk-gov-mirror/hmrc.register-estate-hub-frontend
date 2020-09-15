@@ -18,6 +18,7 @@ package utils.print
 
 import javax.inject.Inject
 import models._
+import org.joda.time.LocalDate
 import play.api.i18n.Messages
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.time.TaxYear
@@ -27,42 +28,45 @@ import viewmodels.{AnswerRow, AnswerSection}
 
 class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yearFormatter: YearFormatter) {
 
+  private case class TaxYearDates(startDate: LocalDate, endDate: LocalDate) {
+    private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)
+    val start: String = formatDate(startDate)
+    val end: String = formatDate(endDate)
+  }
+
   def apply(yearReturns: List[YearReturnType])(implicit messages: Messages): Seq[AnswerSection] = {
 
-    def rows(taxYear: (String, String)): Seq[AnswerRow] = {
+    def rows(taxYear: TaxYearDates): Seq[AnswerRow] = {
       Seq(
-        yesNoQuestion(value = true, "taxLiability.neededToPayTax", taxYear._1, taxYear._2),
-        yesNoQuestion(value = false, "taxLiability.wasTaxDeclared", taxYear._1, taxYear._2)
+        yesNoQuestion(value = true, "taxLiability.neededToPayTax", taxYear),
+        yesNoQuestion(value = false, "taxLiability.wasTaxDeclared", taxYear)
       )
     }
 
     yearReturns.zipWithIndex.foldLeft(Seq[AnswerSection]()) {
       case (acc, (yearReturn, index)) =>
-        val taxYear = taxYearStartAndEndDate(yearReturn.taxReturnYear)
+        val taxYear: TaxYearDates = taxYearDates(yearReturn.taxReturnYear)
         acc :+ AnswerSection(
           headingKey = if (index == 0) Some("taskList.yearsOfTaxLiability.label") else None,
           rows = rows(taxYear),
-          subHeading = Some(messages("taskList.yearOfTaxLiability.label", taxYear._1, taxYear._2))
+          subHeading = Some(messages("taskList.yearOfTaxLiability.label", taxYear.start, taxYear.end))
         )
     }
   }
 
-  private def taxYearStartAndEndDate(taxReturnYear: String): (String, String) = {
-
+  private def taxYearDates(taxReturnYear: String): TaxYearDates = {
     import yearFormatter._
 
     val endYear: Int = taxReturnYear.fullYear
     val taxYear = TaxYear(startYear = endYear - 1)
-    (dateFormatter.formatDate(taxYear.starts), dateFormatter.formatDate(taxYear.finishes))
-
+    TaxYearDates(taxYear.starts, taxYear.finishes)
   }
 
   private def yesNoQuestion(value: Boolean,
                             labelKey: String,
-                            fromDate: String,
-                            toDate: String)(implicit messages: Messages): AnswerRow = {
+                            taxYear: TaxYearDates)(implicit messages: Messages): AnswerRow = {
     AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", fromDate, toDate)),
+      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", taxYear.start, taxYear.end)),
       yesOrNo(value)
     )
   }
