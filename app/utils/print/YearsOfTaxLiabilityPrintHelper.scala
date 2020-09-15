@@ -60,7 +60,7 @@ class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yea
       yesOrNo(value)
     )
 
-  implicit class TaxYearImpl(taxYear: TaxYear) {
+  private implicit class TaxYearImpl(taxYear: TaxYear) {
     private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)
     val start: String = formatDate(taxYear.starts)
     val end: String = formatDate(taxYear.finishes)
