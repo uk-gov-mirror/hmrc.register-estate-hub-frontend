@@ -39,7 +39,7 @@ class YearFormatter @Inject()(localDateService: LocalDateService) {
     }
   }
 
-  implicit class ExtractYearParts(year: Int) {
+  private implicit class ExtractYearParts(year: Int) {
     def century: Int = {
       year.toString.dropRight(2).toInt
     }

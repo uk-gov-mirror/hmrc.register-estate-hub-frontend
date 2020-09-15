@@ -22,30 +22,23 @@ import org.joda.time.LocalDate
 import play.api.i18n.Messages
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.time.TaxYear
-import utils.{DateFormatter, YearFormatter}
 import utils.print.CheckAnswersFormatters.yesOrNo
+import utils.{DateFormatter, YearFormatter}
 import viewmodels.{AnswerRow, AnswerSection}
 
 class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yearFormatter: YearFormatter) {
 
-  private case class TaxYearDates(startDate: LocalDate, endDate: LocalDate) {
-    private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)
-    val start: String = formatDate(startDate)
-    val end: String = formatDate(endDate)
-  }
-
   def apply(yearReturns: List[YearReturnType])(implicit messages: Messages): Seq[AnswerSection] = {
 
-    def rows(taxYear: TaxYearDates): Seq[AnswerRow] = {
+    def rows(taxYear: TaxYear): Seq[AnswerRow] =
       Seq(
         yesNoQuestion(value = true, "taxLiability.neededToPayTax", taxYear),
         yesNoQuestion(value = false, "taxLiability.wasTaxDeclared", taxYear)
       )
-    }
 
     yearReturns.zipWithIndex.foldLeft(Seq[AnswerSection]()) {
       case (acc, (yearReturn, index)) =>
-        val taxYear: TaxYearDates = taxYearDates(yearReturn.taxReturnYear)
+        val taxYear: TaxYear = getTaxYear(yearReturn.taxReturnYear)
         acc :+ AnswerSection(
           headingKey = if (index == 0) Some("taskList.yearsOfTaxLiability.label") else None,
           rows = rows(taxYear),
@@ -54,20 +47,23 @@ class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yea
     }
   }
 
-  private def taxYearDates(taxReturnYear: String): TaxYearDates = {
+  private def getTaxYear(taxReturnYear: String): TaxYear = {
     import yearFormatter._
 
     val endYear: Int = taxReturnYear.fullYear
-    val taxYear = TaxYear(startYear = endYear - 1)
-    TaxYearDates(taxYear.starts, taxYear.finishes)
+    TaxYear(startYear = endYear - 1)
   }
 
-  private def yesNoQuestion(value: Boolean,
-                            labelKey: String,
-                            taxYear: TaxYearDates)(implicit messages: Messages): AnswerRow = {
+  private def yesNoQuestion(value: Boolean, labelKey: String, taxYear: TaxYear)(implicit messages: Messages): AnswerRow =
     AnswerRow(
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", taxYear.start, taxYear.end)),
       yesOrNo(value)
     )
+
+  implicit class TaxYearImpl(taxYear: TaxYear) {
+    private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)
+    val start: String = formatDate(taxYear.starts)
+    val end: String = formatDate(taxYear.finishes)
   }
+
 }
