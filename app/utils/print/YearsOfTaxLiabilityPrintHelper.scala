@@ -29,8 +29,7 @@ class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yea
 
   def apply(yearReturns: List[YearReturnType])(implicit messages: Messages): Seq[AnswerSection] = {
 
-    def rows(yearReturn: YearReturnType): Seq[AnswerRow] = {
-      val taxYear = taxYearStartAndEndDate(yearReturn.taxReturnYear)
+    def rows(taxYear: (String, String)): Seq[AnswerRow] = {
       Seq(
         yesNoQuestion(value = true, "taxLiability.neededToPayTax", taxYear._1, taxYear._2),
         yesNoQuestion(value = false, "taxLiability.wasTaxDeclared", taxYear._1, taxYear._2)
@@ -42,7 +41,7 @@ class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yea
         val taxYear = taxYearStartAndEndDate(yearReturn.taxReturnYear)
         acc :+ AnswerSection(
           headingKey = if (index == 0) Some("taskList.yearsOfTaxLiability.label") else None,
-          rows = rows(yearReturn),
+          rows = rows(taxYear),
           subHeading = Some(messages("taskList.yearOfTaxLiability.label", taxYear._1, taxYear._2))
         )
     }
