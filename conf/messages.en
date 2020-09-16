@@ -280,6 +280,8 @@ personalRep.individual.passport.checkYourAnswersLabel = What are {0}’s passpor
 personalRep.individual.idCard.checkYourAnswersLabel = What are {0}’s ID card details?
 personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel = Does {0} live in the UK?
 personalRep.individual.address.checkYourAnswersLabel = What is {0}’s address?
+personalRep.individual.emailYesNo.checkYourAnswersLabel = Do you know {0}’s email address?
+personalRep.individual.email.checkYourAnswersLabel = What is {0}’s email address?
 personalRep.individual.telephoneNumber.checkYourAnswersLabel = What is {0}’s telephone number?
 
 personalRep.business.ukRegisteredYesNo.checkYourAnswersLabel = Is this personal representative a UK registered company?
@@ -287,6 +289,8 @@ personalRep.business.name.checkYourAnswersLabel = What is the company’s name?
 personalRep.business.utr.checkYourAnswersLabel = What is {0}’s Unique Taxpayer Reference (UTR)?
 personalRep.business.addressUkYesNo.checkYourAnswersLabel = Is {0}’s address in the UK?
 personalRep.business.address.checkYourAnswersLabel = What is {0}’s address?
+personalRep.business.emailYesNo.checkYourAnswersLabel = Do you know {0}’s email address?
+personalRep.business.email.checkYourAnswersLabel = What is {0}’s email address?
 personalRep.business.telephoneNumber.checkYourAnswersLabel = What is {0}’s telephone number?
 
 deceasedPerson.name.checkYourAnswersLabel = What is the name of the person who died?

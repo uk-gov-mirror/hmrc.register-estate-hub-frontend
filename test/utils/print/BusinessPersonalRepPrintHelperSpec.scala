@@ -29,17 +29,19 @@ class BusinessPersonalRepPrintHelperSpec extends SpecBase {
   val utr: Option[String] = Some("1234567890")
   val ukAddress: UkAddress = UkAddress("21 Test Lane", "Testville", None, None, "NE1 1NE")
   val nonUkAddress: NonUkAddress = NonUkAddress("99 Test Lane", "Testville", None, "DE")
+  val email: Option[String] = Some("email@example.com")
   val phoneNumber: String = "+447123456789"
 
   "BusinessPersonalRepPrintHelper" must {
 
-    "render answer section for business personal rep with a UK address and no UTR" in {
+    "render answer section for business personal rep with a UK address, no UTR and an email address" in {
 
       val personalRep: BusinessPersonalRep = BusinessPersonalRep(
         name,
         phoneNumber,
         None,
-        ukAddress
+        ukAddress,
+        email
       )
 
       val result = helper(personalRep)
@@ -52,6 +54,8 @@ class BusinessPersonalRepPrintHelperSpec extends SpecBase {
           AnswerRow(label = Html(messages("personalRep.business.name.checkYourAnswersLabel")), answer = Html("Business Ltd."), None),
           AnswerRow(label = Html(messages("personalRep.business.addressUkYesNo.checkYourAnswersLabel", name)), answer = Html("Yes"), None),
           AnswerRow(label = Html(messages("personalRep.business.address.checkYourAnswersLabel", name)), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
+          AnswerRow(label = Html(messages("personalRep.business.emailYesNo.checkYourAnswersLabel", name)), answer = Html("Yes"), None),
+          AnswerRow(label = Html(messages("personalRep.business.email.checkYourAnswersLabel", name)), answer = Html("email@example.com"), None),
           AnswerRow(label = Html(messages("personalRep.business.telephoneNumber.checkYourAnswersLabel", name)), answer = Html("+447123456789"), None)
         )
       )
@@ -63,7 +67,8 @@ class BusinessPersonalRepPrintHelperSpec extends SpecBase {
         name,
         phoneNumber,
         utr,
-        nonUkAddress
+        nonUkAddress,
+        None
       )
 
       val result = helper(personalRep)
@@ -77,6 +82,7 @@ class BusinessPersonalRepPrintHelperSpec extends SpecBase {
           AnswerRow(label = Html(messages("personalRep.business.utr.checkYourAnswersLabel", name)), answer = Html("1234567890"), None),
           AnswerRow(label = Html(messages("personalRep.business.addressUkYesNo.checkYourAnswersLabel", name)), answer = Html("No"), None),
           AnswerRow(label = Html(messages("personalRep.business.address.checkYourAnswersLabel", name)), answer = Html("99 Test Lane<br />Testville<br />Germany"), None),
+          AnswerRow(label = Html(messages("personalRep.business.emailYesNo.checkYourAnswersLabel", name)), answer = Html("No"), None),
           AnswerRow(label = Html(messages("personalRep.business.telephoneNumber.checkYourAnswersLabel", name)), answer = Html("+447123456789"), None)
         )
       )

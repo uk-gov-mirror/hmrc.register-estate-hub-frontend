@@ -22,7 +22,8 @@ import play.api.libs.json._
 final case class BusinessPersonalRep(name: String,
                                      phoneNumber: String,
                                      utr: Option[String],
-                                     address: Address)
+                                     address: Address,
+                                     email: Option[String])
 
 object BusinessPersonalRep extends Entity {
 
@@ -30,17 +31,19 @@ object BusinessPersonalRep extends Entity {
     ((__ \ 'orgName).read[String] and
       (__ \ 'phoneNumber).read[String] and
       __.lazyRead(readNullableAtSubPath[String](__ \ 'identification \ 'utr)) and
-      __.lazyRead(readAtSubPath[Address](__ \ 'identification \ 'address))).tupled.map {
+      __.lazyRead(readAtSubPath[Address](__ \ 'identification \ 'address)) and
+      (__ \ 'email).readNullable[String]).tupled.map {
 
-      case (name, phoneNumber, utr, address) =>
-        BusinessPersonalRep(name, phoneNumber, utr, address)
+      case (name, phoneNumber, utr, address, email) =>
+        BusinessPersonalRep(name, phoneNumber, utr, address, email)
     }
 
   implicit val writes: Writes[BusinessPersonalRep] =
     ((__ \ 'orgName).write[String] and
       (__ \ 'phoneNumber).write[String] and
       (__ \ 'identification \ 'utr).writeNullable[String] and
-      (__ \ 'identification \ 'address).write[Address]
+      (__ \ 'identification \ 'address).write[Address] and
+      (__ \ 'email).writeNullable[String]
       ).apply(unlift(BusinessPersonalRep.unapply))
 
 }

@@ -49,11 +49,19 @@ class BusinessPersonalRepPrintHelper @Inject()(countryOptions: AllCountryOptions
       }
     }
 
+    def email(email: Option[String]): Seq[AnswerRow] = {
+      Seq(
+        Some(converter.yesNoQuestion(boolean = email.isDefined, "personalRep.business.emailYesNo")),
+        converter.optionStringQuestion(email, "personalRep.business.email")
+      ).flatten
+    }
+
     val rows: Seq[AnswerRow] =
       Seq(converter.stringQuestion(messages("individualOrBusiness.business"), "personalRep.individualOrBusiness")) ++
         name(business.utr) ++
         address(business.address) ++
-        Seq(converter.stringQuestion(business.phoneNumber, "personalRep.individual.telephoneNumber"))
+        email(business.email) ++
+        Seq(converter.stringQuestion(business.phoneNumber, "personalRep.business.telephoneNumber"))
 
     AnswerSection(Some("taskList.personalRepresentative.label"), rows)
   }

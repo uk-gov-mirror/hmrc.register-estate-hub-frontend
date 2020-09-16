@@ -19,7 +19,7 @@ package utils.print
 import java.time.LocalDate
 
 import base.SpecBase
-import models.{DeceasedPerson, IdCard, IndividualPersonalRep, Name, NationalInsuranceNumber, NonUkAddress, Passport, UkAddress}
+import models.{IdCard, IndividualPersonalRep, Name, NationalInsuranceNumber, NonUkAddress, Passport, UkAddress}
 import play.twirl.api.Html
 import viewmodels.{AnswerRow, AnswerSection}
 
@@ -34,17 +34,19 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
   val nonUkAddress: NonUkAddress = NonUkAddress("99 Test Lane", "Testville", None, "DE")
   val passport: Passport = Passport("GB", "1234567890", LocalDate.parse("2023-02-03"))
   val idCard: IdCard = IdCard("GB", "1234567890", LocalDate.parse("2023-02-03"))
+  val email: Option[String] = Some("email@example.com")
   val phoneNumber: String = "+447123456789"
 
   "IndividualPersonalRepPrintHelper" must {
 
-    "render answer section for individual personal rep with a NINO and UK address" in {
+    "render answer section for individual personal rep with a NINO, UK address and an email address" in {
 
       val personalRep: IndividualPersonalRep = IndividualPersonalRep(
         name,
         dateOfBirth,
         nino,
         ukAddress,
+        email,
         phoneNumber
       )
 
@@ -60,6 +62,8 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
           AnswerRow(label = Html(messages("personalRep.individual.nino.checkYourAnswersLabel", name.displayName)), answer = Html("AA 00 00 00 A"), None),
           AnswerRow(label = Html(messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("Yes"), None),
           AnswerRow(label = Html(messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName)), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
+          AnswerRow(label = Html(messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("Yes"), None),
+          AnswerRow(label = Html(messages("personalRep.individual.email.checkYourAnswersLabel", name.displayName)), answer = Html("email@example.com"), None),
           AnswerRow(label = Html(messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName)), answer = Html("+447123456789"), None)
         )
       )
@@ -72,6 +76,7 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
         dateOfBirth,
         passport,
         ukAddress,
+        None,
         phoneNumber
       )
 
@@ -88,6 +93,7 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
           AnswerRow(label = Html(messages("personalRep.individual.passport.checkYourAnswersLabel", name.displayName)), answer = Html("United Kingdom<br />1234567890<br />3 February 2023"), None),
           AnswerRow(label = Html(messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("Yes"), None),
           AnswerRow(label = Html(messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName)), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
+          AnswerRow(label = Html(messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
           AnswerRow(label = Html(messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName)), answer = Html("+447123456789"), None)
         )
       )
@@ -100,6 +106,7 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
         dateOfBirth,
         idCard,
         nonUkAddress,
+        None,
         phoneNumber
       )
 
@@ -116,6 +123,7 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
           AnswerRow(label = Html(messages("personalRep.individual.idCard.checkYourAnswersLabel", name.displayName)), answer = Html("United Kingdom<br />1234567890<br />3 February 2023"), None),
           AnswerRow(label = Html(messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
           AnswerRow(label = Html(messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName)), answer = Html("99 Test Lane<br />Testville<br />Germany"), None),
+          AnswerRow(label = Html(messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
           AnswerRow(label = Html(messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName)), answer = Html("+447123456789"), None)
         )
       )

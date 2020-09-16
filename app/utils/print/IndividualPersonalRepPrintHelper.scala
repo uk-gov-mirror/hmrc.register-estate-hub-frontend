@@ -63,6 +63,13 @@ class IndividualPersonalRepPrintHelper @Inject()(countryOptions: AllCountryOptio
       }
     }
 
+    def email(email: Option[String]): Seq[AnswerRow] = {
+      Seq(
+        Some(converter.yesNoQuestion(boolean = email.isDefined, "personalRep.individual.emailYesNo")),
+        converter.optionStringQuestion(email, "personalRep.individual.email")
+      ).flatten
+    }
+
     val rows: Seq[AnswerRow] =
       Seq(
         converter.stringQuestion(messages("individualOrBusiness.individual"), "personalRep.individualOrBusiness"),
@@ -71,6 +78,7 @@ class IndividualPersonalRepPrintHelper @Inject()(countryOptions: AllCountryOptio
       ) ++
         identification(individual.identification) ++
         address(individual.address) ++
+        email(individual.email) ++
         Seq(converter.stringQuestion(individual.phoneNumber, "personalRep.individual.telephoneNumber"))
 
     AnswerSection(Some("taskList.personalRepresentative.label"), rows)
