@@ -63,6 +63,7 @@ class DeclaredAnswersControllerSpec extends SpecBase {
               dateOfBirth,
               nino,
               ukAddress,
+              None,
               phoneNumber
             )
           ),

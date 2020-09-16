@@ -53,6 +53,7 @@ class RegistrationAnswersPrintHelperSpec extends SpecBase {
               dateOfBirth,
               nino,
               ukAddress,
+              None,
               phoneNumber
             )
           ),
@@ -95,6 +96,7 @@ class RegistrationAnswersPrintHelperSpec extends SpecBase {
             AnswerRow(label = Html(messages("personalRep.individual.nino.checkYourAnswersLabel", name.displayName)), answer = Html("AA 00 00 00 A"), None),
             AnswerRow(label = Html(messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("Yes"), None),
             AnswerRow(label = Html(messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName)), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
+            AnswerRow(label = Html(messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
             AnswerRow(label = Html(messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName)), answer = Html("+447123456789"), None)
           )
         ),
