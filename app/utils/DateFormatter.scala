@@ -19,15 +19,19 @@ package utils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-import com.google.inject.Inject
+import org.joda.time.LocalDate
 
-class DateFormatter @Inject()() {
+class DateFormatter {
 
   private val format = "d MMMM yyyy"
 
   def formatDate(dateTime: LocalDateTime): String = {
     val dateFormatter = DateTimeFormatter.ofPattern(format)
     dateTime.format(dateFormatter)
+  }
+
+  def formatDate(date: LocalDate): String = {
+    date.toString(format)
   }
 
 }

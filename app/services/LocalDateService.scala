@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package viewmodels
+package services
 
-case class AnswerSection(headingKey: Option[String],
-                         rows: Seq[AnswerRow],
-                         subHeading: Option[String] = None) extends Section
+import java.time.LocalDate
+
+class LocalDateService {
+  def now: LocalDate = LocalDate.now
+}

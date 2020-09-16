@@ -25,7 +25,8 @@ import viewmodels.AnswerSection
 class RegistrationAnswersPrintHelper @Inject()(countryOptions: AllCountryOptions,
                                                individualPersonalRepPrintHelper: IndividualPersonalRepPrintHelper,
                                                businessPersonalRepPrintHelper: BusinessPersonalRepPrintHelper,
-                                               deceasedPersonPrintHelper: DeceasedPersonPrintHelper) {
+                                               deceasedPersonPrintHelper: DeceasedPersonPrintHelper,
+                                               yearsOfTaxLiabilityPrintHelper: YearsOfTaxLiabilityPrintHelper) {
 
   def apply(registration: EstateRegistrationNoDeclaration)(implicit messages: Messages): Seq[AnswerSection] = {
 
@@ -33,7 +34,7 @@ class RegistrationAnswersPrintHelper @Inject()(countryOptions: AllCountryOptions
       estateDetails(registration.correspondence.name),
       personalRep(registration.estate.entities.personalRepresentative),
       deceasedPersonPrintHelper(registration.estate.entities.deceased)
-    )
+    ) ++ yearsOfTaxLiability(registration.yearsReturns)
 
   }
 
@@ -52,6 +53,13 @@ class RegistrationAnswersPrintHelper @Inject()(countryOptions: AllCountryOptions
       case PersonalRepresentativeType(Some(individual), None) => individualPersonalRepPrintHelper(individual)
       case PersonalRepresentativeType(None, Some(business)) => businessPersonalRepPrintHelper(business)
       case _ => AnswerSection(None, Nil)
+    }
+  }
+
+  private def yearsOfTaxLiability(yearsReturns: Option[YearsReturns])(implicit messages: Messages): Seq[AnswerSection] = {
+    yearsReturns match {
+      case Some(yearsReturns) => yearsOfTaxLiabilityPrintHelper(yearsReturns.returns)
+      case _ => Nil
     }
   }
 }

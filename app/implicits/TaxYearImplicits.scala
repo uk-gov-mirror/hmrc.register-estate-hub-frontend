@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-package viewmodels
+package implicits
 
-case class AnswerSection(headingKey: Option[String],
-                         rows: Seq[AnswerRow],
-                         subHeading: Option[String] = None) extends Section
+import javax.inject.Inject
+import org.joda.time.LocalDate
+import uk.gov.hmrc.time.TaxYear
+import utils.DateFormatter
+
+class TaxYearImplicits @Inject()(dateFormatter: DateFormatter) {
+
+  implicit class TaxYearWithFormattedDates(taxYear: TaxYear) {
+    private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)
+    val start: String = formatDate(taxYear.starts)
+    val end: String = formatDate(taxYear.finishes)
+  }
+}
