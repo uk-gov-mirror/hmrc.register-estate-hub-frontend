@@ -16,17 +16,20 @@
 
 package utils.print
 
+import implicits.TaxYearImplicits
 import javax.inject.Inject
 import models._
-import org.joda.time.LocalDate
 import play.api.i18n.Messages
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.time.TaxYear
+import utils.YearFormatter
 import utils.print.CheckAnswersFormatters.yesOrNo
-import utils.{DateFormatter, YearFormatter}
 import viewmodels.{AnswerRow, AnswerSection}
 
-class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yearFormatter: YearFormatter) {
+class YearsOfTaxLiabilityPrintHelper @Inject()(yearFormatter: YearFormatter, taxYearImplicits: TaxYearImplicits) {
+
+  import yearFormatter._
+  import taxYearImplicits._
 
   def apply(yearReturns: List[YearReturnType])(implicit messages: Messages): Seq[AnswerSection] = {
 
@@ -48,8 +51,6 @@ class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yea
   }
 
   private def getTaxYear(taxReturnYear: String): TaxYear = {
-    import yearFormatter._
-
     val endYear: Int = taxReturnYear.fullYear
     TaxYear(startYear = endYear - 1)
   }
@@ -59,11 +60,5 @@ class YearsOfTaxLiabilityPrintHelper @Inject()(dateFormatter: DateFormatter, yea
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", taxYear.start, taxYear.end)),
       yesOrNo(value)
     )
-
-  private implicit class TaxYearImpl(taxYear: TaxYear) {
-    private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)
-    val start: String = formatDate(taxYear.starts)
-    val end: String = formatDate(taxYear.finishes)
-  }
 
 }

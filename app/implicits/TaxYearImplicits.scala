@@ -14,24 +14,18 @@
  * limitations under the License.
  */
 
-package utils
+package implicits
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
+import javax.inject.Inject
 import org.joda.time.LocalDate
+import uk.gov.hmrc.time.TaxYear
+import utils.DateFormatter
 
-class DateFormatter {
+class TaxYearImplicits @Inject()(dateFormatter: DateFormatter) {
 
-  private val format = "d MMMM yyyy"
-
-  def formatDate(dateTime: LocalDateTime): String = {
-    val dateFormatter = DateTimeFormatter.ofPattern(format)
-    dateTime.format(dateFormatter)
+  implicit class TaxYearWithFormattedDates(taxYear: TaxYear) {
+    private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)
+    val start: String = formatDate(taxYear.starts)
+    val end: String = formatDate(taxYear.finishes)
   }
-
-  def formatDate(date: LocalDate): String = {
-    date.toString(format)
-  }
-
 }
