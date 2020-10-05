@@ -24,7 +24,7 @@ import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.AgentOverviewView
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
 class AgentOverviewController @Inject()(
                                        override val messagesApi: MessagesApi,
@@ -35,7 +35,7 @@ class AgentOverviewController @Inject()(
                                        requireData: DataRequiredAction,
                                        val controllerComponents: MessagesControllerComponents,
                                        view: AgentOverviewView
-                                     )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
+                                     ) extends FrontendBaseController with I18nSupport {
 
   private def actions() = identify andThen hasAgentAffinityGroup()
 
@@ -45,7 +45,6 @@ class AgentOverviewController @Inject()(
   }
 
   def onSubmit() = actions().async {
-    implicit request =>
       Future.successful(Redirect(routes.EstateRegisteredOnlineYesNoController.onPageLoad()))
   }
 

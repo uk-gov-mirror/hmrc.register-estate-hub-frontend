@@ -19,13 +19,13 @@ package controllers
 import base.SpecBase
 import connectors.EstatesConnector
 import models.PersonalRepName
+import org.mockito.Matchers.any
+import org.mockito.Mockito.when
 import pages.TRNPage
+import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import views.html.ConfirmationView
-import org.mockito.Mockito.when
-import org.mockito.Matchers.any
-import play.api.inject.bind
 
 import scala.concurrent.Future
 

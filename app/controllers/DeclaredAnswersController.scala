@@ -25,8 +25,6 @@ import models.requests.DataRequest
 import pages.{SubmissionDatePage, TRNPage}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.play.HeaderCarrierConverter
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import utils.DateFormatter
 import utils.print.RegistrationAnswersPrintHelper
