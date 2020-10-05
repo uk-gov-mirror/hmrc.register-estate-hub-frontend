@@ -21,7 +21,6 @@ import models.Declaration
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.auth.core.AffinityGroup
-import uk.gov.hmrc.auth.core.AffinityGroup.Organisation
 import views.behaviours.QuestionViewBehaviours
 import views.html.DeclarationView
 

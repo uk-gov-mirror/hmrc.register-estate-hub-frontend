@@ -17,7 +17,7 @@
 package views
 
 import views.behaviours.ViewBehaviours
-import views.html.{ProblemDeclaringView, UTRSentInPostView}
+import views.html.UTRSentInPostView
 
 class UTRSentInPostViewSpec extends ViewBehaviours {
 

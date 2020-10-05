@@ -21,14 +21,14 @@ import java.time.{LocalDate, LocalDateTime}
 import base.SpecBase
 import connectors.EstatesConnector
 import models._
+import org.mockito.Matchers.any
+import org.mockito.Mockito.when
 import pages.{SubmissionDatePage, TRNPage}
+import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import utils.print.RegistrationAnswersPrintHelper
 import views.html.DeclaredAnswersView
-import org.mockito.Matchers.any
-import org.mockito.Mockito.when
-import play.api.inject.bind
 
 import scala.concurrent.Future
 

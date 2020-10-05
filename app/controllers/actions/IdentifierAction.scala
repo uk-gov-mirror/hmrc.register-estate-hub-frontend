@@ -18,16 +18,9 @@ package controllers.actions
 
 import com.google.inject.Inject
 import config.FrontendAppConfig
-import controllers.routes
 import models.requests.IdentifierRequest
 import org.slf4j.LoggerFactory
-import play.api.mvc.Results.Redirect
 import play.api.mvc.{Request, Result, _}
-import uk.gov.hmrc.auth.core.retrieve.v2.Retrievals
-import uk.gov.hmrc.auth.core.{AuthorisationException, NoActiveSession}
-import uk.gov.hmrc.auth.core.retrieve.~
-import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.play.HeaderCarrierConverter
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -39,8 +32,6 @@ class IdentifierAction @Inject()(val parser: BodyParsers.Default,
   private val logger = LoggerFactory.getLogger(s"application" + classOf[IdentifierAction].getCanonicalName)
 
   override def invokeBlock[A](request: Request[A], block: IdentifierRequest[A] => Future[Result]): Future[Result] = {
-
-    implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
 
     request match {
       case req: IdentifierRequest[A] =>

@@ -28,8 +28,6 @@ import play.api.http.Status
 import play.api.libs.json.Json
 import uk.gov.hmrc.http.HeaderCarrier
 
-import scala.concurrent.ExecutionContext
-
 class EstatesStoreConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAndAfterEach with ScalaFutures with IntegrationPatience {
 
   implicit lazy val hc: HeaderCarrier = HeaderCarrier()
