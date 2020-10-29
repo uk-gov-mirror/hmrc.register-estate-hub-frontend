@@ -32,6 +32,7 @@ import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import repositories.SessionRepository
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
+import utils.Session
 import views.html.DeclarationView
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -46,6 +47,8 @@ class DeclarationController @Inject()(
                                        errorHandler: ErrorHandler
                                      )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
+  private val logger: Logger = Logger(getClass)
+  
   val form: Form[Declaration] = formProvider()
 
   def onPageLoad: Action[AnyContent] = actions.authWithData {
@@ -82,10 +85,10 @@ class DeclarationController @Inject()(
                 Redirect(controllers.routes.ConfirmationController.onPageLoad())
               }
             case DeclarationResponse.AlreadyRegistered =>
-              Logger.error(s"[DeclarationController] estate already registered")
+              logger.error(s"[Session ID: ${Session.id(hc)}] estate already registered")
               Future.successful(Conflict(errorHandler.badRequestTemplate))
             case _ =>
-              Logger.error(s"[DeclarationController] something went wrong")
+              logger.error(s"[Session ID: ${Session.id(hc)}] something went wrong")
               Future.successful(InternalServerError(errorHandler.internalServerErrorTemplate))
           }
         }

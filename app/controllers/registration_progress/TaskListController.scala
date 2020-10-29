@@ -43,6 +43,8 @@ class TaskListController @Inject()(
                                   )(implicit ec: ExecutionContext)
   extends FrontendBaseController with I18nSupport with TaskListSections {
 
+  private val logger: Logger = Logger(getClass)
+  
   def onPageLoad(): Action[AnyContent] = actions.authWithSession.async {
     implicit request =>
 
@@ -69,7 +71,7 @@ class TaskListController @Inject()(
                 affinityGroup = request.affinityGroup))
 
           case CompletedTasksResponse.InternalServerError =>
-            Logger.error(s"[TaskListController] unable to get tasks statuses")
+            logger.error(s"[TaskListController] unable to get tasks statuses")
             InternalServerError(errorHandler.internalServerErrorTemplate)
         }
       }

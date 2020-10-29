@@ -19,7 +19,8 @@ package models.http
 import play.api.Logger
 import play.api.http.Status._
 import play.api.libs.json._
-import uk.gov.hmrc.http.{HttpReads, HttpResponse}
+import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
+import utils.Session
 
 sealed trait DeclarationResponse
 
@@ -33,6 +34,8 @@ object TRNResponse {
 
 object DeclarationResponse {
 
+  private val logger: Logger = Logger(getClass)
+  
   implicit object RegistrationResponseFormats extends Reads[DeclarationResponse] {
 
     override def reads(json: JsValue): JsResult[DeclarationResponse] = json.validate[TRNResponse]
@@ -42,10 +45,10 @@ object DeclarationResponse {
   case object AlreadyRegistered extends DeclarationResponse
   case object InternalServerError extends DeclarationResponse
 
-  implicit lazy val httpReads: HttpReads[DeclarationResponse] =
+  implicit def httpReads(implicit hc: HeaderCarrier): HttpReads[DeclarationResponse] =
     new HttpReads[DeclarationResponse] {
       override def read(method: String, url: String, response: HttpResponse): DeclarationResponse = {
-        Logger.info(s"[DeclarationResponse] response status received from estates api: ${response.status}")
+        logger.info(s"[Session ID: ${Session.id(hc)}] response status received from estates api: ${response.status}")
 
         response.status match {
           case OK =>
