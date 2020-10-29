@@ -25,6 +25,7 @@ import play.api.Logger
 import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
+import utils.Session
 import views.html.ConfirmationView
 
 import scala.concurrent.ExecutionContext
@@ -37,11 +38,13 @@ class ConfirmationController @Inject()(
                                         errorHandler: ErrorHandler
                                       )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
+  private val logger: Logger = Logger(getClass)
+  
   def onPageLoad: Action[AnyContent] = actions.authWithData.async {
     implicit request =>
 
       request.userAnswers.get(TRNPage).fold {
-        Logger.error(s"[ConfirmationController] no TRN in user answers, cannot render confirmation")
+        logger.error(s"[Session ID: ${Session.id(hc)}] no TRN in user answers, cannot render confirmation")
         errorHandler.onServerError(request, new Exception("TRN is not available for completed estate."))
       }{
         trn =>

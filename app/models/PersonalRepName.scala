@@ -25,6 +25,8 @@ case class PersonalRepName(name: String)
 
 object PersonalRepName {
 
+  private val logger: Logger = Logger(getClass)
+  
   implicit val formats : Format[PersonalRepName] = Json.format[PersonalRepName]
 
   val personalRepIndividualNameReads : HttpReads[Option[PersonalRepName]] = new HttpReads[Option[PersonalRepName]] {
@@ -38,7 +40,7 @@ object PersonalRepName {
             case _ => None
           }
         case status =>
-          Logger.error(s"Error response from estates $status body: ${response.body}")
+          logger.error(s"Error response from estates $status body: ${response.body}")
           None
       }
     }
@@ -51,7 +53,7 @@ object PersonalRepName {
           val orgName = (response.json \ "orgName").asOpt[String]
           orgName.map(x => PersonalRepName(x))
         case status =>
-          Logger.error(s"Error response from estates $status body: ${response.body}")
+          logger.error(s"Error response from estates $status body: ${response.body}")
           None
       }
     }

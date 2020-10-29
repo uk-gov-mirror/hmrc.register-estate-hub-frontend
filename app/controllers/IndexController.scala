@@ -26,6 +26,7 @@ import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
 import repositories.SessionRepository
 import uk.gov.hmrc.auth.core.AffinityGroup
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
+import utils.Session
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -35,11 +36,13 @@ class IndexController @Inject()(
                                  repository: SessionRepository
                                )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
+  private val logger: Logger = Logger(getClass)
+  
   def onPageLoad: Action[AnyContent] = actions.authWithSession.async {
     implicit request =>
       request.affinityGroup match {
         case AffinityGroup.Agent =>
-          Logger.info(s"[IndexController] user is an agent, redirect to overview")
+          logger.info(s"[Session ID: ${Session.id(hc)}] user is an agent, redirect to overview")
           val route: Call = controllers.routes.AgentOverviewController.onPageLoad()
           checkUserAnswersAndRedirect(request, route)
         case _ =>

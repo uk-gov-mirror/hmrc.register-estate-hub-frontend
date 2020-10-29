@@ -19,7 +19,8 @@ package models
 import play.api.Logger
 import play.api.http.Status._
 import play.api.libs.json.{Format, Json}
-import uk.gov.hmrc.http.{HttpReads, HttpResponse}
+import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
+import utils.Session
 
 sealed trait CompletedTasksResponse
 
@@ -44,11 +45,13 @@ object CompletedTasks {
 
 object CompletedTasksResponse {
 
+  private val logger: Logger = Logger(getClass)
+  
   case object InternalServerError extends CompletedTasksResponse
 
-  implicit lazy val httpReads: HttpReads[CompletedTasksResponse] = new HttpReads[CompletedTasksResponse] {
+  implicit def httpReads(implicit hc: HeaderCarrier): HttpReads[CompletedTasksResponse] = new HttpReads[CompletedTasksResponse] {
     override def read(method: String, url: String, response: HttpResponse): CompletedTasksResponse = {
-      Logger.info(s"[CompletedTasksResponse] response status received from estates store api: ${response.status}")
+      logger.info(s"[Session ID: ${Session.id(hc)}] response status received from estates store api: ${response.status}")
 
       response.status match {
         case OK =>
