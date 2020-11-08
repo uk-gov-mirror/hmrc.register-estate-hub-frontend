@@ -19,7 +19,9 @@ package utils.print
 import java.time.LocalDate
 
 import base.SpecBase
-import models.{IdCard, IndividualPersonalRep, Name, NationalInsuranceNumber, NonUkAddress, Passport, UkAddress}
+import models.entities.personalrep
+import models.entities.personalrep.IndividualPersonalRep
+import models.identification._
 import play.twirl.api.Html
 import viewmodels.{AnswerRow, AnswerSection}
 
@@ -41,7 +43,7 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
 
     "render answer section for individual personal rep with a NINO, UK address and an email address" in {
 
-      val personalRep: IndividualPersonalRep = IndividualPersonalRep(
+      val personalRep: IndividualPersonalRep = personalrep.IndividualPersonalRep(
         name,
         dateOfBirth,
         nino,
@@ -71,7 +73,7 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
 
     "render answer section for individual personal rep with a passport and UK address" in {
 
-      val personalRep: IndividualPersonalRep = IndividualPersonalRep(
+      val personalRep: IndividualPersonalRep = personalrep.IndividualPersonalRep(
         name,
         dateOfBirth,
         passport,
@@ -101,7 +103,7 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
 
     "render answer section for individual personal rep with an ID card and non-UK address" in {
 
-      val personalRep: IndividualPersonalRep = IndividualPersonalRep(
+      val personalRep: IndividualPersonalRep = personalrep.IndividualPersonalRep(
         name,
         dateOfBirth,
         idCard,

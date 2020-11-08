@@ -20,7 +20,8 @@ import base.SpecBase
 import connectors.EstatesConnector
 import forms.DeclarationFormProvider
 import models.http.TRNResponse
-import models.{Declaration, Name}
+import models.Declaration
+import models.identification.Name
 import org.mockito.Matchers.any
 import org.mockito.Mockito.when
 import pages.DeclarationPage

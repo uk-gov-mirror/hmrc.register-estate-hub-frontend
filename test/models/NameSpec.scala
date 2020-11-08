@@ -17,6 +17,7 @@
 package models
 
 import base.SpecBase
+import models.identification.Name
 
 class NameSpec extends SpecBase {
 

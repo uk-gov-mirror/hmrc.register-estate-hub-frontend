@@ -18,6 +18,7 @@ package utils.print
 
 import javax.inject.Inject
 import models._
+import models.entities.personalrep.PersonalRepresentativeType
 import play.api.i18n.Messages
 import utils.countryOptions.AllCountryOptions
 import viewmodels.AnswerSection

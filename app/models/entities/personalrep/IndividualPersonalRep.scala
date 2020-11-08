@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package models
+package models.entities.personalrep
 
 import java.time.LocalDate
 
+import models.entities.{Entity, personalrep}
+import models.identification.{Address, IndividualIdentification, Name}
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 
@@ -39,7 +41,7 @@ object IndividualPersonalRep extends Entity {
       (__ \ 'phoneNumber).read[String]).tupled.map{
 
       case (name, dob, identification, address, email, phoneNumber) =>
-        IndividualPersonalRep(name, dob, identification, address, email, phoneNumber)
+        personalrep.IndividualPersonalRep(name, dob, identification, address, email, phoneNumber)
     }
 
   implicit val writes: Writes[IndividualPersonalRep] =

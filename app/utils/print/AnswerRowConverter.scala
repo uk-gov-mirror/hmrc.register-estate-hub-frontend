@@ -19,7 +19,7 @@ package utils.print
 import java.time.LocalDate
 
 import com.google.inject.Inject
-import models.{Address, IdCard, Name, Passport}
+import models.identification.{Address, IdCard, Name, Passport}
 import play.api.i18n.Messages
 import play.twirl.api.HtmlFormat
 import utils.countryOptions.CountryOptions

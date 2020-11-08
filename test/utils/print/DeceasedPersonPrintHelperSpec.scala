@@ -19,7 +19,9 @@ package utils.print
 import java.time.LocalDate
 
 import base.SpecBase
-import models.{DeceasedPerson, Name, NationalInsuranceNumber, NonUkAddress, UkAddress}
+import models.entities.DeceasedPerson
+import models.identification.{Name, NationalInsuranceNumber, NonUkAddress, UkAddress}
+import models.entities
 import play.twirl.api.Html
 import viewmodels.{AnswerRow, AnswerSection}
 
@@ -38,7 +40,7 @@ class DeceasedPersonPrintHelperSpec extends SpecBase {
 
     "render answer section for deceased person with no date of birth, address or NINO" in {
 
-      val deceased: DeceasedPerson = DeceasedPerson(
+      val deceased: DeceasedPerson = entities.DeceasedPerson(
         name,
         None,
         dateOfDeath,
@@ -62,7 +64,7 @@ class DeceasedPersonPrintHelperSpec extends SpecBase {
 
     "render answer section for deceased person with a date of birth, UK address and no NINO" in {
 
-      val deceased: DeceasedPerson = DeceasedPerson(
+      val deceased: DeceasedPerson = entities.DeceasedPerson(
         name,
         dateOfBirth,
         dateOfDeath,
@@ -89,7 +91,7 @@ class DeceasedPersonPrintHelperSpec extends SpecBase {
 
     "render answer section for deceased person with a date of birth, non-UK address and a NINO" in {
 
-      val deceased: DeceasedPerson = DeceasedPerson(
+      val deceased: DeceasedPerson = entities.DeceasedPerson(
         name,
         dateOfBirth,
         dateOfDeath,

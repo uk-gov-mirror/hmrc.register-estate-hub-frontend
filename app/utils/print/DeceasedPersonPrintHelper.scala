@@ -19,7 +19,8 @@ package utils.print
 import java.time.LocalDate
 
 import javax.inject.Inject
-import models._
+import models.entities.DeceasedPerson
+import models.identification.{Address, NationalInsuranceNumber, NonUkAddress, UkAddress}
 import play.api.i18n.Messages
 import utils.countryOptions.AllCountryOptions
 import viewmodels.{AnswerRow, AnswerSection}

@@ -18,7 +18,8 @@ package forms
 
 import com.google.inject.Inject
 import forms.mappings.Mappings
-import models.{Declaration, Name}
+import models.Declaration
+import models.identification.Name
 import play.api.data.{Form, Mapping}
 import play.api.data.Forms.{mapping, optional}
 

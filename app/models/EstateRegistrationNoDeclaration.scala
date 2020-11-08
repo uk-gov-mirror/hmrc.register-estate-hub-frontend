@@ -32,5 +32,4 @@ case class CorrespondenceName(name: String)
 
 object CorrespondenceName {
   implicit val correspondenceFormat : Format[CorrespondenceName] = Json.format[CorrespondenceName]
-
 }

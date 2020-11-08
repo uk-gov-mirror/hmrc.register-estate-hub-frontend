@@ -20,6 +20,9 @@ import java.time.LocalDate
 
 import base.SpecBase
 import models._
+import models.entities.personalrep.{IndividualPersonalRep, PersonalRepresentativeType}
+import models.entities.{DeceasedPerson, EntitiesType}
+import models.identification.{IdCard, Name, NationalInsuranceNumber, NonUkAddress, Passport, UkAddress}
 import play.twirl.api.Html
 import viewmodels.{AnswerRow, AnswerSection}
 

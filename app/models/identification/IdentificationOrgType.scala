@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package models
+package models.identification
 
-import play.api.libs.json.{Reads, __}
+import play.api.libs.json.{Format, Json}
 
-case class EstateName(name: Option[String])
+case class IdentificationOrgType(utr: Option[String],
+                                 address: Option[Address])
 
-object EstateName {
-  implicit val reads: Reads[EstateName] =
-    (__ \ "name").readNullable[String].map(EstateName.apply)
+object IdentificationOrgType {
+  implicit val trustBeneficiaryIdentificationFormat: Format[IdentificationOrgType] = Json.format[IdentificationOrgType]
 }
