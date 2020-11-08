@@ -18,6 +18,8 @@ package models
 
 import java.time.LocalDate
 
+import models.entities.EntitiesType
+import models.identification.{Address, Name}
 import play.api.libs.json.{Json, _}
 
 case class EstateRegistration(matchData: Option[MatchData],
@@ -46,7 +48,6 @@ case class Correspondence(abroadIndicator: Boolean,
 
 object Correspondence {
   implicit val correspondenceFormat : Format[Correspondence] = Json.format[Correspondence]
-
 }
 
 case class YearsReturns(returns: List[YearReturnType])
@@ -62,6 +63,12 @@ object YearReturnType {
   implicit val yearReturnTypeFormat: Format[YearReturnType] = Json.format[YearReturnType]
 }
 
+case class Declaration(name: Name)
+
+object Declaration {
+  implicit lazy val formats: Format[Declaration] = Json.format[Declaration]
+}
+
 case class Estate(entities: EntitiesType,
                   administrationEndDate: Option[LocalDate],
                   periodTaxDues: String)
@@ -70,41 +77,12 @@ object Estate {
   implicit val estateFormat: Format[Estate] = Json.format[Estate]
 }
 
-case class EntitiesType(personalRepresentative: PersonalRepresentativeType,
-                        deceased: DeceasedPerson)
-
-object EntitiesType {
-  implicit val entitiesTypeFormat: Format[EntitiesType] = Json.format[EntitiesType]
-}
-
-
-case class PersonalRepresentativeType (estatePerRepInd : Option[IndividualPersonalRep] = None,
-                                       estatePerRepOrg : Option[BusinessPersonalRep] = None)
-
-object PersonalRepresentativeType {
-  implicit val personalRepresentativeTypeFormat: Format[PersonalRepresentativeType] = Json.format[PersonalRepresentativeType]
-}
-
 case class AgentDetails(arn: String,
                         agentName: String,
                         agentAddress: Address,
                         agentTelephoneNumber: String,
                         clientReference: String)
+
 object AgentDetails {
   implicit val agentDetailsFormat: Format[AgentDetails] = Json.format[AgentDetails]
-}
-
-case class IdentificationOrgType(utr: Option[String],
-                                 address: Option[Address])
-
-object IdentificationOrgType {
-  implicit val trustBeneficiaryIdentificationFormat: Format[IdentificationOrgType] = Json.format[IdentificationOrgType]
-}
-
-case class PassportType(number: String,
-                        expirationDate: LocalDate,
-                        countryOfIssue: String)
-
-object PassportType {
-  implicit val passportTypeFormat: Format[PassportType] = Json.format[PassportType]
 }

@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package models
+package models.identification
 
-import play.api.libs.json.{JsPath, JsSuccess, Reads}
+import play.api.libs.json.{Format, Json}
 
-trait Entity {
+case class Name(firstName: String, middleName: Option[String], lastName: String) {
+  lazy val displayName : String = firstName + " " + lastName
+  private val middleNameFormatted = middleName.fold(" ")(m => s" $m ")
+  lazy val displayFullName : String = firstName + middleNameFormatted + lastName
+}
 
-  def readAtSubPath[T: Reads](subPath: JsPath): Reads[T] = Reads (
-    _.transform(subPath.json.pick)
-      .flatMap(_.validate[T])
-  )
-
-  def readNullableAtSubPath[T: Reads](subPath: JsPath): Reads[Option[T]] = Reads (
-    _.transform(subPath.json.pick)
-      .flatMap(_.validate[T])
-      .map(Some(_))
-      .recoverWith(_ => JsSuccess(None))
-  )
-
+object Name {
+  implicit lazy val formats: Format[Name] = Json.format[Name]
 }

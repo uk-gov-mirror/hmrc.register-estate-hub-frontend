@@ -14,13 +14,22 @@
  * limitations under the License.
  */
 
-package models
+package models.entities
 
-import play.api.libs.json.{Reads, __}
+import play.api.libs.json.{JsPath, JsSuccess, Reads}
 
-case class EstateName(name: Option[String])
+trait Entity {
 
-object EstateName {
-  implicit val reads: Reads[EstateName] =
-    (__ \ "name").readNullable[String].map(EstateName.apply)
+  def readAtSubPath[T: Reads](subPath: JsPath): Reads[T] = Reads(
+    _.transform(subPath.json.pick)
+      .flatMap(_.validate[T])
+  )
+
+  def readNullableAtSubPath[T: Reads](subPath: JsPath): Reads[Option[T]] = Reads(
+    _.transform(subPath.json.pick)
+      .flatMap(_.validate[T])
+      .map(Some(_))
+      .recoverWith(_ => JsSuccess(None))
+  )
+
 }

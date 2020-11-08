@@ -17,7 +17,9 @@
 package utils.print
 
 import base.SpecBase
-import models.{BusinessPersonalRep, NonUkAddress, UkAddress}
+import models.entities.personalrep
+import models.entities.personalrep.BusinessPersonalRep
+import models.identification.{NonUkAddress, UkAddress}
 import play.twirl.api.Html
 import viewmodels.{AnswerRow, AnswerSection}
 
@@ -36,7 +38,7 @@ class BusinessPersonalRepPrintHelperSpec extends SpecBase {
 
     "render answer section for business personal rep with a UK address, no UTR and an email address" in {
 
-      val personalRep: BusinessPersonalRep = BusinessPersonalRep(
+      val personalRep: BusinessPersonalRep = personalrep.BusinessPersonalRep(
         name,
         phoneNumber,
         None,
@@ -63,7 +65,7 @@ class BusinessPersonalRepPrintHelperSpec extends SpecBase {
 
     "render answer section for business personal rep with a non-UK address and a UTR" in {
 
-      val personalRep: BusinessPersonalRep = BusinessPersonalRep(
+      val personalRep: BusinessPersonalRep = personalrep.BusinessPersonalRep(
         name,
         phoneNumber,
         utr,

@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package models
+package models.entities
 
+import models.entities.personalrep.PersonalRepresentativeType
 import play.api.libs.json.{Format, Json}
 
-case class Declaration(name: Name)
+case class EntitiesType(personalRepresentative: PersonalRepresentativeType,
+                        deceased: DeceasedPerson)
 
-object Declaration {
-  implicit lazy val formats: Format[Declaration] = Json.format[Declaration]
+object EntitiesType {
+  implicit val entitiesTypeFormat: Format[EntitiesType] = Json.format[EntitiesType]
 }

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package models
+package models.entities.personalrep
 
-import play.api.libs.json.{Reads, __}
+import play.api.libs.json.{Format, Json}
 
-case class EstateName(name: Option[String])
+case class PersonalRepresentativeType(estatePerRepInd : Option[IndividualPersonalRep] = None,
+                                      estatePerRepOrg : Option[BusinessPersonalRep] = None)
 
-object EstateName {
-  implicit val reads: Reads[EstateName] =
-    (__ \ "name").readNullable[String].map(EstateName.apply)
+object PersonalRepresentativeType {
+  implicit val personalRepresentativeTypeFormat: Format[PersonalRepresentativeType] = Json.format[PersonalRepresentativeType]
 }

@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package models
+package models.entities.personalrep
 
+import models.entities.Entity
+import models.identification.Address
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 

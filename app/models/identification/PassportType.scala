@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package models
+package models.identification
+
+import java.time.LocalDate
 
 import play.api.libs.json.{Format, Json}
 
-case class Name(firstName: String, middleName: Option[String], lastName: String) {
-  lazy val displayName : String = firstName + " " + lastName
-  private val middleNameFormatted = middleName.fold(" ")(m => s" $m ")
-  lazy val displayFullName : String = firstName + middleNameFormatted + lastName
-}
+case class PassportType(number: String,
+                        expirationDate: LocalDate,
+                        countryOfIssue: String)
 
-object Name {
-  implicit lazy val formats: Format[Name] = Json.format[Name]
+object PassportType {
+  implicit val passportTypeFormat: Format[PassportType] = Json.format[PassportType]
 }

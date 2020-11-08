@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package models
+package models.entities
 
 import java.time.LocalDate
 
+import models.identification.{Address, Name, NationalInsuranceNumber}
+import models.entities
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 
@@ -37,7 +39,7 @@ object DeceasedPerson extends Entity {
       __.lazyRead(readNullableAtSubPath[Address](__ \ 'identification \ 'address))).tupled.map{
 
       case (name, dob, dod, nino, identification) =>
-        DeceasedPerson(name, dob, dod, nino, identification)
+        entities.DeceasedPerson(name, dob, dod, nino, identification)
 
     }
 

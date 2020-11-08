@@ -17,7 +17,8 @@
 package utils.print
 
 import javax.inject.Inject
-import models._
+import models.entities.personalrep.BusinessPersonalRep
+import models.identification.{Address, NonUkAddress, UkAddress}
 import play.api.i18n.Messages
 import utils.countryOptions.AllCountryOptions
 import viewmodels.{AnswerRow, AnswerSection}

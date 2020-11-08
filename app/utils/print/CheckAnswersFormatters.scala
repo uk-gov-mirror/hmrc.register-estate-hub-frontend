@@ -18,7 +18,7 @@ package utils.print
 
 import java.time.format.DateTimeFormatter
 
-import models.{Address, IdCard, NonUkAddress, Passport, UkAddress}
+import models.identification._
 import play.api.i18n.Messages
 import play.twirl.api.{Html, HtmlFormat}
 import uk.gov.hmrc.domain.Nino

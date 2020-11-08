@@ -23,8 +23,11 @@ import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.{okJson, urlEqualTo, _}
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
 import models._
+import models.entities.personalrep.PersonalRepresentativeType
+import models.entities.{DeceasedPerson, EntitiesType}
 import models.http.DeclarationResponse.{AlreadyRegistered, InternalServerError}
 import models.http.TRNResponse
+import models.identification.Name
 import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach}
 import play.api.http.Status

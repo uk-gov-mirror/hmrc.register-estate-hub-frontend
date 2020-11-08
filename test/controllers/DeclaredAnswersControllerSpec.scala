@@ -21,6 +21,9 @@ import java.time.{LocalDate, LocalDateTime}
 import base.SpecBase
 import connectors.EstatesConnector
 import models._
+import models.entities.personalrep.{IndividualPersonalRep, PersonalRepresentativeType}
+import models.entities.{DeceasedPerson, EntitiesType}
+import models.identification.{IdCard, Name, NationalInsuranceNumber, NonUkAddress, Passport, UkAddress}
 import org.mockito.Matchers.any
 import org.mockito.Mockito.when
 import pages.{SubmissionDatePage, TRNPage}
