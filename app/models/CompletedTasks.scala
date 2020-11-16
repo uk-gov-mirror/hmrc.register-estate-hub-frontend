@@ -16,7 +16,7 @@
 
 package models
 
-import play.api.Logger
+import play.api.Logging
 import play.api.http.Status._
 import play.api.libs.json.{Format, Json}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
@@ -43,10 +43,8 @@ object CompletedTasks {
   )
 }
 
-object CompletedTasksResponse {
+object CompletedTasksResponse extends Logging {
 
-  private val logger: Logger = Logger(getClass)
-  
   case object InternalServerError extends CompletedTasksResponse
 
   implicit def httpReads(implicit hc: HeaderCarrier): HttpReads[CompletedTasksResponse] = new HttpReads[CompletedTasksResponse] {
