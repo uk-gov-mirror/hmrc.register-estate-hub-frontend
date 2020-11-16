@@ -16,17 +16,15 @@
 
 package models
 
-import play.api.Logger
+import play.api.Logging
 import play.api.http.Status.OK
 import play.api.libs.json.{Format, Json}
 import uk.gov.hmrc.http.{HttpReads, HttpResponse}
 
 case class PersonalRepName(name: String)
 
-object PersonalRepName {
+object PersonalRepName extends Logging {
 
-  private val logger: Logger = Logger(getClass)
-  
   implicit val formats : Format[PersonalRepName] = Json.format[PersonalRepName]
 
   val personalRepIndividualNameReads : HttpReads[Option[PersonalRepName]] = new HttpReads[Option[PersonalRepName]] {

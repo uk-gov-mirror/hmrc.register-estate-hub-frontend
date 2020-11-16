@@ -21,10 +21,10 @@ import connectors.EstatesConnector
 import controllers.actions.Actions
 import handlers.ErrorHandler
 import pages._
-import play.api.Logger
+import play.api.Logging
 import play.api.i18n.I18nSupport
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
 import utils.Session
 import views.html.ConfirmationView
 
@@ -36,10 +36,9 @@ class ConfirmationController @Inject()(
                                         connector: EstatesConnector,
                                         actions: Actions,
                                         errorHandler: ErrorHandler
-                                      )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
+                                      )(implicit ec: ExecutionContext
+) extends FrontendBaseController with I18nSupport with Logging {
 
-  private val logger: Logger = Logger(getClass)
-  
   def onPageLoad: Action[AnyContent] = actions.authWithData.async {
     implicit request =>
 

@@ -16,7 +16,7 @@
 
 package models.http
 
-import play.api.Logger
+import play.api.Logging
 import play.api.http.Status._
 import play.api.libs.json._
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
@@ -32,10 +32,8 @@ object TRNResponse {
 
 }
 
-object DeclarationResponse {
+object DeclarationResponse extends Logging {
 
-  private val logger: Logger = Logger(getClass)
-  
   implicit object RegistrationResponseFormats extends Reads[DeclarationResponse] {
 
     override def reads(json: JsValue): JsResult[DeclarationResponse] = json.validate[TRNResponse]
