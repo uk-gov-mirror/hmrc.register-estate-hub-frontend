@@ -36,6 +36,9 @@ import scala.concurrent.ExecutionContext
 
 trait SpecBase extends PlaySpec with GuiceOneAppPerSuite with TryValues with Mocked with ScalaFutures with IntegrationPatience {
 
+  final val ENGLISH = "en"
+  final val WELSH = "cy"
+
   val userAnswersId = "id"
 
   lazy val fakeNavigator = new FakeNavigator()
