@@ -52,7 +52,6 @@ class TaskListControllerSpec extends SpecBase {
   when(mockAppConfig.deceasedPersonsFrontendUrl) thenReturn deceasedPersonsRoute
   when(mockAppConfig.registerTaxFrontendUrl) thenReturn registerTaxRoute
   when(mockAppConfig.featureUnavailableUrl) thenReturn featureUnavailableRoute
-  when(mockAppConfig.analyticsToken) thenReturn "N/A"
 
   private val mockEstatesStoreConnector: EstatesStoreConnector = mock[EstatesStoreConnector]
   private val mockEstatesConnector: EstatesConnector = mock[EstatesConnector]
