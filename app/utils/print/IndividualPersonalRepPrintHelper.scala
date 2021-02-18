@@ -16,17 +16,17 @@
 
 package utils.print
 
-import javax.inject.Inject
 import models.entities.personalrep.IndividualPersonalRep
 import models.identification._
 import play.api.i18n.Messages
-import utils.countryOptions.AllCountryOptions
 import viewmodels.{AnswerRow, AnswerSection}
 
-class IndividualPersonalRepPrintHelper @Inject()(countryOptions: AllCountryOptions) {
+import javax.inject.Inject
+
+class IndividualPersonalRepPrintHelper @Inject()(checkAnswersFormatters: CheckAnswersFormatters) {
 
   def apply(individual: IndividualPersonalRep)(implicit messages: Messages): AnswerSection = {
-    val converter = AnswerRowConverter(countryOptions, individual.name.displayName)
+    val converter = AnswerRowConverter(individual.name.displayName)(checkAnswersFormatters)
 
     def identification(identification: IndividualIdentification): Seq[AnswerRow] = {
       identification match {
@@ -52,8 +52,8 @@ class IndividualPersonalRepPrintHelper @Inject()(countryOptions: AllCountryOptio
 
     def address(address: Address): Seq[AnswerRow] = {
       def answerRow(isUk: Boolean, address: Address): Seq[AnswerRow] = Seq(
-          converter.yesNoQuestion(isUk, "personalRep.individual.livesInTheUkYesNo"),
-          converter.addressQuestion(address, "personalRep.individual.address")
+        converter.yesNoQuestion(isUk, "personalRep.individual.livesInTheUkYesNo"),
+        converter.addressQuestion(address, "personalRep.individual.address")
       )
 
       address match {

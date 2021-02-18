@@ -16,17 +16,16 @@
 
 package utils.print
 
-import java.time.LocalDate
-
 import com.google.inject.Inject
 import models.identification.{Address, IdCard, Name, Passport}
 import play.api.i18n.Messages
 import play.twirl.api.HtmlFormat
-import utils.countryOptions.CountryOptions
-import utils.print.CheckAnswersFormatters._
 import viewmodels.AnswerRow
 
-case class AnswerRowConverter @Inject()(countryOptions: CountryOptions, name: String = "")
+import java.time.LocalDate
+
+case class AnswerRowConverter @Inject()(name: String = "")
+                                       (checkAnswersFormatters: CheckAnswersFormatters)
                                        (implicit messages: Messages) {
 
   def nameQuestion(name: Name,
@@ -57,7 +56,7 @@ case class AnswerRowConverter @Inject()(countryOptions: CountryOptions, name: St
                     labelKey: String): AnswerRow = {
     AnswerRow(
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      yesOrNo(boolean)
+      checkAnswersFormatters.yesOrNo(boolean)
     )
   }
 
@@ -65,7 +64,7 @@ case class AnswerRowConverter @Inject()(countryOptions: CountryOptions, name: St
                    labelKey: String): AnswerRow = {
     AnswerRow(
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      HtmlFormat.escape(date.format(dateFormatter))
+      HtmlFormat.escape(checkAnswersFormatters.formatDate(date))
     )
   }
 
@@ -73,7 +72,7 @@ case class AnswerRowConverter @Inject()(countryOptions: CountryOptions, name: St
                    labelKey: String): AnswerRow = {
     AnswerRow(
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      formatNino(nino)
+      checkAnswersFormatters.formatNino(nino)
     )
   }
 
@@ -81,7 +80,7 @@ case class AnswerRowConverter @Inject()(countryOptions: CountryOptions, name: St
                                     labelKey: String): AnswerRow = {
     AnswerRow(
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      formatAddress(address, countryOptions)
+      checkAnswersFormatters.formatAddress(address)
     )
   }
 
@@ -89,7 +88,7 @@ case class AnswerRowConverter @Inject()(countryOptions: CountryOptions, name: St
                        labelKey: String): AnswerRow = {
     AnswerRow(
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      formatPassportDetails(passport, countryOptions)
+      checkAnswersFormatters.formatPassportDetails(passport)
     )
   }
 
@@ -97,7 +96,7 @@ case class AnswerRowConverter @Inject()(countryOptions: CountryOptions, name: St
                      labelKey: String): AnswerRow = {
     AnswerRow(
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      formatIdCardDetails(idCard, countryOptions)
+      checkAnswersFormatters.formatIdCardDetails(idCard)
     )
   }
 }

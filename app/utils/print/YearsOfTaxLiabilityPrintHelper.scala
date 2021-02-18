@@ -17,19 +17,21 @@
 package utils.print
 
 import implicits.TaxYearImplicits
-import javax.inject.Inject
 import models._
 import play.api.i18n.Messages
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.time.TaxYear
 import utils.YearFormatter
-import utils.print.CheckAnswersFormatters.yesOrNo
 import viewmodels.{AnswerRow, AnswerSection}
 
-class YearsOfTaxLiabilityPrintHelper @Inject()(yearFormatter: YearFormatter, taxYearImplicits: TaxYearImplicits) {
+import javax.inject.Inject
 
-  import yearFormatter._
+class YearsOfTaxLiabilityPrintHelper @Inject()(yearFormatter: YearFormatter,
+                                               taxYearImplicits: TaxYearImplicits,
+                                               checkAnswersFormatters: CheckAnswersFormatters) {
+
   import taxYearImplicits._
+  import yearFormatter._
 
   def apply(yearReturns: List[YearReturnType])(implicit messages: Messages): Seq[AnswerSection] = {
 
@@ -58,7 +60,7 @@ class YearsOfTaxLiabilityPrintHelper @Inject()(yearFormatter: YearFormatter, tax
   private def yesNoQuestion(value: Boolean, labelKey: String, taxYear: TaxYear)(implicit messages: Messages): AnswerRow =
     AnswerRow(
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", taxYear.start, taxYear.end)),
-      yesOrNo(value)
+      checkAnswersFormatters.yesOrNo(value)
     )
 
 }
