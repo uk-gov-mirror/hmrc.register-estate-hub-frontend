@@ -17,11 +17,10 @@
 package config
 
 import java.net.{URI, URLEncoder}
-
 import com.google.inject.{Inject, Singleton}
 import controllers.routes
 import play.api.Configuration
-import play.api.i18n.Lang
+import play.api.i18n.{Lang, Messages}
 import play.api.mvc.{Call, Request}
 
 @Singleton
@@ -50,7 +49,6 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
 
   lazy val agentsSubscriptionsUrl : String = configuration.get[String]("urls.agentSubscriptions")
   lazy val agentServiceRegistrationUrl = s"$agentsSubscriptionsUrl?continue=$loginContinueUrl"
-  lazy val estatesHelplineUrl: String = configuration.get[String]("urls.estatesHelpline")
   lazy val registerYourClientsEstateUrl: String = configuration.get[String]("urls.registerYourClientsEstate")
 
   lazy val estatesUrl: String = configuration.get[Service]("microservice.services.estates").baseUrl
@@ -105,4 +103,15 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   def accessibilityLinkUrl(implicit request: Request[_]): String = {
     val userAction = URLEncoder.encode(new URI(request.uri).getPath, "UTF-8")
     s"$accessibilityLinkBaseUrl?userAction=$userAction"
-  }}
+  }
+
+  def helplineUrl(implicit messages: Messages): String = {
+    val path = messages.lang.code match {
+      case WELSH => "urls.welshHelpline"
+      case _ => "urls.estatesHelpline"
+    }
+
+    configuration.get[String](path)
+  }
+
+}

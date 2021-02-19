@@ -16,14 +16,14 @@
 
 package utils.print
 
-import javax.inject.Inject
 import models._
 import models.entities.personalrep.PersonalRepresentativeType
 import play.api.i18n.Messages
-import utils.countryOptions.AllCountryOptions
 import viewmodels.AnswerSection
 
-class RegistrationAnswersPrintHelper @Inject()(countryOptions: AllCountryOptions,
+import javax.inject.Inject
+
+class RegistrationAnswersPrintHelper @Inject()(checkAnswersFormatters: CheckAnswersFormatters,
                                                individualPersonalRepPrintHelper: IndividualPersonalRepPrintHelper,
                                                businessPersonalRepPrintHelper: BusinessPersonalRepPrintHelper,
                                                deceasedPersonPrintHelper: DeceasedPersonPrintHelper,
@@ -40,7 +40,7 @@ class RegistrationAnswersPrintHelper @Inject()(countryOptions: AllCountryOptions
   }
 
   private def estateDetails(name: String)(implicit messages: Messages): AnswerSection = {
-    val converter = AnswerRowConverter(countryOptions)
+    val converter = AnswerRowConverter()(checkAnswersFormatters)
     AnswerSection(
       Some("taskList.estateName.label"),
       Seq(

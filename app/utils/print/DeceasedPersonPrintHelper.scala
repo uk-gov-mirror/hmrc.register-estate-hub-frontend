@@ -16,19 +16,18 @@
 
 package utils.print
 
-import java.time.LocalDate
-
-import javax.inject.Inject
 import models.entities.DeceasedPerson
 import models.identification.{Address, NationalInsuranceNumber, NonUkAddress, UkAddress}
 import play.api.i18n.Messages
-import utils.countryOptions.AllCountryOptions
 import viewmodels.{AnswerRow, AnswerSection}
 
-class DeceasedPersonPrintHelper @Inject()(countryOptions: AllCountryOptions) {
+import java.time.LocalDate
+import javax.inject.Inject
+
+class DeceasedPersonPrintHelper @Inject()(checkAnswersFormatters: CheckAnswersFormatters) {
 
   def apply(deceasedPerson: DeceasedPerson)(implicit messages: Messages): AnswerSection = {
-    val converter = AnswerRowConverter(countryOptions, deceasedPerson.name.displayName)
+    val converter = AnswerRowConverter(deceasedPerson.name.displayName)(checkAnswersFormatters)
 
     def dateOfBirth(dateOfBirth: Option[LocalDate]): Seq[AnswerRow] = {
       dateOfBirth match {
@@ -52,9 +51,9 @@ class DeceasedPersonPrintHelper @Inject()(countryOptions: AllCountryOptions) {
 
     def address(address: Option[Address]): Seq[AnswerRow] = {
       def answerRow(isUk: Boolean, address: Address): Seq[AnswerRow] = Seq(
-          converter.yesNoQuestion(boolean = true, "deceasedPerson.addressYesNo"),
-          converter.yesNoQuestion(isUk, "deceasedPerson.livedInTheUkYesNo"),
-          converter.addressQuestion(address, "deceasedPerson.address")
+        converter.yesNoQuestion(boolean = true, "deceasedPerson.addressYesNo"),
+        converter.yesNoQuestion(isUk, "deceasedPerson.livedInTheUkYesNo"),
+        converter.addressQuestion(address, "deceasedPerson.address")
       )
 
       address match {
