@@ -50,6 +50,7 @@ class DefaultSessionRepository @Inject()(
     key     = Seq("lastUpdated" -> IndexType.Ascending),
     name    = "user-answers-last-updated-index",
     expireAfterSeconds = Some(cacheTtl)
+
   )
 
   val started: Future[Unit] =
