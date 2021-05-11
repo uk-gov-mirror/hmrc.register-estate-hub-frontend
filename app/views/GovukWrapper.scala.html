@@ -16,6 +16,7 @@
 
 @import play.twirl.api.HtmlFormat
 @import views.html.layouts.GovUkTemplate
+@import views.html.helper.CSPNonce
 
 @this(
     header_nav: HeaderNav,
@@ -44,9 +45,11 @@
 @headContent = {
     @head(
       linkElem = None,
-      headScripts = None)
+      headScripts = None,
+      nonce = CSPNonce.get
+    )
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/registerestatehubfrontend-app.css")' />
+    <link rel="stylesheet" @{CSPNonce.attr} href='@routes.Assets.versioned("stylesheets/registerestatehubfrontend-app.css")' />
 }
 
 @headerNavLinks = {
@@ -76,7 +79,7 @@
       ssoUrl = None,
       scriptElem = scriptElem,
       gaCalls = None)
-      <script src='@routes.Assets.versioned("javascripts/registerestatehubfrontend-app.min.js")'> </script>
+      <script @{CSPNonce.attr} src='@routes.Assets.versioned("javascripts/registerestatehubfrontend-app.min.js")'></script>
 }
 
 @footerTop = {}

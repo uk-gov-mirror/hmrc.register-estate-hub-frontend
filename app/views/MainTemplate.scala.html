@@ -16,6 +16,7 @@
 
 @import config.FrontendAppConfig
 @import controllers.routes.SessionTimeoutController
+@import views.html.helper.CSPNonce
 
 @this(
     appConfig: FrontendAppConfig,
@@ -39,7 +40,7 @@
 
 @defaultScriptElem = {
 @if(timeoutEnabled) {
-    <script id="timeoutScript" tabindex="-1">
+    <script @{CSPNonce.attr} id="timeoutScript" tabindex="-1">
             window.GOVUK.timeoutDialog({
                 timeout: @appConfig.timeoutLength,
                 countdown: @appConfig.countdownLength,

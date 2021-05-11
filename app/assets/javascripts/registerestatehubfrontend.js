@@ -180,6 +180,16 @@ $(document).ready(function() {
         $(':header:first').attr('tabindex', '-1').focus();
     });
 
+    // ------
+    // Introduced due to strict CSP policy with CSPFilter
+    // HTML elements cannot call JS using event handlers such as:
+    // <button onClick="window.print()">
+    // ------
+    $("#print").click(function(e) {
+        e.preventDefault();
+        window.print();
+    });
+
 });
 
 

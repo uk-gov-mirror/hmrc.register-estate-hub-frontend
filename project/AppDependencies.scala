@@ -10,7 +10,7 @@ object AppDependencies {
     "uk.gov.hmrc"       %% "play-health"                    % "3.16.0-play-27",
     "uk.gov.hmrc"       %% "play-ui"                        % "9.2.0-play-27",
     "uk.gov.hmrc"       %% "play-conditional-form-mapping"  % "1.6.0-play-27",
-    "uk.gov.hmrc"       %% "bootstrap-frontend-play-27"     % "4.1.0",
+    "uk.gov.hmrc"       %% "bootstrap-frontend-play-27"     % "5.2.0",
     "com.typesafe.play" %% "play-json-joda"                 % "2.7.4",
     "uk.gov.hmrc"       %% "domain"                         % "5.10.0-play-27",
     "uk.gov.hmrc"       %% "tax-year"                       % "1.1.0",
