@@ -2,6 +2,9 @@
 
 GET        /                                            controllers.IndexController.onPageLoad
 
++ nocsrf
+POST       /csp/report                                  controllers.ContentSecurityPolicyReporterController.report()
+
 GET        /accessibility                               controllers.AccessibilityStatementController.onPageLoad(userAction: String)
 
 GET        /create-agent-services-account               controllers.CreateAgentServicesAccountController.onPageLoad()
