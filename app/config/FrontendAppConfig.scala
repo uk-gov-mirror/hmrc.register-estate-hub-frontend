@@ -16,12 +16,13 @@
 
 package config
 
-import java.net.{URI, URLEncoder}
 import com.google.inject.{Inject, Singleton}
 import controllers.routes
 import play.api.Configuration
 import play.api.i18n.{Lang, Messages}
 import play.api.mvc.{Call, Request}
+
+import java.net.{URI, URLEncoder}
 
 @Singleton
 class FrontendAppConfig @Inject() (configuration: Configuration) {
