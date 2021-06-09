@@ -17,7 +17,6 @@
 package controllers
 
 import base.SpecBase
-import config.FrontendAppConfig
 import connectors.{EstatesConnector, EstatesStoreConnector}
 import models.CompletedTasks
 import models.CompletedTasksResponse.InternalServerError
