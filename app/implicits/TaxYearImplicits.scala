@@ -18,13 +18,14 @@ package implicits
 
 import javax.inject.Inject
 import org.joda.time.LocalDate
+import play.api.i18n.Messages
 import uk.gov.hmrc.time.TaxYear
 import utils.DateFormatter
 
 class TaxYearImplicits @Inject()(dateFormatter: DateFormatter) {
 
-  implicit class TaxYearWithFormattedDates(taxYear: TaxYear) {
-    private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)
+  implicit class TaxYearWithFormattedDates(taxYear: TaxYear)(implicit messages: Messages) {
+    private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)(messages)
     val start: String = formatDate(taxYear.starts)
     val end: String = formatDate(taxYear.finishes)
   }
