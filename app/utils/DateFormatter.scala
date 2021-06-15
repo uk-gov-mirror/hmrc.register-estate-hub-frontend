@@ -16,22 +16,23 @@
 
 package utils
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.time.{LocalDateTime, ZoneId}
 
+import com.google.inject.Inject
 import org.joda.time.LocalDate
+import uk.gov.hmrc.play.language.LanguageUtils
+import play.api.i18n.Messages
 
-class DateFormatter {
+class DateFormatter @Inject()(languageUtils: LanguageUtils) {
 
-  private val format = "d MMMM yyyy"
-
-  def formatDate(dateTime: LocalDateTime): String = {
-    val dateFormatter = DateTimeFormatter.ofPattern(format)
-    dateTime.format(dateFormatter)
+  def formatDate(dateTime: LocalDateTime)(implicit messages: Messages): String = {
+    val zonedDateTimeInstant = dateTime.atZone(ZoneId.systemDefault).toInstant
+    val jodaLocalDate = new org.joda.time.LocalDate(zonedDateTimeInstant.toEpochMilli)
+    formatDate(jodaLocalDate)
   }
 
-  def formatDate(date: LocalDate): String = {
-    date.toString(format)
+  def formatDate(date: LocalDate)(implicit messages: Messages): String = {
+    languageUtils.Dates.formatDate(date)
   }
 
 }
