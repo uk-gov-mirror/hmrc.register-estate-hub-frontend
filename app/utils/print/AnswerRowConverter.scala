@@ -19,7 +19,7 @@ package utils.print
 import com.google.inject.Inject
 import models.identification.{Address, IdCard, Name, Passport}
 import play.api.i18n.Messages
-import play.twirl.api.HtmlFormat
+import play.twirl.api.{Html, HtmlFormat}
 import viewmodels.AnswerRow
 
 import java.time.LocalDate
@@ -30,18 +30,13 @@ case class AnswerRowConverter @Inject()(name: String = "")
 
   def nameQuestion(name: Name,
                    labelKey: String): AnswerRow = {
-    AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel")),
-      HtmlFormat.escape(name.displayFullName)
-    )
+    val format = (x: Name) => HtmlFormat.escape(x.displayFullName)
+    question(name, labelKey, format)
   }
 
   def stringQuestion(string: String,
                      labelKey: String): AnswerRow = {
-    AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      HtmlFormat.escape(string)
-    )
+    question(string, labelKey, HtmlFormat.escape)
   }
 
   def optionStringQuestion(optionString: Option[String],
@@ -54,49 +49,40 @@ case class AnswerRowConverter @Inject()(name: String = "")
 
   def yesNoQuestion(boolean: Boolean,
                     labelKey: String): AnswerRow = {
-    AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      checkAnswersFormatters.yesOrNo(boolean)
-    )
+    question(boolean, labelKey, checkAnswersFormatters.yesOrNo)
   }
 
   def dateQuestion(date: LocalDate,
                    labelKey: String): AnswerRow = {
-    AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      HtmlFormat.escape(checkAnswersFormatters.formatDate(date))
-    )
+    question(date, labelKey, checkAnswersFormatters.formatDate)
   }
 
   def ninoQuestion(nino: String,
                    labelKey: String): AnswerRow = {
-    AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      checkAnswersFormatters.formatNino(nino)
-    )
+    question(nino, labelKey, checkAnswersFormatters.formatNino)
   }
 
   def addressQuestion[T <: Address](address: T,
                                     labelKey: String): AnswerRow = {
-    AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      checkAnswersFormatters.formatAddress(address)
-    )
+    question(address, labelKey, checkAnswersFormatters.formatAddress)
   }
 
   def passportQuestion(passport: Passport,
                        labelKey: String): AnswerRow = {
-    AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      checkAnswersFormatters.formatPassportDetails(passport)
-    )
+    question(passport, labelKey, checkAnswersFormatters.formatPassportDetails)
   }
 
   def idCardQuestion(idCard: IdCard,
                      labelKey: String): AnswerRow = {
+    question(idCard, labelKey, checkAnswersFormatters.formatIdCardDetails)
+  }
+
+  private def question[T](answer: T,
+                          labelKey: String,
+                          format: T => Html): AnswerRow = {
     AnswerRow(
       HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
-      checkAnswersFormatters.formatIdCardDetails(idCard)
+      format(answer)
     )
   }
 }
