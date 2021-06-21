@@ -14,7 +14,7 @@ object AppDependencies {
     "com.typesafe.play" %% "play-json-joda"                 % "2.7.4",
     "uk.gov.hmrc"       %% "domain"                         % "5.10.0-play-27",
     "uk.gov.hmrc"       %% "tax-year"                       % "1.1.0",
-    "uk.gov.hmrc"       %% "play-language"                  % "4.10.0-play-27"
+    "uk.gov.hmrc"       %% "play-language"                  % "5.1.0-play-27"
   )
 
   val test = Seq(
