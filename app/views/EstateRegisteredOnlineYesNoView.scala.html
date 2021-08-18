@@ -15,10 +15,15 @@
  *@
 
 @import controllers.routes._
+@import views.html.components.{ErrorSummary, InputYesNo, SubmitButton}
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    appConfig: FrontendAppConfig,
+    errorSummary: ErrorSummary,
+    inputYesNo: InputYesNo,
+    submitButton: SubmitButton
 )
 
 @(form: Form[_])(implicit request: Request[_], messages: Messages)
@@ -30,14 +35,13 @@
 
     @formHelper(action = EstateRegisteredOnlineYesNoController.onSubmit(), 'autoComplete -> "off") {
 
-        @components.error_summary(form.errors)
+        @errorSummary(form.errors)
 
-        @components.input_yes_no(
+        @inputYesNo(
             field = form("value"),
-            legend = messages("estateRegisteredOnline.heading"),
-            legendClass = Some("heading-large")
+            label = messages("estateRegisteredOnline.heading"),
         )
 
-        @components.submit_button()
+        @submitButton()
     }
 }
