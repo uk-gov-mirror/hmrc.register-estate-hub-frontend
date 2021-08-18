@@ -15,11 +15,14 @@
  *@
 
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
-@import utils.AccessibilityHelper._
+@import utils.SectionFormatter.formatSections
+@import views.html.components.Heading
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    heading: Heading,
+    govukSummaryList: GovukSummaryList
 )
 
 @(entities: Seq[Section], trn: String, declarationSent: String)(implicit request: Request[_], messages: Messages)
@@ -29,7 +32,7 @@
     showBackLink = true
 ) {
 
-    @components.heading("declaredAnswers.heading", headingSize = "heading-large")
+    @heading("declaredAnswers.heading")
 
     @components.button_print()
 
@@ -37,12 +40,5 @@
 
     <p>@messages("declaredAnswers.p1", declarationSent)</p>
 
-    @for(section <- entities){
-        @{
-            section match {
-                case a: AnswerSection => components.summary_answer_section(a)
-                case r: RepeaterAnswerSection => components.repeater_answer_section(r)
-            }
-        }
-    }
+    @govukSummaryList(SummaryList(rows = formatSections(entities)))
 }

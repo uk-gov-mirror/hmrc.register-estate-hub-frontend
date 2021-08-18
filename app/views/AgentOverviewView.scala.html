@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *@
+@import views.html.components.{Heading, InputYesNo, SubmitButton}
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    heading: Heading,
+    submitButton: SubmitButton
 )
 
 @()(implicit request: Request[_], messages: Messages)
@@ -26,13 +29,13 @@
     showBackLink = true
 ) {
 
-    @components.heading("agentOverview.heading")
+    @heading("agentOverview.heading")
 
     <p>@messages("agentOverview.paragraph1")</p>
 
     <p>@messages("agentOverview.paragraph2")</p>
 
     @formHelper(action = AgentOverviewController.onSubmit(), 'autoComplete -> "off") {
-        @components.submit_button(Some("agentOverview.start"))
+        @submitButton(Some("agentOverview.start"))
     }
 }

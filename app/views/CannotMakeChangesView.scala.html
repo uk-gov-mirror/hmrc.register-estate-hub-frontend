@@ -17,10 +17,14 @@
 @import controllers.routes._
 @import models.Mode
 @import config.FrontendAppConfig
+@import views.html.components.{Heading, Link}
 
 @this(
     main_template: MainTemplate,
-    appConfig: FrontendAppConfig
+    formHelper: FormWithCSRF,
+    appConfig: FrontendAppConfig,
+    heading: Heading,
+    link: Link
 )
 
 @()(implicit request: Request[_], messages: Messages)
@@ -29,9 +33,12 @@
     title = messages("cannotMakeChanges.title")
 ) {
 
-    @components.heading("cannotMakeChanges.heading")
+    @heading("cannotMakeChanges.heading")
 
-    <p>@messages("cannotMakeChanges.paragraph1") <a href="@appConfig.helplineUrl" target="_blank" rel="external">@messages("cannotMakeChanges.postLink")</a> @messages("cannotMakeChanges.paragraph2")</p>
+    <p>@messages("cannotMakeChanges.paragraph1")
+        @link(@appConfig.helplineUrl, "external", "cannotMakeChanges.postLink", true)
+        @messages("cannotMakeChanges.paragraph2")
+    </p>
 
     <p>@messages("cannotMakeChanges.paragraph3")</p>
 

@@ -17,80 +17,82 @@
 @import controllers.routes._
 @import models.Mode
 @import java.net.URI
+@import views.html.components.{Heading, BulletList, Link}
 
 @this(
-main_template: MainTemplate
+    main_template: MainTemplate,
+    appConfig: FrontendAppConfig,
+    heading: Heading,
+    bulletList: BulletList,
+    link: Link
 )
-
 @(userAction: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("accessibilityStatement.title"),
     showBackLink = true
 ) {
-    @components.heading("accessibilityStatement.heading")
+    @heading("accessibilityStatement.heading")
 
     <p class="govuk-body-l">@messages("accessibilityStatement.p1")</p>
     <p class="govuk-body">@messages("accessibilityStatement.p2.pre.link")
-      <a href="https://www.gov.uk/help/accessibility">@messages("accessibilityStatement.p2.link.text")</a> @messages("accessibilityStatement.p2.post.link")</p>
+        @link("https://www.gov.uk/help/accessibility", "accessibility", "accessibilityStatement.p2.link.text")
+        @messages("accessibilityStatement.p2.post.link")
+    </p>
     <p class="govuk-body">@messages("accessibilityStatement.p3")</p>
 
     <h2 class="govuk-heading-l">@messages("accessibilityStatement.using.this.service")</h2>
     <p class="govuk-body">@messages("accessibilityStatement.this.service.allows")</p>
     <p class="govuk-body">@messages("accessibilityStatement.this.service.is.run")</p>
 
-    <ul class="estate-list--bullet">
-      <li class="inside">@messages("accessibilityStatement.this.service.is.run.b1")</li>
-      <li class="inside">@messages("accessibilityStatement.this.service.is.run.b2")</li>
-      <li class="inside">@messages("accessibilityStatement.this.service.is.run.b3")</li>
-      <li class="inside">@messages("accessibilityStatement.this.service.is.run.b4")</li>
-      <li class="inside">@messages("accessibilityStatement.this.service.is.run.b5")</li>
-    </ul>
+    @bulletList("accessibilityStatement.this.service.is.run", Seq("b1", "b2", "b3", "b4", "b5"))
 
     <p class="govuk-body">@messages("accessibilityStatement.we.have.also")</p>
     <p class="govuk-body">
-      <a href="https://mcmw.abilitynet.org.uk/">AbilityNet</a>
-      @messages("accessibilityStatement.ability.net.has.advice")
+        <a href="https://mcmw.abilitynet.org.uk/">AbilityNet</a>
+        @messages("accessibilityStatement.ability.net.has.advice")
     </p>
 
     <h2 class="govuk-heading-l">@messages("accessibilityStatement.how.accessible")</h2>
     <p class="govuk-body">@messages("accessibilityStatement.this.service.is.partial")
-      <a href="https://www.w3.org/TR/WCAG21/">@messages("accessibilityStatement.wcag.standard")</a>.</p>
+        @link("https://www.w3.org/TR/WCAG21/", "wcag", "accessibilityStatement.wcag.standard").
+    </p>
     <p class="govuk-body">@messages("accessibilityStatement.some.people.may.find")</p>
 
-    <ul class="estate-list--bullet">
-      <li class="inside">@messages("accessibilityStatement.some.people.may.find.b1")</li>
-      <li class="inside">@messages("accessibilityStatement.some.people.may.find.b2")</li>
-      <li class="inside">@messages("accessibilityStatement.some.people.may.find.b3")</li>
-    </ul>
+    @bulletList("accessibilityStatement.some.people.may.find", Seq("b1", "b2", "b3"))
 
     <h2 class="govuk-heading-l">@messages("accessibilityStatement.reporting.problems")</h2>
     <p class="govuk-body">@messages("accessibilityStatement.reporting.pre.link")
-      <a target="_blank" href="https://www.tax.service.gov.uk/contact/accessibility-unauthenticated?service=estates&userAction=@userAction">@messages("accessibilityStatement.reporting.link")</a>.
-      </p>
+        @link(
+            "https://www.tax.service.gov.uk/contact/accessibility-unauthenticated?service=estates&userAction=@userAction",
+            "reporting",
+            "accessibilityStatement.reporting.link",
+            true
+        ).
+    </p>
 
     <h2 class="govuk-heading-l">@messages("accessibilityStatement.what.to.do")</h2>
     <p class="govuk-body">@messages("accessibilityStatement.what.to.do.pre.eass.link")
-      <a href="https://www.equalityadvisoryservice.com/">@messages("accessibilityStatement.what.to.do.eass.link")</a>,
-      @messages("accessibilityStatement.what.to.do.or.the")
-      <a href="https://www.equalityni.org/Home">@messages("accessibilityStatement.what.to.do.ecni.link")</a>
-      @messages("accessibilityStatement.what.to.do.if.you.live")
+        @link("https://www.equalityadvisoryservice.com/", "eass", "accessibilityStatement.what.to.do.eass.link"),
+        @messages("accessibilityStatement.what.to.do.or.the")
+        @link("https://www.equalityni.org/Home", "ecni", "accessibilityStatement.what.to.do.ecni.link")
+        @messages("accessibilityStatement.what.to.do.if.you.live")
     </p>
 
     <h2 class="govuk-heading-l">@messages("accessibilityStatement.contacting.us")</h2>
     <p class="govuk-body">@messages("accessibilityStatement.we.provide.a.text")</p>
     <p class="govuk-body">@messages("accessibilityStatement.we.can.provide")</p>
     <p class="govuk-body">
-      @messages("accessibilityStatement.find.out.how")
-      <a href="https://www.gov.uk/dealing-hmrc-additional-needs">@messages("accessibilityStatement.find.out.contact.us")</a>.
+        @messages("accessibilityStatement.find.out.how")
+        @link("https://www.gov.uk/dealing-hmrc-additional-needs", "contact-us", "accessibilityStatement.find.out.contact.us").
     </p>
 
     <h2 class="govuk-heading-l">@messages("accessibilityStatement.technical.information")</h2>
     <p class="govuk-body">@messages("accessibilityStatement.hmrc.is.committed")</p>
     <p class="govuk-body">
-      @messages("accessibilityStatement.this.service.is.partial")
-      <a href="https://www.w3.org/TR/WCAG21/">@messages("accessibilityStatement.wcag.standard")</a>,
-       @messages("accessibilityStatement.this.service.is.partial.due.to")
+        @messages("accessibilityStatement.this.service.is.partial")
+        @link("https://www.w3.org/TR/WCAG21/", "wcag", "accessibilityStatement.wcag.standard"),
+        @messages("accessibilityStatement.this.service.is.partial.due.to")
     </p>
 
     <h3 class="govuk-heading-m">@messages("accessibilityStatement.non.accessible")</h3>
@@ -98,16 +100,24 @@ main_template: MainTemplate
 
     <h4 class="govuk-heading-s">@messages("accessibilityStatement.non.compliance.with")</h4>
 
-    <p class="govuk-body">@messages("accessibilityStatement.non.compliance.timeout.pre.link") <a href="https://www.w3.org/WAI/WCAG21/Understanding/timing-adjustable.html">@messages("accessibilityStatement.non.compliance.timeout.link")</a> @messages("accessibilityStatement.non.compliance.timeout.post.link")</p>
+    <p class="govuk-body">@messages("accessibilityStatement.non.compliance.timeout.pre.link")
+        @link("https://www.w3.org/WAI/WCAG21/Understanding/timing-adjustable.html", "timing-adjustable", "accessibilityStatement.non.compliance.timeout.link")
+        @messages("accessibilityStatement.non.compliance.timeout.post.link")
+    </p>
 
-    <p class="govuk-body">@messages("accessibilityStatement.non.compliance.telephone.pre.link") <a href="https://www.w3.org/WAI/WCAG21/Understanding/error-identification.html">@messages("accessibilityStatement.non.compliance.telephone.link1")</a> @messages("accessibilityStatement.non.compliance.telephone.post.link1") <a href="https://www.w3.org/WAI/WCAG21/Understanding/error-suggestion.html">@messages("accessibilityStatement.non.compliance.telephone.link2")</a> @messages("accessibilityStatement.non.compliance.telephone.post.link2")</p>
+    <p class="govuk-body">@messages("accessibilityStatement.non.compliance.telephone.pre.link")
+        @link("https://www.w3.org/WAI/WCAG21/Understanding/error-identification.html", "error-identification", "accessibilityStatement.non.compliance.telephone.link1")
+        @messages("accessibilityStatement.non.compliance.telephone.post.link1")
+        @link("https://www.w3.org/WAI/WCAG21/Understanding/error-suggestion.html", "error-suggestion", "accessibilityStatement.non.compliance.telephone.link2")
+        @messages("accessibilityStatement.non.compliance.telephone.post.link2")
+    </p>
 
     <h2 class="govuk-heading-l">@messages("accessibilityStatement.how.we.tested")</h2>
     <p class="govuk-body">@messages("accessibilityStatement.service.last.tested.on")</p>
     <p class="govuk-body">
-      @messages("accessibilityStatement.this.service.was.built.pre.link")
-      <a href="http://www.digitalaccessibilitycentre.org/">@messages("accessibilityStatement.this.service.was.built.link")</a>.
-      @messages("accessibilityStatement.this.service.was.built.post.link")
+        @messages("accessibilityStatement.this.service.was.built.pre.link")
+        @link("http://www.digitalaccessibilitycentre.org/", "was", "accessibilityStatement.this.service.was.built.link").
+        @messages("accessibilityStatement.this.service.was.built.post.link")
     </p>
     <p class="govuk-body">@messages("accessibilityStatement.page.prepared.on")</p>
 

@@ -17,10 +17,17 @@
 @import controllers.routes._
 @import uk.gov.hmrc.auth.core.AffinityGroup
 @import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
+@import views.html.components.{ErrorSummary, Heading, InputText, SubmitButton, Link}
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    appConfig: FrontendAppConfig,
+    errorSummary: ErrorSummary,
+    heading: Heading,
+    inputText: InputText,
+    submitButton: SubmitButton,
+    link: Link
 )
 
 @(form: Form[_], affinityGroup: AffinityGroup)(implicit request: Request[_], messages: Messages)
@@ -32,21 +39,21 @@
 
     @formHelper(action = DeclarationController.onSubmit(), 'autoComplete -> "off") {
 
-        @components.error_summary(form.errors)
+        @errorSummary(form.errors)
 
-        @components.heading("declaration.heading")
+        @heading("declaration.heading")
 
-        @components.input_text(
+        @inputText(
             field = form("firstName"),
             label = messages("declaration.firstName")
         )
 
-        @components.input_text(
+        @inputText(
             field = form("middleName"),
             label = messages("declaration.middleName")
         )
 
-        @components.input_text(
+        @inputText(
             field = form("lastName"),
             label = messages("declaration.lastName")
         )
@@ -57,8 +64,10 @@
             <p class="panel-indent">@messages("declaration.warning")</p>
         }
 
-        @components.submit_button(Some("site.confirm.send"))
+        @submitButton(Some("site.confirm.send"))
 
-        <p><a href="@controllers.registration_progress.routes.TaskListController.onPageLoad()">@messages("site.returnToRegistrationProgress")</a></p>
+        <p>
+            @link("@controllers.registration_progress.routes.TaskListController.onPageLoad()", "returnToRegistrationProgress", "site.returnToRegistrationProgress")
+        </p>
     }
 }

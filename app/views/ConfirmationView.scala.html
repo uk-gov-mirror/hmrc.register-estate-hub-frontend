@@ -17,10 +17,12 @@
 @import controllers.routes._
 @import utils.AccessibilityHelper._
 @import config.FrontendAppConfig
+@import views.html.components.Link
 
 @this(
     main_template: MainTemplate,
-    appConfig: FrontendAppConfig
+    formHelper: FormWithCSRF,
+    link: Link
 )
 
 @(trn: String, personalRepName: String)(implicit request: Request[_], messages: Messages)
@@ -37,7 +39,9 @@
         </h1>
     </div>
 
-    <p class="panel-indent">@components.link(DeclaredAnswersController.onPageLoad().url, "print-and-save","confirmation.printsave")</p>
+    <p class="panel-indent">
+        @link(DeclaredAnswersController.onPageLoad().url, "print-and-save","confirmation.printsave")
+    </p>
 
     <h2>@messages("confirmation.subheading1")</h2>
 
@@ -45,7 +49,11 @@
 
     <h2>@messages("confirmation.subheading2")</h2>
 
-    <p>@messages("confirmation.paragraph2") <a target="_blank" href="@appConfig.helplineUrl">@messages("confirmation.paragraph2.link")</a>.</p>
+    <p>@messages("confirmation.paragraph2")
+        @link(appConfig.helplineUrl, "helplineUrl1", "confirmation.paragraph2.link", true).
+    </p>
 
-    <p>@messages("confirmation.paragraph3") <a target="_blank" href="@appConfig.helplineUrl">@messages("confirmation.paragraph3.link")</a>.</p>
+    <p>@messages("confirmation.paragraph3")
+        @link(appConfig.helplineUrl, "helplineUrl2", "confirmation.paragraph3.link", true).
+    </p>
 }

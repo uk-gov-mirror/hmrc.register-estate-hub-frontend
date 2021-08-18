@@ -16,10 +16,13 @@
 
 @import controllers.routes._
 @import config.FrontendAppConfig
+@import views.html.components.{Heading, Link}
 
 @this(
     main_template: MainTemplate,
-    config: FrontendAppConfig
+    config: FrontendAppConfig,
+    heading: Heading,
+    link: Link
 )
 
 @()(implicit request: Request[_], messages: Messages)
@@ -29,7 +32,9 @@
     showBackLink = true
 ) {
 
-    @components.heading("mustRegisterEstate.heading")
+    @heading("mustRegisterEstate.heading")
 
-    <p>@messages("mustRegisterEstate.p1") <a href=@config.helplineUrl target="_blank">@messages("mustRegisterEstate.p1.link")</a>.</p>
+    <p>@messages("mustRegisterEstate.p1")
+        @link(@config.helplineUrl, "helplineUrl", "mustRegisterEstate.p1.link", true).
+    </p>
 }

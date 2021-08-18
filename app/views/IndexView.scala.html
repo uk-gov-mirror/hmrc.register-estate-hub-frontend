@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *@
+@import views.html.components.Heading
 
 @this(
-    main_template: MainTemplate
+    main_template: MainTemplate,
+    heading: Heading
 )
 
 @()(implicit request: Request[_], messages: Messages)
@@ -24,7 +26,7 @@
     title = messages("index.title")
 ) {
 
-    @components.heading("index.heading")
+    @heading("index.heading")
 
     <p>@messages("index.guidance")</p>
 }

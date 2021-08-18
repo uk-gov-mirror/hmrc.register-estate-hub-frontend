@@ -19,10 +19,13 @@
 @import uk.gov.hmrc.auth.core.AffinityGroup
 @import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
 @import config.FrontendAppConfig
+@import views.html.components.{Heading, Link}
 
 @this(
     appConfig: FrontendAppConfig,
-    main_template: MainTemplate
+    main_template: MainTemplate,
+    heading: Heading,
+    link: Link
 )
 
 @(estateName: Option[String], sections: List[Task], isTaskListComplete: Boolean, affinityGroup: AffinityGroup)(implicit request: Request[_], messages: Messages)
@@ -35,14 +38,14 @@
         <span class="govuk-caption-xl" id="estate-name">@name</span>
     }
 
-    @components.heading("taskList.heading", headingSize = "heading-xlarge")
+    @heading("taskList.heading", headingSize = "govuk-caption-xl")
 
     <p>@messages("taskList.paragraph1")</p>
 
     <p>@messages("taskList.paragraph2")</p>
 
     @if(affinityGroup == AffinityGroup.Agent) {
-        <p>@components.link(appConfig.agentDetails+"/check-your-answers", "agent-details", "taskList.agent.agentDetails")</p>
+        <p>@link(appConfig.agentDetails+"/check-your-answers", "agent-details", "taskList.agent.agentDetails")</p>
     }
 
     @components.task_list(sections)
@@ -53,7 +56,7 @@
         <p id="summary-paragraph">@messages("taskList.summary.paragraph")</p>
 
         <p>
-            @components.link(DraftAnswersController.onPageLoad().url, "print-and-save", "taskList.summary.link")
+            @link(DraftAnswersController.onPageLoad().url, "print-and-save", "taskList.summary.link")
         </p>
 
         @components.button_link(messages("taskList.continue"), DeclarationController.onPageLoad().url)
