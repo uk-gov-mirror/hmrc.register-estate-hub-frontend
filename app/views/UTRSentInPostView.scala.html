@@ -24,10 +24,9 @@
 @()(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("utrSentInPost.title")
-    ) {
-
-    @components.back_link()
+    title = messages("utrSentInPost.title"),
+    showBackLink = true
+) {
 
     @components.heading("utrSentInPost.heading")
 

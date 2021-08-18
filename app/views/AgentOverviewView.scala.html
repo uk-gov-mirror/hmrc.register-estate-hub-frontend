@@ -22,10 +22,9 @@
 @()(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("agentOverview.title")
-    ) {
-
-    @components.back_link()
+    title = messages("agentOverview.title"),
+    showBackLink = true
+) {
 
     @components.heading("agentOverview.heading")
 

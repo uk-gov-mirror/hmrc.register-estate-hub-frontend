@@ -19,22 +19,21 @@
 @import config.FrontendAppConfig
 
 @this(
- main_template: MainTemplate,
- appConfig: FrontendAppConfig
+    main_template: MainTemplate,
+    appConfig: FrontendAppConfig
 )
 
 @()(implicit request: Request[_], messages: Messages)
 
 @main_template(
-title = messages("cannotMakeChanges.title")
+    title = messages("cannotMakeChanges.title")
 ) {
 
-@components.heading("cannotMakeChanges.heading")
+    @components.heading("cannotMakeChanges.heading")
 
-<p>@messages("cannotMakeChanges.paragraph1") <a href="@appConfig.helplineUrl" target="_blank" rel="external">@messages("cannotMakeChanges.postLink")</a> @messages("cannotMakeChanges.paragraph2")</p>
+    <p>@messages("cannotMakeChanges.paragraph1") <a href="@appConfig.helplineUrl" target="_blank" rel="external">@messages("cannotMakeChanges.postLink")</a> @messages("cannotMakeChanges.paragraph2")</p>
 
-
-<p>@messages("cannotMakeChanges.paragraph3")</p>
+    <p>@messages("cannotMakeChanges.paragraph3")</p>
 
 }
 

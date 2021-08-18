@@ -28,11 +28,9 @@
 @(estateName: Option[String], sections: List[Task], isTaskListComplete: Boolean, affinityGroup: AffinityGroup)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("taskList.title")
-    ) {
-
-    @components.back_link()
-
+    title = messages("taskList.title"),
+    showBackLink = true
+) {
     @estateName.map { name =>
         <span class="govuk-caption-xl" id="estate-name">@name</span>
     }
