@@ -1,3 +1,5 @@
+service.name = Cofrestru a Chynnal Ystâd
+
 checkYourAnswers.title = Gwirio’ch Atebion
 checkYourAnswers.heading = Gwirio’ch Atebion
 checkYourAnswers.guidance = Arweiniad ar gyfer gwirio’ch atebion
@@ -38,7 +40,6 @@ site.save.continue = Cadw ac yn eich blaen
 site.confirm.send = Cadarnhau ac anfon
 site.print-or-save = Argraffu neu gadw’r dudalen hon
 site.warning = Rhybudd
-site.service_name = Cofrestru a Chynnal Ystâd
 site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
 site.returnToRegistrationProgress = Yn ôl i gynnydd cofrestru
 site.sign_out = Allgofnodi
