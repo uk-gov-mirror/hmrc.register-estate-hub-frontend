@@ -25,6 +25,7 @@ import play.api.data.Form
 import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import repositories.SessionRepository
 import uk.gov.hmrc.auth.core.AffinityGroup
 import views.html.HaveUTRYesNoView
 
@@ -102,10 +103,12 @@ class HaveUTRYesNoControllerSpec extends SpecBase {
     }
 
     "redirect to the next page when valid data is submitted" in {
-
       val application =
         applicationBuilder(userAnswers = Some(emptyUserAnswers))
-          .overrides(bind[Navigator].qualifiedWith(classOf[EstateRegistration]).toInstance(fakeNavigator))
+          .overrides(Seq(
+            bind[Navigator].qualifiedWith(classOf[EstateRegistration]).toInstance(fakeNavigator),
+            bind[SessionRepository].toInstance(sessionRepository)
+          ))
           .build()
 
       val request =

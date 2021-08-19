@@ -29,6 +29,7 @@ import play.api.data.Form
 import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import repositories.SessionRepository
 import uk.gov.hmrc.auth.core.AffinityGroup
 import views.html.DeclarationView
 
@@ -107,7 +108,10 @@ class DeclarationControllerSpec extends SpecBase {
       val mockConnector: EstatesConnector = mock[EstatesConnector]
 
       val application = applicationBuilder(userAnswers = Some(emptyUserAnswers))
-        .overrides(bind[EstatesConnector].to(mockConnector))
+        .overrides(Seq(
+          bind[EstatesConnector].to(mockConnector),
+          bind[SessionRepository].toInstance(sessionRepository)
+        ))
         .build()
 
       when(mockConnector.register(any())(any(), any())).thenReturn(Future.successful(TRNResponse("fakeTrn")))

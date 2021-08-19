@@ -24,6 +24,7 @@ import pages.EstateRegisteredOnlineYesNoPage
 import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import repositories.SessionRepository
 import views.html.EstateRegisteredOnlineYesNoView
 
 class EstateRegisteredOnlineYesNoControllerSpec extends SpecBase {
@@ -79,9 +80,11 @@ class EstateRegisteredOnlineYesNoControllerSpec extends SpecBase {
 
       val application =
         applicationBuilder(userAnswers = Some(emptyUserAnswers))
-          .overrides(bind[Navigator].qualifiedWith(classOf[EstateRegistration]).toInstance(fakeNavigator))
+          .overrides(Seq(
+            bind[Navigator].qualifiedWith(classOf[EstateRegistration]).toInstance(fakeNavigator),
+            bind[SessionRepository].toInstance(sessionRepository)
+          ))
           .build()
-
       val request =
         FakeRequest(POST, estateRegisteredOnlineRoute)
           .withFormUrlEncodedBody(("value", "true"))
