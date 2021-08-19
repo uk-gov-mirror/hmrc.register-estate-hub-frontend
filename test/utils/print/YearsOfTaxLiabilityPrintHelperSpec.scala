@@ -51,11 +51,11 @@ class YearsOfTaxLiabilityPrintHelperSpec extends SpecBase {
               headingKey = Some("taskList.yearsOfTaxLiability.label"),
               rows = Seq(
                 AnswerRow(
-                  label = Html(messages("taxLiability.neededToPayTax.checkYourAnswersLabel", "6 April 2017", "5 April 2018")),
+                  label = messages("taxLiability.neededToPayTax.checkYourAnswersLabel", "6 April 2017", "5 April 2018"),
                   answer = Html("Yes")
                 ),
                 AnswerRow(
-                  label = Html(messages("taxLiability.wasTaxDeclared.checkYourAnswersLabel", "6 April 2017", "5 April 2018")),
+                  label = messages("taxLiability.wasTaxDeclared.checkYourAnswersLabel", "6 April 2017", "5 April 2018"),
                   answer = Html("No")
                 )
               ),
@@ -78,11 +78,11 @@ class YearsOfTaxLiabilityPrintHelperSpec extends SpecBase {
               headingKey = Some("taskList.yearsOfTaxLiability.label"),
               rows = Seq(
                 AnswerRow(
-                  label = Html(messages("taxLiability.neededToPayTax.checkYourAnswersLabel", "6 April 2017", "5 April 2018")),
+                  label = messages("taxLiability.neededToPayTax.checkYourAnswersLabel", "6 April 2017", "5 April 2018"),
                   answer = Html("Yes")
                 ),
                 AnswerRow(
-                  label = Html(messages("taxLiability.wasTaxDeclared.checkYourAnswersLabel", "6 April 2017", "5 April 2018")),
+                  label = messages("taxLiability.wasTaxDeclared.checkYourAnswersLabel", "6 April 2017", "5 April 2018"),
                   answer = Html("No")
                 )
               ),
@@ -92,11 +92,11 @@ class YearsOfTaxLiabilityPrintHelperSpec extends SpecBase {
               headingKey = None,
               rows = Seq(
                 AnswerRow(
-                  label = Html(messages("taxLiability.neededToPayTax.checkYourAnswersLabel", "6 April 2018", "5 April 2019")),
+                  label = messages("taxLiability.neededToPayTax.checkYourAnswersLabel", "6 April 2018", "5 April 2019"),
                   answer = Html("Yes")
                 ),
                 AnswerRow(
-                  label = Html(messages("taxLiability.wasTaxDeclared.checkYourAnswersLabel", "6 April 2018", "5 April 2019")),
+                  label = messages("taxLiability.wasTaxDeclared.checkYourAnswersLabel", "6 April 2018", "5 April 2019"),
                   answer = Html("No")
                 )
               ),

@@ -81,7 +81,7 @@ case class AnswerRowConverter @Inject()(name: String = "")
                           labelKey: String,
                           format: T => Html): AnswerRow = {
     AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", name)),
+      messages(s"$labelKey.checkYourAnswersLabel", name),
       format(answer)
     )
   }
