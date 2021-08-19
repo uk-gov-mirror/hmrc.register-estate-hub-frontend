@@ -59,7 +59,7 @@ class YearsOfTaxLiabilityPrintHelper @Inject()(yearFormatter: YearFormatter,
 
   private def yesNoQuestion(value: Boolean, labelKey: String, taxYear: TaxYear)(implicit messages: Messages): AnswerRow =
     AnswerRow(
-      HtmlFormat.escape(messages(s"$labelKey.checkYourAnswersLabel", taxYear.start, taxYear.end)),
+      messages(s"$labelKey.checkYourAnswersLabel", taxYear.start, taxYear.end),
       checkAnswersFormatters.yesOrNo(value)
     )
 

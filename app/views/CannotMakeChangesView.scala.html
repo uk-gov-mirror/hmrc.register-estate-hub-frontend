@@ -22,7 +22,7 @@
 @this(
     main_template: MainTemplate,
     formHelper: FormWithCSRF,
-    appConfig: FrontendAppConfig,
+    config: FrontendAppConfig,
     heading: Heading,
     link: Link
 )
@@ -36,7 +36,7 @@
     @heading("cannotMakeChanges.heading")
 
     <p>@messages("cannotMakeChanges.paragraph1")
-        @link(@appConfig.helplineUrl, "external", "cannotMakeChanges.postLink", true)
+        @link(config.helplineUrl, "external", "cannotMakeChanges.postLink", true)
         @messages("cannotMakeChanges.paragraph2")
     </p>
 

@@ -19,12 +19,14 @@
 @import uk.gov.hmrc.auth.core.AffinityGroup
 @import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
 @import config.FrontendAppConfig
-@import views.html.components.{Heading, Link}
+@import views.html.components.{Heading, SubmitButton, Link}
 
 @this(
-    appConfig: FrontendAppConfig,
     main_template: MainTemplate,
+    appConfig: FrontendAppConfig,
+    formHelper: FormWithCSRF,
     heading: Heading,
+    submitButton: SubmitButton,
     link: Link
 )
 
