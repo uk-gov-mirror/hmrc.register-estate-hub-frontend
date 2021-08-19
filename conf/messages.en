@@ -45,8 +45,9 @@ site.textarea.char_limit = (Limit is {0} characters)
 site.returnToRegistrationProgress = Return to registration progress
 site.sign_out = Sign out
 site.sign_in = Sign in
+site.error = Error:
 
-address.country.select = Select a country
+site.address.country.select = Select a country
 
 #timeout dialog
 timeout.title=Your application will time out soon

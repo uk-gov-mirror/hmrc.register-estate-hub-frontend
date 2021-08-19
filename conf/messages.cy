@@ -44,8 +44,9 @@ site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
 site.returnToRegistrationProgress = Yn ôl i gynnydd cofrestru
 site.sign_out = Allgofnodi
 site.sign_in = Mewngofnodi
+site.error = Gwall:
 
-address.country.select = Dewiswch wlad
+site.address.country.select = Dewiswch wlad
 
 timeout.title = Bydd eich cais yn dod i ben cyn hir
 timeout.message = Byddwn yn ailosod eich cais os na fyddwch yn ymateb cyn pen
