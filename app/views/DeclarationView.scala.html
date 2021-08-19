@@ -58,11 +58,18 @@
             label = messages("declaration.lastName")
         )
 
-        @if(affinityGroup == AffinityGroup.Agent) {
-            <p class="panel-indent">@messages("declaration.agent.warning")</p>
-        } else {
-            <p class="panel-indent">@messages("declaration.warning")</p>
-        }
+
+        <div class="govuk-inset-text">
+            <ul class="govuk-list">
+                <li>
+                    @if(affinityGroup == AffinityGroup.Agent) {
+                        @messages("declaration.agent.warning")
+                    } else {
+                        @messages("declaration.warning")
+                    }
+                </li>
+            </ul>
+        </div>
 
         @submitButton(Some("site.confirm.send"))
 

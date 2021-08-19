@@ -29,7 +29,7 @@ import repositories.SessionRepository
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
 import views.html.TaskListView
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 class TaskListController @Inject()(
                                     actions: Actions,
@@ -75,4 +75,7 @@ class TaskListController @Inject()(
       }
   }
 
+  def onSubmit: Action[AnyContent] = Action {
+    Redirect(controllers.routes.DeclarationController.onPageLoad())
+  }
 }

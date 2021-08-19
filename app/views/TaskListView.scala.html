@@ -60,5 +60,8 @@
         </p>
 
         @components.button_link(messages("taskList.continue"), DeclarationController.onPageLoad().url)
+        @formHelper(action = CreateAgentServicesAccountController.onSubmit, 'autoComplete -> "off") {
+            @submitButton(Some(messages("taskList.continue")))
+        }
     }
 }

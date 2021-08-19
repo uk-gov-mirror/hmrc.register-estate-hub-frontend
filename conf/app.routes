@@ -10,6 +10,7 @@ POST       /csp/report                                  controllers.ContentSecur
 GET        /accessibility                               controllers.AccessibilityStatementController.onPageLoad(userAction: String)
 
 GET        /create-agent-services-account               controllers.CreateAgentServicesAccountController.onPageLoad()
+POST       /create-agent-services-account               controllers.CreateAgentServicesAccountController.onSubmit()
 
 GET        /cannot-change                               controllers.CannotMakeChangesController.onPageLoad()
 
@@ -22,6 +23,7 @@ POST       /have-utr                                    controllers.HaveUTRYesNo
 GET        /must-register-estate                        controllers.MustRegisterEstateController.onPageLoad()
 
 GET        /registration-progress                       controllers.registration_progress.TaskListController.onPageLoad()
+POST       /registration-progress                       controllers.registration_progress.TaskListController.onSubmit()
 
 GET        /problem-declaring                           controllers.ProblemDeclaringController.onPageLoad()
 
