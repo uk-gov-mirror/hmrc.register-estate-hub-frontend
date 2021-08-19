@@ -18,6 +18,8 @@
 @import views.html._
 @import models.Tag._
 
+@this()
+
 @(task: Task)(implicit messages: Messages)
 
 <li class="app-task-list__item" id="task-list__item--@{task.link.text}">

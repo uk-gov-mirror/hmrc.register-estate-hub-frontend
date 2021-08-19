@@ -19,7 +19,6 @@ package utils.print
 import implicits.TaxYearImplicits
 import models._
 import play.api.i18n.Messages
-import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.time.TaxYear
 import utils.YearFormatter
 import viewmodels.{AnswerRow, AnswerSection}

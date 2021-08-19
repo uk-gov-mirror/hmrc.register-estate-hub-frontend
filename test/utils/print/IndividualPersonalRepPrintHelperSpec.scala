@@ -87,16 +87,16 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
       result mustBe AnswerSection(
         headingKey = Some("taskList.personalRepresentative.label"),
         rows = Seq(
-          AnswerRow(label = Html(messages("personalRep.individualOrBusiness.checkYourAnswersLabel")), answer = Html("Individual"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.name.checkYourAnswersLabel")), answer = Html("John Doe"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.dateOfBirth.checkYourAnswersLabel", name.displayName)), answer = Html("3 February 2000"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.ninoYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.passportOrIdCard.checkYourAnswersLabel", name.displayName)), answer = Html("Passport"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.passport.checkYourAnswersLabel", name.displayName)), answer = Html("United Kingdom<br />1234567890<br />3 February 2023"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("Yes"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName)), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName)), answer = Html("+447123456789"), None)
+          AnswerRow(label = messages("personalRep.individualOrBusiness.checkYourAnswersLabel"), answer = Html("Individual"), None),
+          AnswerRow(label = messages("personalRep.individual.name.checkYourAnswersLabel"), answer = Html("John Doe"), None),
+          AnswerRow(label = messages("personalRep.individual.dateOfBirth.checkYourAnswersLabel", name.displayName), answer = Html("3 February 2000"), None),
+          AnswerRow(label = messages("personalRep.individual.ninoYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+          AnswerRow(label = messages("personalRep.individual.passportOrIdCard.checkYourAnswersLabel", name.displayName), answer = Html("Passport"), None),
+          AnswerRow(label = messages("personalRep.individual.passport.checkYourAnswersLabel", name.displayName), answer = Html("United Kingdom<br />1234567890<br />3 February 2023"), None),
+          AnswerRow(label = messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName), answer = Html("Yes"), None),
+          AnswerRow(label = messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
+          AnswerRow(label = messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+          AnswerRow(label = messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName), answer = Html("+447123456789"), None)
         )
       )
     }
@@ -117,16 +117,16 @@ class IndividualPersonalRepPrintHelperSpec extends SpecBase {
       result mustBe AnswerSection(
         headingKey = Some("taskList.personalRepresentative.label"),
         rows = Seq(
-          AnswerRow(label = Html(messages("personalRep.individualOrBusiness.checkYourAnswersLabel")), answer = Html("Individual"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.name.checkYourAnswersLabel")), answer = Html("John Doe"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.dateOfBirth.checkYourAnswersLabel", name.displayName)), answer = Html("3 February 2000"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.ninoYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.passportOrIdCard.checkYourAnswersLabel", name.displayName)), answer = Html("ID card"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.idCard.checkYourAnswersLabel", name.displayName)), answer = Html("United Kingdom<br />1234567890<br />3 February 2023"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName)), answer = Html("99 Test Lane<br />Testville<br />Germany"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-          AnswerRow(label = Html(messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName)), answer = Html("+447123456789"), None)
+          AnswerRow(label = messages("personalRep.individualOrBusiness.checkYourAnswersLabel"), answer = Html("Individual"), None),
+          AnswerRow(label = messages("personalRep.individual.name.checkYourAnswersLabel"), answer = Html("John Doe"), None),
+          AnswerRow(label = messages("personalRep.individual.dateOfBirth.checkYourAnswersLabel", name.displayName), answer = Html("3 February 2000"), None),
+          AnswerRow(label = messages("personalRep.individual.ninoYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+          AnswerRow(label = messages("personalRep.individual.passportOrIdCard.checkYourAnswersLabel", name.displayName), answer = Html("ID card"), None),
+          AnswerRow(label = messages("personalRep.individual.idCard.checkYourAnswersLabel", name.displayName), answer = Html("United Kingdom<br />1234567890<br />3 February 2023"), None),
+          AnswerRow(label = messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+          AnswerRow(label = messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName), answer = Html("99 Test Lane<br />Testville<br />Germany"), None),
+          AnswerRow(label = messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+          AnswerRow(label = messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName), answer = Html("+447123456789"), None)
         )
       )
     }

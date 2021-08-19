@@ -17,12 +17,13 @@
 @import config.FrontendAppConfig
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
 @import utils.SectionFormatter.formatSections
-@import views.html.components.Heading
+@import views.html.components.{Heading, ButtonPrint}
 
 @this(
     main_template: MainTemplate,
     formHelper: FormWithCSRF,
     heading: Heading,
+    buttonPrint: ButtonPrint,
     govukSummaryList: GovukSummaryList
 )
 
@@ -35,7 +36,7 @@
 
     @heading("declaredAnswers.heading")
 
-    @components.button_print()
+    @buttonPrint()
 
     <p class="bold">@messages("declaredAnswers.trn", trn)</p>
 

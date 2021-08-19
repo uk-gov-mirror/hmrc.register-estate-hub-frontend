@@ -15,7 +15,11 @@
  *@
 
 @import viewmodels.Task
-@import views.html._
+@import views.html.components.TaskDisplay
+
+@this(
+    taskDisplay: TaskDisplay
+)
 
 @(sections: List[Task])(implicit messages: Messages)
 
@@ -23,6 +27,6 @@
 
 <ul class="app-task-list__items">
     @for(task <- sections){
-        @components.task(task)
+        @taskDisplay(task)
     }
 </ul>

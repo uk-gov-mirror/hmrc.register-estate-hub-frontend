@@ -86,7 +86,7 @@ class RegistrationAnswersPrintHelperSpec extends SpecBase {
         AnswerSection(
           headingKey = Some("taskList.estateName.label"),
           rows = Seq(
-            AnswerRow(label = Html(messages("estateDetails.name.checkYourAnswersLabel")), answer = Html("Estate of John Doe"), None)
+            AnswerRow(label = messages("estateDetails.name.checkYourAnswersLabel"), answer = Html("Estate of John Doe"), None)
           )
         ),
         AnswerSection(
@@ -106,11 +106,11 @@ class RegistrationAnswersPrintHelperSpec extends SpecBase {
         AnswerSection(
           headingKey = Some("taskList.personWhoDied.label"),
           rows = Seq(
-            AnswerRow(label = Html(messages("deceasedPerson.name.checkYourAnswersLabel")), answer = Html("John Doe"), None),
-            AnswerRow(label = Html(messages("deceasedPerson.dateOfDeath.checkYourAnswersLabel", name.displayName)), answer = Html("3 February 2019"), None),
-            AnswerRow(label = Html(messages("deceasedPerson.dateOfBirthYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-            AnswerRow(label = Html(messages("deceasedPerson.ninoYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-            AnswerRow(label = Html(messages("deceasedPerson.addressYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None)
+            AnswerRow(label = messages("deceasedPerson.name.checkYourAnswersLabel"), answer = Html("John Doe"), None),
+            AnswerRow(label = messages("deceasedPerson.dateOfDeath.checkYourAnswersLabel", name.displayName), answer = Html("3 February 2019"), None),
+            AnswerRow(label = messages("deceasedPerson.dateOfBirthYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+            AnswerRow(label = messages("deceasedPerson.ninoYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+            AnswerRow(label = messages("deceasedPerson.addressYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None)
           )
         )
       )

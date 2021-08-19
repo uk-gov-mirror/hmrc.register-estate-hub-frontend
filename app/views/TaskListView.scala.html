@@ -19,7 +19,7 @@
 @import uk.gov.hmrc.auth.core.AffinityGroup
 @import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
 @import config.FrontendAppConfig
-@import views.html.components.{Heading, SubmitButton, Link}
+@import views.html.components.{Heading, SubmitButton, TaskList, Link}
 
 @this(
     main_template: MainTemplate,
@@ -27,6 +27,7 @@
     formHelper: FormWithCSRF,
     heading: Heading,
     submitButton: SubmitButton,
+    taskList: TaskList,
     link: Link
 )
 
@@ -50,7 +51,7 @@
         <p>@link(appConfig.agentDetails+"/check-your-answers", "agent-details", "taskList.agent.agentDetails")</p>
     }
 
-    @components.task_list(sections)
+    @taskList(sections)
 
     @if(isTaskListComplete) {
         <h2 id="summary-heading">@messages("taskList.summary.heading")</h2>

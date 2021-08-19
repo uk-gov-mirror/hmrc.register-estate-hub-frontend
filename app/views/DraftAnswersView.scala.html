@@ -16,12 +16,13 @@
 
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
 @import utils.SectionFormatter.formatSections
-@import views.html.components.Heading
+@import views.html.components.{Heading, ButtonPrint}
 
 @this(
     main_template: MainTemplate,
     formHelper: FormWithCSRF,
     heading: Heading,
+    buttonPrint: ButtonPrint,
     govukSummaryList: GovukSummaryList
 )
 
@@ -35,7 +36,7 @@
 
     @heading("draftAnswers.heading", headingSize = "govuk-heading-xl")
 
-    @components.button_print()
+    @buttonPrint()
 
     @govukSummaryList(SummaryList(rows = formatSections(entities)))
 }
