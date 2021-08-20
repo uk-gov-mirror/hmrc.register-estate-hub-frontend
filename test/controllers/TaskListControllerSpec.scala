@@ -53,10 +53,10 @@ class TaskListControllerSpec extends SpecBase {
       "all routes are enabled" in {
 
         val sections = List(
-          Task(Link(EstateName, estateDetailsRoute), Some(Completed)),
-          Task(Link(PersonalRepresentative, personalRepRoute), Some(Completed)),
-          Task(Link(PersonWhoDied, deceasedPersonsRoute), Some(Completed)),
-          Task(Link(YearsOfTaxLiability, registerTaxRoute), Some(Completed))
+          Task(Link(EstateName, estateDetailsRoute), Completed),
+          Task(Link(PersonalRepresentative, personalRepRoute), Completed),
+          Task(Link(PersonWhoDied, deceasedPersonsRoute), Completed),
+          Task(Link(YearsOfTaxLiability, registerTaxRoute), Completed)
         )
 
         when(mockRepository.set(any())).thenReturn(Future.successful(true))
@@ -93,9 +93,9 @@ class TaskListControllerSpec extends SpecBase {
       "no tasks completed" in {
 
         val sections = List(
-          Task(Link(EstateName, estateDetailsRoute), Some(InProgress)),
-          Task(Link(PersonalRepresentative, personalRepRoute), Some(InProgress)),
-          Task(Link(PersonWhoDied, deceasedPersonsRoute), Some(InProgress))
+          Task(Link(EstateName, estateDetailsRoute),InProgress),
+          Task(Link(PersonalRepresentative, personalRepRoute),InProgress),
+          Task(Link(PersonWhoDied, deceasedPersonsRoute),InProgress)
         )
 
         when(mockRepository.set(any())).thenReturn(Future.successful(true))

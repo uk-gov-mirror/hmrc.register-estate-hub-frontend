@@ -25,7 +25,7 @@ import viewmodels.{Link, Task}
 trait TaskListSections {
 
   case class TaskList(mandatory: List[Task], other: List[Task]) {
-    val isAbleToDeclare : Boolean = !(mandatory ::: other).exists(_.tag.contains(InProgress))
+    val isAbleToDeclare : Boolean = !(mandatory ::: other).exists(_.tag == InProgress)
   }
 
   private lazy val notYetAvailable: String =
@@ -69,15 +69,15 @@ trait TaskListSections {
     val mandatorySections = List(
       Task(
         Link(EstateName, estateDetailsRoute),
-        Some(TagStatus.tagFor(tasks.details, config.estateDetailsEnabled))
+        TagStatus.tagFor(tasks.details, config.estateDetailsEnabled)
       ),
       Task(
         Link(PersonalRepresentative, personalRepRoute),
-        Some(TagStatus.tagFor(tasks.personalRepresentative, config.personalRepEnabled))
+        TagStatus.tagFor(tasks.personalRepresentative, config.personalRepEnabled)
       ),
       Task(
         Link(PersonWhoDied, deceasedPersonsRoute),
-        Some(TagStatus.tagFor(tasks.deceased, config.deceasedPersonsEnabled))
+        TagStatus.tagFor(tasks.deceased, config.deceasedPersonsEnabled)
       )
     )
 
@@ -85,7 +85,7 @@ trait TaskListSections {
       List(
         Task(
           Link(YearsOfTaxLiability, registerTaxRoute),
-          Some(TagStatus.tagFor(tasks.yearsOfTaxLiability, config.registerTaxEnabled))
+          TagStatus.tagFor(tasks.yearsOfTaxLiability, config.registerTaxEnabled)
         )
       )
     } else {

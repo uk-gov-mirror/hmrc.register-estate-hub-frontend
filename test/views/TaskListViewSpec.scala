@@ -45,15 +45,15 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
     List(
       Task(
         Link(EstateName, url),
-        Some(TagStatus.tagFor(tasks.details, featureEnabled = true))
+        TagStatus.tagFor(tasks.details, featureEnabled = true)
       ),
       Task(
         Link(PersonalRepresentative, url),
-        Some(TagStatus.tagFor(tasks.personalRepresentative, featureEnabled = true))
+        TagStatus.tagFor(tasks.personalRepresentative, featureEnabled = true)
       ),
       Task(
         Link(PersonWhoDied, url),
-        Some(TagStatus.tagFor(tasks.deceased, featureEnabled = true))
+        TagStatus.tagFor(tasks.deceased, featureEnabled = true)
       )
     )
   }
