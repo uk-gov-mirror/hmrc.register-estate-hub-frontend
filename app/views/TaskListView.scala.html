@@ -41,7 +41,7 @@
         <span class="govuk-caption-xl" id="estate-name">@name</span>
     }
 
-    @heading("taskList.heading")
+    @heading("taskList.heading", headingSize = "govuk-heading-xl")
 
     <p>@messages("taskList.paragraph1")</p>
 
@@ -58,9 +58,7 @@
 
         <p id="summary-paragraph">@messages("taskList.summary.paragraph")</p>
 
-        <p>
-            @link(DraftAnswersController.onPageLoad().url, "print-and-save", "taskList.summary.link")
-        </p>
+        <p>@link(DraftAnswersController.onPageLoad().url, "print-and-save", "taskList.summary.link")</p>
 
         @formHelper(action = CreateAgentServicesAccountController.onSubmit, 'autoComplete -> "off") {
             @submitButton(Some(messages("taskList.continue")))

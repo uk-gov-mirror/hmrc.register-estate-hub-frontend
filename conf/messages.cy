@@ -79,6 +79,7 @@ mustRegisterEstate.p1.link = gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM (yn
 
 taskList.title = Cynnydd cofrestru
 taskList.heading = Cynnydd cofrestru
+taskList.caption = {0}
 taskList.paragraph1 = Gallwch ychwanegu gwybodaeth am yr ystâd a gwneud datganiad ar ôl i chi gadarnhau bod pob adran wedi’i llenwi.
 taskList.paragraph2 = Os na wnewch ddatganiad, ni chaiff unrhyw wybodaeth rydych yn ei hychwanegu ei chadw.
 taskList.sections.heading = Adrannau i’w cwblhau

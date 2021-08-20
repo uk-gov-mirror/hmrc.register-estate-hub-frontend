@@ -14,18 +14,20 @@
  * limitations under the License.
  *@
 
-@this(
-    button: GovukButton,
-)
+@import uk.gov.hmrc.govukfrontend.views.html.components._
 
-@(overrideMessage: Option[String] = None, submitClass: Option[String] = None)(implicit messages: Messages)
+@this(govukButton : GovukButton)
 
-@button(Button(
-    attributes = Map("id"->"submit"),
-    classes = s"button ${submitClass.getOrElse("")}",
-    content = if(overrideMessage.isEmpty) {
-        Text(messages("site.save.continue"))
-    } else {
-        Text(messages(overrideMessage.get))
-    }
+@(
+ messageKey: String = "site.continue",
+ isStartButton: Boolean = false,
+ isPrintButton: Boolean = false,
+ attributes: Map[String, String] = Map.empty
+)(implicit messages: Messages)
+
+@govukButton(Button(
+ isStartButton = isStartButton,
+ content = Text(messages(messageKey)),
+ classes = if (isPrintButton) "govuk-button--secondary print-hidden" else "",
+ attributes = if (isPrintButton) Map("onClick" -> "window.print()", "id"->"print") else attributes
 ))

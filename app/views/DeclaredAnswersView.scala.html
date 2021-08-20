@@ -17,13 +17,13 @@
 @import config.FrontendAppConfig
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
 @import utils.SectionFormatter.formatSections
-@import views.html.components.{Heading, ButtonPrint}
+@import views.html.components.{Heading, Button}
 
 @this(
     main_template: MainTemplate,
     formHelper: FormWithCSRF,
     heading: Heading,
-    buttonPrint: ButtonPrint,
+    button: Button,
     govukSummaryList: GovukSummaryList
 )
 
@@ -36,7 +36,9 @@
 
     @heading("declaredAnswers.heading")
 
-    @buttonPrint()
+    <div class="section">
+        <p>@button(messageKey = "site.print-or-save", isPrintButton = true)</p>
+    </div>
 
     <p class="bold">@messages("declaredAnswers.trn", trn)</p>
 

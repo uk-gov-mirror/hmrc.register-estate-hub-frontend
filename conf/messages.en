@@ -81,6 +81,7 @@ mustRegisterEstate.p1.link = contact the bereavement and deceased estate helplin
 
 taskList.title = Registration progress
 taskList.heading = Registration progress
+taskList.caption = {0}
 taskList.paragraph1 = You can add information about the estate and make a declaration once you have confirmed each section is complete.
 taskList.paragraph2 = Any information you add without declaring will not be saved.
 taskList.sections.heading = Sections to be completed
