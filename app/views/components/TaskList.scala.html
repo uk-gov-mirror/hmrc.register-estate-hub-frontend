@@ -14,12 +14,14 @@
  * limitations under the License.
  *@
 
+@import views.html.components.{Link, TaskItem}
 @import viewmodels.Task
-@import views.html.components.TaskDisplay
 
 @this(
-    taskDisplay: TaskDisplay
+    taskItem: TaskItem,
+    link: Link
 )
+
 
 @(sections: List[Task])(implicit messages: Messages)
 
@@ -27,6 +29,6 @@
 
 <ul class="app-task-list__items">
     @for(task <- sections){
-        @taskDisplay(task)
+        @taskItem(task)
     }
 </ul>
