@@ -16,22 +16,22 @@
 
 package models
 
-sealed trait Tag
+sealed trait TagStatus
 
-object Tag extends Enumerable.Implicits {
+object TagStatus extends Enumerable.Implicits {
 
-  case object Completed extends WithName("completed") with Tag
+  case object Completed extends WithName("completed") with TagStatus
 
-  case object InProgress extends WithName("in-progress") with Tag
+  case object InProgress extends WithName("in-progress") with TagStatus
 
-  val values: Set[Tag] = Set(
+  val values: Set[TagStatus] = Set(
     Completed, InProgress
   )
 
-  implicit val enumerable: Enumerable[Tag] =
+  implicit val enumerable: Enumerable[TagStatus] =
     Enumerable(values.toSeq.map(v => v.toString -> v): _*)
 
-  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : Tag = {
+  def tagFor(upToDate: Boolean, featureEnabled: Boolean) : TagStatus = {
     if (upToDate || !featureEnabled) {
       Completed
     } else {

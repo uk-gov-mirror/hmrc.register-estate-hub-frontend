@@ -16,7 +16,7 @@
 
 package views
 
-import models.{CompletedTasks, Tag}
+import models.{CompletedTasks, TagStatus}
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
 import viewmodels.tasks.{EstateName, PersonWhoDied, PersonalRepresentative}
@@ -45,15 +45,15 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
     List(
       Task(
         Link(EstateName, url),
-        Some(Tag.tagFor(tasks.details, featureEnabled = true))
+        Some(TagStatus.tagFor(tasks.details, featureEnabled = true))
       ),
       Task(
         Link(PersonalRepresentative, url),
-        Some(Tag.tagFor(tasks.personalRepresentative, featureEnabled = true))
+        Some(TagStatus.tagFor(tasks.personalRepresentative, featureEnabled = true))
       ),
       Task(
         Link(PersonWhoDied, url),
-        Some(Tag.tagFor(tasks.deceased, featureEnabled = true))
+        Some(TagStatus.tagFor(tasks.deceased, featureEnabled = true))
       )
     )
   }

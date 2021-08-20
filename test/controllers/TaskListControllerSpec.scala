@@ -20,7 +20,7 @@ import base.SpecBase
 import connectors.{EstatesConnector, EstatesStoreConnector}
 import models.CompletedTasks
 import models.CompletedTasksResponse.InternalServerError
-import models.Tag._
+import models.TagStatus._
 import org.mockito.Matchers.any
 import org.mockito.Mockito._
 import play.api.inject.bind
