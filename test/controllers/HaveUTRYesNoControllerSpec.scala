@@ -32,7 +32,7 @@ import views.html.HaveUTRYesNoView
 class HaveUTRYesNoControllerSpec extends SpecBase {
 
   val formProvider = new YesNoFormProvider()
-  val form: Form[Boolean] = formProvider.withPrefix("haveUtr")
+  val form: Form[Boolean] = formProvider.withPrefix("haveUtrYesNo")
 
   lazy val haveUTRRoute: String = routes.HaveUTRYesNoController.onPageLoad().url
 

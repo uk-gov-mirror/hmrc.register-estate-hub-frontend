@@ -30,7 +30,7 @@ import views.html.EstateRegisteredOnlineYesNoView
 class EstateRegisteredOnlineYesNoControllerSpec extends SpecBase {
 
   val formProvider = new YesNoFormProvider()
-  val form = formProvider.withPrefix("estateRegisteredOnline")
+  val form = formProvider.withPrefix("estateRegisteredOnlineYesNo")
 
   lazy val estateRegisteredOnlineRoute = routes.EstateRegisteredOnlineYesNoController.onPageLoad().url
 

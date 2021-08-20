@@ -33,10 +33,12 @@
         </a>
     </span>
 
-    @govukTag(Tag(
-        content = Text(messages(s"taskList.${task.tag}")),
-        classes = "app-task-list__task-completed",
-        attributes = Map("id" -> s"task-list__task--${task.link.text}__tag")
-    ))
+    @if(task.tag == Completed){
+        @govukTag(Tag(
+            content = Text(messages(s"taskList.${task.tag}")),
+            classes = "app-task-list__task-completed",
+            attributes = Map("id" -> s"task-list__task--${task.link.text}__tag")
+        ))
+    }
 
 </li>

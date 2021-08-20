@@ -30,7 +30,7 @@
 @(form: Form[_], isOrgCredUser: Boolean)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = s"${errorPrefix(form)}${messages("haveUtr.title")}",
+    title = s"${errorPrefix(form)}${messages("haveUtrYesNo.title")}",
     showBackLink = true
 ) {
 
@@ -40,8 +40,8 @@
 
         @inputYesNo(
             field = form("value"),
-            label = messages("haveUtr.heading"),
-            hint = if(isOrgCredUser) Some(messages("haveUtr.hint")) else None
+            label = messages("haveUtrYesNo.heading"),
+            hint = if(isOrgCredUser) Some(messages("haveUtrYesNo.hint")) else None
         )
 
         @submitButton()

@@ -61,16 +61,16 @@ featureNotAvailable.p1 = Os oes angen i chi wneud unrhyw newidiadau i’r ymddir
 featureNotAvailable.link = gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM (yn agor ffenestr neu dab newydd)
 featureNotAvailable.p2 = Byddwch yn gallu diweddaru’r manylion hyn ar-lein yn y dyfodol.
 
-estateRegisteredOnline.title = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
-estateRegisteredOnline.heading = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
-estateRegisteredOnline.checkYourAnswersLabel = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
-estateRegisteredOnline.error.required = Dewiswch ‘Iawn’ os yw’r ystâd eisoes wedi’i chofrestru ar-lein
+estateRegisteredOnlineYesNo.title = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
+estateRegisteredOnlineYesNo.heading = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
+estateRegisteredOnlineYesNo.checkYourAnswersLabel = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
+estateRegisteredOnlineYesNo.error.required = Dewiswch ‘Iawn’ os yw’r ystâd eisoes wedi’i chofrestru ar-lein
 
-haveUtr.title = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
-haveUtr.heading = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
-haveUtr.checkYourAnswersLabel = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
-haveUtr.hint = Os yw’ch ystâd wedi’i sefydlu ar gyfer Hunanasesiad, dylai rhywun fod wedi cael llythyr (SA250) gyda UTR yr ystâd.
-haveUtr.error.required = Dewiswch ‘Iawn’ os oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr
+haveUtrYesNo.title = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
+haveUtrYesNo.heading = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
+haveUtrYesNo.checkYourAnswersLabel = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
+haveUtrYesNo.hint = Os yw’ch ystâd wedi’i sefydlu ar gyfer Hunanasesiad, dylai rhywun fod wedi cael llythyr (SA250) gyda UTR yr ystâd.
+haveUtrYesNo.error.required = Dewiswch ‘Iawn’ os oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr
 
 mustRegisterEstate.title = Mae’n rhaid i chi gofrestru’ch ystâd
 mustRegisterEstate.heading = Mae’n rhaid i chi gofrestru’ch ystâd

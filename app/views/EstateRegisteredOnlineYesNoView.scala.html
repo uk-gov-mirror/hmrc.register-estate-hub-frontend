@@ -30,7 +30,7 @@
 @(form: Form[_])(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = s"${errorPrefix(form)}${messages("estateRegisteredOnline.title")}",
+    title = s"${errorPrefix(form)}${messages("estateRegisteredOnlineYesNo.title")}",
     showBackLink = true
 ) {
 
@@ -40,7 +40,7 @@
 
         @inputYesNo(
             field = form("value"),
-            label = messages("estateRegisteredOnline.heading"),
+            label = messages("estateRegisteredOnlineYesNo.heading"),
         )
 
         @submitButton()

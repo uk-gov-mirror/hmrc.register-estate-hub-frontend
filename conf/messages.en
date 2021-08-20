@@ -63,16 +63,16 @@ featureNotAvailable.p1 = If you need to make any changes to the trust you can
 featureNotAvailable.link = contact the trusts helpline (opens in a new window or tab)
 featureNotAvailable.p2 = You will be able to update these details online in the future.
 
-estateRegisteredOnline.title = Has the estate already been registered online?
-estateRegisteredOnline.heading = Has the estate already been registered online?
-estateRegisteredOnline.checkYourAnswersLabel = Has the estate already been registered online?
-estateRegisteredOnline.error.required = Select yes if the estate has already been registered online
+estateRegisteredOnlineYesNo.title = Has the estate already been registered online?
+estateRegisteredOnlineYesNo.heading = Has the estate already been registered online?
+estateRegisteredOnlineYesNo.checkYourAnswersLabel = Has the estate already been registered online?
+estateRegisteredOnlineYesNo.error.required = Select yes if the estate has already been registered online
 
-haveUtr.title = Does the estate have a Unique Taxpayer Reference (UTR)?
-haveUtr.heading = Does the estate have a Unique Taxpayer Reference (UTR)?
-haveUtr.checkYourAnswersLabel = Does the estate have a Unique Taxpayer Reference (UTR)?
-haveUtr.hint = If your estate has been set up for Self Assessment, someone should have received a letter (SA250) with the estate’s UTR.
-haveUtr.error.required = Select yes if the estate has a Unique Taxpayer Reference
+haveUtrYesNo.title = Does the estate have a Unique Taxpayer Reference (UTR)?
+haveUtrYesNo.heading = Does the estate have a Unique Taxpayer Reference (UTR)?
+haveUtrYesNo.checkYourAnswersLabel = Does the estate have a Unique Taxpayer Reference (UTR)?
+haveUtrYesNo.hint = If your estate has been set up for Self Assessment, someone should have received a letter (SA250) with the estate’s UTR.
+haveUtrYesNo.error.required = Select yes if the estate has a Unique Taxpayer Reference
 
 mustRegisterEstate.title = You must register your estate
 mustRegisterEstate.heading = You must register your estate

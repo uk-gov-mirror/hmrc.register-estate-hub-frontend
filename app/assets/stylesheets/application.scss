@@ -27,3 +27,7 @@ a {
 h2 {
     @extend .govuk-heading-m;
 }
+
+.app-task-list__items {
+  padding-left: 0 !important;
+}
