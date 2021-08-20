@@ -78,7 +78,7 @@
         @submitButton(Some("site.confirm.send"))
 
         <p>
-            @link("@controllers.registration_progress.routes.TaskListController.onPageLoad()", "returnToRegistrationProgress", "site.returnToRegistrationProgress")
+            @link(controllers.registration_progress.routes.TaskListController.onPageLoad().url, "returnToRegistrationProgress", "site.returnToRegistrationProgress")
         </p>
     }
 }

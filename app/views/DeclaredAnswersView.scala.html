@@ -16,7 +16,7 @@
 
 @import config.FrontendAppConfig
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
-@import utils.SectionFormatter.formatSections
+@import utils.SectionFormatter.formatSummarySections
 @import views.html.components.{Heading, Button}
 
 @this(
@@ -44,5 +44,5 @@
 
     <p>@messages("declaredAnswers.p1", declarationSent)</p>
 
-    @govukSummaryList(SummaryList(rows = formatSections(entities)))
+    @govukSummaryList(SummaryList(rows = formatSummarySections(entities)))
 }

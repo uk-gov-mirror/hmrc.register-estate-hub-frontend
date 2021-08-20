@@ -17,12 +17,13 @@
 @import controllers.routes._
 @import utils.AccessibilityHelper._
 @import config.FrontendAppConfig
-@import views.html.components.Link
+@import views.html.components.{ConfirmationPanel, Link}
 
 @this(
     main_template: MainTemplate,
     formHelper: FormWithCSRF,
     appConfig: FrontendAppConfig,
+    confirmationPanel: ConfirmationPanel,
     link: Link
 )
 
@@ -30,22 +31,15 @@
 
 @main_template(
     title = s"${messages("confirmation.title")}"
-    ) {
+) {
 
-    <div class="govuk-main-wrapper--l">
-        <h1 class="form-title heading-large heading-confirmation">
-            @messages("confirmation.heading")
-            <span class="reference-text">@messages("confirmation.heading2")</span>
-            <span id="estates-registration-number" class="reference-number">@trn</span>
-        </h1>
-    </div>
+    @confirmationPanel(
+        heading = messages("confirmation.heading"),
+        content = messages("confirmation.heading2"),
+        refNumber = trn
+    )
 
-
-    <div class="govuk-inset-text">
-        <ul class="govuk-list">
-            <li>@link(DeclaredAnswersController.onPageLoad().url, "print-and-save","confirmation.printsave")</li>
-        </ul>
-    </div>
+    <p class="govuk-inset-text">@link(DeclaredAnswersController.onPageLoad().url, "print-and-save","confirmation.printsave")</p>
 
     <h2>@messages("confirmation.subheading1")</h2>
 

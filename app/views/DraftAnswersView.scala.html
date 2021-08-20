@@ -15,7 +15,7 @@
  *@
 
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
-@import utils.SectionFormatter.formatSections
+@import utils.SectionFormatter.formatSummarySections
 @import views.html.components.{Heading, Button}
 
 @this(
@@ -40,5 +40,5 @@
         <p>@button(messageKey = "site.print-or-save", isPrintButton = true)</p>
     </div>
 
-    @govukSummaryList(SummaryList(rows = formatSections(entities)))
+    @govukSummaryList(SummaryList(rows = formatSummarySections(entities)))
 }
