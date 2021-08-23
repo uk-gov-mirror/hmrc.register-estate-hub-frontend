@@ -44,7 +44,7 @@ trait TaskListViewBehaviours extends ViewSpecBase {
               }
 
               s"render a link" in {
-                val id = s"task-list__task-link--${section.link.text}"
+                val id = s"task-list__task--${section.link.text}"
 
                 val doc = asDocument(view)
                 doc.getElementById(id).hasAttr("href")
@@ -52,7 +52,7 @@ trait TaskListViewBehaviours extends ViewSpecBase {
 
               s"render a tag" in {
                 val doc = asDocument(view)
-                assertRenderedById(doc, s"task-list__task--${section.link.text}__tag")
+                assertRenderedById(doc, s"task-list__tag--${section.link.text}__tag")
               }
 
             }

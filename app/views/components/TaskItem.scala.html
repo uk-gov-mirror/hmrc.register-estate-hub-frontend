@@ -26,9 +26,9 @@
 <li class="app-task-list__item" id="task-list__item--@{task.link.text}">
     <span class="app-task-link">
         <a class="app-task-list__task-name"
-           id="task-list__task-link--@{task.link.text}"
+           id="task-list__task--@{task.link.text}"
            href="@{task.link.url}"
-           aria-describedby="task-list__task--@{task.link.text}__tag">
+           aria-describedby="task-list__tag--@{task.link.text}__tag">
             @messages(s"taskList.${task.link.text}.label")
         </a>
     </span>
@@ -37,7 +37,7 @@
         @govukTag(Tag(
             content = Text(messages(s"taskList.${task.tag}")),
             classes = "app-task-list__task-completed",
-            attributes = Map("id" -> s"task-list__task--${task.link.text}__tag")
+            attributes = Map("id" -> s"task-list__tag--${task.link.text}__tag")
         ))
     }
 
