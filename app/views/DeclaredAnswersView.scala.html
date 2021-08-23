@@ -14,36 +14,35 @@
  * limitations under the License.
  *@
 
+@import config.FrontendAppConfig
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
-@import utils.AccessibilityHelper._
+@import utils.SectionFormatter.formatSummarySections
+@import views.html.components.{Heading, Button}
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    heading: Heading,
+    button: Button,
+    govukSummaryList: GovukSummaryList
 )
 
 @(entities: Seq[Section], trn: String, declarationSent: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("declaredAnswers.title")
+    title = messages("declaredAnswers.title"),
+    showBackLink = true
 ) {
 
-    @components.back_link()
+    @heading("declaredAnswers.heading")
 
-    @components.heading("declaredAnswers.heading", headingSize = "heading-large")
+    <div class="section">
+        <p>@button(messageKey = "site.print-or-save", isPrintButton = true)</p>
+    </div>
 
-    @components.button_print()
-
-    <p class="bold">@messages("declaredAnswers.trn", trn)</p>
+    <p class="govuk-!-font-weight-bold">@messages("declaredAnswers.trn", trn)</p>
 
     <p>@messages("declaredAnswers.p1", declarationSent)</p>
 
-    @for(section <- entities){
-        @{
-            section match {
-                case a: AnswerSection => components.summary_answer_section(a)
-                case r: RepeaterAnswerSection => components.repeater_answer_section(r)
-            }
-        }
-    }
+    @govukSummaryList(SummaryList(rows = formatSummarySections(entities)))
 }

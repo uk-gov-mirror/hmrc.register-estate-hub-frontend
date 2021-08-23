@@ -25,9 +25,9 @@ import views.html.HaveUTRYesNoView
 
 class HaveUTRYesNoViewSpec extends YesNoViewBehaviours {
 
-  val messageKeyPrefix = "haveUtr"
+  val messageKeyPrefix = "haveUtrYesNo"
 
-  val form: Form[Boolean] = new YesNoFormProvider().withPrefix("haveUtr")
+  val form: Form[Boolean] = new YesNoFormProvider().withPrefix("haveUtrYesNo")
 
   val view: HaveUTRYesNoView = viewFor[HaveUTRYesNoView](Some(emptyUserAnswers))
 

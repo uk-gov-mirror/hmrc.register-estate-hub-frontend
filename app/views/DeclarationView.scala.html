@@ -14,52 +14,71 @@
  * limitations under the License.
  *@
 
+@import config.FrontendAppConfig
 @import controllers.routes._
 @import uk.gov.hmrc.auth.core.AffinityGroup
 @import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
+@import views.html.components.{ErrorSummary, Heading, InputText, SubmitButton, Link}
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    appConfig: FrontendAppConfig,
+    errorSummary: ErrorSummary,
+    heading: Heading,
+    inputText: InputText,
+    submitButton: SubmitButton,
+    link: Link
 )
 
 @(form: Form[_], affinityGroup: AffinityGroup)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = s"${errorPrefix(form)}${messages("declaration.title")}"
-    ) {
+    title = s"${errorPrefix(form)}${messages("declaration.title")}",
+    showBackLink = true
+) {
 
     @formHelper(action = DeclarationController.onSubmit(), 'autoComplete -> "off") {
 
-        @components.back_link()
+        @errorSummary(form.errors)
 
-        @components.error_summary(form.errors)
+        @heading("declaration.heading")
 
-        @components.heading("declaration.heading")
-
-        @components.input_text(
+        @inputText(
             field = form("firstName"),
-            label = messages("declaration.firstName")
+            label = messages("declaration.firstName"),
+            inputClass = Some("govuk-!-width-one-half")
         )
 
-        @components.input_text(
+        @inputText(
             field = form("middleName"),
-            label = messages("declaration.middleName")
+            label = messages("declaration.middleName"),
+            inputClass = Some("govuk-!-width-one-half")
         )
 
-        @components.input_text(
+        @inputText(
             field = form("lastName"),
-            label = messages("declaration.lastName")
+            label = messages("declaration.lastName"),
+            inputClass = Some("govuk-!-width-one-half")
         )
 
-        @if(affinityGroup == AffinityGroup.Agent) {
-            <p class="panel-indent">@messages("declaration.agent.warning")</p>
-        } else {
-            <p class="panel-indent">@messages("declaration.warning")</p>
-        }
 
-        @components.submit_button(Some("site.confirm.send"))
+        <div class="govuk-inset-text">
+            <ul class="govuk-list">
+                <li>
+                    @if(affinityGroup == AffinityGroup.Agent) {
+                        @messages("declaration.agent.warning")
+                    } else {
+                        @messages("declaration.warning")
+                    }
+                </li>
+            </ul>
+        </div>
 
-        <p><a href="@controllers.registration_progress.routes.TaskListController.onPageLoad()">@messages("site.returnToRegistrationProgress")</a></p>
+        @submitButton(Some("site.confirm.send"))
+
+        <p>
+            @link(controllers.registration_progress.routes.TaskListController.onPageLoad().url, "returnToRegistrationProgress", "site.returnToRegistrationProgress")
+        </p>
     }
 }

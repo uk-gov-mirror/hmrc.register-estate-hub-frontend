@@ -17,27 +17,29 @@
 @import controllers.routes._
 @import utils.AccessibilityHelper._
 @import config.FrontendAppConfig
+@import views.html.components.{ConfirmationPanel, Link}
 
 @this(
     main_template: MainTemplate,
-    appConfig: FrontendAppConfig
+    formHelper: FormWithCSRF,
+    appConfig: FrontendAppConfig,
+    confirmationPanel: ConfirmationPanel,
+    link: Link
 )
 
 @(trn: String, personalRepName: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = s"${messages("confirmation.title")}"
-    ) {
+) {
 
-    <div class="govuk-main-wrapper--l">
-        <h1 class="form-title heading-large heading-confirmation">
-            @messages("confirmation.heading")
-            <span class="reference-text">@messages("confirmation.heading2")</span>
-            <span id="estates-registration-number" class="reference-number">@trn</span>
-        </h1>
-    </div>
+    @confirmationPanel(
+        heading = messages("confirmation.heading"),
+        content = messages("confirmation.heading2"),
+        refNumber = trn
+    )
 
-    <p class="panel-indent">@components.link(DeclaredAnswersController.onPageLoad().url, "print-and-save","confirmation.printsave")</p>
+    <p class="govuk-inset-text">@link(DeclaredAnswersController.onPageLoad().url, "print-and-save","confirmation.printsave")</p>
 
     <h2>@messages("confirmation.subheading1")</h2>
 
@@ -45,7 +47,11 @@
 
     <h2>@messages("confirmation.subheading2")</h2>
 
-    <p>@messages("confirmation.paragraph2") <a target="_blank" href="@appConfig.helplineUrl">@messages("confirmation.paragraph2.link")</a>.</p>
+    <p>@messages("confirmation.paragraph2")
+        @link(appConfig.helplineUrl, "helplineUrl1", "confirmation.paragraph2.link", true).
+    </p>
 
-    <p>@messages("confirmation.paragraph3") <a target="_blank" href="@appConfig.helplineUrl">@messages("confirmation.paragraph3.link")</a>.</p>
+    <p>@messages("confirmation.paragraph3")
+        @link(appConfig.helplineUrl, "helplineUrl2", "confirmation.paragraph3.link", true).
+    </p>
 }

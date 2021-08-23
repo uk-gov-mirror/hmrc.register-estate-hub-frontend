@@ -15,31 +15,30 @@
  *@
 
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
-@import utils.AccessibilityHelper._
+@import utils.SectionFormatter.formatSummarySections
+@import views.html.components.{Heading, Button}
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    heading: Heading,
+    button: Button,
+    govukSummaryList: GovukSummaryList
 )
+
 
 @(entities: Seq[Section])(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("draftAnswers.title")
+    title = messages("draftAnswers.title"),
+    showBackLink = true
 ) {
 
-    @components.back_link()
+    @heading("draftAnswers.heading", headingSize = "govuk-heading-xl")
 
-    @components.heading("draftAnswers.heading", headingSize = "heading-xlarge")
+    <div class="section">
+        <p>@button(messageKey = "site.print-or-save", isPrintButton = true)</p>
+    </div>
 
-    @components.button_print()
-
-    @for(section <- entities){
-        @{
-            section match {
-                case a: AnswerSection => components.summary_answer_section(a)
-                case r: RepeaterAnswerSection => components.repeater_answer_section(r)
-            }
-        }
-    }
+    @govukSummaryList(SummaryList(rows = formatSummarySections(entities)))
 }

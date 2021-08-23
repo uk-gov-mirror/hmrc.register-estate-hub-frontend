@@ -25,9 +25,9 @@ import views.html.EstateRegisteredOnlineYesNoView
 
 class EstateRegisteredOnlineYesNoViewSpec extends YesNoViewBehaviours {
 
-  val messageKeyPrefix = "estateRegisteredOnline"
+  val messageKeyPrefix = "estateRegisteredOnlineYesNo"
 
-  val form = new YesNoFormProvider().withPrefix("estateRegisteredOnline")
+  val form = new YesNoFormProvider().withPrefix("estateRegisteredOnlineYesNo")
 
   "EstateRegisteredOnlineYesNo view" must {
 

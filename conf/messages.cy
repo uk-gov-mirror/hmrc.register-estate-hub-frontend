@@ -1,3 +1,5 @@
+service.name = Cofrestru a Chynnal Ystâd
+
 checkYourAnswers.title = Gwirio’ch Atebion
 checkYourAnswers.heading = Gwirio’ch Atebion
 checkYourAnswers.guidance = Arweiniad ar gyfer gwirio’ch atebion
@@ -38,13 +40,13 @@ site.save.continue = Cadw ac yn eich blaen
 site.confirm.send = Cadarnhau ac anfon
 site.print-or-save = Argraffu neu gadw’r dudalen hon
 site.warning = Rhybudd
-site.service_name = Cofrestru a Chynnal Ystâd
 site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
 site.returnToRegistrationProgress = Yn ôl i gynnydd cofrestru
 site.sign_out = Allgofnodi
 site.sign_in = Mewngofnodi
+site.error = Gwall:
 
-address.country.select = Dewiswch wlad
+site.address.country.select = Dewiswch wlad
 
 timeout.title = Bydd eich cais yn dod i ben cyn hir
 timeout.message = Byddwn yn ailosod eich cais os na fyddwch yn ymateb cyn pen
@@ -59,16 +61,16 @@ featureNotAvailable.p1 = Os oes angen i chi wneud unrhyw newidiadau i’r ymddir
 featureNotAvailable.link = gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM (yn agor ffenestr neu dab newydd)
 featureNotAvailable.p2 = Byddwch yn gallu diweddaru’r manylion hyn ar-lein yn y dyfodol.
 
-estateRegisteredOnline.title = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
-estateRegisteredOnline.heading = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
-estateRegisteredOnline.checkYourAnswersLabel = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
-estateRegisteredOnline.error.required = Dewiswch ‘Iawn’ os yw’r ystâd eisoes wedi’i chofrestru ar-lein
+estateRegisteredOnlineYesNo.title = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
+estateRegisteredOnlineYesNo.heading = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
+estateRegisteredOnlineYesNo.checkYourAnswersLabel = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
+estateRegisteredOnlineYesNo.error.required = Dewiswch ‘Iawn’ os yw’r ystâd eisoes wedi’i chofrestru ar-lein
 
-haveUtr.title = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
-haveUtr.heading = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
-haveUtr.checkYourAnswersLabel = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
-haveUtr.hint = Os yw’ch ystâd wedi’i sefydlu ar gyfer Hunanasesiad, dylai rhywun fod wedi cael llythyr (SA250) gyda UTR yr ystâd.
-haveUtr.error.required = Dewiswch ‘Iawn’ os oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr
+haveUtrYesNo.title = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
+haveUtrYesNo.heading = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
+haveUtrYesNo.checkYourAnswersLabel = A oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr (UTR)?
+haveUtrYesNo.hint = Os yw’ch ystâd wedi’i sefydlu ar gyfer Hunanasesiad, dylai rhywun fod wedi cael llythyr (SA250) gyda UTR yr ystâd.
+haveUtrYesNo.error.required = Dewiswch ‘Iawn’ os oes gan yr ystâd Gyfeirnod Unigryw y Trethdalwr
 
 mustRegisterEstate.title = Mae’n rhaid i chi gofrestru’ch ystâd
 mustRegisterEstate.heading = Mae’n rhaid i chi gofrestru’ch ystâd
@@ -77,6 +79,7 @@ mustRegisterEstate.p1.link = gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM (yn
 
 taskList.title = Cynnydd cofrestru
 taskList.heading = Cynnydd cofrestru
+taskList.caption = {0}
 taskList.paragraph1 = Gallwch ychwanegu gwybodaeth am yr ystâd a gwneud datganiad ar ôl i chi gadarnhau bod pob adran wedi’i llenwi.
 taskList.paragraph2 = Os na wnewch ddatganiad, ni chaiff unrhyw wybodaeth rydych yn ei hychwanegu ei chadw.
 taskList.sections.heading = Adrannau i’w cwblhau

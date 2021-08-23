@@ -14,32 +14,36 @@
  * limitations under the License.
  *@
 
+@import config.FrontendAppConfig
 @import controllers.routes._
+@import views.html.components.{ErrorSummary, InputYesNo, SubmitButton}
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    appConfig: FrontendAppConfig,
+    errorSummary: ErrorSummary,
+    inputYesNo: InputYesNo,
+    submitButton: SubmitButton
 )
 
 @(form: Form[_], isOrgCredUser: Boolean)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = s"${errorPrefix(form)}${messages("haveUtr.title")}"
-    ) {
+    title = s"${errorPrefix(form)}${messages("haveUtrYesNo.title")}",
+    showBackLink = true
+) {
 
     @formHelper(action = HaveUTRYesNoController.onSubmit(), 'autoComplete -> "off") {
 
-        @components.back_link()
+        @errorSummary(form.errors)
 
-        @components.error_summary(form.errors)
-
-        @components.input_yes_no(
+        @inputYesNo(
             field = form("value"),
-            legend = messages("haveUtr.heading"),
-            legendClass = Some("heading-large"),
-            hint = if(isOrgCredUser) Some(messages("haveUtr.hint")) else None
+            label = messages("haveUtrYesNo.heading"),
+            hint = if(isOrgCredUser) Some(messages("haveUtrYesNo.hint")) else None
         )
 
-        @components.submit_button()
+        @submitButton()
     }
 }

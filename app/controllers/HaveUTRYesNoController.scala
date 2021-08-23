@@ -45,7 +45,7 @@ class HaveUTRYesNoController @Inject()(
 
   private def actions(): ActionBuilder[DataRequest, AnyContent] = actions.authWithData
 
-  val form: Form[Boolean] = formProvider.withPrefix("haveUtr")
+  val form: Form[Boolean] = formProvider.withPrefix("haveUtrYesNo")
 
   def onPageLoad(): Action[AnyContent] = actions() {
     implicit request =>

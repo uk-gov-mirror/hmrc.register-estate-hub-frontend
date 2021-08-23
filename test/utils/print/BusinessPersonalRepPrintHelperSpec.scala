@@ -51,14 +51,14 @@ class BusinessPersonalRepPrintHelperSpec extends SpecBase {
       result mustBe AnswerSection(
         headingKey = Some("taskList.personalRepresentative.label"),
         rows = Seq(
-          AnswerRow(label = Html(messages("personalRep.individualOrBusiness.checkYourAnswersLabel")), answer = Html("Business"), None),
-          AnswerRow(label = Html(messages("personalRep.business.ukRegisteredYesNo.checkYourAnswersLabel")), answer = Html("No"), None),
-          AnswerRow(label = Html(messages("personalRep.business.name.checkYourAnswersLabel")), answer = Html("Business Ltd."), None),
-          AnswerRow(label = Html(messages("personalRep.business.addressUkYesNo.checkYourAnswersLabel", name)), answer = Html("Yes"), None),
-          AnswerRow(label = Html(messages("personalRep.business.address.checkYourAnswersLabel", name)), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
-          AnswerRow(label = Html(messages("personalRep.business.emailYesNo.checkYourAnswersLabel", name)), answer = Html("Yes"), None),
-          AnswerRow(label = Html(messages("personalRep.business.email.checkYourAnswersLabel", name)), answer = Html("email@example.com"), None),
-          AnswerRow(label = Html(messages("personalRep.business.telephoneNumber.checkYourAnswersLabel", name)), answer = Html("+447123456789"), None)
+          AnswerRow(label = messages("personalRep.individualOrBusiness.checkYourAnswersLabel"), answer = Html("Business"), None),
+          AnswerRow(label = messages("personalRep.business.ukRegisteredYesNo.checkYourAnswersLabel"), answer = Html("No"), None),
+          AnswerRow(label = messages("personalRep.business.name.checkYourAnswersLabel"), answer = Html("Business Ltd."), None),
+          AnswerRow(label = messages("personalRep.business.addressUkYesNo.checkYourAnswersLabel", name), answer = Html("Yes"), None),
+          AnswerRow(label = messages("personalRep.business.address.checkYourAnswersLabel", name), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
+          AnswerRow(label = messages("personalRep.business.emailYesNo.checkYourAnswersLabel", name), answer = Html("Yes"), None),
+          AnswerRow(label = messages("personalRep.business.email.checkYourAnswersLabel", name), answer = Html("email@example.com"), None),
+          AnswerRow(label = messages("personalRep.business.telephoneNumber.checkYourAnswersLabel", name), answer = Html("+447123456789"), None)
         )
       )
     }
@@ -78,14 +78,14 @@ class BusinessPersonalRepPrintHelperSpec extends SpecBase {
       result mustBe AnswerSection(
         headingKey = Some("taskList.personalRepresentative.label"),
         rows = Seq(
-          AnswerRow(label = Html(messages("personalRep.individualOrBusiness.checkYourAnswersLabel")), answer = Html("Business"), None),
-          AnswerRow(label = Html(messages("personalRep.business.ukRegisteredYesNo.checkYourAnswersLabel")), answer = Html("Yes"), None),
-          AnswerRow(label = Html(messages("personalRep.business.name.checkYourAnswersLabel")), answer = Html("Business Ltd."), None),
-          AnswerRow(label = Html(messages("personalRep.business.utr.checkYourAnswersLabel", name)), answer = Html("1234567890"), None),
-          AnswerRow(label = Html(messages("personalRep.business.addressUkYesNo.checkYourAnswersLabel", name)), answer = Html("No"), None),
-          AnswerRow(label = Html(messages("personalRep.business.address.checkYourAnswersLabel", name)), answer = Html("99 Test Lane<br />Testville<br />Germany"), None),
-          AnswerRow(label = Html(messages("personalRep.business.emailYesNo.checkYourAnswersLabel", name)), answer = Html("No"), None),
-          AnswerRow(label = Html(messages("personalRep.business.telephoneNumber.checkYourAnswersLabel", name)), answer = Html("+447123456789"), None)
+          AnswerRow(label = messages("personalRep.individualOrBusiness.checkYourAnswersLabel"), answer = Html("Business"), None),
+          AnswerRow(label = messages("personalRep.business.ukRegisteredYesNo.checkYourAnswersLabel"), answer = Html("Yes"), None),
+          AnswerRow(label = messages("personalRep.business.name.checkYourAnswersLabel"), answer = Html("Business Ltd."), None),
+          AnswerRow(label = messages("personalRep.business.utr.checkYourAnswersLabel", name), answer = Html("1234567890"), None),
+          AnswerRow(label = messages("personalRep.business.addressUkYesNo.checkYourAnswersLabel", name), answer = Html("No"), None),
+          AnswerRow(label = messages("personalRep.business.address.checkYourAnswersLabel", name), answer = Html("99 Test Lane<br />Testville<br />Germany"), None),
+          AnswerRow(label = messages("personalRep.business.emailYesNo.checkYourAnswersLabel", name), answer = Html("No"), None),
+          AnswerRow(label = messages("personalRep.business.telephoneNumber.checkYourAnswersLabel", name), answer = Html("+447123456789"), None)
         )
       )
     }

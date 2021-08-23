@@ -45,7 +45,7 @@ class EstateRegisteredOnlineYesNoController @Inject()(
 
   private def actions() = identify andThen getData andThen requireData
 
-  val form: Form[Boolean] = formProvider.withPrefix("estateRegisteredOnline")
+  val form: Form[Boolean] = formProvider.withPrefix("estateRegisteredOnlineYesNo")
 
   def onPageLoad(): Action[AnyContent] = actions() {
     implicit request =>

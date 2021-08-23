@@ -86,31 +86,31 @@ class RegistrationAnswersPrintHelperSpec extends SpecBase {
         AnswerSection(
           headingKey = Some("taskList.estateName.label"),
           rows = Seq(
-            AnswerRow(label = Html(messages("estateDetails.name.checkYourAnswersLabel")), answer = Html("Estate of John Doe"), None)
+            AnswerRow(label = messages("estateDetails.name.checkYourAnswersLabel"), answer = Html("Estate of John Doe"), None)
           )
         ),
         AnswerSection(
           headingKey = Some("taskList.personalRepresentative.label"),
           rows = Seq(
-            AnswerRow(label = Html(messages("personalRep.individualOrBusiness.checkYourAnswersLabel")), answer = Html("Individual"), None),
-            AnswerRow(label = Html(messages("personalRep.individual.name.checkYourAnswersLabel")), answer = Html("John Doe"), None),
-            AnswerRow(label = Html(messages("personalRep.individual.dateOfBirth.checkYourAnswersLabel", name.displayName)), answer = Html("3 February 2000"), None),
-            AnswerRow(label = Html(messages("personalRep.individual.ninoYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("Yes"), None),
-            AnswerRow(label = Html(messages("personalRep.individual.nino.checkYourAnswersLabel", name.displayName)), answer = Html("AA 00 00 00 A"), None),
-            AnswerRow(label = Html(messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("Yes"), None),
-            AnswerRow(label = Html(messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName)), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
-            AnswerRow(label = Html(messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-            AnswerRow(label = Html(messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName)), answer = Html("+447123456789"), None)
+            AnswerRow(label = messages("personalRep.individualOrBusiness.checkYourAnswersLabel"), answer = Html("Individual"), None),
+            AnswerRow(label = messages("personalRep.individual.name.checkYourAnswersLabel"), answer = Html("John Doe"), None),
+            AnswerRow(label = messages("personalRep.individual.dateOfBirth.checkYourAnswersLabel", name.displayName), answer = Html("3 February 2000"), None),
+            AnswerRow(label = messages("personalRep.individual.ninoYesNo.checkYourAnswersLabel", name.displayName), answer = Html("Yes"), None),
+            AnswerRow(label = messages("personalRep.individual.nino.checkYourAnswersLabel", name.displayName), answer = Html("AA 00 00 00 A"), None),
+            AnswerRow(label = messages("personalRep.individual.livesInTheUkYesNo.checkYourAnswersLabel", name.displayName), answer = Html("Yes"), None),
+            AnswerRow(label = messages("personalRep.individual.address.checkYourAnswersLabel", name.displayName), answer = Html("21 Test Lane<br />Testville<br />NE1 1NE"), None),
+            AnswerRow(label = messages("personalRep.individual.emailYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+            AnswerRow(label = messages("personalRep.individual.telephoneNumber.checkYourAnswersLabel", name.displayName), answer = Html("+447123456789"), None)
           )
         ),
         AnswerSection(
           headingKey = Some("taskList.personWhoDied.label"),
           rows = Seq(
-            AnswerRow(label = Html(messages("deceasedPerson.name.checkYourAnswersLabel")), answer = Html("John Doe"), None),
-            AnswerRow(label = Html(messages("deceasedPerson.dateOfDeath.checkYourAnswersLabel", name.displayName)), answer = Html("3 February 2019"), None),
-            AnswerRow(label = Html(messages("deceasedPerson.dateOfBirthYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-            AnswerRow(label = Html(messages("deceasedPerson.ninoYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None),
-            AnswerRow(label = Html(messages("deceasedPerson.addressYesNo.checkYourAnswersLabel", name.displayName)), answer = Html("No"), None)
+            AnswerRow(label = messages("deceasedPerson.name.checkYourAnswersLabel"), answer = Html("John Doe"), None),
+            AnswerRow(label = messages("deceasedPerson.dateOfDeath.checkYourAnswersLabel", name.displayName), answer = Html("3 February 2019"), None),
+            AnswerRow(label = messages("deceasedPerson.dateOfBirthYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+            AnswerRow(label = messages("deceasedPerson.ninoYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
+            AnswerRow(label = messages("deceasedPerson.addressYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None)
           )
         )
       )

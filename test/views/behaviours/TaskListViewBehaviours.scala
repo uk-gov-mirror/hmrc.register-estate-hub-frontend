@@ -23,7 +23,7 @@ import views.ViewSpecBase
 trait TaskListViewBehaviours extends ViewSpecBase {
 
   def taskList(view: HtmlFormat.Appendable,
-               expectedSections : List[Task] = Nil) : Unit = {
+               expectedSections : List[Task]) : Unit = {
 
     "behave list a page with a task list" when {
 
@@ -31,12 +31,11 @@ trait TaskListViewBehaviours extends ViewSpecBase {
 
         "contain a heading" in {
           val doc = asDocument(view)
-          assertRenderedById(doc, "task-list--heading")
+          assertContainsMessages(doc, "taskList.sections.heading")
         }
 
         expectedSections.foreach {
           section =>
-
             s"${section.link.text}" must {
 
               s"render a list item" in {
@@ -51,24 +50,14 @@ trait TaskListViewBehaviours extends ViewSpecBase {
                 doc.getElementById(id).hasAttr("href")
               }
 
-              section.tag.foreach {
-                _ =>
-
-                  s"render a tag" in {
-                    val doc = asDocument(view)
-                    assertRenderedById(doc, s"task-list__task--${section.link.text}__tag")
-                  }
-
+              s"render a tag" in {
+                val doc = asDocument(view)
+                assertRenderedById(doc, s"task-list__tag--${section.link.text}__tag")
               }
 
             }
-
         }
-
       }
-
     }
-
   }
-
 }

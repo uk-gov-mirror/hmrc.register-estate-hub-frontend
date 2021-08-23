@@ -15,23 +15,28 @@
  *@
 
 @import config.FrontendAppConfig
+@import views.html.components.{Heading, Link}
 
 @this(
     main_template: MainTemplate,
-    appConfig: FrontendAppConfig
+    appConfig: FrontendAppConfig,
+    heading: Heading,
+    link: Link
 )
 
 @()(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("utrSentInPost.title")
-    ) {
+    title = messages("utrSentInPost.title"),
+    showBackLink = true
+) {
 
-    @components.back_link()
-
-    @components.heading("utrSentInPost.heading")
+    @heading("utrSentInPost.heading")
 
     <p>@messages("utrSentInPost.p1")
 
-    <p><a href="@appConfig.helplineUrl" target="_blank">@messages("utrSentInPost.link")</a> @messages("utrSentInPost.link.remainder")</p>
+    <p>
+        @link(appConfig.helplineUrl, "help-link", "utrSentInPost.link", true)
+        @messages("utrSentInPost.link.remainder")
+    </p>
 }

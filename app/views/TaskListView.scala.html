@@ -15,49 +15,53 @@
  *@
 
 @import viewmodels.Task
-@import controllers.routes._
+@import controllers.registration_progress.routes._
 @import uk.gov.hmrc.auth.core.AffinityGroup
 @import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
 @import config.FrontendAppConfig
+@import views.html.components.{Heading, SubmitButton, TaskList, Link}
 
 @this(
+    main_template: MainTemplate,
     appConfig: FrontendAppConfig,
-    main_template: MainTemplate
+    formHelper: FormWithCSRF,
+    heading: Heading,
+    submitButton: SubmitButton,
+    taskList: TaskList,
+    link: Link
 )
 
 @(estateName: Option[String], sections: List[Task], isTaskListComplete: Boolean, affinityGroup: AffinityGroup)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("taskList.title")
-    ) {
-
-    @components.back_link()
-
+    title = messages("taskList.title"),
+    showBackLink = true
+) {
     @estateName.map { name =>
         <span class="govuk-caption-xl" id="estate-name">@name</span>
     }
 
-    @components.heading("taskList.heading", headingSize = "heading-xlarge")
+    @heading("taskList.heading", headingSize = "govuk-heading-xl")
 
     <p>@messages("taskList.paragraph1")</p>
 
     <p>@messages("taskList.paragraph2")</p>
 
     @if(affinityGroup == AffinityGroup.Agent) {
-        <p>@components.link(appConfig.agentDetails+"/check-your-answers", "agent-details", "taskList.agent.agentDetails")</p>
+        <p>@link(appConfig.agentDetails+"/check-your-answers", "agent-details", "taskList.agent.agentDetails")</p>
     }
 
-    @components.task_list(sections)
+    @taskList(sections)
 
     @if(isTaskListComplete) {
         <h2 id="summary-heading">@messages("taskList.summary.heading")</h2>
 
         <p id="summary-paragraph">@messages("taskList.summary.paragraph")</p>
 
-        <p>
-            @components.link(DraftAnswersController.onPageLoad().url, "print-and-save", "taskList.summary.link")
-        </p>
+        <p>@link(DraftAnswersController.onPageLoad().url, "print-and-save", "taskList.summary.link")</p>
 
-        @components.button_link(messages("taskList.continue"), DeclarationController.onPageLoad().url)
+        @formHelper(action = TaskListController.onSubmit, 'autoComplete -> "off") {
+            @submitButton(Some(messages("taskList.continue")))
+        }
     }
 }

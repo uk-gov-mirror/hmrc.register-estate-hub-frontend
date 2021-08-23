@@ -75,4 +75,7 @@ class TaskListController @Inject()(
       }
   }
 
+  def onSubmit: Action[AnyContent] = Action {
+    Redirect(controllers.routes.DeclarationController.onPageLoad())
+  }
 }

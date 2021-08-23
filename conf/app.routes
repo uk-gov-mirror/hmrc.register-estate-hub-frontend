@@ -1,3 +1,5 @@
+->         /govuk-frontend                     govuk.Routes
+->         /hmrc-frontend                      hmrcfrontend.Routes
 # microservice specific routes
 
 GET        /                                            controllers.IndexController.onPageLoad
@@ -8,6 +10,7 @@ POST       /csp/report                                  controllers.ContentSecur
 GET        /accessibility                               controllers.AccessibilityStatementController.onPageLoad(userAction: String)
 
 GET        /create-agent-services-account               controllers.CreateAgentServicesAccountController.onPageLoad()
+POST       /create-agent-services-account               controllers.CreateAgentServicesAccountController.onSubmit()
 
 GET        /cannot-change                               controllers.CannotMakeChangesController.onPageLoad()
 
@@ -20,6 +23,7 @@ POST       /have-utr                                    controllers.HaveUTRYesNo
 GET        /must-register-estate                        controllers.MustRegisterEstateController.onPageLoad()
 
 GET        /registration-progress                       controllers.registration_progress.TaskListController.onPageLoad()
+POST       /registration-progress                       controllers.registration_progress.TaskListController.onSubmit()
 
 GET        /problem-declaring                           controllers.ProblemDeclaringController.onPageLoad()
 
@@ -28,6 +32,7 @@ GET        /assets/*file                                controllers.Assets.versi
 GET        /language/:lang                              controllers.LanguageSwitchController.switchToLanguage(lang: String)
 
 GET        /this-service-has-been-reset                 controllers.SessionExpiredController.onPageLoad
+POST       /this-service-has-been-reset                 controllers.SessionExpiredController.onSubmit
 
 GET        /check-your-answers                          controllers.CheckYourAnswersController.onPageLoad
 
@@ -40,8 +45,6 @@ GET        /timeout                                     controllers.SessionTimeo
 GET        /logout                                      controllers.LogoutController.logout()
 
 GET        /signed-out                                  controllers.LogoutController.logout()
-
-GET        /feature-not-available                       controllers.FeatureNotAvailableController.onPageLoad()
 
 GET        /declaration                                 controllers.DeclarationController.onPageLoad()
 POST       /declaration                                 controllers.DeclarationController.onSubmit()

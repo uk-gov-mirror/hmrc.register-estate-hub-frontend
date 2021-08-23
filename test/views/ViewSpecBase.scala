@@ -85,9 +85,9 @@ trait ViewSpecBase extends SpecBase {
     assertContainsHint(doc, forElement, expectedHintText)
   }
 
-  def assertContainsHint(doc: Document, forElement: String, expectedHintText: Option[String]) = {
+  def assertContainsHint(doc: Document, forElement: String, expectedHintText: Option[String]): Any = {
     if (expectedHintText.isDefined) {
-      assert(doc.getElementsByClass("form-hint").first.text == expectedHintText.get,
+      assert(doc.getElementsByClass("govuk-hint").first.text == expectedHintText.get,
         s"\n\nLabel for $forElement did not contain hint text $expectedHintText")
     }
   }
@@ -95,6 +95,9 @@ trait ViewSpecBase extends SpecBase {
   def assertElementHasClass(doc: Document, id: String, expectedClass: String) = {
     assert(doc.getElementById(id).hasClass(expectedClass), s"\n\nElement $id does not have class $expectedClass")
   }
+
+  def assertRenderedByClass(doc: Document, cssClass: String) =
+    assert(doc.getElementsByClass(cssClass) != null, "\n\nElement " + cssClass + " was not rendered on the page.\n")
 
   def assertContainsRadioButton(doc: Document, id: String, name: String, value: String, isChecked: Boolean) = {
     assertRenderedById(doc, id)
