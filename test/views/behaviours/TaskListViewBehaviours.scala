@@ -33,7 +33,6 @@ trait TaskListViewBehaviours extends ViewSpecBase {
           val doc = asDocument(view)
           assertContainsMessages(doc, "taskList.sections.heading")
         }
-
         expectedSections.foreach {
           section =>
             s"${section.link.text}" must {
@@ -52,11 +51,12 @@ trait TaskListViewBehaviours extends ViewSpecBase {
 
               s"render a tag" in {
                 val doc = asDocument(view)
-                assertRenderedById(doc, s"task-list__tag--${section.link.text}__tag")
+                assertRenderedById(doc, s"task-list__task--${section.link.text}__tag")
               }
-
             }
         }
+
+
       }
     }
   }
