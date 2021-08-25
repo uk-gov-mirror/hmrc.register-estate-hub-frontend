@@ -53,7 +53,7 @@
             <h3 class="govuk-heading-m">@messages(section.subHeading.get)</h3>
         }
 
-        @if(section.rows){
+        @if(section.rows.size > 0){
             @govukSummaryList(SummaryList(rows = formatSummaryAnswerSection(section)))
         }
     }
