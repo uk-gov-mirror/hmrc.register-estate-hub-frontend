@@ -45,12 +45,12 @@
     <p>@messages("declaredAnswers.p1", declarationSent)</p>
 
     @for(section <- entities){
-        @if(section.headingKey.isDefined){
-            <h2 class="govuk-heading-l">@messages(section.headingKey.get)</h2>
+        @section.headingKey.map { hk =>
+            <h2 class="govuk-heading-l">@messages(hk)</h2>
         }
 
-        @if(section.subHeading.isDefined){
-            <h3 class="govuk-heading-m">@messages(section.subHeading.get)</h3>
+        @section.subHeading.map { sh =>
+            <h3 class="govuk-heading-m">@messages(sh)</h3>
         }
 
         @if(section.rows.size > 0){
