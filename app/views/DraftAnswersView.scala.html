@@ -14,8 +14,8 @@
  * limitations under the License.
  *@
 
-@import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
-@import utils.SectionFormatter.formatSummarySections
+@import viewmodels.AnswerSection
+@import utils.SectionFormatter.formatSummaryAnswerSection
 @import views.html.components.{Heading, Button}
 
 @this(
@@ -27,7 +27,7 @@
 )
 
 
-@(entities: Seq[Section])(implicit request: Request[_], messages: Messages)
+@(entities: Seq[AnswerSection])(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("draftAnswers.title"),
@@ -40,5 +40,17 @@
         <p>@button(messageKey = "site.print-or-save", isPrintButton = true)</p>
     </div>
 
-    @govukSummaryList(SummaryList(rows = formatSummarySections(entities)))
+    @for(section <- entities){
+        @section.headingKey.map { hk =>
+            <h2 class="govuk-heading-l">@messages(hk)</h2>
+        }
+
+        @section.subHeading.map { sh =>
+            <h3 class="govuk-heading-m">@messages(sh)</h3>
+        }
+
+        @if(section.rows.size > 0){
+            @govukSummaryList(SummaryList(rows = formatSummaryAnswerSection(section)))
+        }
+    }
 }

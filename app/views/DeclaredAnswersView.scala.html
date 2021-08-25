@@ -15,8 +15,8 @@
  *@
 
 @import config.FrontendAppConfig
-@import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
-@import utils.SectionFormatter.formatSummarySections
+@import viewmodels.AnswerSection
+@import utils.SectionFormatter.formatSummaryAnswerSection
 @import views.html.components.{Heading, Button}
 
 @this(
@@ -27,7 +27,7 @@
     govukSummaryList: GovukSummaryList
 )
 
-@(entities: Seq[Section], trn: String, declarationSent: String)(implicit request: Request[_], messages: Messages)
+@(entities: Seq[AnswerSection], trn: String, declarationSent: String)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = messages("declaredAnswers.title"),
@@ -44,5 +44,17 @@
 
     <p>@messages("declaredAnswers.p1", declarationSent)</p>
 
-    @govukSummaryList(SummaryList(rows = formatSummarySections(entities)))
+    @for(section <- entities){
+        @section.headingKey.map { hk =>
+            <h2 class="govuk-heading-l">@messages(hk)</h2>
+        }
+
+        @section.subHeading.map { sh =>
+            <h3 class="govuk-heading-m">@messages(sh)</h3>
+        }
+
+        @if(section.rows.size > 0){
+            @govukSummaryList(SummaryList(rows = formatSummaryAnswerSection(section)))
+        }
+    }
 }
