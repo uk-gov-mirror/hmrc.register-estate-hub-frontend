@@ -62,14 +62,7 @@ object SectionFormatter {
     }
   }
 
-  def formatSummarySections(answerSections: Seq[Section])(implicit messages: Messages): Seq[SummaryListRow] = {
-    answerSections.flatMap {
-      case a: AnswerSection => formatSummaryAnswerSection(a)
-      case _: RepeaterAnswerSection => throw new NotImplementedError("Not used anywhere in code.")
-    }
-  }
-
-  private def formatSummaryAnswerSection(section: AnswerSection)(implicit messages: Messages): Seq[SummaryListRow] = {
+  def formatSummaryAnswerSection(section: AnswerSection)(implicit messages: Messages): Seq[SummaryListRow] = {
     section.rows.zipWithIndex.map {
       case (row:AnswerRow, i: Int) => {
         SummaryListRow(
