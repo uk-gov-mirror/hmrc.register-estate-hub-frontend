@@ -124,7 +124,7 @@ declaration.error.lastName.invalid = Your last name must only include letters a 
 problemDeclaring.heading = Sorry, there is a problem with the service
 problemDeclaring.title = Sorry, there is a problem with the service
 problemDeclaring.p1 = Try again later.
-problemDeclaring.p2 = If you need need help with the service
+problemDeclaring.p2 = If you need help with the service
 problemDeclaring.contact.link = contact the trusts helpline (opens in a new window or tab)
 
 confirmation.title = Registration received
