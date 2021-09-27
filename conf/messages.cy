@@ -1,4 +1,4 @@
-service.name = Cofrestru a Chynnal Ystâd
+service.name = Cofrestru Ystâd a’i Chynnal
 
 checkYourAnswers.title = Gwirio’ch Atebion
 checkYourAnswers.heading = Gwirio’ch Atebion
