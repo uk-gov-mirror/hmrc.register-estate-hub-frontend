@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,13 +39,13 @@ class RegistrationNavigator @Inject()(config: FrontendAppConfig) extends Navigat
           ua, HaveUTRYesNoPage,
           rts.MustRegisterEstateController.onPageLoad(),
           Call("GET", config.suitabilityUrl))
-        case None => controllers.routes.SessionExpiredController.onPageLoad()
+        case None => controllers.routes.SessionExpiredController.onPageLoad
       }
 
   private def yesNoNav(ua: UserAnswers, fromPage: QuestionPage[Boolean], yesCall: => Call, noCall: => Call): Call = {
     ua.get(fromPage)
       .map(if (_) yesCall else noCall)
-      .getOrElse(controllers.routes.SessionExpiredController.onPageLoad())
+      .getOrElse(controllers.routes.SessionExpiredController.onPageLoad)
   }
 
   def routes(): PartialFunction[Page, UserAnswers => Call] = {
