@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ class IndexControllerSpec extends SpecBase {
         ))
         .build()
 
-      val request = FakeRequest(GET, routes.IndexController.onPageLoad().url)
+      val request = FakeRequest(GET, routes.IndexController.onPageLoad.url)
 
       val result = route(application, request).value
 
@@ -53,7 +53,7 @@ class IndexControllerSpec extends SpecBase {
         ))
         .build()
 
-      val request = FakeRequest(GET, routes.IndexController.onPageLoad().url)
+      val request = FakeRequest(GET, routes.IndexController.onPageLoad.url)
 
       val result = route(application, request).value
 

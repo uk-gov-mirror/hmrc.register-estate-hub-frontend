@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ class RequiredAffinityGroupActionSpec extends SpecBase with MockitoSugar with Sc
         val futureResult = action.callFilter(new IdentifierRequest(fakeRequest, "id", AffinityGroup.Organisation, Enrolments(Set.empty[Enrolment])))
 
         whenReady(futureResult) { result =>
-          result.value.header.headers(HeaderNames.LOCATION) mustBe UnauthorisedController.onPageLoad().url
+          result.value.header.headers(HeaderNames.LOCATION) mustBe UnauthorisedController.onPageLoad.url
         }
       }
 
