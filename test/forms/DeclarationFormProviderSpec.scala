@@ -32,12 +32,11 @@ class DeclarationFormProviderSpec extends StringFieldBehaviours {
     val fieldName = "firstName"
     val requiredKey = "declaration.error.firstName.required"
     val lengthKey = "declaration.error.firstName.length"
-    val regex = "^[A-Za-z0-9 ,.()/&'-]*$"
 
     behave like fieldThatBindsValidData(
       form,
       fieldName,
-      RegexpGen.from(regex)
+      RegexpGen.from(Validation.nameRegex)
     )
 
     behave like fieldWithMaxLength(
@@ -65,7 +64,6 @@ class DeclarationFormProviderSpec extends StringFieldBehaviours {
     val fieldName = "middleName"
     val lengthKey = "declaration.error.middleName.length"
     val maxLength = 35
-    val regex = "^[A-Za-z0-9 ,.()/&'-]*$"
 
 
     behave like fieldWithMaxLength(
@@ -78,7 +76,22 @@ class DeclarationFormProviderSpec extends StringFieldBehaviours {
     behave like optionalField(
       form,
       fieldName,
-      validDataGenerator = RegexpGen.from(regex))
+      validDataGenerator = RegexpGen.from(Validation.nameRegex))
+
+    "bind whitespace trim values" in {
+      val result = form.bind(Map("firstName" -> "firstName", "middleName" -> "  middle  ", "lastName" -> "lastName"))
+      result.value.value.name.middleName mustBe Some("middle")
+    }
+
+    "bind whitespace blank values" in {
+      val result = form.bind(Map("firstName" -> "firstName", "middleName" -> "  ", "lastName" -> "lastName"))
+      result.value.value.name.middleName mustBe None
+    }
+
+    "bind whitespace no values" in {
+      val result = form.bind(Map("firstName" -> "firstName", "middleName" -> "", "lastName" -> "lastName"))
+      result.value.value.name.middleName mustBe None
+    }
   }
 
 
@@ -87,12 +100,11 @@ class DeclarationFormProviderSpec extends StringFieldBehaviours {
     val fieldName = "lastName"
     val requiredKey = "declaration.error.lastName.required"
     val lengthKey = "declaration.error.lastName.length"
-    val regex = "^[A-Za-z0-9 ,.()/&'-]*$"
 
     behave like fieldThatBindsValidData(
       form,
       fieldName,
-      RegexpGen.from(regex)
+      RegexpGen.from(Validation.nameRegex)
     )
 
     behave like fieldWithMaxLength(

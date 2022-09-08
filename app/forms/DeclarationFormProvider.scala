@@ -17,6 +17,7 @@
 package forms
 
 import com.google.inject.Inject
+import forms.helpers.WhitespaceHelper._
 import forms.mappings.Mappings
 import models.Declaration
 import models.identification.Name
@@ -35,11 +36,12 @@ class DeclarationFormProvider @Inject() extends Mappings {
           regexp(Validation.nameRegex, s"declaration.error.firstName.invalid")
         )),
     "middleName" -> optional(text()
+      .transform(trimWhitespace, identity[String])
       .verifying(
         firstError(
           maxLength(35, s"declaration.error.middleName.length"),
           regexp(Validation.nameRegex, s"declaration.error.middleName.invalid"))
-      )),
+      )).transform(emptyToNone, identity[Option[String]]),
     "lastName" -> text("declaration.error.lastName.required")
       .verifying(
         firstError(
