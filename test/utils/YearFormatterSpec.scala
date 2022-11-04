@@ -19,7 +19,6 @@ package utils
 import java.time.LocalDate
 
 import base.SpecBase
-import org.mockito.Mockito.when
 import services.LocalDateService
 
 class YearFormatterSpec extends SpecBase {

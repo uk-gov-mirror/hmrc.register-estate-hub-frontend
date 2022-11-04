@@ -147,7 +147,7 @@ class MessagesSpec extends SpecBase {
 
   private lazy val defaultMessages: Map[String, String] = getExpectedMessages("default") -- commonProvidedKeys
 
-  private lazy val welshMessages: Map[String, String] = getExpectedMessages("cy")
+  private lazy val welshMessages: Map[String, String] = getExpectedMessages("cy") -- commonProvidedKeys
 
   private def getExpectedMessages(languageCode: String) =
     messagesApi.messages.getOrElse(languageCode, throw new Exception(s"Missing messages for $languageCode"))

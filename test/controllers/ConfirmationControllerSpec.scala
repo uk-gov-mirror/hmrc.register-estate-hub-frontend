@@ -19,8 +19,7 @@ package controllers
 import base.SpecBase
 import connectors.EstatesConnector
 import models.PersonalRepName
-import org.mockito.Matchers.any
-import org.mockito.Mockito.when
+import org.mockito.ArgumentMatchers.any
 import pages.TRNPage
 import play.api.inject.bind
 import play.api.test.FakeRequest
@@ -31,7 +30,7 @@ import scala.concurrent.Future
 
 class ConfirmationControllerSpec extends SpecBase {
 
-  val mockConnector = mock[EstatesConnector]
+  val mockConnector: EstatesConnector = mock[EstatesConnector]
 
   "Confirmation Controller" must {
 

@@ -16,9 +16,9 @@
 
 package base
 
-import org.mockito.Matchers.any
-import org.mockito.Mockito.when
-import org.scalatestplus.mockito.MockitoSugar
+import models.UserAnswers
+import org.mockito.ArgumentMatchers.any
+import org.mockito.{ArgumentCaptor, MockitoSugar}
 import repositories.SessionRepository
 
 import scala.concurrent.Future
@@ -26,6 +26,7 @@ import scala.concurrent.Future
 trait Mocked extends MockitoSugar {
 
   val sessionRepository: SessionRepository = mock[SessionRepository]
+  val userAnswerArgumentCaptor: ArgumentCaptor[UserAnswers] = ArgumentCaptor.forClass(classOf[UserAnswers])
 
   when(sessionRepository.set(any())).thenReturn(Future.successful(true))
 

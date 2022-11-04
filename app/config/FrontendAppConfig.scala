@@ -17,25 +17,19 @@
 package config
 
 import com.google.inject.{Inject, Singleton}
-import controllers.routes
 import play.api.Configuration
 import play.api.i18n.{Lang, Messages}
-import play.api.mvc.{Call, Request}
-
+import play.api.mvc.Request
 import java.net.{URI, URLEncoder}
-import uk.gov.hmrc.hmrcfrontend.config.ContactFrontendConfig
+
 
 @Singleton
-class FrontendAppConfig @Inject() (configuration: Configuration,
-                                   contactFrontendConfig: ContactFrontendConfig) {
+class FrontendAppConfig @Inject() (configuration: Configuration) {
 
   final val ENGLISH = "en"
   final val WELSH = "cy"
   final val UK_COUNTRY_CODE = "GB"
 
-  val betaFeedbackUrl = s"${contactFrontendConfig.baseUrl.get}/contact/beta-feedback?service=${contactFrontendConfig.serviceId.get}"
-
-  lazy val authUrl: String = configuration.get[Service]("auth").baseUrl
   lazy val loginUrl: String = configuration.get[String]("urls.login")
   lazy val loginContinueUrl: String = configuration.get[String]("urls.loginContinue")
   lazy val logoutUrl: String = configuration.get[String]("urls.logout")
@@ -64,8 +58,8 @@ class FrontendAppConfig @Inject() (configuration: Configuration,
     "cymraeg" -> Lang(WELSH)
   )
 
-  def routeToSwitchLanguage: String => Call =
-    (lang: String) => routes.LanguageSwitchController.switchToLanguage(lang)
+  val cacheTtlSeconds: Long = configuration.get[Long]("mongodb.timeToLiveInSeconds")
+  val dropIndexes: Boolean = configuration.getOptional[Boolean]("microservice.services.features.mongo.dropIndexes").getOrElse(false)
 
   lazy val estateDetailsEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.estate-details.enabled")
   lazy val personalRepEnabled: Boolean = configuration.get[Boolean]("microservice.services.features.personal-rep.enabled")

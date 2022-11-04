@@ -21,8 +21,7 @@ import connectors.{EstatesConnector, EstatesStoreConnector}
 import models.CompletedTasks
 import models.CompletedTasksResponse.InternalServerError
 import models.TagStatus._
-import org.mockito.Matchers.any
-import org.mockito.Mockito._
+import org.mockito.ArgumentMatchers.any
 import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._

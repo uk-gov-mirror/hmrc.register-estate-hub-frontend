@@ -23,6 +23,7 @@ error.number = Nodwch rif dilys
 error.required = Nodwch werth
 error.summary.title = Mae problem wedi codi
 
+# Session expired page
 session_expired.title = Er eich diogelwch, gwnaethom eich allgofnodi
 session_expired.heading = Er eich diogelwch, gwnaethom eich allgofnodi
 session_expired.guidance = Mae hyn oherwydd eich bod wedi bod yn segur yn y gwasanaeth ers 15 munud.
@@ -48,6 +49,7 @@ site.error = Gwall:
 
 site.address.country.select = Dewiswch wlad
 
+#timeout dialog
 timeout.title = Bydd eich cais yn dod i ben cyn hir
 timeout.message = Byddwn yn ailosod eich cais os na fyddwch yn ymateb cyn pen
 timeout.keep-alive-button = Yn eich blaen â’r cais

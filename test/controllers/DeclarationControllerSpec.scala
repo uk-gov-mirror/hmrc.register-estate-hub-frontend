@@ -22,8 +22,7 @@ import forms.DeclarationFormProvider
 import models.http.TRNResponse
 import models.Declaration
 import models.identification.Name
-import org.mockito.Matchers.any
-import org.mockito.Mockito.when
+import org.mockito.ArgumentMatchers.any
 import pages.DeclarationPage
 import play.api.data.Form
 import play.api.inject.bind
