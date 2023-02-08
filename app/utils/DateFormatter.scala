@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,24 +17,17 @@
 package utils
 
 import com.google.inject.Inject
-import org.joda.time.{LocalDate => JodaDate}
 import play.api.i18n.Messages
 import uk.gov.hmrc.play.language.LanguageUtils
 
-import java.time.{LocalDateTime, LocalDate => JavaDate}
+import java.time.{LocalDate, LocalDateTime}
 
 class DateFormatter @Inject()(languageUtils: LanguageUtils) {
 
-  def formatDate(dateTime: LocalDateTime)(implicit messages: Messages): String = {
+  def formatDate(dateTime: LocalDateTime)(implicit messages: Messages): String =
     formatDate(dateTime.toLocalDate)
-  }
 
-  def formatDate(date: JodaDate)(implicit messages: Messages): String = {
-    formatDate(JavaDate.of(date.getYear, date.getMonthOfYear, date.getDayOfMonth))
-  }
-
-  private def formatDate(date: JavaDate)(implicit messages: Messages): String = {
+  def formatDate(date: LocalDate)(implicit messages: Messages): String =
     languageUtils.Dates.formatDate(date)
-  }
 
 }
