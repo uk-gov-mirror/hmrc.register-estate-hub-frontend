@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,18 @@
 
 package implicits
 
-import javax.inject.Inject
-import org.joda.time.LocalDate
 import play.api.i18n.Messages
 import uk.gov.hmrc.time.TaxYear
 import utils.DateFormatter
+
+import java.time.LocalDate
+import javax.inject.Inject
 
 class TaxYearImplicits @Inject()(dateFormatter: DateFormatter) {
 
   implicit class TaxYearWithFormattedDates(taxYear: TaxYear)(implicit messages: Messages) {
     private def formatDate(date: LocalDate): String = dateFormatter.formatDate(date)(messages)
+
     val start: String = formatDate(taxYear.starts)
     val end: String = formatDate(taxYear.finishes)
   }

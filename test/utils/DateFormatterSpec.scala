@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,8 @@
 
 package utils
 
-import java.time.LocalDateTime
-
+import java.time.{LocalDate, LocalDateTime}
 import base.SpecBase
-import org.joda.time.LocalDate
 import play.api.i18n.{Lang, MessagesImpl}
 import uk.gov.hmrc.play.language.LanguageUtils
 
@@ -32,7 +30,7 @@ class DateFormatterSpec extends SpecBase {
   "Date Formatter" must {
 
     "format date" when {
-      val dateToFormat = new LocalDate(2020, 4, 6)
+      val dateToFormat = LocalDate.of(2020, 4, 6)
 
       "language set to English" in {
         val result = new DateFormatter(languageUtils).formatDate(dateToFormat)(englishMessages)

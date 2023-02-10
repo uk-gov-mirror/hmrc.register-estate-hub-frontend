@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -97,7 +97,7 @@ trait ViewSpecBase extends SpecBase {
   }
 
   def assertRenderedByClass(doc: Document, cssClass: String) =
-    assert(doc.getElementsByClass(cssClass) != null, "\n\nElement " + cssClass + " was not rendered on the page.\n")
+    assert(!doc.getElementsByClass(cssClass).isEmpty, "\n\nElement " + cssClass + " was not rendered on the page.\n")
 
   def assertContainsRadioButton(doc: Document, id: String, name: String, value: String, isChecked: Boolean) = {
     assertRenderedById(doc, id)
