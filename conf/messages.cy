@@ -60,7 +60,7 @@ unauthorised.heading = Ni allwch ddefnyddio’r gwasanaeth hwn gyda’r cyfrif h
 featureNotAvailable.title = Nid yw rhan hon y gwasanaeth ar-lein ar gael eto
 featureNotAvailable.heading = Nid yw rhan hon y gwasanaeth ar-lein ar gael eto
 featureNotAvailable.p1 = Os oes angen i chi wneud unrhyw newidiadau i’r ymddiriedolaeth, gallwch
-featureNotAvailable.link = gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM (yn agor ffenestr neu dab newydd)
+featureNotAvailable.link = gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF (yn agor ffenestr neu dab newydd)
 featureNotAvailable.p2 = Byddwch yn gallu diweddaru’r manylion hyn ar-lein yn y dyfodol.
 
 estateRegisteredOnlineYesNo.title = A yw’r ystâd eisoes wedi’i chofrestru ar-lein?
@@ -77,7 +77,7 @@ haveUtrYesNo.error.required = Dewiswch ‘Iawn’ os oes gan yr ystâd Gyfeirnod
 mustRegisterEstate.title = Mae’n rhaid i chi gofrestru’ch ystâd
 mustRegisterEstate.heading = Mae’n rhaid i chi gofrestru’ch ystâd
 mustRegisterEstate.p1 = Mae’n rhaid i chi
-mustRegisterEstate.p1.link = gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEM (yn agor tab newydd)
+mustRegisterEstate.p1.link = gysylltu â Gwasanaeth Cwsmeriaid Cymraeg CThEF (yn agor tab newydd)
 
 taskList.title = Cynnydd cofrestru
 taskList.heading = Cynnydd cofrestru
@@ -120,7 +120,7 @@ problemDeclaring.heading = Mae’n ddrwg gennym – mae problem gyda’r gwasana
 problemDeclaring.title = Mae’n ddrwg gennym – mae problem gyda’r gwasanaeth
 problemDeclaring.p1 = Rhowch gynnig arall arni yn nes ymlaen.
 problemDeclaring.p2 = Os oes angen help arnoch gyda’r gwasanaeth
-problemDeclaring.contact.link = cyslltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEM (yn agor ffenestr neu dab newydd)
+problemDeclaring.contact.link = cyslltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF (yn agor ffenestr neu dab newydd)
 
 confirmation.title = Cofrestriad wedi dod i law
 confirmation.heading = Cofrestriad wedi dod i law
@@ -129,15 +129,15 @@ confirmation.printsave = Argraffu neu gadw copi o ddatganiad yr ystâd
 confirmation.subheading1 = Yr hyn sy’n digwydd nesaf
 confirmation.paragraph1 = Byddwn yn anfon Cyfeirnod Unigryw y Trethdalwr (UTR) ar gyfer yr ystâd at {0} drwy’r post. Os ydyw wedi’i leoli yn y DU, gall hyn gymryd 15 diwrnod gwaith. Ar gyfer cynrychiolydd personol rhyngwladol, gall hyn gymryd hyd at 21 diwrnod gwaith.
 confirmation.subheading2 = Yr hyn y mae angen i chi ei wneud nesaf
-confirmation.paragraph2 = Gwnewch nodyn o’ch cyfeirnod rhag ofn y bydd angen i chi gysylltu â CThEM. Os nad yw’r UTR yn cyrraedd cyn pen 15 i 21 diwrnod gwaith, bydd angen i’r cynrychiolydd personol
-confirmation.paragraph2.link = gysylltu â CThEM i ganfod pam (yn agor ffenestr neu dab newydd)
+confirmation.paragraph2 = Gwnewch nodyn o’ch cyfeirnod rhag ofn y bydd angen i chi gysylltu â CThEF. Os nad yw’r UTR yn cyrraedd cyn pen 15 i 21 diwrnod gwaith, bydd angen i’r cynrychiolydd personol
+confirmation.paragraph2.link = gysylltu â CThEF i ganfod pam (yn agor ffenestr neu dab newydd)
 confirmation.paragraph3 = Ni allwch wneud newidiadau i’r ystâd ar-lein. Er mwyn newid y cynrychiolydd personol neu ei fanylion cyswllt,
-confirmation.paragraph3.link = anfonwch y newidiadau i CThEM drwy’r post (yn agor ffenestr neu dab newydd)
+confirmation.paragraph3.link = anfonwch y newidiadau i CThEF drwy’r post (yn agor ffenestr neu dab newydd)
 
 createAgentServicesAccount.title = Creu cyfrif gwasanaethau asiant
 createAgentServicesAccount.heading = Creu cyfrif gwasanaethau asiant
 createAgentServicesAccount.paragraph1 = Cyn i chi allu cofrestru ystâd, bydd angen i chi greu cyfrif gwasanaethau asiant. Gallwch wneud hyn nawr.
-createAgentServicesAccount.insetText = Mae’n rhaid mai chi yw’r person sy’n gyfrifol am faterion treth neu weinyddol eich cwmni. Mae’r cyfrif yn rhoi rheolaeth weinyddol i chi dros allu eich cwmni i gael at wasanaethau ar-lein newydd CThEM.
+createAgentServicesAccount.insetText = Mae’n rhaid mai chi yw’r person sy’n gyfrifol am faterion treth neu weinyddol eich cwmni. Mae’r cyfrif yn rhoi rheolaeth weinyddol i chi dros allu eich cwmni i gael at wasanaethau ar-lein newydd CThEF.
 createAgentServicesAccount.link = Gwiriwch yr arweiniad
 createAgentServicesAccount.paragraph2 = i gael gwybod yr hyn y bydd ei angen arnoch er mwyn creu cyfrif gwasanaethau asiant.
 createAgentServicesAccount.paragraph3 = Pan fyddwch wedi creu eich cyfrif gwasanaethau asiant, gallwch barhau â chofrestriad eich ystâd.
@@ -148,16 +148,16 @@ cannotMakeChanges.heading = Ni allwch wneud newidiadau i’r ystâd ar-lein
 cannotMakeChanges.paragraph1 = Gallwch
 cannotMakeChanges.paragraph2 = os oes angen i chi ddiweddaru’r manylion cyswllt ar gyfer yr ystâd.
 cannotMakeChanges.paragraph3 = Mae’n rhaid i chi gadw cofnod o bob newid arall i’r ystâd, ond nid oes angen i chi eu hanfon drwy’r post.
-cannotMakeChanges.postLink = anfon llythyr i Gyllid a Thollau EM drwy’r post
+cannotMakeChanges.postLink = anfon llythyr i Gyllid a Thollau EF drwy’r post
 
 utrSentInPost.title = Mae Cyfeirnod Unigryw y Trethdalwr (UTR) ar gyfer yr ystâd wedi’i anfon drwy’r post
 utrSentInPost.heading = Mae Cyfeirnod Unigryw y Trethdalwr (UTR) ar gyfer yr ystâd wedi’i anfon drwy’r post
 utrSentInPost.p1 = Gall gymryd 15 diwrnod gwaith i chi gael UTR yr ystâd. Gall gymryd 21 diwrnod gwaith ar gyfer cyfeiriadau rhyngwladol.
-utrSentInPost.link = Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEM (yn agor tab newydd)
+utrSentInPost.link = Cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF (yn agor tab newydd)
 utrSentInPost.link.remainder = os nad ydych wedi cael UTR yr  ystâd ar ôl yr amser hwn.
 
 doNotNeedToRegister.p3 = Os oes angen help arnoch gyda’r gwasanaeth,
-doNotNeedToRegister.contact.link = cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEM (yn agor ffenestr neu dab newydd)
+doNotNeedToRegister.contact.link = cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF (yn agor ffenestr neu dab newydd)
 
 agentOverview.title = Cofrestru ystâd a’i chynnal ar ran cleient
 agentOverview.heading = Cofrestru ystâd a’i chynnal ar ran cleient
