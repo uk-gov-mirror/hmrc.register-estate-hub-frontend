@@ -72,6 +72,7 @@ class DraftAnswersControllerSpec extends SpecBase {
           None,
           dateOfDeath,
           None,
+          Some(false),
           None
         )
       ),

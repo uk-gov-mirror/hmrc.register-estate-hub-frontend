@@ -76,6 +76,7 @@ class DeclaredAnswersControllerSpec extends SpecBase {
           None,
           dateOfDeath,
           None,
+          Some(false),
           None
         )
       ),

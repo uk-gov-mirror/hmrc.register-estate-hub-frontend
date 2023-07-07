@@ -45,6 +45,7 @@ class DeceasedPersonPrintHelperSpec extends SpecBase {
         None,
         dateOfDeath,
         None,
+        Some(false),
         None
       )
 
@@ -69,6 +70,7 @@ class DeceasedPersonPrintHelperSpec extends SpecBase {
         dateOfBirth,
         dateOfDeath,
         None,
+        Some(true),
         ukAddress
       )
 
@@ -89,13 +91,14 @@ class DeceasedPersonPrintHelperSpec extends SpecBase {
       )
     }
 
-    "render answer section for deceased person with a date of birth, non-UK address and a NINO" in {
+    "render answer section for deceased person with a date of birth, non-UK address and no NINO" in {
 
       val deceased: DeceasedPerson = entities.DeceasedPerson(
         name,
         dateOfBirth,
         dateOfDeath,
-        nino,
+        None,
+        Some(true),
         nonUkAddress
       )
 
@@ -108,11 +111,36 @@ class DeceasedPersonPrintHelperSpec extends SpecBase {
           AnswerRow(label = messages("deceasedPerson.dateOfDeath.checkYourAnswersLabel", name.displayName), answer = Html("3 February 2019"), None),
           AnswerRow(label = messages("deceasedPerson.dateOfBirthYesNo.checkYourAnswersLabel", name.displayName), answer = Html("Yes"), None),
           AnswerRow(label = messages("deceasedPerson.dateOfBirth.checkYourAnswersLabel", name.displayName), answer = Html("3 February 2000"), None),
-          AnswerRow(label = messages("deceasedPerson.ninoYesNo.checkYourAnswersLabel", name.displayName), answer = Html("Yes"), None),
-          AnswerRow(label = messages("deceasedPerson.nino.checkYourAnswersLabel", name.displayName), answer = Html("AA 00 00 00 A"), None),
+          AnswerRow(label = messages("deceasedPerson.ninoYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
           AnswerRow(label = messages("deceasedPerson.addressYesNo.checkYourAnswersLabel", name.displayName), answer = Html("Yes"), None),
           AnswerRow(label = messages("deceasedPerson.livedInTheUkYesNo.checkYourAnswersLabel", name.displayName), answer = Html("No"), None),
           AnswerRow(label = messages("deceasedPerson.address.checkYourAnswersLabel", name.displayName), answer = Html("99 Test Lane<br />Testville<br />Germany"), None)
+        )
+      )
+    }
+
+    "render answer section for deceased person with a date of birth and a NINO" in {
+
+      val deceased: DeceasedPerson = entities.DeceasedPerson(
+        name,
+        dateOfBirth,
+        dateOfDeath,
+        nino,
+        None,
+        None
+      )
+
+      val result = helper(deceased)
+
+      result mustBe AnswerSection(
+        headingKey = Some("taskList.personWhoDied.label"),
+        rows = Seq(
+          AnswerRow(label = messages("deceasedPerson.name.checkYourAnswersLabel"), answer = Html("John Doe"), None),
+          AnswerRow(label = messages("deceasedPerson.dateOfDeath.checkYourAnswersLabel", name.displayName), answer = Html("3 February 2019"), None),
+          AnswerRow(label = messages("deceasedPerson.dateOfBirthYesNo.checkYourAnswersLabel", name.displayName), answer = Html("Yes"), None),
+          AnswerRow(label = messages("deceasedPerson.dateOfBirth.checkYourAnswersLabel", name.displayName), answer = Html("3 February 2000"), None),
+          AnswerRow(label = messages("deceasedPerson.ninoYesNo.checkYourAnswersLabel", name.displayName), answer = Html("Yes"), None),
+          AnswerRow(label = messages("deceasedPerson.nino.checkYourAnswersLabel", name.displayName), answer = Html("AA 00 00 00 A"), None)
         )
       )
     }

@@ -27,6 +27,7 @@ final case class DeceasedPerson(name: Name,
                                 dateOfBirth: Option[LocalDate],
                                 dateOfDeath: LocalDate,
                                 nino: Option[NationalInsuranceNumber],
+                                addressYesNo: Option[Boolean],
                                 address : Option[Address])
 
 object DeceasedPerson extends Entity {
@@ -36,10 +37,11 @@ object DeceasedPerson extends Entity {
       (__ \ 'dateOfBirth).readNullable[LocalDate] and
       (__ \ 'dateOfDeath).read[LocalDate] and
       __.lazyRead(readNullableAtSubPath[NationalInsuranceNumber](__ \ 'identification)) and
+      (__ \ 'addressYesNo).readNullable[Boolean] and
       __.lazyRead(readNullableAtSubPath[Address](__ \ 'identification \ 'address))).tupled.map{
 
-      case (name, dob, dod, nino, identification) =>
-        entities.DeceasedPerson(name, dob, dod, nino, identification)
+      case (name, dob, dod, nino, addressYesNo, identification) =>
+        entities.DeceasedPerson(name, dob, dod, nino, addressYesNo, identification)
 
     }
 
@@ -48,12 +50,14 @@ object DeceasedPerson extends Entity {
       (__ \ 'dateOfBirth).writeNullable[LocalDate] and
       (__ \ 'dateOfDeath).write[LocalDate] and
       (__ \ 'identification).writeNullable[NationalInsuranceNumber] and
+      (__ \ 'addressYesNo).writeNullable[Boolean] and
       (__ \ 'identification \ 'address).writeNullable[Address]
       ).apply(settlor => (
       settlor.name,
       settlor.dateOfBirth,
       settlor.dateOfDeath,
       settlor.nino,
+      settlor.addressYesNo,
       settlor.address
     ))
 }
