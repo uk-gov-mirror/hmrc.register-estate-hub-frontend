@@ -66,7 +66,7 @@ class EstatesConnectorSpec extends SpecBase with BeforeAndAfterAll with BeforeAn
     ),
     yearsReturns = None,
     estate = Estate(
-      entities = EntitiesType(PersonalRepresentativeType(), DeceasedPerson(Name("first", None, "last"), None, LocalDate.parse("1996-02-03"), None, None)),
+      entities = EntitiesType(PersonalRepresentativeType(), DeceasedPerson(Name("first", None, "last"), None, LocalDate.parse("1996-02-03"), None, None, None)),
       administrationEndDate = None,
       periodTaxDues = "periodTaxDues"
     ),

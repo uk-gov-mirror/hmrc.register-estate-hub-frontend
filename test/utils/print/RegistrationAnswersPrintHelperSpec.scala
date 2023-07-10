@@ -67,6 +67,7 @@ class RegistrationAnswersPrintHelperSpec extends SpecBase {
           None,
           dateOfDeath,
           None,
+          Some(false),
           None
         )
       ),
