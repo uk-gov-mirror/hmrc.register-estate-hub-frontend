@@ -40,7 +40,7 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   lazy val countdownLength: Int = configuration.get[Int]("timeout.countdown")
   lazy val timeoutLength: Int = configuration.get[Int]("timeout.length")
 
-  lazy val agentsSubscriptionsUrl : String = configuration.get[String]("urls.agentSubscriptions")
+  private lazy val agentsSubscriptionsUrl : String = configuration.get[String]("urls.agentSubscriptions")
   lazy val agentServiceRegistrationUrl = s"$agentsSubscriptionsUrl?continue=$loginContinueUrl"
   lazy val registerYourClientsEstateUrl: String = configuration.get[String]("urls.registerYourClientsEstate")
 

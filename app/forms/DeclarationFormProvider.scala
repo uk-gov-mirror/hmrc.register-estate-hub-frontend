@@ -26,7 +26,7 @@ import play.api.data.Forms.{mapping, optional}
 
 class DeclarationFormProvider @Inject() extends Mappings {
 
-  val fullName: Mapping[Name] = mapping(
+  private val fullName: Mapping[Name] = mapping(
 
     "firstName" -> text("declaration.error.firstName.required")
       .verifying(

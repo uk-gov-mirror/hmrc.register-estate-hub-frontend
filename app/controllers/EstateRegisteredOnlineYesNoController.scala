@@ -58,7 +58,7 @@ class EstateRegisteredOnlineYesNoController @Inject()(
       Ok(view(preparedForm))
   }
 
-  def onSubmit() = actions().async {
+  def onSubmit(): Action[AnyContent] = actions().async {
     implicit request =>
 
       form.bindFromRequest().fold(

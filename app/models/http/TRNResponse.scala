@@ -44,18 +44,16 @@ object DeclarationResponse extends Logging {
   case object InternalServerError extends DeclarationResponse
 
   implicit def httpReads(implicit hc: HeaderCarrier): HttpReads[DeclarationResponse] =
-    new HttpReads[DeclarationResponse] {
-      override def read(method: String, url: String, response: HttpResponse): DeclarationResponse = {
-        logger.info(s"[Session ID: ${Session.id(hc)}] response status received from estates api: ${response.status}")
+    (method: String, url: String, response: HttpResponse) => {
+      logger.info(s"[Session ID: ${Session.id(hc)}] response status received from estates api: ${response.status}")
 
-        response.status match {
-          case OK =>
-            response.json.as[TRNResponse]
-          case CONFLICT =>
-            AlreadyRegistered
-          case _ =>
-            InternalServerError
-        }
+      response.status match {
+        case OK =>
+          response.json.as[TRNResponse]
+        case CONFLICT =>
+          AlreadyRegistered
+        case _ =>
+          InternalServerError
       }
     }
 

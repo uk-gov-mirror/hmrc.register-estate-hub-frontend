@@ -36,7 +36,7 @@ object ViewUtils {
         s"${error.key}.${error.args.head}"
       case _ if error.message.toLowerCase.contains("yesno") =>
         s"${error.key}-yes"
-      case _ if radioOptions.size != 0 =>
+      case _ if radioOptions.nonEmpty =>
         radioOptions.head.id
       case _ =>
         val isSingleDateField = isDateError(error.message) && !error.message.toLowerCase.contains("yesno")
@@ -48,7 +48,7 @@ object ViewUtils {
     }
   }
 
-  def isDateError(error: String): Boolean = {
+  private def isDateError(error: String): Boolean = {
     error.toLowerCase.contains("date") || error.toLowerCase.contains("when")
   }
 }

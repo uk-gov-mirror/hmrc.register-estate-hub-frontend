@@ -60,7 +60,7 @@
 
         <p>@link(DraftAnswersController.onPageLoad().url, "print-and-save", "taskList.summary.link")</p>
 
-        @formHelper(action = TaskListController.onSubmit, 'autoComplete -> "off") {
+        @formHelper(action = TaskListController.onSubmit(), Symbol("autoComplete") -> "off") {
             @submitButton(Some(messages("taskList.continue")))
         }
     }

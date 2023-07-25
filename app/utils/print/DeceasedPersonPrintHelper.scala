@@ -17,7 +17,7 @@
 package utils.print
 
 import models.entities.DeceasedPerson
-import models.identification.{Address, NationalInsuranceNumber, NonUkAddress, UkAddress}
+import models.identification.{NationalInsuranceNumber, NonUkAddress, UkAddress}
 import play.api.i18n.Messages
 import viewmodels.{AnswerRow, AnswerSection}
 

@@ -25,9 +25,9 @@ sealed trait IndividualIdentification
 
 object IndividualIdentification {
   implicit val reads: Reads[IndividualIdentification] =
-    (__ \ 'passport \ 'isPassport).read[Boolean].flatMap[IndividualIdentification] {
-      case true => (__ \ 'passport).read[Passport].widen[IndividualIdentification]
-      case false => (__ \ 'passport).read[IdCard].widen[IndividualIdentification]
+    (__ \ Symbol("passport") \ Symbol("isPassport")).read[Boolean].flatMap[IndividualIdentification] {
+      case true => (__ \ Symbol("passport")).read[Passport].widen[IndividualIdentification]
+      case false => (__ \ Symbol("passport")).read[IdCard].widen[IndividualIdentification]
     } orElse __.read[NationalInsuranceNumber].widen[IndividualIdentification]
 
   implicit val writes: Writes[IndividualIdentification] = Writes {
@@ -51,15 +51,15 @@ case class Passport(countryOfIssue: String,
 object Passport {
 
   implicit val reads: Reads[Passport] =
-    ((__ \ 'countryOfIssue).read[String] and
-      (__ \ 'number).read[String] and
-      (__ \ 'expirationDate).read[LocalDate]).apply(Passport.apply _)
+    ((__ \ Symbol("countryOfIssue")).read[String] and
+      (__ \ Symbol("number")).read[String] and
+      (__ \ Symbol("expirationDate")).read[LocalDate]).apply(Passport.apply _)
 
   implicit val writes: Writes[Passport] =
-    ((__ \ 'countryOfIssue).write[String] and
-      (__ \ 'number).write[String] and
-      (__ \ 'expirationDate).write[LocalDate] and
-      (__ \ 'isPassport).write[Boolean]
+    ((__ \ Symbol("countryOfIssue")).write[String] and
+      (__ \ Symbol("number")).write[String] and
+      (__ \ Symbol("expirationDate")).write[LocalDate] and
+      (__ \ Symbol("isPassport")).write[Boolean]
       ).apply(passport => (
       passport.countryOfIssue,
       passport.number,
@@ -78,15 +78,15 @@ case class IdCard(countryOfIssue: String,
 object IdCard {
 
   implicit val reads: Reads[IdCard] =
-    ((__ \ 'countryOfIssue).read[String] and
-      (__ \ 'number).read[String] and
-      (__ \ 'expirationDate).read[LocalDate]).apply(IdCard.apply _)
+    ((__ \ Symbol("countryOfIssue")).read[String] and
+      (__ \ Symbol("number")).read[String] and
+      (__ \ Symbol("expirationDate")).read[LocalDate]).apply(IdCard.apply _)
 
   implicit val writes: Writes[IdCard] =
-    ((__ \ 'countryOfIssue).write[String] and
-      (__ \ 'number).write[String] and
-      (__ \ 'expirationDate).write[LocalDate] and
-      (__ \ 'isPassport).write[Boolean]
+    ((__ \ Symbol("countryOfIssue")).write[String] and
+      (__ \ Symbol("number")).write[String] and
+      (__ \ Symbol("expirationDate")).write[LocalDate] and
+      (__ \ Symbol("isPassport")).write[Boolean]
       ).apply(idCard => (
       idCard.countryOfIssue,
       idCard.number,
