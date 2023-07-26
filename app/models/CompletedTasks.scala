@@ -47,16 +47,14 @@ object CompletedTasksResponse extends Logging {
 
   case object InternalServerError extends CompletedTasksResponse
 
-  implicit def httpReads(implicit hc: HeaderCarrier): HttpReads[CompletedTasksResponse] = new HttpReads[CompletedTasksResponse] {
-    override def read(method: String, url: String, response: HttpResponse): CompletedTasksResponse = {
-      logger.info(s"[Session ID: ${Session.id(hc)}] response status received from estates store api: ${response.status}")
+  implicit def httpReads(implicit hc: HeaderCarrier): HttpReads[CompletedTasksResponse] = (method: String, url: String, response: HttpResponse) => {
+    logger.info(s"[Session ID: ${Session.id(hc)}] response status received from estates store api: ${response.status}")
 
-      response.status match {
-        case OK =>
-          response.json.as[CompletedTasks]
-        case _ =>
-          InternalServerError
-      }
+    response.status match {
+      case OK =>
+        response.json.as[CompletedTasks]
+      case _ =>
+        InternalServerError
     }
   }
 }

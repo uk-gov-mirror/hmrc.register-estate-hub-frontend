@@ -27,33 +27,29 @@ object PersonalRepName extends Logging {
 
   implicit val formats : Format[PersonalRepName] = Json.format[PersonalRepName]
 
-  val personalRepIndividualNameReads : HttpReads[Option[PersonalRepName]] = new HttpReads[Option[PersonalRepName]] {
-    override def read(method: String, url: String, response: HttpResponse): Option[PersonalRepName] = {
-      response.status match {
-        case OK =>
-          val firstName = (response.json \ "name" \ "firstName").asOpt[String]
-          val lastName = (response.json \ "name" \ "lastName").asOpt[String]
-          (firstName, lastName) match {
-            case (Some(f), Some(l)) => Some(PersonalRepName(s"$f $l"))
-            case _ => None
-          }
-        case status =>
-          logger.error(s"Error response from estates $status body: ${response.body}")
-          None
-      }
+  val personalRepIndividualNameReads : HttpReads[Option[PersonalRepName]] = (method: String, url: String, response: HttpResponse) => {
+    response.status match {
+      case OK =>
+        val firstName = (response.json \ "name" \ "firstName").asOpt[String]
+        val lastName = (response.json \ "name" \ "lastName").asOpt[String]
+        (firstName, lastName) match {
+          case (Some(f), Some(l)) => Some(PersonalRepName(s"$f $l"))
+          case _ => None
+        }
+      case status =>
+        logger.error(s"Error response from estates $status body: ${response.body}")
+        None
     }
   }
 
-  val personalRepOrganisationNameReads : HttpReads[Option[PersonalRepName]] = new HttpReads[Option[PersonalRepName]] {
-    override def read(method: String, url: String, response: HttpResponse): Option[PersonalRepName] = {
-      response.status match {
-        case OK =>
-          val orgName = (response.json \ "orgName").asOpt[String]
-          orgName.map(x => PersonalRepName(x))
-        case status =>
-          logger.error(s"Error response from estates $status body: ${response.body}")
-          None
-      }
+  val personalRepOrganisationNameReads : HttpReads[Option[PersonalRepName]] = (method: String, url: String, response: HttpResponse) => {
+    response.status match {
+      case OK =>
+        val orgName = (response.json \ "orgName").asOpt[String]
+        orgName.map(x => PersonalRepName(x))
+      case status =>
+        logger.error(s"Error response from estates $status body: ${response.body}")
+        None
     }
   }
 

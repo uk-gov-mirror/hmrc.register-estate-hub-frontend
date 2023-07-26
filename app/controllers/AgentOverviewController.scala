@@ -44,7 +44,7 @@ class AgentOverviewController @Inject()(
       Ok(view())
   }
 
-  def onSubmit() = actions().async {
+  def onSubmit(): Action[AnyContent] = actions().async {
       Future.successful(Redirect(routes.EstateRegisteredOnlineYesNoController.onPageLoad()))
   }
 

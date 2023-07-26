@@ -36,7 +36,7 @@
 
     <p>@messages("agentOverview.paragraph2")</p>
 
-    @formHelper(action = AgentOverviewController.onSubmit(), 'autoComplete -> "off") {
+    @formHelper(action = AgentOverviewController.onSubmit(), Symbol("autoComplete") -> "off") {
         @submitButton(Some("agentOverview.start"))
     }
 }

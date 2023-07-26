@@ -34,7 +34,7 @@
     showBackLink = true
 ) {
 
-    @formHelper(action = EstateRegisteredOnlineYesNoController.onSubmit(), 'autoComplete -> "off") {
+    @formHelper(action = EstateRegisteredOnlineYesNoController.onSubmit(), Symbol("autoComplete") -> "off") {
 
         @errorSummary(form.errors)
 
