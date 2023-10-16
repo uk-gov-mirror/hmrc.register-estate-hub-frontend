@@ -18,6 +18,7 @@
 @import viewmodels.AnswerSection
 @import utils.SectionFormatter.formatSummaryAnswerSection
 @import views.html.components.{Heading, Button}
+@import views.html.helper.CSPNonce
 
 @this(
     main_template: MainTemplate,
@@ -33,6 +34,8 @@
     title = messages("declaredAnswers.title"),
     showBackLink = true
 ) {
+
+    <script src='@routes.Assets.versioned("javascripts/print.js")' @{CSPNonce.attr}></script>
 
     @heading("declaredAnswers.heading")
 

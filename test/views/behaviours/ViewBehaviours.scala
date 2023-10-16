@@ -91,7 +91,7 @@ trait ViewBehaviours extends ViewSpecBase {
     "behave like a page with a print button" must {
       "have a print button" in {
         val doc = asDocument(view)
-        assertRenderedById(doc, "print")
+        assertRenderedById(doc, "print-button")
       }
     }
   }

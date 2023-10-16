@@ -17,6 +17,7 @@
 @import viewmodels.AnswerSection
 @import utils.SectionFormatter.formatSummaryAnswerSection
 @import views.html.components.{Heading, Button}
+@import views.html.helper.CSPNonce
 
 @this(
     main_template: MainTemplate,
@@ -34,6 +35,8 @@
     showBackLink = true
 ) {
 
+    <script src='@routes.Assets.versioned("javascripts/print.js")' @{CSPNonce.attr}></script>
+
     @heading("draftAnswers.heading", headingSize = "govuk-heading-xl")
 
     <div class="section">
@@ -49,7 +52,7 @@
             <h3 class="govuk-heading-m">@messages(sh)</h3>
         }
 
-        @if(section.rows.size > 0){
+        @if(section.rows.nonEmpty){
             @govukSummaryList(SummaryList(rows = formatSummaryAnswerSection(section)))
         }
     }
