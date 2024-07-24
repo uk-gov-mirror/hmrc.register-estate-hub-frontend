@@ -44,7 +44,7 @@ class RequiredAffinityGroupActionSpec extends SpecBase with MockitoSugar with Sc
       "continue with returning None" in {
 
         val action = new Harness()
-        val futureResult = action.callFilter(new IdentifierRequest(fakeRequest, "id", AffinityGroup.Agent, Enrolments(Set.empty[Enrolment])))
+        val futureResult = action.callFilter(IdentifierRequest(fakeRequest, "id", AffinityGroup.Agent, Enrolments(Set.empty[Enrolment])))
 
         whenReady(futureResult) { result =>
           result mustBe None
@@ -58,7 +58,7 @@ class RequiredAffinityGroupActionSpec extends SpecBase with MockitoSugar with Sc
       "redirect to Unauthorised page" in {
 
         val action = new Harness()
-        val futureResult = action.callFilter(new IdentifierRequest(fakeRequest, "id", AffinityGroup.Organisation, Enrolments(Set.empty[Enrolment])))
+        val futureResult = action.callFilter(IdentifierRequest(fakeRequest, "id", AffinityGroup.Organisation, Enrolments(Set.empty[Enrolment])))
 
         whenReady(futureResult) { result =>
           result.value.header.headers(HeaderNames.LOCATION) mustBe UnauthorisedController.onPageLoad.url

@@ -4,7 +4,7 @@ import scoverage.ScoverageKeys
 
 lazy val appName: String = "register-estate-hub-frontend"
 
-ThisBuild / scalaVersion := "2.13.13"
+ThisBuild / scalaVersion := "2.13.14"
 ThisBuild / majorVersion := 0
 
 lazy val microservice = (project in file("."))

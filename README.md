@@ -3,7 +3,7 @@
 This service is responsible for navigating the user to respective sections of their registration. It shows the progress of their registration on a task list and provides the ability to print draft and confirmations of their registraton.
 It acts as a 'hub' to other parts of their registration journey.
 
-To run locally using the micro-service provided by the service manager:
+To run locally using the microservice provided by the service manager:
 
 ***sm2 --start ESTATES_ALL***
 
