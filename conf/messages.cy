@@ -37,7 +37,6 @@ site.hidden-edit = Newid {0}
 site.no = Na
 site.yes = Iawn
 site.continue = Yn eich blaen
-site.save.continue = Cadw ac yn eich blaen
 site.confirm.send = Cadarnhau ac anfon
 site.print-or-save = Argraffu neu gadw’r dudalen hon
 site.warning = Rhybudd
