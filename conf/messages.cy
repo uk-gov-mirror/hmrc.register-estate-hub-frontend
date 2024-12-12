@@ -49,9 +49,9 @@ site.error = Gwall:
 site.address.country.select = Dewiswch wlad
 
 #timeout dialog
-timeout.title = Bydd eich cais yn dod i ben cyn hir
-timeout.message = Byddwn yn ailosod eich cais os na fyddwch yn ymateb cyn pen
-timeout.keep-alive-button = Yn eich blaen â’r cais
+timeout.title = Rydych ar fin cael eich allgofnodi
+timeout.message = Er eich diogelwch, byddwn yn eich allgofnodi cyn pen
+timeout.keep-alive-button = Parhau i fod wedi’ch mewngofnodi
 
 unauthorised.title = Ni allwch ddefnyddio’r gwasanaeth hwn gyda’r cyfrif hwn
 unauthorised.heading = Ni allwch ddefnyddio’r gwasanaeth hwn gyda’r cyfrif hwn
