@@ -128,15 +128,18 @@ problemDeclaring.contact.link = contact the trusts helpline (opens in a new wind
 
 confirmation.title = Registration received
 confirmation.heading = Registration received
-confirmation.heading2 = Your reference is:
-confirmation.printsave = Print or save a copy of the estate’s declaration
+confirmation.heading2 = Your registration reference number is:
+confirmation.printsave = Print or save a declared copy of the estate’s registration
 confirmation.subheading1 = What happens next
-confirmation.paragraph1 = We will post {0} the estate’s Unique Taxpayer Reference (UTR). If they are based in the UK, this can take 15 working days. For an international personal representative, this can take up to 21 working days.
-confirmation.subheading2 = What you need to do next
-confirmation.paragraph2 = Make a note of your reference number in case you need to contact HMRC. If the UTR does not arrive within 15 to 21 working days, the personal representative will need to
+confirmation.paragraph1 = We will post the estate’s Unique Taxpayer Reference (UTR) to {0}. If they are based in the UK, this can take 15 working days. For an international personal representative, this can take up to 21 working days.
+confirmation.paragraph2 = Make a note of your registration number in case you need to contact HMRC. If the UTR does not arrive within 15 to 21 working days, the personal representative will need to
 confirmation.paragraph2.link = contact HMRC to find out why (opens in a new window or tab)
-confirmation.paragraph3 = You cannot make online changes to the estate. To change the personal representative or their contact details,
-confirmation.paragraph3.link = post the changes to HMRC (opens in a new window or tab)
+confirmation.subheading2 = If you need to make changes to the estate
+confirmation.paragraph3 = You must keep the details for the personal representative up to date. This is the person that HMRC will contact and all official documents will be sent to. You can make changes to the personal representative’s details when you manage the estate.
+confirmation.paragraph4 = When you manage an estate you can also:
+confirmation.bulletpoint1 = replace the personal representative
+confirmation.bulletpoint2 = close the estate
+confirmation.paragraph5 = You cannot update the details of the person who has died or the years of tax liability.
 
 createAgentServicesAccount.title = Create an agent services account
 createAgentServicesAccount.heading = Create an agent services account

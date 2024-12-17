@@ -34,17 +34,20 @@ class ConfirmationViewSpec extends ViewBehaviours {
       val doc = asDocument(view)
 
       assertContainsText(doc, "Registration received")
-      assertContainsText(doc, "Your reference is:")
+      assertContainsText(doc, "Your registration reference number is:")
       assertRenderedById(doc, "estates-registration-number")
 
       assertRenderedById(doc, "print-and-save")
 
-      assertContainsText(doc, "We will post the estate’s Unique Taxpayer Reference (UTR). If they are based in the UK, this can take 15 working days. For an international personal representative, this can take up to 21 working days.")
+      assertContainsText(doc, "We will post the estate’s Unique Taxpayer Reference (UTR) to . If they are based in the UK, this can take 15 working days. For an international personal representative, this can take up to 21 working days.")
 
-      assertContainsText(doc, "Make a note of your reference number in case you need to contact HMRC. If the UTR does not arrive within 15 to 21 working days, the personal representative will need to")
+      assertContainsText(doc, "Make a note of your registration number in case you need to contact HMRC. If the UTR does not arrive within 15 to 21 working days, the personal representative will need to")
 
-      assertContainsText(doc, "You cannot make online changes to the estate. To change the personal representative or their contact details,")
+      assertContainsText(doc, "You must keep the details for the personal representative up to date. This is the person that HMRC will contact and all official documents will be sent to. You can make changes to the personal representative’s details when you manage the estate.")
 
+      assertContainsText(doc, "When you manage an estate you can also:")
+
+      assertContainsText(doc, "You cannot update the details of the person who has died or the years of tax liability.")
     }
 
   }

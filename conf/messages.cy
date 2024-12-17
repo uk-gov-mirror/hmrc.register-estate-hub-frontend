@@ -123,15 +123,18 @@ problemDeclaring.contact.link = cyslltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF
 
 confirmation.title = Cofrestriad wedi dod i law
 confirmation.heading = Cofrestriad wedi dod i law
-confirmation.heading2 = Eich cyfeirnod yw:
-confirmation.printsave = Argraffu neu gadw copi o ddatganiad yr ystâd
+confirmation.heading2 = Cyfeirnod eich cofrestriad yw:
+confirmation.printsave = Argraffu neu gadw copi datganedig o gofrestriad yr ystâd
 confirmation.subheading1 = Yr hyn sy’n digwydd nesaf
-confirmation.paragraph1 = Byddwn yn anfon Cyfeirnod Unigryw y Trethdalwr (UTR) ar gyfer yr ystâd at {0} drwy’r post. Os ydyw wedi’i leoli yn y DU, gall hyn gymryd 15 diwrnod gwaith. Ar gyfer cynrychiolydd personol rhyngwladol, gall hyn gymryd hyd at 21 diwrnod gwaith.
-confirmation.subheading2 = Yr hyn y mae angen i chi ei wneud nesaf
+confirmation.paragraph1 = Byddwn yn anfon Cyfeirnod Unigryw y Trethdalwr (UTR) ar gyfer yr ystâd drwy’r post at {0}. Os ydyw wedi’i leoli yn y DU, gall hyn gymryd 15 diwrnod gwaith. Ar gyfer cynrychiolydd personol rhyngwladol, gall hyn gymryd hyd at 21 diwrnod gwaith.
 confirmation.paragraph2 = Gwnewch nodyn o’ch cyfeirnod rhag ofn y bydd angen i chi gysylltu â CThEF. Os nad yw’r UTR yn cyrraedd cyn pen 15 i 21 diwrnod gwaith, bydd angen i’r cynrychiolydd personol
 confirmation.paragraph2.link = gysylltu â CThEF i ganfod pam (yn agor ffenestr neu dab newydd)
-confirmation.paragraph3 = Ni allwch wneud newidiadau i’r ystâd ar-lein. Er mwyn newid y cynrychiolydd personol neu ei fanylion cyswllt,
-confirmation.paragraph3.link = anfonwch y newidiadau i CThEF drwy’r post (yn agor ffenestr neu dab newydd)
+confirmation.subheading2 = Os oes angen i chi wneud newidiadau i’r ystâd
+confirmation.paragraph3 = Mae’n rhaid i chi gadw manylion y cynrychiolydd personol yn gyfredol. Bydd yr holl ddogfennau swyddogol yn cael eu hanfon at y person hwn a dyma pwy fydd CThEF yn cysylltu ag ef. Gallwch wneud newidiadau i fanylion y cynrychiolydd personol pan fyddwch yn rheoli’r ystâd.
+confirmation.paragraph4 = Pan fyddwch yn rheoli’r ystâd gallwch hefyd wneud y canlynol:
+confirmation.bulletpoint1 = disodli’r cynrychiolydd personol
+confirmation.bulletpoint2 = cau’r ystâd
+confirmation.paragraph5 = Ni allwch ddiweddaru manylion y person sydd wedi marw na’r blynyddoedd o rwymedigaeth treth.
 
 createAgentServicesAccount.title = Creu cyfrif gwasanaethau asiant
 createAgentServicesAccount.heading = Creu cyfrif gwasanaethau asiant

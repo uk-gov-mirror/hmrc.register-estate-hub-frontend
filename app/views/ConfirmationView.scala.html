@@ -17,14 +17,15 @@
 @import controllers.routes._
 @import utils.AccessibilityHelper._
 @import config.FrontendAppConfig
-@import views.html.components.{ConfirmationPanel, Link}
+@import views.html.components.{ConfirmationPanel, Link, BulletList}
 
 @this(
     main_template: MainTemplate,
     formHelper: FormWithCSRF,
     appConfig: FrontendAppConfig,
     confirmationPanel: ConfirmationPanel,
-    link: Link
+    link: Link,
+    bulletList: BulletList
 )
 
 @(trn: String, personalRepName: String)(implicit request: Request[_], messages: Messages)
@@ -45,13 +46,24 @@
 
     <p>@messages("confirmation.paragraph1", personalRepName)</p>
 
-    <h2>@messages("confirmation.subheading2")</h2>
-
     <p>@messages("confirmation.paragraph2")
         @link(appConfig.helplineUrl, "helplineUrl1", "confirmation.paragraph2.link", true).
     </p>
 
-    <p>@messages("confirmation.paragraph3")
-        @link(appConfig.helplineUrl, "helplineUrl2", "confirmation.paragraph3.link", true).
-    </p>
+    <h2>@messages("confirmation.subheading2")</h2>
+
+    <p>@messages("confirmation.paragraph3")</p>
+
+    <p>@messages("confirmation.paragraph4")</p>
+
+    @bulletList(
+        "confirmation",
+        List(
+            "bulletpoint1",
+            "bulletpoint2"
+        )
+    )
+
+    <p>@messages("confirmation.paragraph5")</p>
+
 }
