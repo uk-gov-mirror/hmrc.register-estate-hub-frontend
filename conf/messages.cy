@@ -41,7 +41,6 @@ site.confirm.send = Cadarnhau ac anfon
 site.print-or-save = Argraffu neu gadw’r dudalen hon
 site.warning = Rhybudd
 site.textarea.char_limit = (Y terfyn yw {0} o gymeriadau)
-site.returnToRegistrationProgress = Yn ôl i gynnydd cofrestru
 site.sign_out = Allgofnodi
 site.sign_in = Mewngofnodi
 site.error = Gwall:
