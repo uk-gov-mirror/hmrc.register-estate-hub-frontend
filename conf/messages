@@ -53,7 +53,12 @@ timeout.message=For your security, we will sign you out in
 timeout.keep-alive-button=Stay signed in
 
 unauthorised.title = You can’t access this service with this account
-unauthorised.heading = You can’t access this service with this account
+unauthorised.heading = There is a problem
+unauthorised.p1 = You signed in using a Government Gateway user ID for an individual.
+unauthorised.p2 = To use this service you need a Government Gateway user ID for the estate. You can set one up when you register an estate.
+unauthorised.p3 = You need to either:
+unauthorised.bullet1 = sign out and set up a Government Gateway user ID for the estate you want to register
+unauthorised.bullet2 = sign out and sign in with the estate’s Government Gateway user ID if the estate already has one
 
 featureNotAvailable.title = This part of the online service is not available yet
 featureNotAvailable.heading = This part of the online service is not available yet
@@ -224,3 +229,9 @@ deceasedPerson.address.checkYourAnswersLabel = What is {0}’s last known addres
 
 taxLiability.neededToPayTax.checkYourAnswersLabel = Did the estate need to pay any tax from {0} to {1}?
 taxLiability.wasTaxDeclared.checkYourAnswersLabel = Was the tax from {0} to {1} declared?
+
+sign_out.title = You have signed out
+sign_out.heading = You have signed out
+sign_out.p1 = You can
+sign_out.link = sign in to register or manage an estate
+sign_out.p2 = You can create a new Government Gateway user ID for the estate when you register the estate.

@@ -53,7 +53,12 @@ timeout.message = Er eich diogelwch, byddwn yn eich allgofnodi cyn pen
 timeout.keep-alive-button = Parhau i fod wedi’ch mewngofnodi
 
 unauthorised.title = Ni allwch ddefnyddio’r gwasanaeth hwn gyda’r cyfrif hwn
-unauthorised.heading = Ni allwch ddefnyddio’r gwasanaeth hwn gyda’r cyfrif hwn
+unauthorised.heading = Mae problem wedi codi
+unauthorised.p1 = Gwnaethoch fewngofnodi gan ddefnyddio Dynodydd Defnyddiwr (ID) unigolyn ar gyfer Porth y Llywodraeth.
+unauthorised.p2 = I ddefnyddio’r gwasanaeth hwn, bydd angen Dynodydd Defnyddiwr (ID) ar gyfer Porth y Llywodraeth arnoch ar gyfer yr ystâd. Gallwch greu un wrth i chi gofrestru ystâd.
+unauthorised.p3 = Mae’n rhaid i chi wneud y naill neu’r llall o’r canlynol:
+unauthorised.bullet1 = allgofnodi a chreu Dynodydd Defnyddiwr (ID) ar gyfer Porth y Llywodraeth ar gyfer yr ystâd rydych am ei chofrestru
+unauthorised.bullet2 = allgofnodi ac yna mewngofnodi eto gan ddefnyddio Dynodydd Defnyddiwr (ID) yr ystâd ar gyfer Porth y Llywodraeth, os oes gan yr ystâd un yn barod
 
 featureNotAvailable.title = Nid yw rhan hon y gwasanaeth ar-lein ar gael eto
 featureNotAvailable.heading = Nid yw rhan hon y gwasanaeth ar-lein ar gael eto
@@ -217,3 +222,9 @@ deceasedPerson.address.checkYourAnswersLabel = Beth yw cyfeiriad hysbys diwethaf
 
 taxLiability.neededToPayTax.checkYourAnswersLabel = A oedd angen i’r ymddiriedolaeth dalu unrhyw dreth o {0} i {1}?
 taxLiability.wasTaxDeclared.checkYourAnswersLabel = A gafodd y dreth o {0} i {1} ei datgan?
+
+sign_out.title = Rydych wedi allgofnodi
+sign_out.heading = Rydych wedi allgofnodi
+sign_out.p1 = Gallwch
+sign_out.link = mewngofnodi i gofrestru neu reoli ystâd
+sign_out.p2 = Gallwch greu Dynodydd Defnyddiwr (ID) newydd ar gyfer Porth y Llywodraeth ar gyfer yr ystâd pan fyddwch yn cofrestru’r ystâd.
