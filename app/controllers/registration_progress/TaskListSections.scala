@@ -17,15 +17,15 @@
 package controllers.registration_progress
 
 import config.FrontendAppConfig
-import models.TagStatus.InProgress
+import models.TagStatus.Incomplete
 import models.{CompletedTasks, TagStatus}
 import viewmodels.tasks.{EstateName, PersonWhoDied, PersonalRepresentative, YearsOfTaxLiability}
 import viewmodels.{Link, Task}
 
 trait TaskListSections {
 
-  case class TaskList(mandatory: List[Task], other: List[Task]) {
-    val isAbleToDeclare : Boolean = !(mandatory ::: other).exists(_.tag == InProgress)
+  case class TaskList(mandatory: List[Task]) {
+    val isAbleToDeclare : Boolean = !mandatory.exists(_.tag == Incomplete)
   }
 
   private lazy val notYetAvailable: String =
@@ -78,21 +78,12 @@ trait TaskListSections {
       Task(
         Link(PersonWhoDied, deceasedPersonsRoute),
         TagStatus.tagFor(tasks.deceased, config.deceasedPersonsEnabled)
+      ),
+      Task(
+        Link(YearsOfTaxLiability, registerTaxRoute),
+        TagStatus.tagForTaxLiability(tasks.yearsOfTaxLiability, config.registerTaxEnabled, enableTaxLiability,tasks.deceased
       )
-    )
-
-    val optionalSections = if (enableTaxLiability) {
-      List(
-        Task(
-          Link(YearsOfTaxLiability, registerTaxRoute),
-          TagStatus.tagFor(tasks.yearsOfTaxLiability, config.registerTaxEnabled)
-        )
-      )
-    } else {
-      Nil
-    }
-
-    TaskList(mandatorySections, optionalSections)
+    ))
+    TaskList(mandatorySections)
   }
-
 }

@@ -64,7 +64,7 @@ class TaskListController @Inject()(
 
               Ok(view(
                 estateName = estateName,
-                sections = taskList.mandatory ++ taskList.other,
+                sections = taskList.mandatory,
                 isTaskListComplete = taskList.isAbleToDeclare,
                 affinityGroup = request.affinityGroup))
 

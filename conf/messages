@@ -102,6 +102,12 @@ taskList.yearOfTaxLiability.label = Tax liability {0} to {1}
 
 taskList.in-progress = In progress
 taskList.completed = Completed
+taskList.not-started = Not started
+taskList.cannot-start-yet = Cannot start yet
+taskList.no-action-needed = No action needed
+taskList.incomplete = Incomplete
+
+
 
 declaration.title = Declaration
 declaration.heading = Declaration

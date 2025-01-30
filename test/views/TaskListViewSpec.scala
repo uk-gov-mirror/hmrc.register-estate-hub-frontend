@@ -19,7 +19,7 @@ package views
 import models.{CompletedTasks, TagStatus}
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.auth.core.AffinityGroup.{Agent, Organisation}
-import viewmodels.tasks.{EstateName, PersonWhoDied, PersonalRepresentative}
+import viewmodels.tasks.{EstateName, PersonWhoDied, PersonalRepresentative, YearsOfTaxLiability}
 import viewmodels.{Link, Task}
 import views.behaviours.{TaskListViewBehaviours, ViewBehaviours}
 import views.html.TaskListView
@@ -31,14 +31,15 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
   private def tasks(estateDetailsEnabled: Boolean,
             personalRepEnabled: Boolean,
-            deceasedPersonsEnabled: Boolean
+            deceasedPersonsEnabled: Boolean,
+            yearsOfTaxLiability: Boolean
            ): CompletedTasks =
 
     CompletedTasks(
       details = estateDetailsEnabled,
       personalRepresentative = personalRepEnabled,
       deceased = deceasedPersonsEnabled,
-      yearsOfTaxLiability = true
+      yearsOfTaxLiability = yearsOfTaxLiability
     )
 
   private def sections(tasks: CompletedTasks): List[Task] = {
@@ -54,6 +55,10 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
       Task(
         Link(PersonWhoDied, url),
         TagStatus.tagFor(tasks.deceased, featureEnabled = true)
+      ),
+      Task(
+        Link(YearsOfTaxLiability, url),
+        TagStatus.tagForTaxLiability(tasks.yearsOfTaxLiability, featureEnabled = true, true, tasks.deceased )
       )
     )
   }
@@ -64,7 +69,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
       val view = viewFor[TaskListView](Some(emptyUserAnswers))
 
-      val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true)
+      val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true, yearsOfTaxLiability = true )
 
       val tasksList = sections(completedTasks)
 
@@ -85,7 +90,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
         "all sections are completed" in {
 
-          val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true)
+          val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true, yearsOfTaxLiability = true)
 
           val tasksList = sections(completedTasks)
 
@@ -103,7 +108,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
         "not all sections are completed" in {
 
-          val completedTasks = tasks(estateDetailsEnabled = false, personalRepEnabled = false, deceasedPersonsEnabled = false)
+          val completedTasks = tasks(estateDetailsEnabled = false, personalRepEnabled = false, deceasedPersonsEnabled = false, yearsOfTaxLiability = false)
 
           val tasksList = sections(completedTasks)
 
@@ -122,7 +127,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
 
       val view = viewFor[TaskListView](Some(emptyUserAnswers))
 
-      val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true)
+      val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true, yearsOfTaxLiability = true)
 
       val tasksList = sections(completedTasks)
 
@@ -155,7 +160,7 @@ class TaskListViewSpec extends ViewBehaviours with TaskListViewBehaviours {
       "render Agent details link" in {
         val view = viewFor[TaskListView](Some(emptyUserAnswers))
 
-        val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true)
+        val completedTasks = tasks(estateDetailsEnabled = true, personalRepEnabled = true, deceasedPersonsEnabled = true, yearsOfTaxLiability = true)
 
         val tasksList = sections(completedTasks)
 
