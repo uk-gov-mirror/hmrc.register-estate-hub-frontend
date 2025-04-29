@@ -17,7 +17,6 @@
 package controllers
 
 import java.time.{LocalDate, LocalDateTime}
-
 import base.SpecBase
 import connectors.EstatesConnector
 import models._
@@ -25,6 +24,7 @@ import models.entities.personalrep.{IndividualPersonalRep, PersonalRepresentativ
 import models.entities.{DeceasedPerson, EntitiesType}
 import models.identification.{IdCard, Name, NationalInsuranceNumber, NonUkAddress, Passport, UkAddress}
 import org.mockito.ArgumentMatchers.any
+import org.mockito.Mockito.when
 import pages.{SubmissionDatePage, TRNPage}
 import play.api.inject.bind
 import play.api.test.FakeRequest

@@ -22,6 +22,7 @@ import models.CompletedTasks
 import models.CompletedTasksResponse.InternalServerError
 import models.TagStatus._
 import org.mockito.ArgumentMatchers.any
+import org.mockito.Mockito.when
 import play.api.inject.bind
 import play.api.test.FakeRequest
 import play.api.test.Helpers._

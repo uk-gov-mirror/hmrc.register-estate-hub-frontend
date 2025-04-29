@@ -20,6 +20,7 @@ import base.SpecBase
 import connectors.EstatesConnector
 import models.PersonalRepName
 import org.mockito.ArgumentMatchers.any
+import org.mockito.Mockito.when
 import pages.TRNPage
 import play.api.inject.bind
 import play.api.test.FakeRequest
