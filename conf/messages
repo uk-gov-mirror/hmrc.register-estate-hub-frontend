@@ -176,10 +176,10 @@ utrSentInPost.link.remainder = if you have not received the estate’s UTR after
 doNotNeedToRegister.p3 = If you need help with the service contact
 doNotNeedToRegister.contact.link = contact the deceased estate helpline (opens in a new tab or window)
 
-agentOverview.title = Register and maintain an estate for a client
-agentOverview.heading = Register and maintain an estate for a client
+agentOverview.title = Register or manage an estate for a client
+agentOverview.heading = Register or manage an estate for a client
 agentOverview.paragraph1 = You cannot save your registration and come back later. If you do not complete this registration now, your information will not be saved.
-agentOverview.paragraph2 = If you need to maintain an estate which has already been registered online, any changes you make without declaring will not be saved.
+agentOverview.paragraph2 = If you need to manage an estate which has already been registered online, any changes you make without declaring will not be saved.
 agentOverview.start = Start now
 
 

@@ -170,10 +170,10 @@ utrSentInPost.link.remainder = os nad ydych wedi cael UTR yr  ystâd ar ôl yr a
 doNotNeedToRegister.p3 = Os oes angen help arnoch gyda’r gwasanaeth,
 doNotNeedToRegister.contact.link = cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEF (yn agor ffenestr neu dab newydd)
 
-agentOverview.title = Cofrestru ystâd a’i chynnal ar ran cleient
-agentOverview.heading = Cofrestru ystâd a’i chynnal ar ran cleient
+agentOverview.title = Cofrestru neu reoli ystâd ar ran cleient
+agentOverview.heading = Cofrestru neu reoli ystâd ar ran cleient
 agentOverview.paragraph1 = Ni allwch gadw’ch cofrestriad a dod yn ôl yn nes ymlaen. Os nad ydych yn cwblhau’r cofrestriad hwn nawr, ni fydd eich gwybodaeth yn cael ei chadw.
-agentOverview.paragraph2 = Os oes angen i chi gynnal ystâd sydd eisoes wedi’i chofrestru ar-lein, ni chaiff unrhyw newidiadau a wnewch eu cadw.
+agentOverview.paragraph2 = Os oes angen i chi reoli ystâd sydd eisoes wedi’i chofrestru ar-lein, ni chaiff unrhyw newidiadau a wnewch eu cadw.
 agentOverview.start = Dechrau nawr
 
 declaredAnswers.title = Copi wedi’i ddatgan o gofrestriad yr ystâd
