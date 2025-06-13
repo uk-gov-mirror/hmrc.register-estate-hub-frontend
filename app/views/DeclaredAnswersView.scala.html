@@ -28,7 +28,7 @@
     govukSummaryList: GovukSummaryList
 )
 
-@(entities: Seq[AnswerSection], trn: String, declarationSent: String)(implicit request: Request[_], messages: Messages)
+@(entities: Seq[AnswerSection], trn: String, declarationSent: String)(implicit request: RequestHeader, messages: Messages)
 
 @main_template(
     title = messages("declaredAnswers.title"),

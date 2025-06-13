@@ -27,7 +27,7 @@
     submitButton: SubmitButton
 )
 
-@(form: Form[_], isOrgCredUser: Boolean)(implicit request: Request[_], messages: Messages)
+@(form: Form[_], isOrgCredUser: Boolean)(implicit request: RequestHeader, messages: Messages)
 
 @main_template(
     title = s"${errorPrefix(form)}${messages("haveUtrYesNo.title")}",

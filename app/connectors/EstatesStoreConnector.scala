@@ -17,19 +17,19 @@
 package connectors
 
 import config.FrontendAppConfig
-import javax.inject.Inject
 import models.CompletedTasksResponse
-import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.http.HttpClient
+import uk.gov.hmrc.http.client.HttpClientV2
+import uk.gov.hmrc.http.{HeaderCarrier, StringContextOps}
 
+import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class EstatesStoreConnector @Inject()(http: HttpClient, config : FrontendAppConfig) {
+class EstatesStoreConnector @Inject()(http: HttpClientV2, config : FrontendAppConfig) {
 
-  private val registerTasksUrl = s"${config.estatesStoreUrl}/register/tasks"
 
   def getStatusOfTasks(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[CompletedTasksResponse] = {
-    http.GET[CompletedTasksResponse](registerTasksUrl)
+    val registerTasksUrl = s"${config.estatesStoreUrl}/register/tasks"
+    http.get(url"$registerTasksUrl").execute[CompletedTasksResponse]
   }
 
 }

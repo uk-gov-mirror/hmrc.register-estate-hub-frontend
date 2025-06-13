@@ -24,12 +24,12 @@ import handlers.ErrorHandler
 import models.{CompletedTasks, CompletedTasksResponse, UserAnswers}
 import play.api.Logging
 import play.api.i18n.I18nSupport
-import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents, Result}
 import repositories.SessionRepository
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
 import views.html.TaskListView
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 class TaskListController @Inject()(
                                     actions: Actions,
@@ -45,35 +45,37 @@ class TaskListController @Inject()(
 
   def onPageLoad(): Action[AnyContent] = actions.authWithSession.async {
     implicit request =>
-
       def continueOrCreateNewSession =
         request.userAnswers.getOrElse(UserAnswers(request.internalId))
 
-      def getEstateName =  connector.getEstateName()
-      def getIsLiableForTax =  connector.getIsLiableForTax()
+      def getEstateName = connector.getEstateName()
 
-      for {
-       _ <- repository.set(continueOrCreateNewSession)
-       estateName <- getEstateName
-       isLiableForTax <- getIsLiableForTax
-        tasks <- storeConnector.getStatusOfTasks
-      } yield {
+      def getIsLiableForTax = connector.getIsLiableForTax()
+
+      def taskList(estateName: Option[String], isLiableForTax: Boolean, tasks: CompletedTasksResponse): Future[Result] = {
         tasks match {
           case l @ CompletedTasks(_, _, _, _) =>
             val taskList = generateTaskList(l, isLiableForTax)
-
-              Ok(view(
-                estateName = estateName,
-                sections = taskList.mandatory,
-                isTaskListComplete = taskList.isAbleToDeclare,
-                affinityGroup = request.affinityGroup))
-
+            Future.successful(Ok(view(
+              estateName = estateName,
+              sections = taskList.mandatory,
+              isTaskListComplete = taskList.isAbleToDeclare,
+              affinityGroup = request.affinityGroup)))
           case CompletedTasksResponse.InternalServerError =>
             logger.error(s"[TaskListController] unable to get tasks statuses")
-            InternalServerError(errorHandler.internalServerErrorTemplate)
+            errorHandler.internalServerErrorTemplate.map(html => InternalServerError(html))
         }
       }
+
+      for {
+        _ <- repository.set(continueOrCreateNewSession)
+        estateName <- getEstateName
+        isLiableForTax <- getIsLiableForTax
+        tasks <- storeConnector.getStatusOfTasks
+        result <- taskList(estateName, isLiableForTax, tasks)
+      } yield result
   }
+
 
   def onSubmit: Action[AnyContent] = Action {
     Redirect(controllers.routes.DeclarationController.onPageLoad())

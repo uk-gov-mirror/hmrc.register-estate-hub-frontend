@@ -2,7 +2,7 @@ import sbt.*
 
 object AppDependencies {
 
-  val boostrapVersion = "8.6.0"
+  val boostrapVersion = "9.13.0"
   val mongoVersion = "2.6.0"
 
   private lazy val compile = Seq(

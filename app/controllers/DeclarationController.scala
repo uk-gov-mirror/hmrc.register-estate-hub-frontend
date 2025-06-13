@@ -85,10 +85,10 @@ class DeclarationController @Inject()(
               }
             case DeclarationResponse.AlreadyRegistered =>
               logger.error(s"[Session ID: ${Session.id(hc)}] estate already registered")
-              Future.successful(Conflict(errorHandler.badRequestTemplate))
+              errorHandler.badRequestTemplate.map(html => BadRequest(html))
             case _ =>
               logger.error(s"[Session ID: ${Session.id(hc)}] something went wrong")
-              Future.successful(InternalServerError(errorHandler.internalServerErrorTemplate))
+              errorHandler.internalServerErrorTemplate.map(html => InternalServerError(html))
           }
         }
       )

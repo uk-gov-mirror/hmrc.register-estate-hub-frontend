@@ -19,30 +19,29 @@ package connectors
 import config.FrontendAppConfig
 import models._
 import models.http.DeclarationResponse
-import play.api.libs.json.Writes
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
+import play.api.libs.json.Json
 import uk.gov.hmrc.http.HttpReads.Implicits._
+import uk.gov.hmrc.http.client.HttpClientV2
+import uk.gov.hmrc.http.{HeaderCarrier, StringContextOps}
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
+class EstatesConnector @Inject()(http: HttpClientV2, config: FrontendAppConfig) {
 
-  private val registerUrl = s"${config.estatesUrl}/estates/register"
 
   def register(payload: Declaration)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[DeclarationResponse] = {
-    http.POST[Declaration, DeclarationResponse](registerUrl, payload)(
-      implicitly[Writes[Declaration]], DeclarationResponse.httpReads, hc, ec
-    )
+    val registerUrl = s"${config.estatesUrl}/estates/register"
+    http.post(url"$registerUrl").withBody(Json.toJson(payload)).execute[DeclarationResponse](
+      DeclarationResponse.httpReads, ec)
   }
 
-  private val getPersonalRepIndUrl = s"${config.estatesUrl}/estates/personal-rep/individual"
-  private val getPersonalRepOrgUrl = s"${config.estatesUrl}/estates/personal-rep/organisation"
-
   def getPersonalRepName()(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[PersonalRepName] = {
+    val getPersonalRepIndUrl = s"${config.estatesUrl}/estates/personal-rep/individual"
+    val getPersonalRepOrgUrl = s"${config.estatesUrl}/estates/personal-rep/organisation"
     for {
-      individual <- http.GET[Option[PersonalRepName]](getPersonalRepIndUrl)(PersonalRepName.personalRepIndividualNameReads, hc, ec)
-      organisation <- http.GET[Option[PersonalRepName]](getPersonalRepOrgUrl)(PersonalRepName.personalRepOrganisationNameReads, hc, ec)
+      individual <- http.get(url"$getPersonalRepIndUrl").execute[Option[PersonalRepName]](PersonalRepName.personalRepIndividualNameReads, ec)
+      organisation <- http.get(url"$getPersonalRepOrgUrl").execute[Option[PersonalRepName]](PersonalRepName.personalRepOrganisationNameReads, ec)
     } yield {
       (individual, organisation) match {
         case (Some(name), None) => name
@@ -52,22 +51,22 @@ class EstatesConnector @Inject()(http: HttpClient, config: FrontendAppConfig) {
     }
   }
 
-  private val getEstateNameUrl = s"${config.estatesUrl}/estates/correspondence/name"
 
   def getEstateName()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[Option[String]] = {
-    http.GET[EstateName](getEstateNameUrl).map(_.name)
+    val getEstateNameUrl = s"${config.estatesUrl}/estates/correspondence/name"
+    http.get(url"$getEstateNameUrl").execute[EstateName].map(_.name)
   }
 
-  private val getRegistrationUrl = s"${config.estatesUrl}/estates/registration"
 
   def getRegistration()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[EstateRegistrationNoDeclaration] = {
-    http.GET[EstateRegistrationNoDeclaration](getRegistrationUrl)
+    val getRegistrationUrl = s"${config.estatesUrl}/estates/registration"
+    http.get(url"$getRegistrationUrl").execute[EstateRegistrationNoDeclaration]
   }
 
-  private val getIsLiableForTaxUrl = s"${config.estatesUrl}/estates/is-tax-required"
 
   def getIsLiableForTax()(implicit hc: HeaderCarrier, ec : ExecutionContext): Future[Boolean] = {
-    http.GET[Boolean](getIsLiableForTaxUrl)
+    val getIsLiableForTaxUrl = s"${config.estatesUrl}/estates/is-tax-required"
+    http.get(url"$getIsLiableForTaxUrl").execute[Boolean]
   }
 
 }

@@ -28,7 +28,7 @@
     bulletList: BulletList
 )
 
-@(trn: String, personalRepName: String)(implicit request: Request[_], messages: Messages)
+@(trn: String, personalRepName: String)(implicit request: RequestHeader, messages: Messages)
 
 @main_template(
     title = s"${messages("confirmation.title")}"

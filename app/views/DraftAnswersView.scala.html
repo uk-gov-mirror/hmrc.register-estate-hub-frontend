@@ -28,7 +28,7 @@
 )
 
 
-@(entities: Seq[AnswerSection])(implicit request: Request[_], messages: Messages)
+@(entities: Seq[AnswerSection])(implicit request: RequestHeader, messages: Messages)
 
 @main_template(
     title = messages("draftAnswers.title"),

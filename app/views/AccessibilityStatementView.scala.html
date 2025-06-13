@@ -26,7 +26,7 @@
     link: Link
 )
 
-@(userAction: String)(implicit request: Request[_], messages: Messages)
+@(userAction: String)(implicit request: RequestHeader, messages: Messages)
 
 @main_template(
     title = messages("accessibilityStatement.title"),

@@ -24,7 +24,7 @@
     link: Link
 )
 
-@()(implicit request: Request[_], messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
 @main_template(
     title = messages("sign_out.title"),

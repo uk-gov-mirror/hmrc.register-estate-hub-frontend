@@ -24,7 +24,7 @@
     govukSummaryList: GovukSummaryList
 )
 
-@(answerSections: Seq[Section])(implicit request: Request[_], messages: Messages)
+@(answerSections: Seq[Section])(implicit request: RequestHeader, messages: Messages)
 
 @main_template(
     title = messages("checkYourAnswers.title")
