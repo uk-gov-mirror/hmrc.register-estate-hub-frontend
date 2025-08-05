@@ -20,11 +20,13 @@ import com.google.inject.{Inject, Singleton}
 import play.api.Configuration
 import play.api.i18n.{Lang, Messages}
 import play.api.mvc.Request
+import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
+
 import java.net.{URI, URLEncoder}
 
 
 @Singleton
-class FrontendAppConfig @Inject() (configuration: Configuration) {
+class FrontendAppConfig @Inject() (configuration: Configuration, servicesConfig: ServicesConfig) {
 
   final val ENGLISH = "en"
   final val WELSH = "cy"
@@ -44,8 +46,8 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   lazy val agentServiceRegistrationUrl = s"$agentsSubscriptionsUrl?continue=$loginContinueUrl"
   lazy val registerYourClientsEstateUrl: String = configuration.get[String]("urls.registerYourClientsEstate")
 
-  lazy val estatesUrl: String = configuration.get[Service]("microservice.services.estates").baseUrl
-  lazy val estatesStoreUrl: String = configuration.get[Service]("microservice.services.estates-store").baseUrl + "/estates-store"
+  lazy val estatesUrl: String = servicesConfig.baseUrl("estates")
+  lazy val estatesStoreUrl: String = servicesConfig.baseUrl("estates-store") + "/estates-store"
 
   lazy val locationCanonicalList: String = configuration.get[String]("location.canonical.list.all")
   lazy val locationCanonicalListCY: String = configuration.get[String]("location.canonical.list.allCY")

@@ -10,6 +10,7 @@ ThisBuild / majorVersion := 0
 lazy val microservice = (project in file("."))
   .enablePlugins(PlayScala, SbtDistributablesPlugin)
   .disablePlugins(JUnitXmlReportPlugin) //Required to prevent https://github.com/scalatest/scalatest/issues/1427
+  .settings(CodeCoverageSettings())
   .settings(
     inConfig(Test)(testSettings),
     name := appName,
@@ -64,4 +65,3 @@ lazy val testSettings: Seq[Def.Setting[?]] = Seq(
   )
 )
 
-addCommandAlias("scalastyleAll", "all scalastyle Test/scalastyle")
