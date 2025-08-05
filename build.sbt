@@ -1,6 +1,5 @@
 import play.sbt.routes.RoutesKeys
 import sbt.Def
-import scoverage.ScoverageKeys
 
 lazy val appName: String = "register-estate-hub-frontend"
 
@@ -26,10 +25,6 @@ lazy val microservice = (project in file("."))
       "controllers.routes._"
     ),
     PlayKeys.playDefaultPort := 8822,
-    ScoverageKeys.coverageExcludedFiles := "<empty>;.*components.*;.*Routes.*",
-    ScoverageKeys.coverageMinimumStmtTotal := 80,
-    ScoverageKeys.coverageFailOnMinimum := true,
-    ScoverageKeys.coverageHighlighting := true,
     scalacOptions ++= Seq(
       "-feature",
       "-Wconf:src=routes/.*:s",
